@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1FSFSSNCQ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1FSFSSNCQ5');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zerox Zhang's Personal Website</title>
+    <!-- 引入Google字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Ubuntu', sans-serif; /* 使用新字体 */
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 90%;
+            position: relative;
+            z-index: 1;
+            padding-top: 10%;
+        }
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            font-family: 'Ubuntu', sans-serif; /* 使用新字体 */
+            font-weight: 400; /* Regular 400 */
+            font-style: italic; /* Italic */
+        }
+        .links {
+            display: flex;
+            gap: 20px;
+        }
+        .links a {
+            padding: 15px 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .links a:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        .matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8em;
+        }
+        .footer span {
+            margin-right: 20px;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            animation: bubble 1s ease-out forwards;
+        }
+        @keyframes bubble {
+            to {
+                transform: translateY(-50px) scale(0.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Zerox Zhang.</h1>
+        <div class="links">
+            <a href="https://blog.zeroxzhang.cc/">Blog</a>
+            <a href="https://github.com/ZeroxZhang?tab=repositories">Github</a>
+            <a href="https://www.instagram.com/p/CvYwp6LSuPm/">Ins</a>
+            <a href="https://cn.linkedin.com/in/zeroxzhang">Linkedin</a>
+        </div>
+    </div>
+    <div class="matrix" id="matrix"></div>
+    <div class="footer">
+        <span id="visit-count">访问量统计模块: 0</span>
+        <span>© 2024 Zerox Zhang</span>
+    </div>
+    <script>
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        document.getElementById('matrix').appendChild(canvas);
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = Array(256).join(1).split('');
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+        
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            letters.map((y_pos, index) => {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                const x_pos = index * 10;
+                ctx.fillText(text, x_pos, y_pos);
+                letters[index] = y_pos > 758 + Math.random() * 1e4 ? 0 : y_pos + 10;
+            });
+        };
+        setInterval(draw, 50); // 调整此值以减缓下落速度
+
+        // 获取访问量
+        fetch('/api/visit')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visit-count').innerText = `访问量统计模块: ${data.count}`;
+            });
+
+        // 鼠标跟随泡泡效果
+        document.addEventListener('mousemove', (e) => {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.style.width = `${Math.random() * 10 + 10}px`;
+            bubble.style.height = `${Math.random() * 10 + 10}px`;
+            bubble.style.left = `${e.clientX}px`;
+            bubble.style.top = `${e.clientY}px`;
+
+            document.body.appendChild(bubble);
+
+            setTimeout(() => {
+                bubble.remove();
+            }, 1000);
+        });
+    </script>
+     <!-- SiteMaster Analytics Powered by AdMaster -->
+<script>!(function(a,b,c,d,e,f){var g="",h=a.sessionStorage,i="__admaster_ta_param__",j="tmDataLayer"!==d?"&dl="+d:"";
+    if(a[f]={},a[d]=a[d]||[],a[d].push({startTime:+new Date,event:"tm.js"}),h){var k=a.location.search,
+    l=new RegExp("[?&]"+i+"=(.*?)(&|#|$)").exec(k)||[];l[1]&&h.setItem(i,l[1]),l=h.getItem(i),
+    l&&(g="&p="+l+"&t="+ +new Date)}var m=b.createElement(c),n=b.getElementsByTagName(c)[0];m.src="//tag.cdnmaster.cn/tmjs/tm.js?id="+e+j+g,
+    m.async=!0,n.parentNode.insertBefore(m,n)})(window,document,"script","tmDataLayer","TM-纪念曾经工作过的AdMaster","admaster_tm");</script>
+    
+    <!--历史GA代码 Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-103780694-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-103780694-2'); -->
+    </script>
+</body>
+</html>
