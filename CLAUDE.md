@@ -27,7 +27,18 @@ Personal website for **Zerox** at `zeroxzhang.cc`. Three content pillars:
 
 The site is intentionally multi-level with many sub-pages. The user wants rich frontend animations/effects — the animation tech stack is **not yet decided** (candidates to discuss: GSAP, Anime.js, Lottie, Three.js, CSS-only, or a framework-specific solution). This is a deliberate, prominent part of the design, not an afterthought.
 
-**Governing docs** (PRD, research, dev plans, version iterations, design specs) live in `docs/` — see `docs/README.md` for structure and conventions. Write programmatic conclusions there, never in a session only.
+## Governing Docs (`docs/`)
+
+All programmatic conclusions (PRD, research, dev plans, design/tech specs, iterations) live in `docs/`, never in a session only. See `docs/README.md` for per-directory conventions.
+
+**Document flow** — documents move through the directories in this direction:
+
+`raw/`（素材）→ `research/`（调研结论）→ `prd/`（需求）+ `specs/`（技术方案）→ `plans/`（规划）→ `iterations/`（迭代记录）
+
+- `ideas/`（想法池）随时供给任何环节；想法被采纳后移出 ideas/，落入对应的正式文档
+- 作废文档移入 `archive/`（仅归档、不修改，复活需复制回原目录）
+- `raw/` 是只读素材：引用时保持原样，不重新格式化、不重命名
+- 正式文档遵循命名 `YYYY-MM-DD-<主题>.md`，`raw/` 与 `archive/` 豁免
 
 ## Project Status (as of 2026-08-19)
 
