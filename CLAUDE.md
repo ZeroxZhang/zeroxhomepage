@@ -4,6 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `AGENTS.md` (for other agent tools such as Codex/Cursor) points here — keep this file as the single source of truth.
 
+## Keeping This File Current
+
+This file holds the project's **long-term, important information** — decisions, constraints, deployment facts, and architecture notes that persist beyond any single session. It is not documentation of transient state.
+
+Update it **in the same change** that makes it outdated, and commit the update with that change:
+
+- When a decision is made (framework, animation tech, deploy method), record it here and update the status line.
+- When deployment setup changes (visibility, Pages config, DNS), update the Deployment section.
+- When scaffolding lands, fill in the Architecture Notes section (route map, animation architecture).
+- Bump the date in "Project Status" whenever its content changes.
+
+If you notice this file contradicts reality, fix the file — it is the source of truth, not a snapshot.
+
 ## Project Overview
 
 Personal website for **Zerox** at `zeroxzhang.cc`. Three content pillars:
