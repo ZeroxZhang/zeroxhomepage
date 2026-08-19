@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+`AGENTS.md` (for other agent tools such as Codex/Cursor) points here — keep this file as the single source of truth.
+
 ## Project Overview
 
 Personal website for **Zerox** at `zeroxzhang.cc`. Three content pillars:
