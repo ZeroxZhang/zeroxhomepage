@@ -27,6 +27,8 @@ Personal website for **Zerox** at `zeroxzhang.cc`. Three content pillars:
 
 The site is intentionally multi-level with many sub-pages. The user wants rich frontend animations/effects — the animation tech stack is **not yet decided** (candidates to discuss: GSAP, Anime.js, Lottie, Three.js, CSS-only, or a framework-specific solution). This is a deliberate, prominent part of the design, not an afterthought.
 
+**Governing docs** (PRD, research, dev plans, version iterations, design specs) live in `docs/` — see `docs/README.md` for structure and conventions. Write programmatic conclusions there, never in a session only.
+
 ## Project Status (as of 2026-08-19)
 
 - Git repo: `github.com/ZeroxZhang/ZeroxZhang.github.io` (user-site repo, originally created 2016 with a placeholder README; reused for this project). **Private** (chosen deliberately — see deployment note below). Default branch: `main` (old `master` history preserved in it, then deleted).
