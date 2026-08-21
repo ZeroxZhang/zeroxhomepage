@@ -41,23 +41,22 @@ All programmatic conclusions (PRD, research, dev plans, design/tech specs, itera
 - `raw/` 是只读素材：引用时保持原样，不重新格式化、不重命名
 - 正式文档遵循命名 `YYYY-MM-DD-<主题>.md`，`raw/` 与 `archive/` 豁免
 
-## Project Status (as of 2026-08-19)
+## Project Status (as of 2026-08-21)
 
-- Git repo: `github.com/ZeroxZhang/ZeroxZhang.github.io` (user-site repo, originally created 2016 with a placeholder README; reused for this project). **Private** (chosen deliberately — see deployment note below). Default branch: `main` (old `master` history preserved in it, then deleted).
+- Git repo: `github.com/ZeroxZhang/ZeroxZhang.github.io` (user-site repo, originally created 2016 with a placeholder README; reused for this project). **Private** (chosen deliberately — visibility stays private until launch). Default branch: `main` (old `master` history preserved in it, then deleted).
 - Multi-device workflow: this is the canonical remote. Clone from GitHub on other machines rather than copying the directory.
 - **No framework chosen yet.** No `package.json`, build tooling, linter, or tests exist. Do not invent build/lint/test commands — add them to this file once the stack is chosen.
 - Site content does not exist yet; nothing has been migrated from any prior site.
 
-## Deployment: GitHub Pages + custom domain
+## Deployment: function-capable hosting (platform TBD)
 
-This is static hosting — there is no server runtime. All "dynamic effects" must be client-side JS/CSS/WebGL, and any framework must be statically exportable.
+**Decision (2026-08-21):** the site needs a small backend — the footer visit counter (starts at 1888, +1–10 random increments per day) must be computed server-side with the logic never exposed to the client. Pure-static GitHub Pages cannot host that, so the deployment target is a hosting platform with serverless-function support. **Platform selection (candidates: Vercel, Netlify, Cloudflare Pages + Workers) is deferred to `specs/`.**
 
 - Custom domain: `zeroxzhang.cc` (apex), `www.zeroxzhang.cc`.
-- **Important:** the domain currently points to an *old* page. Before switching, capture/save anything worth keeping from the old site; the DNS flip is the irreversible step. The old page is **not** hosted in this repo (it had no `cname` configured) — it lives elsewhere.
-- The repo is **private**, and GitHub Pages is disabled on free private repos. The publish path later: flip repo to public → enable Pages (source: `main`, root) → configure custom domain → update DNS. Do not waste effort "deploying" while the repo is private.
-- Custom domain on GitHub Pages requires a `CNAME` file (containing `zeroxzhang.cc`) in the root of whatever is deployed — either the repo root (user site or `main` branch project site), the `docs/` directory, or the `gh-pages` branch. A deploy that removes the `CNAME` file silently resets the custom domain in repo Settings.
-- DNS requirements when migrating: apex `zeroxzhang.cc` → A/ALIAS records to GitHub Pages IPs, `www` → CNAME to `<user>.github.io`.
-- Deploy options (decide with the user once the stack is chosen): GitHub Actions build→deploy (`pages` artifact, recommended for SSGs), build-to-branch (`gh-pages`), or `docs/` folder for plain static files.
+- **Important:** the domain currently points to an *old* page. Before switching, capture/save anything worth keeping from the old site; the DNS flip is the irreversible step. The old page is **not** hosted in this repo — it lives elsewhere.
+- The repo is **private**; the candidate platforms all deploy from private repos, so privacy no longer blocks deployment. Visibility stays private until launch.
+- Custom-domain configuration follows the chosen platform's docs, not GitHub Pages specifics (the Pages `CNAME`-file mechanism and Pages IP records are superseded by this decision).
+- The frontend is still statically deployable; the only backend is the counter function. All animation/visual effects remain client-side JS/CSS/WebGL.
 
 ## Architecture Notes (to be filled in as the stack lands)
 
