@@ -35,6 +35,7 @@ All programmatic conclusions (PRD, research, dev plans, design/tech specs, itera
 
 `raw/`（素材）→ `research/`（调研结论）→ `prd/`（需求）+ `specs/`（技术方案）→ `plans/`（规划）→ `iterations/`（迭代记录）
 
+- `user_original_briefs/`（用户原始需求与 brief）存放用户写给 Agent 的阶段性 Prompt 与需求原文，是需求源头；Agent 只读不改，过程对话不落盘
 - `ideas/`（想法池）随时供给任何环节；想法被采纳后移出 ideas/，落入对应的正式文档
 - 作废文档移入 `archive/`（仅归档、不修改，复活需复制回原目录）
 - `raw/` 是只读素材：引用时保持原样，不重新格式化、不重命名
