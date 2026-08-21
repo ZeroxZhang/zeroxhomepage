@@ -1,9 +1,5 @@
-# AGENTS.md
+# Agent Entry Point
 
-This file provides guidance to AI coding agents when working with code in this repository.
+Read [`CLAUDE.md`](./CLAUDE.md) for shared project context and durable boundaries, then use the nearest relevant README or focused document for the area being changed.
 
-All project guidance lives in [CLAUDE.md](./CLAUDE.md) — read it before working in this repository. It covers:
-
-- Project overview (personal site for zeroxzhang.cc: intro / portfolio / blog, animation-heavy)
-- Current project status and open decisions (tech stack not yet chosen)
-- Deployment constraints (GitHub Pages, custom domain, private-repo caveat)
+Guidance in this repository is intentionally lightweight and may evolve with the project. Apply local judgment, preserve explicit user intent and hard safety boundaries, and update stale guidance when the work changes its assumptions.

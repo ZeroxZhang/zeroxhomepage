@@ -1,64 +1,62 @@
-# CLAUDE.md
+# Project Guidance
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This is the shared entry point for agents working in this repository. It should stay short and describe durable project context, not prescribe every implementation detail.
 
-`AGENTS.md` (for other agent tools such as Codex/Cursor) points here — keep this file as the single source of truth.
+## How Guidance Works
 
-## Keeping This File Current
+- The user's latest explicit direction has priority. Existing documents record prior decisions; they do not prevent those decisions from changing.
+- Repository behavior is the authority for what the project currently does. When code and documentation diverge, determine whether the code or the intended decision should change, then reconcile both.
+- Use the most local relevant guidance: this file covers the whole project, a directory README covers that area, and a focused PRD, design note, or spec owns its topic.
+- Treat patterns, proposed stacks, plans, and checklists as defaults unless they protect security, privacy, data integrity, licensing, accessibility, or an explicit product requirement.
+- Prefer links over copied rules. Update only the documents materially affected by a change.
+- If two active sources conflict in a consequential way, surface the conflict instead of silently choosing whichever wording is stricter.
 
-This file holds the project's **long-term, important information** — decisions, constraints, deployment facts, and architecture notes that persist beyond any single session. It is not documentation of transient state.
+These files are living project tools. Refine, merge, or retire guidance when it stops helping the work.
 
-Update it **in the same change** that makes it outdated, and commit the update with that change:
+## Product Direction
 
-- When a decision is made (framework, animation tech, deploy method), record it here and update the status line.
-- When deployment setup changes (visibility, Pages config, DNS), update the Deployment section.
-- When scaffolding lands, fill in the Architecture Notes section (route map, animation architecture).
-- Bump the date in "Project Status" whenever its content changes.
+This repository contains Zerox's personal website for `zeroxzhang.cc`, organized around About, Portfolio, and Blog experiences. It is intended to support multiple levels of content and a strong visual and motion identity.
 
-If you notice this file contradicts reality, fix the file — it is the source of truth, not a snapshot.
+Rich interaction is a product goal, not a commitment to a particular library. Choose technology according to the experience, maintainability, performance, accessibility, and the surrounding implementation.
 
-## Project Overview
+## Current Context
 
-Personal website for **Zerox** at `zeroxzhang.cc`. Three content pillars:
+- The repository is private and the canonical remote is `github.com/ZeroxZhang/ZeroxZhang.github.io`.
+- No application framework or runnable toolchain has been adopted yet. The files currently under `app/` and `postcss.config.mjs` are OriginKit integration inputs, not proof of an initialized application.
+- `content/works/` contains the current bilingual portfolio source for 35 works. About, Blog, and portfolio media are still incomplete.
+- OriginKit Hero 10 is a locally preserved visual reference and source baseline. Its demo content and structure are not product requirements.
+- Hosting must support the server-side visit-counter behavior described in the product documents; the platform and persistence mechanism remain open decisions.
 
-- **个人介绍 (About)** — personal introduction
-- **作品集 (Portfolio)** — project showcase
-- **博客 (Blog)** — articles
+Current status and next steps belong in [README.md](./README.md) and active plans rather than being duplicated here.
 
-The site is intentionally multi-level with many sub-pages. The user wants rich frontend animations/effects — the animation tech stack is **not yet decided** (candidates to discuss: GSAP, Anime.js, Lottie, Three.js, CSS-only, or a framework-specific solution). This is a deliberate, prominent part of the design, not an afterthought.
+## Durable Boundaries
 
-## Governing Docs (`docs/`)
+- Never commit or expose credentials, private content, personal identifiers, or local machine paths. OriginKit credential and provenance details are documented in [`components/originkit/ORIGIN.md`](./components/originkit/ORIGIN.md).
+- Preserve source provenance and license information for third-party assets. Adapt local vendor/reference code deliberately rather than treating it as unexplained project code.
+- Back up the existing site and relevant DNS state before switching `zeroxzhang.cc`; the current domain still points to a site hosted elsewhere.
+- Preserve user-authored briefs and raw source material as evidence. Derived interpretation belongs in active project documents or content files.
+- Keep structured content internally consistent. The local README and active content spec define the current contract; change the contract intentionally when a better model is needed.
 
-All programmatic conclusions (PRD, research, dev plans, design/tech specs, iterations) live in `docs/`, never in a session only. See `docs/README.md` for per-directory conventions.
+## Project Map
 
-**Document flow** — documents move through the directories in this direction:
+| Area | Role |
+| --- | --- |
+| [`README.md`](./README.md) | Human-facing overview and current state |
+| [`docs/`](./docs/) | Decisions, evidence, designs, plans, and project history |
+| [`content/`](./content/) | Visitor-facing source content |
+| [`components/originkit/`](./components/originkit/) | Preserved OriginKit source and provenance |
+| [`public/originkit/`](./public/originkit/) | Assets associated with that source delivery |
 
-`raw/`（素材）→ `research/`（调研结论）→ `prd/`（需求）+ `specs/`（技术方案）→ `plans/`（规划）→ `iterations/`（迭代记录）
+Read only the local documents needed for the task. Add durable documentation when a decision will matter across sessions or areas; routine implementation details can remain in code and tests.
 
-- `user_original_briefs/`（用户原始需求与 brief）存放用户写给 Agent 的阶段性 Prompt 与需求原文，是需求源头；Agent 只读不改，过程对话不落盘
-- `ideas/`（想法池）随时供给任何环节；想法被采纳后移出 ideas/，落入对应的正式文档
-- 作废文档移入 `archive/`（仅归档、不修改，复活需复制回原目录）
-- `raw/` 是只读素材：引用时保持原样，不重新格式化、不重命名
-- 正式文档遵循命名 `YYYY-MM-DD-<主题>.md`，`raw/` 与 `archive/` 豁免
+## Evolving Decisions
 
-## Project Status (as of 2026-08-21)
+Research informs choices but does not make them binding. PRDs describe desired outcomes, design documents shape the experience, specs capture important technical contracts, and plans coordinate temporary work. Implementation and validation reveal when any of them should change.
 
-- Git repo: `github.com/ZeroxZhang/ZeroxZhang.github.io` (user-site repo, originally created 2016 with a placeholder README; reused for this project). **Private** (chosen deliberately — visibility stays private until launch). Default branch: `main` (old `master` history preserved in it, then deleted).
-- Multi-device workflow: this is the canonical remote. Clone from GitHub on other machines rather than copying the directory.
-- **No framework chosen yet.** No `package.json`, build tooling, linter, or tests exist. Do not invent build/lint/test commands — add them to this file once the stack is chosen.
-- Site content does not exist yet; nothing has been migrated from any prior site.
+When a decision changes:
 
-## Deployment: function-capable hosting (platform TBD)
+1. Update the document that owns the decision.
+2. Adjust affected code, content, or dependent documents.
+3. Preserve superseded material only when its history remains useful.
 
-**Decision (2026-08-21):** the site needs a small backend — the footer visit counter (starts at 1888, +1–10 random increments per day) must be computed server-side with the logic never exposed to the client. Pure-static GitHub Pages cannot host that, so the deployment target is a hosting platform with serverless-function support. **Platform selection (candidates: Vercel, Netlify, Cloudflare Pages + Workers) is deferred to `specs/`.**
-
-- Custom domain: `zeroxzhang.cc` (apex), `www.zeroxzhang.cc`.
-- **Important:** the domain currently points to an *old* page. Before switching, capture/save anything worth keeping from the old site; the DNS flip is the irreversible step. The old page is **not** hosted in this repo — it lives elsewhere.
-- The repo is **private**; the candidate platforms all deploy from private repos, so privacy no longer blocks deployment. Visibility stays private until launch.
-- Custom-domain configuration follows the chosen platform's docs, not GitHub Pages specifics (the Pages `CNAME`-file mechanism and Pages IP records are superseded by this decision).
-- The frontend is still statically deployable; the only backend is the counter function. All animation/visual effects remain client-side JS/CSS/WebGL.
-
-## Architecture Notes (to be filled in as the stack lands)
-
-- Route map for the multi-level structure (about / portfolio / blog / sub-pages) will live here once scaffolding exists.
-- Animation architecture (how effects are organized, reused, and kept performant across many pages) belongs here once the animation tech is chosen.
+The goal is coherence, not documentary completeness.
