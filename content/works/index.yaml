@@ -1,0 +1,80 @@
+schema_version: 2
+
+categories:
+  - id: agent-platform
+    label: AI Agent 系统
+    label_en: AI agent systems
+    description: 从本地运行时到多智能体协作的完整 Agent 产品。
+    description_en: Complete agent products spanning local runtimes and multi-agent collaboration.
+  - id: content-publishing
+    label: 内容创作与出版
+    label_en: Content and publishing
+    description: 把写作方法、文档与知识转化为可交付内容。
+    description_en: Systems that turn writing methods, documents, and knowledge into finished deliverables.
+  - id: visual-design
+    label: 可视化与设计
+    label_en: Visualization and design
+    description: 把抽象信息转成流程图、架构图、信息图和交互视觉。
+    description_en: Tools that turn abstract information into diagrams, information graphics, and interactive visuals.
+  - id: quant-research
+    label: 量化研究与风控
+    label_en: Quant research and risk
+    description: 覆盖筛选、检查、分析与决策辅助的个人投研工具链。
+    description_en: A personal research toolkit for screening, analysis, decision support, and risk checks.
+  - id: learning
+    label: 教育与知识传播
+    label_en: Learning and knowledge
+    description: 用互动课程、游戏和方法论降低复杂知识的理解门槛。
+    description_en: Interactive courses, games, and methods that make complex knowledge easier to understand.
+  - id: utilities
+    label: 实用工具
+    label_en: Utilities
+    description: 针对单一痛点完成清晰交付的小型应用与工具。
+    description_en: Focused applications and tools built around a clear, specific job.
+  - id: web-products
+    label: 已上线产品
+    label_en: Live products
+    description: 已部署到公网、面向真实使用场景的 Web 产品与服务。
+    description_en: Publicly deployed web products and services designed for real use cases.
+  - id: personal-system
+    label: 个人系统
+    label_en: Personal systems
+    description: 支撑长期信息管理和创作循环的本地基础设施。
+    description_en: Local infrastructure for long-term information management and creative work.
+
+works:
+  - zerox-agent
+  - huashu-bookwriter
+  - md2book
+  - flowchart-generator-skill
+  - onepager
+  - paper-to-course
+  - lingmou
+  - silenzio
+  - io-system
+  - arch-diagram
+  - concept-bridge
+  - really
+  - deepseek-harness-app
+  - end-of-day-picker
+  - a-share-tailpicker
+  - invest-signal-kit
+  - stock-fund-analyzer
+  - etf-analyzer
+  - zerox-agent-course
+  - nanobot-course
+  - sonoquest-ultrasound-play-lab
+  - money-education-whitebook
+  - newspaper-demo
+  - md2pdf-v2
+  - editor
+  - text-card-generator
+  - x-card
+  - epub-pdf-to-txt-converter
+  - hottrend
+  - pdf-watermark-remover
+  - indian-workplace-methodology
+  - z-slides
+  - allergen-map
+  - minimalism-note-card-generator
+  - zerox-homepage

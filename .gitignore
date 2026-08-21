@@ -3,3 +3,5 @@
 
 # Node (framework TBD — expand once the stack is chosen)
 node_modules/
+.originkit/
+.gstack/

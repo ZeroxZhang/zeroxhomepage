@@ -2,16 +2,16 @@
 
 - 调研日期：2026-08-21
 - 调研对象：[OriginKit](https://www.originkit.dev/) 及其托管 MCP、CLI
-- 原始需求：[brief_research_on_originkit.md](../user_original_briefs/brief_research_on_originkit.md)
+- 原始需求：[brief_research_on_originkit——0821.md](../user_original_briefs/brief_research_on_originkit——0821.md)
 - 结论适用范围：OriginKit 公开 beta 阶段；定价与限额可能随时调整
 
 ## 一、结论摘要
 
 | 问题 | 结论 |
 | --- | --- |
-| 是否纯免费 | **当前公开能力不收费，但不是不限量。** 官网把组件库定义为 free，模板也全部标为 Free；未发现公开价格、订阅或结账入口。不过，源码交付受日限额和周限额约束，且需要登录或 API Key。 |
-| MCP 超限后购买什么 | **截至调研日，没有公开可购买的套餐、额度包或 Pro 计划。** API Key 只是认证凭证，不是付费扩容凭证。公开可行做法只有等待额度重置，或联系运营方申请提高额度、白名单或未公开的定制方案。 |
-| 能否绕开限制无限使用 | **不能合规地把官方托管服务变成无限交付。** 最可行的方案是只获取一次已选定的组件，把合法取得的源码保存在项目或私有组件库中，此后由本地代码、本地目录或自建私有 MCP 重复提供。这样可以实现已取得内容的近似无限复用，但获取新组件仍受官方额度限制。 |
+| 是否纯免费 | **当前公开目录可免费使用，但不是不限量，也不能假定未来始终只有免费层。** 官网已有 paid plan、premium component、退款与取消政策说明，但尚未发现公开的价格/额度对应表。源码交付仍受日限额和周限额约束，且需要登录或 API Key。 |
+| MCP 超限后购买什么 | **公开文档确认付费计划概念存在，但截至调研日未发现可核验的套餐价格、购买入口或“付费后增加多少 quota”的矩阵。** API Key 只是认证凭证。当前可执行方案仍是等待重置，或联系运营方询问付费层、提高额度、白名单或定制方案。 |
+| 能否绕开限制无限使用 | **不能合规地把官方托管服务变成无限交付。** 最可行的方案是只获取一次已选定的组件，把合法取得的源码保存在实际应用项目中，此后在项目内本地修改和复用。获取新组件仍受官方额度限制；不能用本地缓存或私有 MCP 对外重发 OriginKit 目录。 |
 
 ## 二、免费不等于无限
 
@@ -22,7 +22,7 @@
 1. [Introduction](https://www.originkit.dev/intro) 将 OriginKit 描述为免费的动画组件库。
 2. [Templates](https://www.originkit.dev/templates) 中当前展示的模板均标记为 `Free`。
 3. 官网允许通过 Code、Framer、CLI 和 MCP 获取组件源码；官方称源码复制后归用户使用，且不会留下 OriginKit 运行时依赖。
-4. 官方 npm 包 `originkit@0.2.23` 标记为 MIT，但该许可证明确覆盖 CLI 软件包，**不能据此推断整个组件目录、模板或托管 MCP 服务均采用 MIT 许可证**。
+4. 官方 [Licensing & Usage](https://www.originkit.dev/docs/licensing) 已明确覆盖通过 Code、编辑器、Framer 和 MCP 合法取得的组件：允许在自有项目与商业项目中使用、修改，无需署名；允许包含修改后组件的真实开源应用/网站。该授权不等于 MIT，且不允许把组件作为模板、主题、starter、组件库或设计资产再分发。
 
 因此，“免费”的准确含义是：目前没有公开收费门槛，取得源码后也没有按运行次数计费；它不代表可以无限次从官方服务拉取源码。
 
@@ -64,14 +64,14 @@ MCP 的 `list_components` 和 `search` 主要返回索引或搜索结果；`get_
 
 ## 三、超限后是否有付费扩容
 
-截至 2026-08-21，未找到以下公开能力：
+截至 2026-08-21，未找到以下可公开核验的信息：
 
 - OriginKit 服务定价页
-- Free、Pro、Team 或 Enterprise 套餐
-- 额度包或按量付费
-- Billing、Subscription、Upgrade 或 Checkout 入口
+- Free、Pro、Team 或 Enterprise 的价格与功能矩阵
+- 额度包、按量付费或付费层对应的 quota 增量
+- 可直接验证的公开 Checkout 入口
 
-[公开站点地图](https://www.originkit.dev/sitemap.xml) 中的 `pricing` 路径都是可复制的“定价区块”组件，不是 OriginKit 自身的服务定价页。`/terms` 和 `/privacy` 在调研时均返回 404。
+[Account & Billing](https://www.originkit.dev/docs/account-billing) 已描述 paid plan 的 7 天首次付款退款窗口、订阅取消、续费和付费组件权益，但没有展示具体套餐价格或 quota。此前调研发现的 `/terms` 与 `/privacy` 路径已由 `/docs/terms`、`/docs/privacy` 和 `/docs/licensing` 取代，说明站点规则在 beta 阶段仍快速变化。
 
 因此，不能建议购买一个目前并不存在于公开页面的产品。超限后的合理路径是：
 
@@ -96,16 +96,16 @@ MCP 的 `list_components` 和 `search` 主要返回索引或搜索结果；`get_
 
 组件进入本地代码库后，开发、构建、部署和运行均不需要再次调用 OriginKit，因而没有运行次数限制。
 
-### 方案 B：建立私有组件目录或私有 MCP
+### 方案 B：项目内建立来源明确的本地组件层
 
-如果未来有多个项目或多个 Agent 需要复用：
+对本项目可做以下整理：
 
-1. 把已合法取得的组件整理到私有 Git 仓库、私有 npm 包或 monorepo package。
-2. 保存组件元数据、预览图、依赖和适配说明。
-3. 让 Agent 优先搜索本地目录；确有需要时，再用一个自建私有 MCP 暴露这些本地副本。
-4. 只有本地目录缺少目标组件时才访问 OriginKit。
+1. 将已合法取得、实际用于本站的组件保存在本站仓库的明确目录中。
+2. 保存组件元数据、来源 URL、取得日期、依赖和本地修改说明。
+3. 让 Agent 优先搜索本站已有代码；只有缺少目标能力时才访问 OriginKit。
+4. 如果未来要跨项目共享、制作 starter 或通过私有 MCP 提供组件副本，先取得 OriginKit 的书面 partnership/custom license。
 
-该方案把重复读取从官方服务转移到自己的存储，可以让已取得组件在内部近似无限调用。它不应演变为自动批量抓取整个 OriginKit 目录，也不应在许可未明确时公开再分发。
+该方案把本站的重复开发从官方服务转移到项目本地，但不把 OriginKit 组件变成独立的可分发产品。官方许可明确禁止系统化镜像、缓存并再分发目录，也禁止把组件放入模板、主题或 starter kit 后对外分发。
 
 ### 方案 C：对官方额度做预算
 
@@ -143,8 +143,8 @@ MCP 的 `list_components` 和 `search` 主要返回索引或搜索结果；`get_
 1. 先确定 React/Next.js/Framer 等技术路线和页面组件清单。
 2. 用官网预览建立短名单，不在探索阶段请求源码。
 3. 每个确定采用的组件只交付一次，并立即纳入本地代码管理。
-4. 在本地建立来源与许可证记录，之后让 Agent 优先复用本地版本。
-5. 本项目未来需要把 GitHub Pages 仓库转为公开仓库。首次采用 OriginKit 组件前，应书面确认组件源码能否随公开仓库再分发；CLI 的 MIT 许可证不足以自动覆盖交付的组件源码。
+4. 在本地建立来源与许可证记录，之后让 Agent 优先复用本站已有版本。
+5. 官方许可已明确允许“真实开源应用或网站”包含修改后的组件，因此本个人网站未来公开仓库原则上属于允许场景；但不得把仓库改造成组件目录、模板或 starter kit，且预览中的字体、图片、图标仍需逐项核对第三方许可。
 
 ## 七、证据与可信度
 
@@ -155,6 +155,8 @@ MCP 的 `list_components` 和 `search` 主要返回索引或搜索结果；`get_
 - [OriginKit Templates](https://www.originkit.dev/templates)：模板当前均标记为 Free
 - [OriginKit MCP 根端点](https://mcp.originkit.dev/)：认证要求、工具列表和 REST API 描述
 - [OriginKit npm 包](https://www.npmjs.com/package/originkit)：CLI 版本、MIT 许可证、旧配额说明和维护者信息
+- [OriginKit Licensing & Usage](https://www.originkit.dev/docs/licensing)：组件授权、开源应用、MCP 使用和再分发限制
+- [OriginKit Account & Billing](https://www.originkit.dev/docs/account-billing)：付费计划、退款、取消和付费组件的政策框架
 - [OriginKit robots.txt](https://www.originkit.dev/robots.txt)：抓取和 AI 使用限制
 - [OriginKit sitemap.xml](https://www.originkit.dev/sitemap.xml)：公开路由核验
 - [Lander Studio 联系页](https://lander.studio/booking)：公开联系邮箱
@@ -162,7 +164,8 @@ MCP 的 `list_components` 和 `search` 主要返回索引或搜索结果；`get_
 ### 可信度判断
 
 - 当前免费状态和官网配额：高
-- 当前没有公开付费扩容入口：高
+- 当前没有可核验的公开价格/额度矩阵：高
+- 付费计划政策框架存在：高
 - 未来是否推出付费套餐：未知
 - 日/周额度的精确重置时区：中低，旧 CLI 文档与当前官网存在版本差异
-- 组件源码的公开再分发权：未知，需运营方或组件交付文件中的明确许可证确认
+- 组件用于真实开源应用/网站：高；作为模板、starter、组件库或设计资产再分发：明确不允许，除非取得 partnership/custom license
