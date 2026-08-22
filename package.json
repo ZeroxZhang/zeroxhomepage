@@ -1,0 +1,38 @@
+{
+  "name": "zeroxzhang.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "description": "个人网站 [zeroxzhang.cc](https://zeroxzhang.cc) 的源代码仓库。",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeroxZhang/ZeroxZhang.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZeroxZhang/ZeroxZhang.github.io/issues"
+  },
+  "homepage": "https://github.com/ZeroxZhang/ZeroxZhang.github.io#readme",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "framer-motion": "^13.1.1",
+    "motion": "^13.1.1",
+    "next": "^16.3.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.2",
+    "typescript": "^6.0.3"
+  }
+}

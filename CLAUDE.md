@@ -22,7 +22,7 @@ Rich interaction is a product goal, not a commitment to a particular library. Ch
 ## Current Context
 
 - The repository is private and the canonical remote is `github.com/ZeroxZhang/ZeroxZhang.github.io`.
-- No application framework or runnable toolchain has been adopted yet. The files currently under `app/` and `postcss.config.mjs` are OriginKit integration inputs, not proof of an initialized application.
+- The dependency manifest has been initialized with Next.js, React, TypeScript, Tailwind CSS v4, Motion, and Framer Motion. The files currently under `app/` and `postcss.config.mjs` began as OriginKit integration inputs; a complete runnable application scaffold is still pending.
 - `content/works/` contains the current bilingual portfolio source for 35 works. About, Blog, and portfolio media are still incomplete.
 - OriginKit Hero 10 is a locally preserved visual reference and source baseline. Its demo content and structure are not product requirements.
 - Hosting must support the server-side visit-counter behavior described in the product documents; the platform and persistence mechanism remain open decisions.

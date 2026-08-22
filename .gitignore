@@ -1,7 +1,17 @@
 # macOS
 .DS_Store
 
-# Node (framework TBD — expand once the stack is chosen)
+# Node / Next.js
 node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# Local environment
+.env*.local
+
+# Local tool state
 .originkit/
 .gstack/
+.vercel/
