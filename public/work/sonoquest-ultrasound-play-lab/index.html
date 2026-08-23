@@ -1,0 +1,365 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  sonoquest-ultrasound-play-lab.html · SonoQuest Ultrasound Play Lab 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/sonoquest-ultrasound-play-lab.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级查看源码）→
+     key-cap 命令（打开仓库）→ cube-flip 切换（复制仓库地址 / 已复制）→
+     dotted-offset 翻阅（关联作品索引）→ tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  8. 医疗边界：本作不连接探头或医疗设备、不读取人体数据，边界写进证据区 callout-risk。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/sonoquest-ultrasound-play-lab">
+  <title>SonoQuest Ultrasound Play Lab · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="一场亲子超声探索游戏：移动探头、调节增益和深度、冻结测量，寻找随机目标并生成趣味报告。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/sonoquest-ultrasound-play-lab/index.html · SonoQuest Ultrasound Play Lab 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/sonoquest-ultrasound-play-lab.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用方法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://zeroxzhang.github.io/sonoquest-ultrasound-play-lab/" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 21</b><br>作品展示 · Web 游戏</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">亲子超声探索游戏 · 桌面与移动浏览器</div>
+          <h1>SonoQuest<br><em>Ultrasound</em> Play Lab</h1>
+        </div>
+        <div class="hero-note">
+          <strong>把虚拟探头交给孩子，在浏览器里完成一次寻找与发现</strong>
+          <p>一场亲子超声探索游戏：移动探头、调节增益和深度、冻结测量，寻找随机目标并生成趣味报告。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">Web 游戏</span>
+            <span class="tag">亲子互动</span>
+            <span class="tag">超声模拟</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://zeroxzhang.github.io/sonoquest-ultrasound-play-lab/" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>开始超声探险</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="https://github.com/ZeroxZhang/sonoquest-ultrasound-play-lab" target="_blank" rel="noopener"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>查看源码</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-3">
+        <div><small>探头</small><b>凸阵 · 线阵双模式</b></div>
+        <div><small>操作</small><b>移动 · 调参 · 冻结 · 测量</b></div>
+        <div><small>结果</small><b>趣味报告 · 无需账号</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：扫描主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/sonoquest-ultrasound-play-lab/01-scan-interface.png" alt="SonoQuest 扫描主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.995Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把屏幕变成一间虚构的超声探索室</h2>
+            <div class="section-deck">孩子通过连续操作形成判断，而不是只看图片或点答案。</div>
+          </div>
+
+          <p class="lead reveal">很多儿童科普页面只能观看图片或点击答案，孩子很少有机会通过连续操作形成判断。SonoQuest 把屏幕变成一间虚构的超声探索室：<mark>目标藏在灰阶噪声中</mark>，玩家需要移动探头、改变参数、观察反馈，再决定自己是否找到了线索。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>这是一款面向亲子互动的浏览器游戏。它借用「扫描—调节—冻结—记录」的操作节奏，设计了一次可以共同讨论的寻找任务。</p>
+              <p>页面没有真实病例和医学结论，所有回声、目标、数值与报告都由游戏逻辑生成。</p>
+            </div>
+            <aside class="pull">把专业设备的交互节奏，转译成一场孩子可以参与的寻找与发现。<small>Play loop</small></aside>
+          </div>
+
+          <!-- 图示 · 操作节奏：一局游戏的四步循环 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Play Rhythm / 操作节奏</span><span>扫描 → 调节 → 冻结 → 记录</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Step 01</small>扫描</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Step 02</small>调节</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Step 03</small>冻结</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Step 04</small>记录</div>
+              </div>
+              <div class="dg-gate"><b>寻找任务 · PLAY LOOP</b> — 一次可以共同讨论的寻找任务；页面没有真实病例和医学结论。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>目标、探头与参数反馈</h2>
+            <div class="section-deck">10 种虚构目标与两类探头；参数变化直接改动画面反馈。</div>
+          </div>
+
+          <!-- 02.1 目标与探头 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Targets & Probes</div>
+              <h3>10 种虚构目标，凸阵与线阵两种探头</h3>
+              <p>开始前可以从 10 种虚构目标中自行选择，或随机放入 5 个。目标包括星点细菌、蛔虫与绦虫造型，以及草莓、玉米、饼干等食物线索；位置、角度和尺度每局都会变化。已发现目标保持显影，便于孩子确认进度并继续寻找剩余对象。</p>
+              <p>扫描时可切换凸阵与线阵探头，使用鼠标、触控板或手指移动扫描区域。</p>
+            </div>
+            <!-- ══ 截图槽位 02：目标设置（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/sonoquest-ultrasound-play-lab/02-target-setup.png" alt="目标设置界面"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.995Z -->
+          </div>
+
+          <!-- 02.2 参数反馈 -->
+          <div class="full-cap reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Controls & Feedback</div>
+              <h3>每次调参都有可观察的画面反馈</h3>
+              <p>总增益影响回声亮度，深度改变刻度与测量换算，动态范围调整对比，雷达半径控制显影范围。Canvas 2D 根据这些参数持续重绘噪声、扫线、距离环与动态目标，使每次调整都能得到可观察的结果。</p>
+              <!-- 图示 · 参数反馈：四个参数经 Canvas 2D 重绘为可观察的画面变化 -->
+              <div class="diagram">
+                <div class="diagram-title"><span>Controls / 参数反馈</span><span>4 个参数 → 画面反馈</span></div>
+                <div class="diagram-body">
+                  <div class="dg-row">
+                    <div class="dg-node"><small>参数</small>增益 · 深度 · 动态范围 · 半径</div>
+                    <span class="dg-arrow">→</span>
+                    <div class="dg-node dg-current"><small>Canvas 2D</small>噪声 · 扫线 · 距离环 · 目标</div>
+                    <span class="dg-arrow">→</span>
+                    <div class="dg-node"><small>反馈</small>每次调整都可观察</div>
+                  </div>
+                  <div class="dg-gate"><b>PARAM → FEEDBACK</b> — 总增益影响回声亮度，深度改变刻度与测量换算，动态范围调整对比，雷达半径控制显影范围。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02.3 冻结、测量与报告 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：趣味报告（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/sonoquest-ultrasound-play-lab/03-playful-report.png" alt="趣味报告页"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.996Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Freeze, Measure & Report</div>
+              <h3>发现线索后冻结、测量，结束留下报告</h3>
+              <p>发现线索后可冻结画面并选择两点进行模拟测量；截图按钮把当前 Canvas 保存为 PNG，探头接管模式可锁定指针以获得连续移动体验。</p>
+              <p>结束扫描后，报告页汇总耗时、发现数量与各目标状态，适合作为亲子对话的结尾。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>一局游戏留下的结果</h2>
+            <div class="section-deck">目标设置、设备加载、扫描、报告四个阶段；结束扫描后报告汇总这一局的发现。</div>
+          </div>
+
+          <!-- 图示 · 一局流程：四步（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Session Flow / 一局流程</span><span>4 Stages</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一局游戏的四个阶段">
+                <span class="flow-step"><span class="flow-index">01</span>目标设置</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>设备加载</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>扫描</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>报告</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>目标设置：自行选择或随机放入 5 个目标。</p><p><small>10 种虚构目标可选，位置、角度和尺度每局都会变化。</small></p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>设备加载：进入扫描界面，切换凸阵或线阵探头。</p><p><small>用鼠标、触控板或手指移动扫描区域。</small></p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>扫描：调节参数并观察反馈，发现线索后冻结、测量。</p><p><small>总增益、深度、动态范围与扫描半径都会改动画面。</small></p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>报告：结束扫描，查看趣味报告。</p><p><small>报告汇总耗时、发现数量与各目标状态；截图按钮保存 PNG。</small></p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">无需账号或 API Key，公开页面在桌面和移动浏览器中即可进入主流程。<small>No account</small></div>
+              <div class="aside-tags">
+                <span class="tag">亲子互动</span>
+                <span class="tag">凸阵 · 线阵</span>
+                <span class="tag">冻结测量</span>
+                <span class="tag">趣味报告</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开证据与医疗边界</h2>
+            <div class="section-deck">截至 2026-08-21；在线页面可访问，但仓库未发布 Release 或许可证。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：公开仓库与部署记录</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>游戏功能</td><td class="data-table-ok">已实现</td><td class="data-table-mono">两类探头 / 10 种目标 / 冻结 · 测量 · 截图</td><td>公开源码</td></tr>
+                  <tr><td>在线部署</td><td class="data-table-ok">成功</td><td class="data-table-mono">GitHub Pages</td><td>页面可访问</td></tr>
+                  <tr><td>Release</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>未发布 Release</td></tr>
+                  <tr><td>公开许可证</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>未提供公开许可证</td></tr>
+                  <tr><td>自动化验证</td><td class="data-table-warn">未覆盖</td><td class="data-table-mono">渲染测试</td><td>仅检查脚手架加载页</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：React 19 / TypeScript / Next.js 16 / Canvas 2D</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 医疗与适用边界</b>
+            <p class="callout-statement">SonoQuest 不连接探头或任何医疗设备，不读取人体数据，也不训练超声判读能力。页面中的厘米、频率和「检查报告」均为叙事与玩法元素，不能用于诊断、健康筛查或医学教学考核。</p>
+            <div class="callout-note">儿童若对寄生虫等目标感到不适，家长可改选食物线索并陪同使用。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/sonoquest-ultrasound-play-lab" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/sonoquest-ultrasound-play-lab" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="callout reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">它适合希望用探索任务引导孩子观察因果反馈的家庭，也适合演示网页如何把专业设备的交互节奏转译成游戏。</p>
+            <div class="callout-note">寻找真实超声判读训练或医疗诊断用途的用户，不属于本项目覆盖范围。</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">把「扫描—调节—冻结—记录」的节奏，变成一场孩子可以参与的寻找与发现。</p>
+              <p>无需账号或 API Key，打开浏览器即可进入主流程。它面向亲子互动与交互演示，不用于诊断、健康筛查或医学教学考核。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://zeroxzhang.github.io/sonoquest-ultrasound-play-lab/" target="_blank" rel="noopener">开始超声探险</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Live Products</small>
+              <h3>过敏原地图</h3>
+              <p>以地区作为健康信息入口的一次交互可视化实验。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/allergen-map">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Learning</small>
+              <h3>Nanobot Course</h3>
+              <p>用六章互动练习，重建一次 Agent 从消息到工具的执行过程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/nanobot-course">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — SonoQuest Ultrasound Play Lab · No.21</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

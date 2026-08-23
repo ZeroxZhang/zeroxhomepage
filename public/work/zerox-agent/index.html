@@ -1,0 +1,524 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  zerox-agent.html · Zerox Agent 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/zerox-agent.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级引导）→
+     key-cap 命令（打开仓库）→ cube-flip 切换（复制仓库地址 / 已复制）→
+     dotted-offset 翻阅（关联作品索引）→ tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/zerox-agent">
+  <title>Zerox Agent · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="住在你 Mac 上的 AI 工作助手：改代码、查资料、写长文、整理文件，它自己动手推进，你随时可以检查、叫停和接管。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/zerox-agent/index.html · Zerox Agent 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/zerox-agent.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#runtime">运行时</a>
+          <a href="#capabilities">能力</a>
+          <a href="#workflow">工作流</a>
+          <a href="#evidence">证据</a>
+          <a href="#start">开始</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/zerox-agent" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 01</b><br>作品展示 · Agent Platform</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">Mac 上的 AI 工作助手 · Apple Silicon</div>
+          <h1>Zerox<br><em>Agent</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>复杂的事交给它，每一步都看得见、拦得住、续得上</strong>
+          <p>住在你 Mac 上的 AI 工作助手：改代码、查资料、写长文、整理文件，它自己动手推进，你随时可以检查、叫停和接管。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">AI Agent</span>
+            <span class="tag">Local-first</span>
+            <span class="tag">多智能体</span>
+            <span class="tag">macOS</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/zerox-agent" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>获取 Zerox Agent</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="/work/zerox-agent-course"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>先读 Course 理解系统</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Platform</small><b>macOS · Apple Silicon</b></div>
+        <div><small>Models</small><b>19 类模型可接</b></div>
+        <div><small>Observable</small><b>过程全程可见</b></div>
+        <div><small>Recovery</small><b>中断后可恢复</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/zerox-agent/01-main-ui.png" alt="Zerox Agent 主界面"> -->
+      <figure class="shot reveal" data-shot="01" style="--ratio:16/10">
+        <div class="shot-head"><span class="shot-id">Screenshot 01 / Main UI</span><span>16:10 · 建议 2880×1800 · PNG</span></div>
+        <div class="shot-frame">
+                                                          <img class="shot-img" src="/work-assets/screenshots/zerox-agent/01-main-ui.png" alt="图 01 · 主界面 — 一次运行中，会话、目标与工具轨迹同屏可见，过程本身也可以被检查。" decoding="async" fetchpriority="high">
+<i class="shot-tick tl"></i><i class="shot-tick tr"></i><i class="shot-tick bl"></i><i class="shot-tick br"></i>
+        </div>
+        <figcaption>图 01 · 主界面 — 一次运行中，会话、目标与工具轨迹同屏可见，过程本身也可以被检查。</figcaption>
+      </figure>
+    </header>
+
+    <main>
+      <!-- ══ 01 / 运行时 ══ -->
+      <section class="block" id="runtime">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / RUNTIME</div>
+            <h2>从聊天窗口走向完整的 Agent 运行时</h2>
+            <div class="section-deck">消息记录很难承担全部状态；Zerox Agent 把一次运行拆成几个清晰对象。</div>
+          </div>
+
+          <p class="lead reveal">复杂任务最消耗人的地方，通常不是输入那句话，而是接下来的<mark>一连串照看</mark>：确认计划有没有跑偏，判断工具调用是否安全，处理失败，补充上下文，最后再核对任务究竟有没有完成。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>普通聊天产品围绕消息组织体验。适合问答，也适合快速生成内容。一旦任务需要读写文件、运行 Shell、访问网络或持续几十分钟，消息记录就很难承担全部状态。</p>
+              <p>Zerox Agent 将一次运行拆成几个清晰对象：目标定义了要抵达的结果；计划记录当前路径；工具轨迹保存实际动作；权限层决定哪些操作可以发生；记忆和检查点负责跨越中断。最终答案只是交付的一部分，过程本身也可以被检查。</p>
+            </div>
+            <aside class="pull">这种设计特别适合代码修改、资料研究、长篇写作和本地文件整理——它们往往没有「一问一答」的捷径，却可以被拆成一条有状态的完成链。<small>Runtime Objects</small></aside>
+          </div>
+
+          <!-- 图示 · 运行时对象链：一次运行拆成哪些对象 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Runtime Objects / 对象链</span><span>Goal → Plan → Trace → Memory</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Obj 01</small>目标</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Obj 02</small>计划</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Obj 03</small>工具轨迹</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Obj 05</small>记忆与检查点</div>
+              </div>
+              <div class="dg-gate"><b>权限层 · PERMISSION</b> — 决定哪些操作可以发生；高风险动作放在明确的授权边界内。</div>
+            </div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Obj 01 / Goal</small>
+              <h2 class="editorial-card-title">目标</h2>
+              <p class="editorial-card-body">定义要抵达的结果。完成标准独立于对话，不随上下文增长而漂移。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Obj 02 / Plan</small>
+              <h2 class="editorial-card-title">计划</h2>
+              <p class="editorial-card-body">记录当前路径，让进行中的任务可以随时被查看和修正。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Obj 03 / Tool Trace</small>
+              <h2 class="editorial-card-title">工具轨迹</h2>
+              <p class="editorial-card-body">保存实际动作。发生了什么，什么时候发生，都可回看。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Obj 04 / Permission</small>
+              <h2 class="editorial-card-title">权限</h2>
+              <p class="editorial-card-body">决定哪些操作可以发生，把高风险动作放在明确的授权边界内。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Obj 05 / Memory + Checkpoint</small>
+              <h2 class="editorial-card-title">记忆与检查点</h2>
+              <p class="editorial-card-body">承载跨中断的状态，让任务从已知位置恢复，而不是从头再来。</p>
+            </article>
+            <article class="editorial-card editorial-card-data">
+              <small class="editorial-card-eyebrow">Fit Tasks</small>
+              <h2 class="editorial-card-title">适合的任务</h2>
+              <p class="editorial-card-body">代码修改 · 资料研究 · 长篇写作 · 本地文件整理</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>目标、分支、权限与恢复</h2>
+            <div class="section-deck">同一套运行时里的四层机制，各自解决一类控制问题，再加上对既有模型的连接。</div>
+          </div>
+
+          <!-- 02.1 Goal Mode -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Goal Mode</div>
+              <h3>Goal Mode：把目标写进系统，而不是留在上下文里</h3>
+              <p><strong>Direct 模式</strong>适合路径较清楚的工作，系统会规划并持续推进；<strong>Debate 模式</strong>增加独立评审与质量门，用于结论需要被挑战、交付需要额外验收的场景。</p>
+              <p>目标、剩余工作和完成证据都有独立状态。即使对话已经很长，你仍然可以回到最初目标，查看哪些部分完成、哪些部分仍在进行——任务不会因为模型忘记了前文，就悄悄改变完成标准。</p>
+              <p>对于简单请求，直接对话仍然保留。Zerox Agent 没有要求所有事情都进入复杂流程；产品会根据任务规模提供不同的工作深度。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>Mode</small>Direct · 规划推进</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Mode</small>Debate · 评审 + 质量门</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>独立状态</small>目标 / 剩余工作 / 完成证据</div>
+              </div>
+              <p class="dg-caption">三种状态独立于对话：即使上下文很长，完成标准也不会悄悄改变。</p>
+            </div>
+            <!-- ══ 截图槽位 02：Goal Mode（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/zerox-agent/02-goal-mode.png" alt="Goal Mode 面板"> -->
+            <figure class="shot cap-shot" data-shot="02" style="--ratio:4/3">
+              <div class="shot-head"><span class="shot-id">Screenshot 02 / Goal Mode</span><span>4:3 · 1600×1200</span></div>
+              <div class="shot-frame">
+                                <img class="shot-img" src="/work-assets/screenshots/zerox-agent/02-goal-mode.png" alt="图 02 · Goal Mode — 目标、剩余工作与完成证据的独立状态。" loading="lazy" decoding="async">
+                <i class="shot-tick tl"></i><i class="shot-tick tr"></i><i class="shot-tick bl"></i><i class="shot-tick br"></i>
+              </div>
+              <figcaption>图 02 · Goal Mode — 目标、剩余工作与完成证据的独立状态。</figcaption>
+            </figure>
+          </div>
+
+          <!-- 02.2 父子会话 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：任务树（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/zerox-agent/03-task-tree.png" alt="父子会话任务树"> -->
+            <figure class="shot cap-shot" data-shot="03" style="--ratio:4/3">
+              <div class="shot-head"><span class="shot-id">Screenshot 03 / Task Tree</span><span>4:3 · 1600×1200</span></div>
+              <div class="shot-frame">
+                                                                <img class="shot-img" src="/work-assets/screenshots/zerox-agent/03-task-tree.png" alt="图 03 · 任务树 — 分支各自可见、可回看、可单独处理。" loading="lazy" decoding="async">
+<i class="shot-tick tl"></i><i class="shot-tick tr"></i><i class="shot-tick bl"></i><i class="shot-tick br"></i>
+              </div>
+              <figcaption>图 03 · 任务树 — 分支各自可见、可回看、可单独处理。</figcaption>
+            </figure>
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Parent-Child Sessions</div>
+              <h3>把大任务拆开，同时保持每个分支可见</h3>
+              <p>父子会话支持将研究、实现、验证等工作交给不同子 Agent。子任务继承受控的上下文与权限，并继续归属于同一棵任务树。</p>
+              <p>这解决了多 Agent 产品里一个常见问题：并行能力很容易增加，但用户往往看不清每个分支做了什么。Zerox Agent 保留父子关系、消息与工具记录。你可以逐层回看，也能在某个分支出现偏差时单独处理，而无需重启整个任务。</p>
+              <div class="rule-note">多 Agent 在这里是一种任务组织方式，不是一场不可见的后台表演。</div>
+            </div>
+          </div>
+
+          <!-- 02.3 权限 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Permission Layer</div>
+              <h3>工具可以行动，权限需要先说清楚</h3>
+              <p>文件系统、Shell、网络和工作区访问都经过运行时权限层。系统区分「模型知道如何调用工具」和「当前任务被允许执行什么」，并把高风险动作放在明确的授权边界内。</p>
+              <p>对日常使用者来说，这意味着 Agent 可以处理真实工作，而不需要默认获得整台电脑的无限权限。对开发者来说，工具 schema、路径范围、网络域和错误返回也进入统一的执行协议，便于扩展和审计。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>模型</small>知道如何调用工具</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>运行时</small>权限层</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>任务</small>被允许执行什么</div>
+              </div>
+              <div class="scope-list">
+                <div><b>文件系统</b><span>路径范围</span></div>
+                <div><b>Shell</b><span>高风险动作需授权</span></div>
+                <div><b>网络</b><span>网络域</span></div>
+                <div><b>工作区</b><span>受控访问</span></div>
+              </div>
+              <div class="rule-note">权限控制不会消除所有风险，但它把风险从一条隐藏的 Prompt 约定，提升为可以被产品界面表达和执行的规则。</div>
+            </div>
+            <!-- ══ 截图槽位 04：权限确认（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/zerox-agent/04-permission-gate.png" alt="工具调用权限确认"> -->
+            <figure class="shot cap-shot" data-shot="04" style="--ratio:4/3">
+              <div class="shot-head"><span class="shot-id">Screenshot 04 / Permission Gate</span><span>4:3 · 1600×1200</span></div>
+              <div class="shot-frame">
+                                <img class="shot-img" src="/work-assets/screenshots/zerox-agent/04-permission-gate.png" alt="图 04 · 权限确认 — 高风险动作在明确的授权边界内发生。" loading="lazy" decoding="async">
+                <i class="shot-tick tl"></i><i class="shot-tick tr"></i><i class="shot-tick bl"></i><i class="shot-tick br"></i>
+              </div>
+              <figcaption>图 04 · 权限确认 — 高风险动作在明确的授权边界内发生。</figcaption>
+            </figure>
+          </div>
+
+          <!-- 02.4 恢复 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 05：检查点恢复（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/zerox-agent/05-checkpoint-trace.png" alt="检查点与工具轨迹"> -->
+            <figure class="shot cap-shot" data-shot="05" style="--ratio:16/9">
+              <div class="shot-head"><span class="shot-id">Screenshot 05 / Checkpoint & Trace</span><span>16:9 · 2560×1440</span></div>
+              <div class="shot-frame">
+                                <img class="shot-img" src="/work-assets/screenshots/zerox-agent/05-checkpoint-trace.png" alt="图 05 · 检查点恢复 — 失败不等于重来，任务从已知位置继续。" loading="lazy" decoding="async">
+                <i class="shot-tick tl"></i><i class="shot-tick tr"></i><i class="shot-tick bl"></i><i class="shot-tick br"></i>
+              </div>
+              <figcaption>图 05 · 检查点恢复 — 失败不等于重来，任务从已知位置继续。</figcaption>
+            </figure>
+            <div class="cap-text">
+              <div class="cap-no">02.4 / Recovery</div>
+              <h3>中断之后，从已知位置继续</h3>
+              <p>应用关闭、模型请求失败或工具执行报错，并不意味着已经完成的步骤必须丢失。Zerox Agent 将运行结果、工具轨迹、失败原因和检查点写入本地状态，使任务能够从已知位置恢复。</p>
+              <p>SQLite 是运行时的权威数据源，承载目标、记忆与检查点。Local-first 在这里有具体含义：任务状态优先保存在用户自己的电脑上，能够长期积累，也方便离线审计。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>运行</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>中断 · 失败原因</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03</small>检查点</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>04</small>从已知位置继续</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- local-first 边界说明（全宽 callout） -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Local-first / 明确边界</b>
+            <p class="callout-statement">任务状态优先保存在用户自己的电脑上；如果选择外部模型供应商，完成请求所需的上下文仍会发送到相应服务。</p>
+            <div class="callout-note">本地持久化与远程推理是两件事——没有把 local-first 包装成「所有计算完全离线」。</div>
+          </div>
+
+          <!-- 02.5 模型连接 -->
+          <div class="models-block reveal">
+            <div class="cap-no">02.5 / Model Connections</div>
+            <h3 style="margin:14px 0 0;font:600 var(--font-size-h3)/var(--line-height-h3) var(--sans);letter-spacing:0;color:var(--paper-100)">连接你已经在使用的模型</h3>
+            <p style="margin:16px 0 0;color:var(--paper-300);font-size:16px;line-height:1.78;text-wrap:pretty">公开版本注册了 19 类内置模型连接，并支持兼容端点。不同供应商被放进一致的消息、工具和错误处理边界，用户无需为每个模型重新理解一套 Agent 工作方式。模型选择因此可以服务于任务：快速模型处理日常工作，更强的模型负责复杂推理，兼容端点用于接入自有或新出现的服务。</p>
+            <div class="stat-grid">
+              <div><small>Built-in</small><b>19 类内置连接</b></div>
+              <div><small>Compatible Endpoints</small><b>支持兼容端点</b></div>
+              <div><small>Unified Boundary</small><b>消息 · 工具 · 错误</b></div>
+              <div><small>Selection</small><b>模型服务于任务</b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 工作流 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>一次典型任务如何展开</h2>
+            <div class="section-deck">五个步骤，从连接模型到验收交付；减少的是持续盯守 Agent 的注意力。</div>
+          </div>
+
+          <!-- 图示 · 典型路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Run / 典型路径</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次典型任务流程">
+                <span class="flow-step"><span class="flow-index">01</span>连接模型</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>创建 Goal</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>确认权限</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>执行与恢复</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>验收交付</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>连接模型服务，并选择需要操作的工作区。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>直接发起请求，或为多步骤任务创建 Goal。</p><p><small>简单请求走对话，复杂任务走 Goal——工作深度随任务规模变化。</small></p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>查看计划和任务分支，在关键工具调用前确认权限。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>让系统持续执行；遇到中断时检查原因并从检查点恢复。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>在完成前查看交付物、工具轨迹和完成证据。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">人仍然负责目标和关键判断，运行时承担重复推进、状态保存和执行记录。<small>Division of Labor</small></div>
+              <div class="aside-tags">
+                <span class="tag">代码修改</span>
+                <span class="tag">资料研究</span>
+                <span class="tag">长篇写作</span>
+                <span class="tag">本地文件整理</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已公开的工程证据</h2>
+            <div class="section-deck">截至 2026-08-21；代码、Release 与验证记录均可在公开仓库查看。</div>
+          </div>
+
+          <!-- 数据图 · 验证记分卡：全部通过的完成度 -->
+          <div class="dg-score reveal" style="margin-bottom:32px">
+            <div><small>Agent Eval</small><b>26 / 26</b><div class="dg-track"><i style="width:100%"></i></div></div>
+            <div><small>Memory Eval</small><b>2 / 2</b><div class="dg-track"><i style="width:100%"></i></div></div>
+            <div><small>Runtime Stress</small><b>6 / 6</b><div class="dg-track"><i style="width:100%"></i></div></div>
+            <div class="dg-score-check"><small>验证工作流</small><b>成功</b><div class="dg-track"><i style="width:100%"></i></div></div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：发布记录与公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>公开版本</td><td class="data-table-ok">已发布</td><td class="data-table-mono">v3.9.1</td><td>Apple Silicon macOS</td></tr>
+                  <tr><td>测试覆盖</td><td class="data-table-ok">通过</td><td class="data-table-mono">2,985 项</td><td>发布记录</td></tr>
+                  <tr><td>Agent eval</td><td class="data-table-ok">通过</td><td class="data-table-mono">26 / 26</td><td>全部通过</td></tr>
+                  <tr><td>Memory eval</td><td class="data-table-ok">通过</td><td class="data-table-mono">2 / 2</td><td>全部通过</td></tr>
+                  <tr><td>Runtime stress</td><td class="data-table-ok">通过</td><td class="data-table-mono">6 / 6</td><td>全部通过</td></tr>
+                  <tr><td>公开验证工作流</td><td class="data-table-ok">成功</td><td class="data-table-mono">latest</td><td>最新一次</td></tr>
+                  <tr><td>Apple notarization</td><td class="data-table-risk">未完成</td><td class="data-table-mono">—</td><td>首次安装需留意 macOS 安全提示</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：TypeScript / Electron / React / Vite / SQLite</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">当前发行包尚未完成 Apple notarization；不同模型的工具能力、复杂任务的完成判断和自主执行边界也仍在持续迭代。</p>
+            <div class="callout-note">截至 2026-08-21 · 以公开仓库为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/zerox-agent" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/zerox-agent" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 05 / 决策与开始 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">05 / DECISION</div>
+            <h2>适合把 Agent 当作工作环境的人</h2>
+            <div class="section-deck">聊天窗口适合偶尔一问；Zerox Agent 面向另一类需求。</div>
+          </div>
+
+          <div class="callout reveal">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">你定义目标、掌握权限并验收结果；Agent 在可观察的运行时里推进工作。</p>
+            <div class="callout-note">一种更稳健的人机分工</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果你只需要偶尔问一个问题，聊天窗口已经足够。Zerox Agent 面向的是另一类需求：任务会跨越多个步骤和工具，需要留下记录，失败后还要继续，用户也希望知道系统正在做什么。</p>
+              <p>项目还衍生出 Zerox Agent Course，用互动页面解释从界面到运行时的关键链路；Nanobot Course 则提供另一个 Agent 框架的中文源码学习路径。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/zerox-agent" target="_blank" rel="noopener">获取 Zerox Agent</a>
+              </div>
+              <a class="btn" href="/work/zerox-agent-course">想先理解系统设计：阅读 Course</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Learning</small>
+              <h3>Zerox Agent Course</h3>
+              <p>沿着一次任务的运行路径，读懂桌面 Agent 的关键边界。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/zerox-agent-course">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Learning</small>
+              <h3>Nanobot Course</h3>
+              <p>用六章互动练习，重建一次 Agent 从消息到工具的执行过程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/nanobot-course">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Utilities</small>
+              <h3>DeepSeek Harness App</h3>
+              <p>免装 Node 与 pnpm，双击在 Mac 上启动 DeepSeek Harness。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/deepseek-harness-app">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Zerox Agent · No.01</span>
+      <span>截图占位待替换 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  nanobot-course.html · Nanobot Course 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/nanobot-course.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制课程地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/nanobot-course">
+  <title>Nanobot Course · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="六章中文互动课，把 Agent 从消息到工具的执行过程一步步讲清。不用装框架、不用配模型，打开网页就能看动画、做练习、查 Bug，边操作边把执行链读懂。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/nanobot-course/index.html · Nanobot Course 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/nanobot-course.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#structure">课程</a>
+          <a href="#path">学习路径</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://zeroxzhang.github.io/nanobot-course/" target="_blank" rel="noopener">开始课程</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 20</b><br>作品展示 · 互动源码教程</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">浏览器里的中文互动课 · 边操作边学源码</div>
+          <h1>Nanobot<br><em>Course</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>跟着一条消息走一遍，看懂 Agent 怎么运转</strong>
+          <p>六章中文互动课，把 Agent 从消息到工具的执行过程一步步讲清。不用装框架、不用配模型，打开网页就能看动画、做练习、查 Bug，边操作边把执行链读懂。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">AI Agent</span>
+            <span class="tag">源码学习</span>
+            <span class="tag">中文教程</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://zeroxzhang.github.io/nanobot-course/" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>开始 Nanobot 课程</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-3">
+        <div><small>Chapters</small><b>六章互动课程</b></div>
+        <div><small>Interactions</small><b>动画 · 拖拽 · 群聊模拟</b></div>
+        <div><small>Setup</small><b>免安装 · 免配模型</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：课程首页（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/nanobot-course/01-home.png" alt="Nanobot Course 课程首页"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:43:42.329Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>从「模型加工具」走到看得见的执行链</h2>
+            <div class="section-deck">零件清单好记，却讲不清系统怎样运转；这门课把它拆成六章可操作的过程。</div>
+          </div>
+
+          <p class="lead reveal">「Agent 等于模型加工具」能概括零件，却交代不了系统怎样运转。这门课要回答的问题更具体：<mark>一条消息从哪里进来、何时调用工具、结果如何回到上下文、错误又在哪一层暴露</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>直接阅读源码时，这些关系散落在多个文件和抽象中。Nanobot Course 把 nanobot 的执行流拆成六章，通过动画、模拟和练习建立组件之间的因果关系，再把读者带回代码结构。</p>
+              <p>无需先安装框架或配置模型，从一次消息的移动开始，就能理解 Agent 的运转方式。</p>
+            </div>
+            <aside class="pull">从一次消息的移动开始理解 Agent，而不是从目录树或入口文件开始。<small>Learning Path</small></aside>
+          </div>
+
+          <!-- 图示 · 执行链：一条消息穿过哪些对象 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Execution Chain / 执行链</span><span>Message → Loop → Tool → Context</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Msg</small>消息 · 渠道</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Loop</small>Agent Loop</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Model</small>模型 · 工具</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Context</small>回到上下文</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Memory</small>记忆 · 状态</div>
+              </div>
+              <div class="dg-gate"><b>错误暴露层 · FAILURE</b> — 出错时先问「错在哪一层」，调试建立在对运行机制的理解之上。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 课程结构与互动 ══ -->
+      <section class="block" id="structure">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / STRUCTURE</div>
+            <h2>六章课程，按理解依赖逐层展开</h2>
+            <div class="section-deck">前两章建立定位，中间追踪消息与工具协作，后两章讨论设计取舍与故障排查。</div>
+          </div>
+
+          <!-- 图示 · 六章顺序：带编号的节点时间线 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Chapter Order / 六章顺序</span><span>01 → 06</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Ch 01</small>认识 nanobot</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Ch 02</small>剧组成员</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Ch 03</small>消息如何流动</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Ch 04</small>与外部世界对话</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Ch 05</small>巧妙的设计</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Ch 06</small>当系统出问题</div>
+              </div>
+              <p class="dg-caption">顺序按理解依赖组织：前两章建立框架定位与角色分工，中间章节追踪执行，后两章才谈设计取舍与故障。</p>
+            </div>
+          </div>
+
+          <!-- 02.1 观察类互动 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Observe</div>
+              <h3>把抽象组件改写为可观察的行为</h3>
+              <p><strong>数据流动画</strong>逐步移动消息包，<strong>架构图</strong>允许点击角色查看职责，<strong>群聊模拟</strong>把协调过程放进同一对话窗口。你看到的不是一排名词，而是组件之间的因果关系。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>动画</small>消息包逐步移动</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>架构图</small>点击角色看职责</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>群聊</small>协调过程同窗可见</div>
+              </div>
+              <p class="dg-caption">三类观察式互动各自承担一个解释任务，让抽象关系变成可回放的行为。</p>
+            </div>
+            <!-- ══ 截图槽位 02：数据流动画（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/nanobot-course/02-data-flow.png" alt="数据流动画章节"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:43:42.331Z -->
+          </div>
+
+          <!-- 02.2 检验类互动 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：拖拽匹配练习（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/nanobot-course/03-matching.png" alt="拖拽匹配练习"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:43:42.331Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Practice</div>
+              <h3>用练习把「看过」和「懂了」分开</h3>
+              <p><strong>拖拽匹配</strong>要求区分消息、模块与能力边界，<strong>选择题</strong>提供即时解释，<strong>Bug 挑战</strong>要求定位出错环节并判断修复方向。</p>
+              <p>每个互动都有明确的教学任务：先让读者做出预测，再看系统回应；判断错了，就回到对应解释重看。它不为装饰页面而设。</p>
+              <div class="rule-note">练习服务于真实误解：让「看过代码」和「理解调用关系」能被区分。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 学习路径 ══ -->
+      <section class="block" id="path">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / PATH</div>
+            <h2>打开网页，边操作边形成阅读地图</h2>
+            <div class="section-deck">从全局介绍出发，跟着一条消息进入循环，再用练习检验每一步理解。</div>
+          </div>
+
+          <!-- 图示 · 学习路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Study Path / 学习路径</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="典型学习路径">
+                <span class="flow-step"><span class="flow-index">01</span>全局介绍</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>跟着消息进循环</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>观察外部能力调用</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>每章练习检验</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>源码阅读地图</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>从第一章的全局介绍开始，建立对框架定位的整体认识。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>跟着一条消息进入循环，观察它如何流动。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>观察系统如何调用外部能力，理解渠道、模型与工具的协作。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>每章结束时用练习检验理解；遇到薄弱点返回相应动画重放。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>完成六章后，得到一张带执行顺序的源码阅读地图。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">完成六章后，交付物是一张带执行顺序的源码地图，以及一组可用于阅读上游实现的具体问题。<small>Deliverable</small></div>
+              <div class="aside-tags">
+                <span class="tag">数据流动画</span>
+                <span class="tag">拖拽匹配</span>
+                <span class="tag">群聊模拟</span>
+                <span class="tag">Bug 挑战</span>
+              </div>
+            </aside>
+          </div>
+
+          <!-- 静态交付边界说明（全宽 callout） -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">静态交付 / 免后端</b>
+            <p class="callout-statement">课程由六个模块化 HTML 片段、共享 CSS 与原生 JavaScript 组成，Shell 构建脚本将它们合并为单页，同时覆盖桌面与触控浏览。</p>
+            <div class="callout-note">学习过程不依赖后端账户、API Key 或正在运行的 nanobot 实例。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开状态与版本边界</h2>
+            <div class="section-deck">截至 2026-08-21；可访问、可核验，同时如实标注没有的东西。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态 · 来源：公开仓库与部署记录</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>六章内容</td><td class="data-table-ok">已公开</td><td class="data-table-mono">6 章</td><td>互动脚本与构建文件同仓提供</td></tr>
+                  <tr><td>互动脚本</td><td class="data-table-ok">已公开</td><td class="data-table-mono">✓</td><td>数据流 / 匹配 / 群聊 / 测验 / Bug 挑战</td></tr>
+                  <tr><td>GitHub Pages 部署</td><td class="data-table-ok">成功</td><td class="data-table-mono">✓</td><td>在线课程可访问</td></tr>
+                  <tr><td>公开 Release</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>未发布</td></tr>
+                  <tr><td>测试套件</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>未公开</td></tr>
+                  <tr><td>许可证</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>未公开</td></tr>
+                  <tr><td>上游 commit</td><td class="data-table-risk">未锁定</td><td class="data-table-mono">—</td><td>未固定所讲解的 nanobot 版本</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / CSS / JavaScript / Shell 构建</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">这是 2026 年 7 月发布的第三方源码学习快照，不代表 nanobot 官方文档，也不会自动跟随上游变化。</p>
+            <div class="callout-note">要核对当前接口、安装方式或安全行为，仍需查阅 nanobot 最新源码与官方资料。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/nanobot-course" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制课程地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://zeroxzhang.github.io/nanobot-course/" aria-pressed="false" aria-label="复制课程地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制课程地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- ══ 决策与开始 ══ -->
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">适合初次接触 Agent 框架的开发者、需要向团队解释执行流的人，以及想通过故障场景巩固理解的学习者。</p>
+              <p>学习过程不依赖后端账户、API Key 或正在运行的 nanobot 实例；要核对当前接口与安全行为，仍以 nanobot 最新源码为准。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://zeroxzhang.github.io/nanobot-course/" target="_blank" rel="noopener">开始 Nanobot 课程</a>
+              </div>
+              <a class="btn" href="https://github.com/ZeroxZhang/nanobot-course" target="_blank" rel="noopener">查看 GitHub 仓库</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Learning</small>
+              <h3>Zerox Agent Course</h3>
+              <p>沿着一次任务的运行路径，读懂桌面 Agent 的关键边界。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/zerox-agent-course">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Content Publishing</small>
+              <h3>paper-to-course</h3>
+              <p>把难懂的论文，变成能一步步看懂的互动课程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/paper-to-course">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Nanobot Course · No.20</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

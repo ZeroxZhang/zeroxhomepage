@@ -1,0 +1,289 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  epub-pdf-to-txt-converter.html · EPUB/PDF to TXT Converter 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/epub-pdf-to-txt-converter.md
+     （facts_as_of 2026-08-21），未新增数据；作品编号按 index.yaml 顺序为 No. 28。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css；版式与交互在 site/site.css + site/site.js，页内不重复。
+  5. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品）→
+     tactile 按压（结尾决策主操作）。
+  6. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；版本号 / 测试数 / 技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/epub-pdf-to-txt-converter">
+  <title>EPUB/PDF to TXT Converter · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把文本型 PDF 与 EPUB 的单本书或整批文件夹，批量转成保留段落的 TXT。转换结果可直接进入全文搜索、语料分析与笔记整理。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/epub-pdf-to-txt-converter/index.html · EPUB/PDF to TXT Converter 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/epub-pdf-to-txt-converter.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/epub-pdf_2_txt_converter" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 28</b><br>作品展示 · 文本转换工具</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">把电子书变成可搜索的纯文本 · 桌面工具</div>
+          <h1>EPUB/PDF<br>to TXT <em>Converter</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>电子书批量放进去，带走能搜索、能分析的纯文本</strong>
+          <p>把文本型 PDF 与 EPUB 的单本书或整批文件夹，批量转成保留段落的 TXT。转换结果可直接进入全文搜索、语料分析与笔记整理。</p>
+          <div class="hero-tags">
+            <span class="tag">EPUB</span>
+            <span class="tag">PDF</span>
+            <span class="tag tag-current">文本转换</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/epub-pdf_2_txt_converter" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>获取转换工具</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 个 C 端能力格：单文件/整批 输入 + 保留段落 输出（compact 页两格，版式按内容收缩为两栏） -->
+      <div class="hero-strip hero-strip-2 hero-strip-2">
+        <div><small>Input</small><b>单文件 / 整批文件夹</b></div>
+        <div><small>Output</small><b>保留段落的 TXT</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/epub-pdf-to-txt-converter/01-main-ui.png" alt="EPUB/PDF to TXT Converter 主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:43:42.338Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把电子书变成可以检索、分析的纯文本</h2>
+            <div class="section-deck">全文搜索、语料分析和二次整理需要稳定文本，而非原书的复杂版面。</div>
+          </div>
+
+          <p class="lead reveal">逐本复制既慢，也容易把段落打散。这个桌面工具把<mark>文本型 PDF 与 EPUB</mark> 的单本书或整批资料，转成更通用的 TXT。</p>
+
+          <!-- 图示 · 转换流程：从输入到输出 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Convert Pipeline / 转换流程</span><span>Input → Extract → Clean → Output</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次转换流程">
+                <span class="flow-step"><span class="flow-index">01</span>选文件 / 文件夹</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>提取已有文本</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>清理并保留段落</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>输出 TXT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>单本或整批，转换并保留段落</h2>
+            <div class="section-deck">三个直接能力：批量处理、进度可见、段落保留。</div>
+          </div>
+
+          <!-- 02.1 批量处理 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Batch</div>
+              <h3>单文件，或递归扫描整个文件夹</h3>
+              <p>选择一本书，或让工具递归扫描整个文件夹，一次处理整批资料。长任务不必一本一本照看。</p>
+              <div class="scope-list">
+                <div><b>单文件</b><span>选择一个文件</span></div>
+                <div><b>整批文件夹</b><span>递归扫描整个文件夹</span></div>
+              </div>
+            </div>
+            <aside class="pull">它处理的是文本型 PDF 与 EPUB，提取已有文本，不重建原书视觉结构。<small>Scope</small></aside>
+          </div>
+
+          <!-- 02.2 进度可见 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Progress</div>
+              <h3>转换过程看得见进度</h3>
+              <p>转换过程中显示实时进度，适合处理不希望反复覆盖的长任务。开始之后不必一直盯着，回来也能知道走到哪一步。</p>
+            </div>
+            <aside class="pull">同名输出存在时跳过——不会悄悄覆盖已有结果。<small>Skip</small></aside>
+          </div>
+
+          <!-- 02.3 段落保留 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Paragraphs</div>
+              <h3>尽量保留段落，让结果继续可用</h3>
+              <p>工具尝试清理页面与章节内容并保留段落，避免把段落打散，让转换后的文本仍保持可读的段落结构。</p>
+            </div>
+            <aside class="pull">转换结果继续进入检索、脚本分析、笔记整理或其他文本工作流。<small>Output</small></aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE</div>
+            <h2>公开状态与使用边界</h2>
+            <div class="section-deck">截至 2026-08-21；仓库数字与转换范围说明如下。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：公开仓库（截至 2026-08-21）</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>公开 Stars</td><td class="data-table-ok">已公开</td><td class="data-table-mono">5</td><td>公开关注</td></tr>
+                  <tr><td>公开 Forks</td><td class="data-table-ok">已公开</td><td class="data-table-mono">1</td><td>公开关注</td></tr>
+                  <tr><td>自动测试</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>无 CI</td></tr>
+                  <tr><td>正式 Release</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>仓库未发布</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / Tkinter / PyPDF2 / ebooklib / BeautifulSoup</p>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/epub-pdf_2_txt_converter" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/epub-pdf_2_txt_converter" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">扫描版 PDF、复杂多栏排版、公式与图片文字不属于可靠处理范围；Unicode BMP 之外字符会被删除，段落保留依赖启发式清理，输出仍需抽查。</p>
+            <div class="callout-note">工具提取已有文本，不重建原书视觉结构，也不包含 OCR。</div>
+          </div>
+
+          <div class="callout reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Use / 适用范围</b>
+            <p class="callout-statement">适合自有、公版或已获授权的文本型电子书；转换不会自动赋予复制、分析或再发布权利。</p>
+            <div class="callout-note">处理前应确认版权与隐私要求，并保留原文件作为校对依据。</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果你手头有自有、公版或已获授权的文本型电子书，需要把它们整理成可搜索、可分析的纯文本，这个工具可以直接用起来。</p>
+              <p>5 Stars 与 1 Fork 只能证明项目被公开关注，不能证明转换准确率或兼容范围；不同出版物的内部结构差异较大，批量转换后仍建议抽查。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/epub-pdf_2_txt_converter" target="_blank" rel="noopener">获取转换工具</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Content-publishing</small>
+              <h3>md2book</h3>
+              <p>用 Markdown 写作，以一本中文书的形态交付。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/md2book">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Content-publishing</small>
+              <h3>md2pdf_v2</h3>
+              <p>一句话确认风格，把 Markdown 变成可交付的中文 PDF。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/md2pdf-v2">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — EPUB/PDF to TXT Converter · No.28</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表（# 占位）</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

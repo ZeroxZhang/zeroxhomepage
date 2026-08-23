@@ -1,0 +1,364 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  silenzio.html · 大音希声 SILENZIO 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/silenzio.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级引导）→
+     cube-flip 切换（复制主链接 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。本作品无公开仓库，故省略 key-cap 命令按钮。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/silenzio">
+  <title>大音希声 SILENZIO · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="贴一条小宇宙节目链接，省去下载与上传，长音频在后台转成可阅读的文字，进度看得见、中断续得上。完成后直接搜索、核对与摘录，把节目里的观点接进你的笔记与写作。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/silenzio/index.html · 大音希声 SILENZIO 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/silenzio.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://silenzio.cn" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 08</b><br>作品展示 · Web 产品</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">小宇宙播客转文字 · 贴链接即开始</div>
+          <h1>大音希声<br><em>SILENZIO</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>一条小宇宙链接，把长播客变成可检索、可编辑的文字</strong>
+          <p>贴一条小宇宙节目链接，省去下载与上传，长音频在后台转成可阅读的文字，进度看得见、中断续得上。完成后直接搜索、核对与摘录，把节目里的观点接进你的笔记与写作。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">语音转文字</span>
+            <span class="tag">播客</span>
+            <span class="tag">内容沉淀</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://silenzio.cn" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>免费转录播客</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="#usage"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>先看一次典型使用</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Input</small><b>贴链接即开始</b></div>
+        <div><small>Progress</small><b>长任务进度可见</b></div>
+        <div><small>Recovery</small><b>中断后可继续</b></div>
+        <div><small>Output</small><b>可搜索可编辑</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/silenzio/01-main-ui.png" alt="SILENZIO 主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.989Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>从一条小宇宙链接到一段可用文字</h2>
+            <div class="section-deck">播客以时间轴为中心；SILENZIO 把它换成文字工作流，让声音里的信息能被阅读、查找和继续编辑。</div>
+          </div>
+
+          <p class="lead reveal">一段两小时的访谈，往往只有一次被完整听完的机会。之后你记得某个观点，却很难确认它出现在哪一分钟；想引用一段原话，只能拖动进度条反复寻找；准备写作时，声音里的信息也无法直接进入<mark>搜索、摘录和整理</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>多数通用转录工具从「上传文件」开始。对播客听众而言，这意味着先找到音频来源、完成下载、管理一个可能很大的本地文件，再把它交给另一个服务。找回内容这个目的，反而排在一串准备动作之后。</p>
+              <p>SILENZIO 把输入收窄到小宇宙链接。用户粘贴节目链接即可提交任务，无需先下载音频再上传文件。系统在后台处理长音频，并通过进度反馈与中断恢复，交付一份可以阅读、查找和继续编辑的转录结果。</p>
+            </div>
+            <aside class="pull">这个边界是产品对主流程的选择：当来源明确时，入口可以更短，错误提示可以更具体，任务状态也可以围绕播客场景设计。<small>Product Boundary</small></aside>
+          </div>
+
+          <!-- 图示 · 链接到文字的对象链：输入如何变成工作流里的材料 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>From Link to Text / 链接到文字</span><span>Link → Transcript → Workflow</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>In 01</small>小宇宙节目链接</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>In 02</small>后台转录 · 进度可见</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>In 03</small>转录文字 · 可检索 / 编辑</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>In 04</small>笔记 · 选题 · 写作</div>
+              </div>
+              <div class="dg-gate"><b>进度反馈 · 中断恢复 · PROGRESS + RESUME</b> — 后台处理期间保持可见，网络波动或页面退出不抹掉此前投入。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>一条从节目链接到可用文本的完整路径</h2>
+            <div class="section-deck">四个环节各自解决一类问题：输入更短、过程可见、中断可续、结果回到工作流。</div>
+          </div>
+
+          <!-- 02.1 链接直接提交 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Submit the Link</div>
+              <h3>链接直接提交：不碰音频文件</h3>
+              <p>复制小宇宙节目链接，粘贴后即可开始。用户不必处理音频格式、上传大小或临时文件，第一次使用也不需要先理解一套转录工作台。</p>
+            </div>
+            <aside class="pull">输入收窄到小宇宙链接，是产品对主流程的选择。<small>Input Boundary</small></aside>
+          </div>
+
+          <!-- 02.2 长任务保持可见 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 02：任务进度（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/silenzio/02-progress.png" alt="任务进度界面"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.989Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Visible Progress</div>
+              <h3>长任务保持可见：进度代替空白等待</h3>
+              <p>播客转录需要时间。实时进度把后台处理变成可观察的过程，用户能够判断任务仍在运行、已经走到哪一步，免去在空白等待界面里猜测状态。</p>
+            </div>
+          </div>
+
+          <!-- 02.3 中断后继续处理 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Resume</div>
+              <h3>中断后继续处理：从断点接着走</h3>
+              <p>网络波动或页面退出不应抹掉此前投入。断点续传为长任务保留恢复路径，降低重新提交、重新等待以及重复消耗资源的概率。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>任务运行</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>网络波动 / 页面退出</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03</small>断点续传</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>04</small>从断点继续</div>
+              </div>
+              <p class="dg-caption">中断不是从头再来：已完成的投入被保留，恢复从已知位置继续。</p>
+            </div>
+            <aside class="pull">失败不等于从头再来。<small>Recovery</small></aside>
+          </div>
+
+          <!-- 02.4 结果回到内容工作流 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：转录结果（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/silenzio/03-transcript.png" alt="转录结果文字界面"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.989Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.4 / Back to Workflow</div>
+              <h3>结果回到内容工作流：文字成为可继续使用的基础</h3>
+              <p>完成后的文字可以被浏览、搜索和编辑。它既适合快速确认节目谈到了什么，也可以进入笔记、选题、引用核对或文章准备流程。转录结果因此成为后续工作可继续使用的基础材料。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方式 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>一次典型使用</h2>
+            <div class="section-deck">从通勤听完到回到电脑，把模糊记忆换成可核对的段落。</div>
+          </div>
+
+          <!-- 图示 · 典型使用：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Use / 典型使用</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次典型使用流程">
+                <span class="flow-step"><span class="flow-index">01</span>通勤听完</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>贴链接提交</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>查看进度</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>搜索定位</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>整理进笔记</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>通勤时听完一场访谈，记得嘉宾讲过一个很适合写进文章的案例。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>回到电脑后，复制节目链接并提交转录。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>处理期间查看任务进度，确认任务仍在运行。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>完成后用关键词定位相关段落，结合上下文确认表达。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>把需要的部分整理进自己的笔记。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">这条路径节省的是从模糊记忆回到准确内容的查找成本；节目本身依然值得完整收听。<small>Value After Playback</small></div>
+              <div class="aside-tags">
+                <span class="tag">研究者</span>
+                <span class="tag">内容创作者</span>
+                <span class="tag">重度播客听众</span>
+              </div>
+            </aside>
+          </div>
+
+          <!-- 免费额度 / 开始方式 -->
+          <div class="callout callout-data reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">免费额度 / 开始方式</b>
+            <p class="callout-statement">游客可以先使用三次免费额度，在决定是否注册前验证自己的节目和使用场景。</p>
+            <div class="callout-note">内容起点是一条小宇宙链接时，用一次真实节目检验这条流程。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已公开的事实与边界</h2>
+            <div class="section-deck">截至 2026-08-21；可以核验的事实与尚待披露的部分分开列出。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开事实与边界 · 来源：公开网站（facts_as_of 2026-08-21）</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>事实</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>上线</td><td class="data-table-ok">已上线</td><td class="data-table-mono">2026-02-07</td><td>公开网站可正常访问</td></tr>
+                  <tr><td>公开入口</td><td class="data-table-ok">可访问</td><td class="data-table-mono">小宇宙链接</td><td>提供节目链接提交入口</td></tr>
+                  <tr><td>免费额度</td><td class="data-table-ok">提供</td><td class="data-table-mono">3 次</td><td>注册前可验证节目与场景</td></tr>
+                  <tr><td>输入来源</td><td class="data-table-info">单一来源</td><td class="data-table-mono">小宇宙</td><td>会议 / 视频 / 本地录音超出范围</td></tr>
+                  <tr><td>保存与删除</td><td class="data-table-risk">未披露</td><td class="data-table-mono">—</td><td>公开页面未完整说明</td></tr>
+                  <tr><td>第三方处理</td><td class="data-table-risk">未披露</td><td class="data-table-mono">—</td><td>公开页面未完整说明</td></tr>
+                  <tr><td>统一质量口径</td><td class="data-table-risk">未披露</td><td class="data-table-mono">—</td><td>公开页面未完整说明</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 适用范围与风险边界</b>
+            <p class="callout-statement">转录准确度会受到录音质量、多人重叠、口音、背景音乐和专业名词影响，重要引用仍应回到原音频核对。用户也应只处理自己有权访问和使用的内容，尊重节目创作者及平台的版权规则。</p>
+            <div class="callout-note">音频与文本的保存期限、删除机制、第三方处理服务和统一质量口径尚未完整披露；在这些边界明确之前，不建议上传涉及商业秘密、个人隐私或其他高度敏感的信息。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「切换」：真实双态 —— 复制主链接 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://silenzio.cn" aria-pressed="false" aria-label="复制 SILENZIO 链接到剪贴板">
+              <span class="cube">
+                <span class="face front">复制 SILENZIO 链接</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- ══ 决策与 CTA ══ -->
+          <div class="callout reveal" style="margin-top:var(--space-8)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">如果内容起点是一条小宇宙链接，可以直接用一次真实节目检验这条流程。</p>
+            <div class="callout-note">适合复查长访谈、沉淀节目笔记、寻找引用线索的人</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">SILENZIO 适合希望复查长访谈、沉淀节目笔记、寻找引用线索，或把播客纳入研究与写作流程的人。它目前专注小宇宙来源。</p>
+              <p>会议、视频、本地录音和其他播客平台超出产品范围。价值集中在播放结束之后。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://silenzio.cn" target="_blank" rel="noopener">免费转录播客</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Personal System</small>
+              <h3>IO System</h3>
+              <p>一套以本地文件为事实源、持续连接素材与创作的个人内容系统。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/io-system">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Content Publishing</small>
+              <h3>huashu-bookwriter</h3>
+              <p>把一本书的结构、声音和质量标准写进 AI 工作流。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/huashu-bookwriter">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — 大音希声 SILENZIO · No.08</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

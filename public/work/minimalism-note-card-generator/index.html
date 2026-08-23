@@ -1,0 +1,282 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  minimalism-note-card-generator.html · Minimalism Note Card Generator 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/minimalism-note-card-generator.md
+     （facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css；版式与交互由 site/site.css + site/site.js 承担，页内不重复。
+  5. 链接约定：主链接用 https 绝对地址；关联作品用相对路径 ../<slug>/index.html。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ cube-flip 切换（复制在线地址）→
+     dotted-offset 翻阅（关联作品索引）→ tactile 按压（结尾决策主操作）。
+     本作品无公开仓库链接，故不设 key-cap 命令按钮。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；技术栈与上线细节后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/minimalism-note-card-generator">
+  <title>Minimalism Note Card Generator · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把摘录和短句排成干净卡片：自动识别中英文，选一套配色、署上名字。在页面里先看效果，满意就导出 PNG。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/minimalism-note-card-generator/index.html · Minimalism Note Card Generator 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/minimalism-note-card-generator.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://card.zeroxzhang.cc" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 34</b><br>作品展示 · Web 工具</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">把摘录排成干净卡片的在线工具 · 免账号</div>
+          <h1>Minimalism<br><em>Note Card Generator</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>写下一段话，几步带走一张克制、干净的分享卡片</strong>
+          <p>把摘录和短句排成干净卡片：自动识别中英文，选一套配色、署上名字。在页面里先看效果，满意就导出 PNG。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">文字卡片</span>
+            <span class="tag">极简设计</span>
+            <span class="tag">客户端导出</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://card.zeroxzhang.cc" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>立即制作卡片</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-2 hero-strip-2">
+        <div><small>Language</small><b>中英文自动识别</b></div>
+        <div><small>Themes</small><b>浅色 · 深色 · 暖色</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/minimalism-note-card-generator/01-main-ui.png" alt="Minimalism Note Card Generator 主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.309Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>从一段话到一张干净的卡片</h2>
+            <div class="section-deck">短句、摘录和临时想法需要清楚排版与快速导出；过多模板与装饰反而延长一次简单分享。</div>
+          </div>
+
+          <p class="lead reveal">短句、摘录和临时想法需要的是<mark>清楚排版与快速导出</mark>，过多模板和装饰选择反而会延长一次简单分享。Minimalism Note Card Generator 把流程收窄为四个元素，让内容保持页面中心。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>填写昵称与正文后，页面识别中文或英文，并采用相应的字体与排版规则。你不需要在几十套模板里反复挑选，只需要把注意力放在文字本身。</p>
+              <p>卡片效果在页面中即可检查，随后可以复制内容，或通过 html2canvas 下载 PNG——一条足够短的制作路径。</p>
+            </div>
+            <aside class="pull">把一次简单分享，收窄为文字、署名、主题和导出四个动作，而不是一长串装饰性决定。<small>Four Elements</small></aside>
+          </div>
+
+          <!-- 图示 · 四步流程：文字 → 署名 → 主题 → 导出 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Four Elements / 四步流程</span><span>Text → Attribution → Theme → Export</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="制作卡片的四步流程">
+                <span class="flow-step"><span class="flow-index">01</span>文字</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>署名</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>主题</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>导出</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>排版跟随语言，导出交给浏览器</h2>
+            <div class="section-deck">两类关键设计：输入之后排版自动跟随语言；正文在浏览器客户端完成排版与导出。</div>
+          </div>
+
+          <!-- 02.1 排版跟随语言 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Typography Follows Language</div>
+              <h3>输入之后，排版自动跟随语言</h3>
+              <p>填写昵称与正文后，页面识别中文或英文，并采用相应的字体与排版规则。<strong>浅色、深色和暖色三套主题</strong>提供足够明确的气质差异，同时避免复杂图层。</p>
+              <p>主题只负责气质，不增加装饰层级——内容仍然是卡片里唯一的主角。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>Input</small>输入正文</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Detect</small>识别语言</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Type</small>字体与排版</div>
+              </div>
+              <p class="dg-caption">中文与英文采用不同的字体与排版规则；三套主题再提供气质差异。</p>
+            </div>
+            <!-- 截图槽位 02 放在 02.2（导出），此处为文字列，不留槽位 -->
+            <div class="rule-note">排版规则跟随语言自动切换，使用者不需要手动为每一种文字调整字号与行距。</div>
+          </div>
+
+          <!-- 02.2 浏览器承担工作 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 02：预览与导出（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/minimalism-note-card-generator/02-export.png" alt="卡片预览与导出"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.309Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Browser-side Export</div>
+              <h3>浏览器承担主要工作</h3>
+              <p>产品以 HTML、CSS 和 JavaScript 构建，正文在浏览器客户端参与排版和导出，<strong>没有业务后端保存输入内容</strong>。界面语言可在中文与英文之间切换，选择会写入 localStorage。</p>
+              <p>这一结构适合临时文字、社交分享和无需账号的快速制作：你可以在页面中检查卡片效果，再复制内容或通过 html2canvas 下载 PNG。</p>
+              <div class="rule-note">没有账号门槛，也没有业务后端保存正文——输入的内容只在你自己的浏览器里参与排版。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与开始 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE</div>
+            <h2>在线状态与隐私边界</h2>
+            <div class="section-deck">截至 2026-08-21；公开页面可访问，核心逻辑可在页面源码中核验。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开证据 · 来源：上线时间与页面源码核验</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>上线时间</td><td class="data-table-ok">已上线</td><td class="data-table-mono">2026-01-22</td><td>公开页面</td></tr>
+                  <tr><td>公开页面</td><td class="data-table-ok">可访问</td><td class="data-table-mono">2026-08-21</td><td>截至核验日正常访问</td></tr>
+                  <tr><td>核心逻辑</td><td class="data-table-ok">可核验</td><td class="data-table-mono">页面源码</td><td>输入 / 主题 / 预览 / 复制 / 下载</td></tr>
+                  <tr><td>核验范围</td><td class="data-table-risk">未覆盖全部</td><td class="data-table-mono">—</td><td>未覆盖所有浏览器与字体组合</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / CSS / JavaScript / html2canvas</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Privacy / 隐私边界</b>
+            <p class="callout-statement">正文在浏览器客户端排版和导出，没有业务后端保存输入内容；但第三方字体、统计脚本及其他页面资源仍会产生常规网络请求。</p>
+            <div class="callout-note">「客户端处理」不等于完全离线或零第三方访问 · 截至 2026-08-21</div>
+          </div>
+
+          <div class="callout callout-data reveal" style="margin-top:var(--space-5)">
+            <b class="callout-label">Scope / 适用范围</b>
+            <p class="callout-statement">长文排版、自由画布和品牌模板系统超出当前范围；字体加载、超长文本与不同浏览器下的 PNG 结果应在发布前检查。</p>
+            <div class="callout-note">适合临时文字、社交分享和无需账号的快速制作</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「切换」：真实双态 —— 复制在线地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://card.zeroxzhang.cc" aria-pressed="false" aria-label="复制在线地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制在线地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">对于只想把一段话整理成干净图片的人，在线入口保留了一条足够短的制作路径。</p>
+              <p>填写文字与署名、选择主题，检查效果后即可导出；适合临时文字、社交分享和无需账号的快速制作。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://card.zeroxzhang.cc" target="_blank" rel="noopener">立即制作卡片</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Visual design</small>
+              <h3>Text Card Generator</h3>
+              <p>把一段摘录，排成干净、高清、可分享的文字卡片。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/text-card-generator">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Visual design</small>
+              <h3>X Card</h3>
+              <p>不截真实账号，也能做出干净、可控的 X 风格文字卡片。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/x-card">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Minimalism Note Card Generator · No.34</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  hottrend · Hottrend / TrendRadar Integration 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/hottrend.md（facts_as_of 2026-08-21），未新增数据。
+  3. 本作品为 compact 级别、legacy 归档集成实践，无产品 UI，故不预留截图槽位。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的内容。
+  5. 链接约定：主链接用 https 绝对地址；「返回作品列表」暂以 # 占位。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级上游入口）→
+     key-cap 命令（打开公开仓库）→ cube-flip 切换（复制仓库地址 / 已复制）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；版本号 / 测试数 / 技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/hottrend">
+  <title>Hottrend / TrendRadar Integration · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把跨平台热点按关键词收拢成一条信息流，推给你，或交给 AI 助手接着查。这是基于开源 TrendRadar 的集成实践记录，不是独立产品。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/hottrend/index.html · Hottrend / TrendRadar Integration 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/hottrend.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 本作品为 compact 级别 legacy 归档案例，无产品界面，不预留截图槽位。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/hottrend" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 29</b><br>作品展示 · 上游项目集成实践</div>
+        <div class="mast-right">
+          <b>Status — Legacy</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">热点信息流 · 上游项目集成实践</div>
+          <h1>Hottrend /<br><em>TrendRadar</em> Integration</h1>
+        </div>
+        <div class="hero-note">
+          <strong>把分散热点，汇成一条能筛、能推、能查的信息流</strong>
+          <p>把跨平台热点按关键词收拢成一条信息流，推给你，或交给 AI 助手接着查。这是基于开源 TrendRadar 的集成实践记录，不是独立产品。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">热点聚合</span>
+            <span class="tag">AI 助手可查询</span>
+            <span class="tag">开源集成</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/hottrend" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>查看集成实践</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="https://github.com/sansan0/TrendRadar" target="_blank" rel="noopener"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>访问 TrendRadar 上游</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-2 hero-strip-2">
+        <div><small>Aggregate</small><b>跨平台热点聚合</b></div>
+        <div><small>Deliver</small><b>通知推送 · Agent 查询</b></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把分散热点，收成一条能判断的信息流</h2>
+            <div class="section-deck">每天开多个平台只会增加刷新；Hottrend 记录了一次把热点收进统一工作流的个人实践。</div>
+          </div>
+
+          <p class="lead reveal">每天依次打开多个平台，只会增加刷新动作，很难形成稳定的信息判断。Hottrend 记录了一次个人集成实践：把跨平台热点接入统一工作流，<mark>按关键词缩小范围</mark>，再通过通知或 Agent 查询进入后续研究。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>上游系统先聚合多个平台，再用必含、排除和计数规则过滤内容。daily 模式生成每日汇总，current 保留当前榜单，incremental 只提示新增变化；历史数据可由 MCP 服务继续查询。</p>
+              <p>个人仓库保留环境配置、定时任务、通知接入与 Agent 查询的实践痕迹，适合观察一个成熟开源信息产品如何进入私人工作流，以及部署后会暴露哪些凭证管理、通知噪声和持续维护问题。</p>
+            </div>
+            <aside class="pull">它不提供独立品牌产品、原创抓取器或另行验证的数据服务。<small>Scope / 定位</small></aside>
+          </div>
+
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Upstream / 上游归属</b>
+            <p class="callout-statement">热点聚合、关键词规则、daily / current / incremental 模式、通知渠道与 MCP 服务均来自开源 TrendRadar；此处展示的是个人仓库的导入、配置、部署和接入记录。</p>
+            <div class="callout-note">不是对 TrendRadar 核心产品的原创声明</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>从榜单到可处理的信息流</h2>
+            <div class="section-deck">聚合 → 过滤 → 三种模式 → 通知与查询；能力全部来自 TrendRadar 上游。</div>
+          </div>
+
+          <!-- 图示 · 信息流：从聚合到交付 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Pipeline / 信息流</span><span>聚合 → 过滤 → 模式 → 交付</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>01</small>多平台聚合</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>关键词规则</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Mode</small>daily / current / incremental</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>04</small>通知 · MCP 查询</div>
+              </div>
+              <div class="dg-gate"><b>归属边界 · UPSTREAM</b> — 聚合、规则、模式、通知与 MCP 均来自 TrendRadar 上游；个人仓库只记录导入、配置与接入。</div>
+            </div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Cap 01 / Aggregate + Filter</small>
+              <h3 class="editorial-card-title">聚合与过滤</h3>
+              <p class="editorial-card-body">先把分散在多个平台的热点收进一处，再用必含、排除和计数规则过滤，把噪声挡在信息流之外。</p>
+            </article>
+            <article class="editorial-card editorial-card-data">
+              <small class="editorial-card-eyebrow">Cap 02 / Modes + Deliver</small>
+              <h3 class="editorial-card-title">模式与交付</h3>
+              <p class="editorial-card-body">daily 生成每日汇总，current 保留当前榜单，incremental 只提示新增变化；历史数据可由 MCP 查询，也可经企业微信、飞书、钉钉、Telegram、Email、ntfy、Bark、Slack 等渠道推送。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE</div>
+            <h2>公开状态与边界</h2>
+            <div class="section-deck">截至 2026-08-21；这是一份归档案例，运行记录不能证明排序质量。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态 · 来源：个人仓库与运行记录</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>独立 Pages</td><td class="data-table-risk">未部署</td><td>个人仓库没有独立 Pages</td></tr>
+                  <tr><td>定时 GitHub Action</td><td class="data-table-risk">失败</td><td>最近的定时任务存在失败</td></tr>
+                  <tr><td>状态标记</td><td class="data-table-warn">legacy</td><td>归档案例，不持续维护</td></tr>
+                  <tr><td>数据质量</td><td class="data-table-info">未验证</td><td>运行记录不能证明热点完整性、排序质量或通知及时性</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / SQLite / Docker / GitHub Actions</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">这不是一个独立品牌产品，也没有原创抓取器或另行验证的数据服务；运行记录不能证明热点完整性、排序质量或通知及时性。</p>
+            <div class="callout-note">截至 2026-08-21 · 以个人仓库为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/hottrend" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/hottrend" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">想看一个成熟开源信息产品如何进入个人工作流，直接翻仓库。</p>
+              <p>个人仓库保留环境配置、定时任务、通知接入与 Agent 查询的实践痕迹；部署后暴露的凭证管理、通知噪声和持续维护问题，也一并记录在里面。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/hottrend" target="_blank" rel="noopener">查看集成实践</a>
+              </div>
+              <a class="btn" href="https://github.com/sansan0/TrendRadar" target="_blank" rel="noopener">访问 TrendRadar 上游</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Hottrend / TrendRadar Integration · No.29</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

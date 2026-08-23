@@ -1,0 +1,417 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  work/z-slides/index.html · Z-Slides 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/z-slides.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ cube-flip 切换（复制制作地址 / 已复制）→
+     dotted-offset 翻阅（关联作品索引）→ tactile 按压（结尾决策主操作）。
+     本项目无公开仓库链接，故证据区不使用 key-cap（命令）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（技术栈等）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/z-slides">
+  <title>Z-Slides · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把你的材料做成一份从头到尾完整、风格统一的动画演示。生成过程逐批推进、可局部重来，做完能全屏播放，也能下载 HTML 或图片 ZIP。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/z-slides/index.html · Z-Slides 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/z-slides.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#method">方法</a>
+          <a href="#workflow">开始</a>
+          <a href="#evidence">证据</a>
+          <a href="#start">决策</a>
+        </div>
+        <a class="nav-cta" href="https://slides.zeroxzhang.cc" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 32</b><br>作品展示 · Web 产品</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">网页上的 AI 演示工具</div>
+          <h1>Z-<em>Slides</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把材料完整做成一份带动画、可下载的网页演示</strong>
+          <p>把你的材料做成一份从头到尾完整、风格统一的动画演示。生成过程逐批推进、可局部重来，做完能全屏播放，也能下载 HTML 或图片 ZIP。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">AI 演示文稿</span>
+            <span class="tag">HTML Slides</span>
+            <span class="tag">动画</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://slides.zeroxzhang.cc" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>开始制作演示</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Styles</small><b>12+ 风格可选</b></div>
+        <div><small>Batch</small><b>每批 2—3 页生成</b></div>
+        <div><small>Models</small><b>6+ 模型可接</b></div>
+        <div><small>Deliver</small><b>HTML · 图片 ZIP</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/z-slides/01-main-ui.png" alt="Z-Slides 主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.998Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>长演示需要流程控制，而不只是更长的提示词</h2>
+            <div class="section-deck">一次请求直接生成全部页面，等于要求模型在不断增长的上下文中同时维持两套约束。</div>
+          </div>
+
+          <p class="lead reveal">生成一张漂亮的幻灯片已经不难，稳定完成一整份演示仍然困难。长响应可能在中途截断，前后页面的视觉规则逐渐漂移，失败后重新生成又会推翻已经满意的部分——结果看起来像一次快速产出，实际却把大量时间转移到<mark>补页、统一风格和重新导出</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>演示文稿同时处理两种一致性。内容上，每页要推进同一条论述；视觉上，字体、色彩、网格、组件与动效需要遵守共同规则。一次请求直接生成全部页面，等于要求模型在不断增长的上下文中同时维持两套约束。</p>
+              <p>Z-Slides 将问题拆开。大纲先回答「讲什么、按什么顺序讲」，视觉规范再回答「用什么系统呈现」，页面批次只负责落实局部内容。拆分后的流程更容易观察、重试和扩展，也为后续人工调整保留清晰边界。</p>
+            </div>
+            <aside class="pull">稳定完成一整份演示仍然困难。分阶段的生产流程把它变成可检查、可局部重试的完整交付，而不是一场不可中断的单次请求。<small>Staged Pipeline</small></aside>
+          </div>
+
+          <!-- 图示 · 四阶段流程：一次演示如何被分阶段生产 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Four Stages / 四阶段流程</span><span>Outline → Style → Batch → Export</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="四阶段生成流程">
+                <span class="flow-step"><span class="flow-index">01</span>结构化大纲</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>视觉方向</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>每批 2—3 页</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>合并 · 播放 · 导出</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 方法 ══ -->
+      <section class="block" id="method">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / METHOD</div>
+            <h2>四个阶段组成一份完整演示</h2>
+            <div class="section-deck">从结构化大纲到视觉方向、再到分批生成与导出，每个阶段都有明确产物，局部失败不必从封面重新开始。</div>
+          </div>
+
+          <!-- 02.1 结构化大纲 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Structured Outline</div>
+              <h3>内容进入结构化大纲</h3>
+              <p>用户提供主题、原始材料或要表达的内容。系统先组织叙事顺序与页面职责，使封面、论点、证据、转折和结尾有明确位置。页面生成开始前，整份演示已经拥有可检查的骨架。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>叙事顺序</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>页面职责</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>03</small>可检查骨架</div>
+              </div>
+              <p class="dg-caption">页面生成开始前，整份演示已经拥有可检查的骨架。</p>
+            </div>
+            <div class="cap-text">
+              <div class="rule-note">大纲先回答「讲什么、按什么顺序讲」，让封面、论点、证据、转折和结尾各就各位——视觉与批次都在这个骨架上继续。</div>
+            </div>
+          </div>
+
+          <!-- 02.2 视觉方向 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Visual Direction</div>
+              <h3>视觉方向成为共同约束</h3>
+              <p>产品提供 <strong>12 种以上风格选择</strong>，用于确定色彩、排版、装饰语言与整体气质。视觉决定在具体页面之前完成，后续批次都基于同一组规则工作，减少前几页精致、后几页失控的情况。</p>
+              <div class="rule-note">风格先定、页面后做：整份演示共享同一套视觉规则，而不是每一页各自即兴。</div>
+            </div>
+            <!-- ══ 截图槽位 02：风格选择（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/z-slides/02-style-picker.png" alt="风格选择界面"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.998Z -->
+          </div>
+
+          <!-- 02.3 每批生成 2—3 页 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：分阶段生成（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/z-slides/03-batch-progress.png" alt="分阶段生成进度面板"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.998Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Batch Generation</div>
+              <h3>每批生成 2—3 页</h3>
+              <p>小批量控制单次响应长度，降低长内容被截断的风险。某批页面失败时，可以针对这一段重新处理，已完成的部分仍然保留。生成过程因此具备局部恢复能力，而不再是一场不可中断的单次请求。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>某批失败</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>只重试该段</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>03</small>已完成保留</div>
+              </div>
+              <p class="dg-caption">局部失败不必从封面重新开始，已满意的部分不会被推翻。</p>
+            </div>
+          </div>
+
+          <!-- 02.4 合并、播放与导出 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.4 / Assemble &amp; Export</div>
+              <h3>合并、播放与导出</h3>
+              <p>完成的页面被组装为统一文稿，内含键盘、触摸和滚轮导航，支持响应式显示、动画与全屏预览。用户可以下载独立 HTML，也可以导出图片 ZIP，用于分享、归档或进入其他制作流程。</p>
+              <div class="scope-list">
+                <div><b>Navigation</b><span>键盘 · 触摸 · 滚轮</span></div>
+                <div><b>Display</b><span>响应式 · 动画 · 全屏</span></div>
+                <div><b>Export</b><span>独立 HTML · 图片 ZIP</span></div>
+              </div>
+            </div>
+            <!-- ══ 截图槽位 04：全屏预览与导出（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/z-slides/04-preview-export.png" alt="全屏预览与导出界面"> -->
+      <!-- SHOT-SLOT 04 ADMIN-SKIPPED 2026-08-22T15:37:20.998Z -->
+          </div>
+
+          <!-- 02.5 模型选择 -->
+          <div class="models-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.5 / Model Choice</div>
+              <h3>模型选择属于产品控制面</h3>
+              <p>公开页面提供 <strong>6 种以上模型服务</strong>，并支持自定义 OpenAI-compatible 接口。用户可以根据视觉表现、响应稳定性、成本和已有账号选择后端，而不必固定在单一供应商上。</p>
+              <div class="stat-grid">
+                <div><small>Built-in</small><b>6+ 模型服务</b></div>
+                <div><small>Custom</small><b>OpenAI-compatible 接口</b></div>
+                <div><small>Basis</small><b>视觉 · 稳定 · 成本</b></div>
+                <div><small>Note</small><b>结果依赖所选模型</b></div>
+              </div>
+            </div>
+            <div class="callout callout-data reveal" style="margin-top:var(--space-6)">
+              <b class="callout-label">Model / 模型边界</b>
+              <p class="callout-statement">实际生成会依赖所选模型的能力与可用性。相同输入在不同模型上可能产生不同结构、代码质量和视觉结果；Z-Slides 提供生产流程和交付形式，但不会消除模型本身的差异。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 开始方式 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>一次典型生成</h2>
+            <div class="section-deck">以一场产品复盘为例，从放入材料到下载成品；重要判断仍由用户完成。</div>
+          </div>
+
+          <!-- 图示 · 典型路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Run / 典型路径</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次典型生成流程">
+                <span class="flow-step"><span class="flow-index">01</span>放入材料</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>选择风格与模型</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>给出叙事骨架</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>分批生成与重试</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>预览并下载</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>放入项目背景、关键决策和结果材料。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>选择适合复盘场景的视觉方向与模型。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>系统先给出叙事骨架，再依次生成页面批次。</p><p><small>开始生成前，整份演示已经拥有可检查的骨架。</small></p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>观察进度，在某个批次需要调整时集中重试。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>进入全屏预览，下载 HTML。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">重要判断仍由用户完成：哪些信息应该进入演示、叙事是否准确、数据是否有依据，以及最终视觉是否适合真实场合。<small>Human Judgment</small></div>
+              <div class="aside-tags">
+                <span class="tag">历史记录</span>
+                <span class="tag">登录前输入恢复</span>
+                <span class="tag">产品介绍</span>
+                <span class="tag">课程材料</span>
+                <span class="tag">项目复盘</span>
+                <span class="tag">线上分享</span>
+              </div>
+            </aside>
+          </div>
+
+          <div class="callout reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Fit Tasks / 适用任务</b>
+            <p class="callout-statement">Z-Slides 适合已经拥有内容、需要快速形成叙事完整、具有动效并可以网页交付的演示。</p>
+            <div class="callout-note">产品介绍、课程材料、项目复盘和线上分享；需要严格遵循企业母版、多人精细协作或原生 PPTX 深度编辑的场景，仍应评估专用演示工具。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>当前状态与数据边界</h2>
+            <div class="section-deck">截至 2026-08-21；已公开的路径与尚未公开的数据一并说明。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态 · 来源：内容文件 facts_as_of 2026-08-21</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>上线日期</td><td class="data-table-ok">已上线</td><td class="data-table-mono">2026-03-11</td><td>公开网站</td></tr>
+                  <tr><td>当前状态</td><td class="data-table-ok">在线运行</td><td class="data-table-mono">active</td><td>可访问</td></tr>
+                  <tr><td>公开路径</td><td class="data-table-ok">可见</td><td class="data-table-mono">输入 / 风格 / 分阶段 / 预览 / 导出</td><td>均可访问</td></tr>
+                  <tr><td>跨模型成功率</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>尚无公开数据</td></tr>
+                  <tr><td>生成耗时分布</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>尚无公开数据</td></tr>
+                  <tr><td>大规模用户效果</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>尚无公开数据</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：React / Vite / tRPC / OpenAI-compatible API</p>
+
+          <div class="callout callout-data reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Deliverable / 交付边界</b>
+            <p class="callout-statement">HTML 不等同于 PowerPoint 源文件，不保证进入传统 PPT 编辑流程后仍能逐元素修改；导出文档是否引用外部字体、脚本或其他网络资源，也会影响离线使用，需要在具体成品中检查。</p>
+            <div class="callout-note">文本和交互结构仍可继续编辑；下载文件保留归档与迁移能力。</div>
+          </div>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-6)">
+            <b class="callout-label">Data / 数据与隐私边界</b>
+            <p class="callout-statement">实际生成需要登录并配置模型服务，提交内容会发送到用户所选的模型提供方。BYOK 密钥的具体保存方式，以及导出 HTML 对外部资源的依赖范围，仍需要更完整的公开技术说明。</p>
+            <div class="callout-note">处理内部报告、未发布数据或其他敏感材料前，应先确认所选服务和产品端的存储边界。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「切换」：真实双态 —— 复制制作地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://slides.zeroxzhang.cc" aria-pressed="false" aria-label="复制制作地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制制作地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 05 / 决策与开始 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">05 / DECISION</div>
+            <h2>适合把演示当作交付物的场景</h2>
+            <div class="section-deck">已经拥有内容，需要把它快速形成一份叙事完整、能网页交付的演示。</div>
+          </div>
+
+          <div class="callout reveal">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">你准备内容、选定风格与模型并确认叙事骨架；系统分批推进、保留已完成页面，重要判断与最终验收仍由你完成。</p>
+            <div class="callout-note">一次可观察、可局部重来的演示生产</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">生成单页幻灯片已经不难；Z-Slides 解决的是整份演示的稳定完成——截断、风格漂移与推倒重来。</p>
+              <p>如果你已经有材料，需要一份带动画、可全屏播放、能下载带走的网页演示，可以开始制作。交付物以 HTML 形态保留文本与交互结构；图片 ZIP 用于分享与归档。需要企业母版、多人精细协作或原生 PPTX 深度编辑时，仍建议评估专用工具。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://slides.zeroxzhang.cc" target="_blank" rel="noopener">开始制作演示</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Visual Design</small>
+              <h3>OnePager</h3>
+              <p>把长内容重新编辑成一页可以读完的视觉叙事。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/onepager">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Content Publishing</small>
+              <h3>Newspaper Demo</h3>
+              <p>让 AI 生成的网页，重新拥有报纸式的阅读秩序。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/newspaper-demo">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Z-Slides · No.32</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

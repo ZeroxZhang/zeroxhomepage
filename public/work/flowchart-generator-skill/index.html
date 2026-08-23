@@ -1,0 +1,342 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  flowchart-generator-skill.html · Flowchart Generator Skill 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/flowchart-generator-skill.md（facts_as_of 2026-08-21），
+     未新增数据；作品编号 No. 4 按 content/works/index.yaml 顺序。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。无次级入口，故跳过 light-glass 悬浮。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；版本号 / 测试数 / 技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/flowchart-generator-skill">
+  <title>Flowchart Generator Skill · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把会议记录、操作规范或一段文字变成流程图，不用先学绘图语法。它先理清步骤和分支再出图，输出可编辑的图，改一处分支不用整张重来。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/flowchart-generator-skill/index.html · Flowchart Generator Skill 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/flowchart-generator-skill.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#method">方法</a>
+          <a href="#start">开始</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/flowchart-generator-skill" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 04</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">流程图生成 Agent Skill · 不用学绘图语法</div>
+          <h1>Flowchart<br><em>Generator</em> Skill</h1>
+        </div>
+        <div class="hero-note">
+          <strong>把一段描述，变成一张能改的流程图</strong>
+          <p>把会议记录、操作规范或一段文字变成流程图，不用先学绘图语法。它先理清步骤和分支再出图，输出可编辑的图，改一处分支不用整张重来。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">流程图</span>
+            <span class="tag">SVG</span>
+            <span class="tag">信息架构</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/flowchart-generator-skill" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>获取 Flowchart Skill</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Input</small><b>段落 · 列表 · 会议记录 · SOP</b></div>
+        <div><small>Logic First</small><b>先理清步骤与分支</b></div>
+        <div><small>Deliverable</small><b>可编辑 SVG</b></div>
+        <div><small>Validation</small><b>交付前自动校验</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主运行全貌（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/flowchart-generator-skill/01-main-run.png" alt="Flowchart Generator Skill 一次运行全貌"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.982Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>先把流程讲清楚，再让图长出来</h2>
+            <div class="section-deck">流程图返工常源于一个很早的错误：步骤没拆清、分支缺结果、节点粒度不一。</div>
+          </div>
+
+          <p class="lead reveal">流程图的返工往往从一个很早的错误开始：输入里的步骤没有拆清楚，分支条件缺少结果，节点粒度也不一致。直接进入视觉生成后，这些问题会被颜色和布局暂时遮住，直到评审时才暴露。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>用户可以提交段落、列表、伪代码、会议记录或粗略 SOP，不需要预先学习 Mermaid 或绘图语法。Skill 会识别步骤、判断、循环、并行关系和终止条件，并对过长节点、模糊动词和重复路径进行内容整理。</p>
+              <p>它把理解、结构和渲染分成不同阶段：自然语言先被整理为可检查的中间表示，逻辑确认后再进入 SVG。成图因此拥有清楚的来路，也保留继续修改的空间。</p>
+            </div>
+            <aside class="pull">它先回答「这段话到底描述了什么流程」，然后才讨论图应该长什么样。<small>Logic before Layout</small></aside>
+          </div>
+
+          <!-- 图示 · 六阶段流程：从原文到可编辑 SVG -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Six Stages / 六个阶段</span><span>6 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="六个阶段的制图流程">
+                <span class="flow-step"><span class="flow-index">01</span>分析输入</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>优化内容</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>建立 JSON</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>ASCII 线框</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">05</span>设计视觉</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">06</span>输出校验 SVG</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 方法 ══ -->
+      <section class="block" id="method">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / METHOD</div>
+            <h2>六个阶段，逐步降低修改成本</h2>
+            <div class="section-deck">理解、结构和渲染分开走；每一层都能单独回改，不用整张重来。</div>
+          </div>
+
+          <!-- 图示 · 中间表示对象链：结构层与视觉层分开迭代 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Intermediate Representation / 中间表示</span><span>Structure → Visual</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>01</small>原文</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>JSON 结构</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03</small>ASCII 线框</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>04</small>SVG 成图</div>
+              </div>
+              <div class="dg-gate"><b>分层迭代 · LAYERING</b> — 结构问题回到 JSON / ASCII 修正，视觉问题留在 SVG 层处理，内容、关系与样式分别迭代。</div>
+            </div>
+          </div>
+
+          <!-- 02.1 理解与中间表示 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Understand & Structure</div>
+              <h3>先把输入读懂，再把结构落到中间表示</h3>
+              <p><strong>分析输入</strong>识别流程目标、参与角色、起点、终点和异常路径，信息不足时先提出问题，不用视觉猜测填补业务逻辑。<strong>优化内容</strong>统一节点粒度、缩短标签、明确分支条件——这个阶段只改表达和结构，不碰颜色、字体与形状。</p>
+              <p>随后<strong>建立 JSON 结构</strong>：节点、边和关系进入 schema，它是模型与验证器共享的契约，也是人能够精确修改的接口。<strong>生成 ASCII 线框</strong>用文本快速暴露方向、分组和分支，此时改动成本最低，适合在进入视觉设计前确认整体布局。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>输入</small>段落 · 列表 · 伪代码 · 会议记录 · SOP</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>识别</small>步骤 · 判断 · 循环 · 并行 · 终止</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>整理</small>粒度 · 标签 · 分支条件</div>
+              </div>
+              <p class="dg-caption">输入不必规整：先识别「这段话描述了什么流程」，再整理节点粒度与分支。</p>
+            </div>
+            <!-- ══ 截图槽位 02：中间表示（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/flowchart-generator-skill/02-intermediate-json-ascii.png" alt="JSON 结构与 ASCII 线框"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.983Z -->
+          </div>
+
+          <!-- 02.2 视觉与校验 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：最终成图（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/flowchart-generator-skill/03-final-svg.png" alt="最终可编辑 SVG 成图"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.983Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Render & Validate</div>
+              <h3>视觉与校验：交付前把明显错误拦住</h3>
+              <p><strong>设计视觉语言</strong>根据流程类型选择方向、节点类型、颜色和层级；语言识别与排版规则分开处理，中英文内容都能获得合适的节点尺寸和字体策略。</p>
+              <p><strong>输出并校验 SVG</strong>：最终交付为可编辑 SVG，验证器检查节点、边、连通性、XML、viewBox、字体和基础结构，使明显错误在交付前被发现。</p>
+              <div class="rule-note">验证器能检查结构与文件质量，但不能证明业务语义完全正确，也无法替代人工审美判断。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 开始 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / START</div>
+            <h2>适合哪些流程，怎么开始</h2>
+            <div class="section-deck">它适合有结构的流程；它不替团队做业务决定。</div>
+          </div>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>它适合产品流程、操作规范、系统行为、决策树和中等规模 Agent 工作流。README 建议单张图控制在 30 个节点以内；超过这个规模时，优先拆分为总览和子流程，通常比继续压缩节点更容易阅读。</p>
+              <p>如果输入本身存在严重争议，Skill 也无法替团队做业务决定。它提供的是一条更容易讨论和验收的制图过程。</p>
+            </div>
+            <aside class="pull">把段落、会议记录或 SOP 交给它，先在 JSON 或 ASCII 阶段确认结构，再让它生成可编辑的 SVG。<small>Getting Started</small></aside>
+          </div>
+
+          <div class="callout reveal">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">你确认流程逻辑，它把逻辑变成可检查的中间表示和可编辑的图。</p>
+            <div class="callout-note">仓库包含提示协议、JSON schema、静态模板和两个 Python 验证器，并提供多个 Agent 环境的安装说明。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开状态与使用边界</h2>
+            <div class="section-deck">截至 2026-08-21；公开仓库记录与实际能力边界。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：GitHub 公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>GitHub Stars</td><td class="data-table-ok">已记录</td><td class="data-table-mono">38</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>GitHub Forks</td><td class="data-table-ok">已记录</td><td class="data-table-mono">2</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>安装说明</td><td class="data-table-ok">已提供</td><td class="data-table-mono">多个 Agent 环境</td><td>公开仓库</td></tr>
+                  <tr><td>跨宿主自动化测试</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>输出受宿主模型与运行环境影响</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / SVG / JSON</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">验证器能够检查结构与文件质量，但不能证明业务语义完全正确，也无法替代人工审美判断；仓库没有跨宿主自动化测试，输出仍会受到宿主模型和运行环境影响。</p>
+            <div class="callout-note">截至 2026-08-21 · 以公开仓库为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/flowchart-generator-skill" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/flowchart-generator-skill" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果你手上已经有一段描述流程的文字——会议记录、操作规范或一段伪代码——它可以在进入绘图工具之前，先把步骤和分支理清，再交给你一张能继续改的图。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/flowchart-generator-skill" target="_blank" rel="noopener">安装 Flowchart Skill</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Visual Design</small>
+              <h3>Architecture Diagram</h3>
+              <p>用可校验的几何规则，生成经得住评审的系统架构图</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/arch-diagram">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Visual Design</small>
+              <h3>OnePager</h3>
+              <p>把长内容重新编辑成一页可以读完的视觉叙事</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/onepager">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Flowchart Generator Skill · No.04</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

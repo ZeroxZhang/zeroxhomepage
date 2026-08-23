@@ -1,0 +1,345 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  allergen-map.html · 过敏原地图 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/allergen-map.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容与替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：关联作品用相对路径 ../<slug>/index.html；主链接与仓库用 https 绝对地址。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制原型地址 / 已复制）→ dotted-offset 翻阅（关联作品）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  8. 本作品为医疗相关原型：示意数据与非医疗用途边界在 hero summary 与证据区两处声明。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/allergen-map">
+  <title>过敏原地图 · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="按地区浏览吸入性、食物与接触类过敏原：在中国地图上点选地区，不用再从头翻一张长表。地图、详情面板和数据表都已上线，但目前仅用于界面演示，不能代表实际医学风险。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/allergen-map/index.html · 过敏原地图 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/allergen-map.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  6. 医疗边界：示意数据与非医疗用途说明在 hero summary 与证据区两处声明。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#start">开始</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://alg.zeroxzhang.cc" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 33</b><br>作品展示 · 信息可视化原型</div>
+        <div class="mast-right">
+          <b>Status — Experiment</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">按地区查找过敏原信息 · 健康地图</div>
+          <h1>过敏原地图</h1>
+        </div>
+        <div class="hero-note">
+          <strong>在地图上点一个地区，直接看到该地的三类过敏原</strong>
+          <p>按地区浏览吸入性、食物与接触类过敏原：在中国地图上点选地区，不用再从头翻一张长表。地图、详情面板和数据表都已上线，但目前仅用于界面演示，不能代表实际医学风险。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">地图可视化</span>
+            <span class="tag">健康信息</span>
+            <span class="tag">交互可视化</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://alg.zeroxzhang.cc" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>探索地图原型</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Entry</small><b>中国地图 · 点选地区</b></div>
+        <div><small>Categories</small><b>吸入性 · 食物 · 接触</b></div>
+        <div><small>Navigation</small><b>全国概览 ↔ 地区详情</b></div>
+        <div><small>Table</small><b>地区表格 · 文字入口</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：全国概览（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/allergen-map/01-national-map.png" alt="过敏原地图全国概览"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:33:01.116Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>先选地区，再读过敏原信息</h2>
+            <div class="section-deck">全国健康资料常是一张长表；这张地图把阅读顺序调换过来。</div>
+          </div>
+
+          <p class="lead reveal">全国性健康资料通常从一张长表或一组分类开始，普通读者还要先找出和所在地区有关的部分。过敏原地图调换阅读顺序：<mark>先在中国地图上选择地区</mark>，再进入吸入性、食物与接触类信息。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>这是一个信息架构与交互呈现原型：验证地图、地区详情、分类面板和数据表怎样协同工作。它不提供经过验证的地区风险数据，也不承担诊断功能。</p>
+              <p>观察空间入口能否降低浏览成本，是这一原型最想回答的问题——先选地区，再读内容，而不是先读内容，再翻找地区。</p>
+            </div>
+            <aside class="pull">它适合讨论地图如何改变健康信息的阅读顺序，也可作为数据接入前的交互验证载体。<small>Information Architecture</small></aside>
+          </div>
+
+          <!-- 图示 · 界面组成：四块如何协同工作 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Components / 界面组成</span><span>Map → Detail → Panel → Table</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>01 / Map</small>中国地图</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02 / Detail</small>地区详情</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03 / Panel</small>分类面板</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>04 / Table</small>数据表</div>
+              </div>
+              <div class="dg-gate"><b>颜色图例 · LEGEND</b> — 表达界面中的相对强度，不承担医学风险判断。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>地图、详情面板与文字入口</h2>
+            <div class="section-deck">同一套界面里的几条入口，让地区信息不用靠手动搜索。</div>
+          </div>
+
+          <!-- 02.1 地图到详情 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Map to Detail</div>
+              <h3>从全国视图进入地区详情</h3>
+              <p>地图支持地区悬停与点击交互：颜色图例表达界面中的相对强度，详情面板按类型列出相关项目和说明。用户可以在全国概览与单个地区之间往返，无需在一份完整资料中手动搜索地名。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>全国概览</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>地区悬停 / 点击</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>03</small>地区详情</div>
+              </div>
+              <p class="dg-caption">往返于全国概览与单个地区，中间不需要手动搜索地名。</p>
+            </div>
+            <!-- ══ 截图槽位 02：地区详情面板（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/allergen-map/02-region-detail.png" alt="地区详情面板"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:33:01.117Z -->
+          </div>
+
+          <!-- 02.2 分类与表格 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：数据表文字入口（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/allergen-map/03-data-table.png" alt="地区数据表"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:33:01.117Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Categories &amp; Table</div>
+              <h3>三类信息，与不依赖地图的文字入口</h3>
+              <p>详情面板按类型列出吸入性、食物与接触类项目与说明；地区表格提供不依赖地图操作的文字入口，让用户即使不操作地图，也能从文字列表进入单个地区。</p>
+              <p>整体实现部署为静态单页，适合验证阅读路径和展示形式。</p>
+              <div class="rule-note">切换时的轻量动效提示当前选择和层级变化，不改变数据本身。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法与开始 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / HOW TO USE</div>
+            <h2>一次地区浏览的四步</h2>
+            <div class="section-deck">从全国概览到单个地区，路径很短；打开网页即可开始。</div>
+          </div>
+
+          <!-- 图示 · 阅读路径：四步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Reading Path / 阅读路径</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次地区浏览流程">
+                <span class="flow-step"><span class="flow-index">01</span>选择地区</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>进入三类信息</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>打开详情面板</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>表格文字入口</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>在线原型是静态单页，打开即可浏览，无需账号或安装。先在全国概览里点一个地区，再沿吸入性、食物与接触三类信息浏览；想换一种入口时，也可以直接用地区表格按文字查找。</p>
+              <p>它适合用于讨论地图如何改变健康信息的阅读顺序，也可作为数据接入前的交互验证载体。</p>
+            </div>
+            <aside class="pull">空间入口降低了浏览成本：先选地区，再读内容，而不是先读内容，再翻找地区。<small>Reading Order</small></aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>界面已上线，数据仍是示意</h2>
+            <div class="section-deck">截至 2026-08-21；交互已完整，但强度值不能代表医学风险。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态与数据边界 · 来源：在线原型与公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>在线原型</td><td class="data-table-ok">可访问</td><td class="data-table-mono">正常</td><td>公开页面</td></tr>
+                  <tr><td>地区选择</td><td class="data-table-ok">已完成</td><td class="data-table-mono">✓</td><td>中国地图悬停与点击</td></tr>
+                  <tr><td>三类信息</td><td class="data-table-ok">已完成</td><td class="data-table-mono">✓</td><td>吸入性 · 食物 · 接触</td></tr>
+                  <tr><td>详情面板</td><td class="data-table-ok">已完成</td><td class="data-table-mono">✓</td><td>按类型列出项目与说明</td></tr>
+                  <tr><td>数据表</td><td class="data-table-ok">已完成</td><td class="data-table-mono">✓</td><td>不依赖地图的文字入口</td></tr>
+                  <tr><td>免责声明</td><td class="data-table-ok">已完成</td><td class="data-table-mono">✓</td><td>示意数据与非医疗用途说明</td></tr>
+                  <tr><td>强度值来源</td><td class="data-table-risk">示意数据</td><td class="data-table-mono">随机数</td><td>无可追溯测量依据</td></tr>
+                  <tr><td>数据集 · 文献 · 方法</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>不能作为数据证据</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / ECharts / Tailwind CSS / GSAP</p>
+
+          <!-- 图示 · 数据状态：随机数如何决定当前定位 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Data Status / 数据状态</span><span>Random → Demo Only</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Source</small>随机数生成</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Basis</small>无可追溯依据</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Scope</small>仅用于界面演示</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 医疗边界</b>
+            <p class="callout-statement">本项目不用于诊断、风险预测或医疗决策。过敏症状、检测与治疗应咨询合格医疗专业人员，并使用专业机构提供的可追溯资料。</p>
+            <div class="callout-note">页面提及 2020—2023 年监测和医院统计，但未提供可复核的数据集、文献清单、采样方法或更新时间，不能作为数据证据。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/algmap" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制原型地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://alg.zeroxzhang.cc" aria-pressed="false" aria-label="复制原型地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制原型地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">它今天能回答的是「地图能否改变健康信息的阅读顺序」，而不是「某地区风险有多高」。</p>
+              <p>要成为真正的数据产品，下一步需要接入具备来源、地区覆盖、采样口径和时间范围的可信数据，把来源与方法直接连接到地图，再交由医学或公共卫生专业人员复核。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://alg.zeroxzhang.cc" target="_blank" rel="noopener">探索地图原型</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Learning</small>
+              <h3>SonoQuest Ultrasound Play Lab</h3>
+              <p>把虚拟探头交给孩子，在浏览器里完成一次寻找与发现。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/sonoquest-ultrasound-play-lab">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — 过敏原地图 · No.33</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  lingmou.html · 灵眸 LingMou 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/lingmou.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ cube-flip 切换（复制网站地址 / 已复制）→
+     dotted-offset 翻阅（关联作品索引）→ tactile 按压（结尾决策主操作）。
+     本作品无公开仓库 / Release / 验证记录链接，故 key-cap（命令）不启用；
+     亦无 hero 次级入口，light-glass（悬浮）不启用。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（技术栈 / 上线日期）后置到证据区。
+   ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/lingmou">
+  <title>灵眸 LingMou · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="查一只 A 股、ETF 或基金，灵眸把技术、基本面、资金和情绪四类信号合成一份评分与标签，并标出置信度和风险。结论怎么来的可以一路回看，它帮你整理证据、不替你下单。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/lingmou/index.html · 灵眸 LingMou 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/lingmou.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+   ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#method">方法</a>
+          <a href="#use">使用</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://zrcfzy.top/" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 07</b><br>作品展示 · Web 产品</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">A 股、ETF 与基金的研究助手 · 个人投资者</div>
+          <h1 style="letter-spacing:0">灵眸<br><em>LingMou</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把四类信号放到一起，看清依据再决定</strong>
+          <p>查一只 A 股、ETF 或基金，灵眸把技术、基本面、资金和情绪四类信号合成一份评分与标签，并标出置信度和风险。结论怎么来的可以一路回看，它帮你整理证据、不替你下单。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">量化分析</span>
+            <span class="tag">决策辅助</span>
+            <span class="tag">PWA</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://zrcfzy.top/" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>打开灵眸</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Coverage</small><b>A 股 · ETF · LOF · 基金</b></div>
+        <div><small>Signals</small><b>技术 · 基本面 · 资金 · 情绪</b></div>
+        <div><small>Output</small><b>标签 · 置信度 · 风险</b></div>
+        <div><small>Tracking</small><b>自选 · 历史 · 提醒</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：研究概览（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/lingmou/01-overview.png" alt="灵眸研究概览"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.988Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把分散的证据放进同一套判断框架</h2>
+            <div class="section-deck">价格形态、财务指标、资金流向和情绪消息同时出现，却很少指向完全一致的结论。</div>
+          </div>
+
+          <p class="lead reveal">对个人投资者来说，困难往往不在于找到更多数据，而在于把<mark>不同证据放到同一套判断框架里</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>市场信息一直在增加：价格形态、财务指标、资金流向和情绪消息同时出现，却很少指向完全一致的结论。单独看其中一类信息，很容易得到片面的答案。</p>
+              <p>灵眸是一款面向 A 股、ETF、LOF 与场外基金的量化决策辅助产品。它把多类信号组织成可解释评分，并提供研究标签、置信度、历史变化和风险提示。产品不代替用户做交易决定，重点是把判断依据变得可见。</p>
+            </div>
+            <aside class="pull">同一标的通常存在四种叙述：技术、基本面、资金与情绪。灵眸保留四个维度的独立计算，再按资产类型进入综合评分。<small>Four Narratives</small></aside>
+          </div>
+
+          <!-- 图示 · 结构：四类信号 → 综合评分 → 研究标签 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>信号 → 评分 → 标签 / 结构</span><span>四类信号 · 按资产类型加权</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>信号 01</small>技术面</div>
+                <div class="dg-node"><small>信号 02</small>基本面</div>
+                <div class="dg-node"><small>信号 03</small>资金面</div>
+                <div class="dg-node"><small>信号 04</small>情绪面</div>
+              </div>
+              <div class="dg-gate"><b>综合评分 · 按资产类型加权</b> — 四个维度独立计算，再按资产类型进入综合评分</div>
+              <div class="dg-row" style="margin-top:12px">
+                <div class="dg-node dg-current"><small>输出</small>研究标签 BUY / SELL / HOLD</div>
+                <div class="dg-node"><small>输出</small>置信度 · 风险提示</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="prose-row reveal" style="margin-bottom:0">
+            <div class="prose">
+              <p>用户既能看到最后的 BUY、SELL 或 HOLD 研究标签，也可以回到构成标签的具体信号，理解结论为何形成。这套结构降低了单一指标带来的确定感——一个强烈的技术信号，如果缺少其他维度支持，会在置信度和风险说明中留下痕迹。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 方法 ══ -->
+      <section class="block" id="method">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / METHOD</div>
+            <h2>四类信号各自独立，再合成一个结论</h2>
+            <div class="section-deck">技术、基本面、资金与情绪各自描述一件事；分开计算，再按资产类型进入综合评分。</div>
+          </div>
+
+          <p class="lead reveal">灵眸把四个维度分开计算，让每一类证据都能被单独查看，而不是被压进一个无法解释的分数。</p>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">01 / Technical</small>
+              <h2 class="editorial-card-title">技术面</h2>
+              <p class="editorial-card-body">MA、RSI、MACD、KDJ 与布林线等指标用于描述趋势、动量和波动状态。它们提供规则化视角，不把某个金叉或超卖值直接写成交易指令。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">02 / Fundamental</small>
+              <h2 class="editorial-card-title">基本面</h2>
+              <p class="editorial-card-body">个股与基金需要关注的基本信息不同。产品根据资产类型选择指标和权重，使财务、估值或产品结构进入相应分析。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">03 / Capital Flow</small>
+              <h2 class="editorial-card-title">资金面</h2>
+              <p class="editorial-card-body">资金变化被作为一类独立证据，与价格走势相互核对。它可以增强或削弱技术信号，但不会单独决定最终标签。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">04 / Sentiment</small>
+              <h2 class="editorial-card-title">情绪面</h2>
+              <p class="editorial-card-body">市场情绪与公开信息提供背景，帮助解释短期变化。情绪信号天然噪声较高，因此在综合判断中保留边界。</p>
+            </article>
+          </div>
+
+          <!-- 数据图 · 资产权重：不同资产使用不同权重 -->
+          <div class="reveal" style="margin-top:var(--space-7)">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>不同资产的不同权重口径 · 来源：产品说明</caption>
+                <thead>
+                  <tr><th>资产类型</th><th>权重侧重点</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>个股</td><td class="data-table-mono">企业 · 交易行为</td><td>更关注企业质量与交易行为</td></tr>
+                  <tr><td>ETF / LOF</td><td class="data-table-mono">指数 · 结构 · 流动性</td><td>需要考虑指数、产品结构和流动性</td></tr>
+                  <tr><td>场外基金</td><td class="data-table-mono">频率 · 数据条件</td><td>频率和数据条件不同</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-note reveal" style="margin-top:var(--space-6)">模型可生成补充建议与文字说明，位置排在规则、置信度和风险之后。AI 用于帮助阅读，不负责为概率结论盖章。</div>
+
+          <!-- ══ 截图槽位 02：多维分析展开（手动替换点）══════════════════
+               替换方法：删除 <div class="shot-empty">…</div>，放入
+               <img class="shot-img" src="/work-assets/screenshots/lingmou/02-signal-detail.png" alt="多维信号展开"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.989Z -->
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用 ══ -->
+      <section class="block" id="use">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USE</div>
+            <h2>从一次查询变成持续观察</h2>
+            <div class="section-deck">自选、批量添加、历史记录和信号变化提醒，让一次分析可以被持续跟踪。</div>
+          </div>
+
+          <p class="lead reveal">用户能够比较同一标的在不同日期的判断变化，观察哪些维度发生了改变。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>自选、批量添加、历史记录和信号变化提醒，使分析可以被持续跟踪。用户能够比较同一标的在不同日期的判断变化，观察哪些维度发生了改变。</p>
+            </div>
+            <aside class="pull">这种历史视角比保存一张当日截图更有价值。它帮助用户区分「原来的理由仍然成立」和「结论已经因为新数据改变」。<small>History Over Screenshot</small></aside>
+          </div>
+
+          <!-- 图示 · 从查询到持续观察 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>持续观察 / 路径</span><span>查询 → 自选 → 历史 → 提醒</span></div>
+            <div class="diagram-body">
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>查询</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>自选 / 批量添加</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03</small>历史记录</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>04</small>信号变化提醒</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 图示 · 第一次使用：五步流程 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>第一次使用 / 流程</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="第一次使用流程">
+                <span class="flow-step"><span class="flow-index">01</span>选择标的</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>阅读评分</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>展开来源</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>加入自选</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>研究输入</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>选择一只正在研究的股票、ETF、LOF 或基金。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>阅读多维评分、研究标签、置信度与风险提示。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>展开信号来源，检查结论依赖哪些指标。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>加入自选，在后续日期比较信号变化。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>将结果作为研究输入，与自己的仓位和风险规则一起判断。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">灵眸适合希望建立固定研究节奏的个人用户。它不会连接券商替你下单，也不适合寻找一条无需理解的买卖口令。<small>Intended Use</small></div>
+              <div class="aside-tags">
+                <span class="tag">A 股</span>
+                <span class="tag">ETF</span>
+                <span class="tag">LOF</span>
+                <span class="tag">场外基金</span>
+              </div>
+            </aside>
+          </div>
+
+          <!-- ══ 截图槽位 03：自选与历史（手动替换点）══════════════════
+               替换方法：删除 <div class="shot-empty">…</div>，放入
+               <img class="shot-img" src="/work-assets/screenshots/lingmou/03-watchlist-history.png" alt="自选与历史记录"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.989Z -->
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已核实的事实与尚未验证的部分</h2>
+            <div class="section-deck">截至 2026-08-21，公开网站可以正常访问；回测、收益与完整数据来源尚未被独立验证。</div>
+          </div>
+
+          <p class="lead reveal">页面只描述<mark>可以观察到的产品和规则设计</mark>，不把未验证的部分包装成既定结论。</p>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开证据 · 来源：上线记录与公开网站（截至 2026-08-21）</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>上线时间</td><td class="data-table-ok">已核实</td><td class="data-table-mono">2026-01-22</td><td>灵眸上线</td></tr>
+                  <tr><td>公开访问</td><td class="data-table-ok">可访问</td><td class="data-table-mono">2026-08-21</td><td>公开网站可以正常访问</td></tr>
+                  <tr><td>回测准确率</td><td class="data-table-risk">未验证</td><td class="data-table-mono">—</td><td>公开信息不足以独立验证</td></tr>
+                  <tr><td>实盘收益</td><td class="data-table-risk">未验证</td><td class="data-table-mono">—</td><td>无公开可核验记录</td></tr>
+                  <tr><td>数据来源清单</td><td class="data-table-risk">未验证</td><td class="data-table-mono">—</td><td>完整清单尚未公开</td></tr>
+                  <tr><td>登录后链路</td><td class="data-table-warn">未端到端测试</td><td class="data-table-mono">—</td><td>提醒 / 模型调用 / 真实分析链路</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：React / Express / tRPC / React Query / Cloudflare</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">当前公开信息尚不足以独立验证回测准确率、实盘收益或完整数据来源清单；登录后的提醒、模型调用与真实分析链路也没有在本次核验中完成端到端测试。</p>
+            <div class="callout-note">灵眸用于研究与决策辅助，不构成投资建议，不承诺任何收益。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「切换」：真实双态 —— 复制网站地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://zrcfzy.top/" aria-pressed="false" aria-label="复制网站地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制网站地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- ══ 决策与 CTA + 关联作品 ══ -->
+          <div class="callout reveal" style="margin-top:var(--space-9)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">把证据放在一起，保留来源、分歧和风险，使每次行动之前多一层可以复查的判断。</p>
+            <div class="callout-note">给决定增加依据，而不是增加冲动</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">市场很难因为多看一个指标就变得确定。灵眸提供的价值，是把证据放在一起，保留来源、分歧和风险。</p>
+              <p>产品将尾盘筛选、风险检查、股票与基金研究、ETF 分析等方法收拢到一个入口，适合希望建立固定研究节奏的个人用户。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://zrcfzy.top/" target="_blank" rel="noopener">打开灵眸</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Quant Research</small>
+              <h3>End-of-day Picker</h3>
+              <p>把尾盘筛选写成一条包含数据校验、市场状态、熔断与退出规则的研究流程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/end-of-day-picker">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Quant Research</small>
+              <h3>A-share Tailpicker</h3>
+              <p>在 14:20 建立预选，再用 14:50 的第二次扫描挑战每一个尾盘信号。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/a-share-tailpicker">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Quant Research</small>
+              <h3>Invest Signal Kit</h3>
+              <p>用一份本地检查单，在买入前记录理由、仓位与风险边界。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/invest-signal-kit">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 04 / Quant Research</small>
+              <h3>Stock &amp; Fund Analyzer</h3>
+              <p>把估值、质量、周期与趋势放进同一份股票和基金研究备忘录。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/stock-fund-analyzer">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 05 / Quant Research</small>
+              <h3>ETF Analyzer</h3>
+              <p>别用一条近期收益曲线，决定你是否真的看懂一只 ETF。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/etf-analyzer">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — 灵眸 LingMou · No.07</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

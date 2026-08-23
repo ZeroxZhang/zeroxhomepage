@@ -36,6 +36,7 @@ links:
     type: website
     url: https://silenzio.cn
     primary: true
+    show_on_homepage: true
 related:
   - io-system
   - huashu-bookwriter

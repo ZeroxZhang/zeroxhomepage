@@ -1,0 +1,298 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  money-education-whitebook.html · Money Education Whitebook 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/money-education-whitebook.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：主链接与仓库使用 https 绝对地址；关联作品用相对路径 ../<slug>/index.html。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；工程数据（格式 / 技术栈）后置到证据区。
+  8. 本页为教育类作品：适用范围与风险边界在证据区用 callout-risk 写明。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/money-education-whitebook">
+  <title>Money Education Whitebook · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="一份按 3—22 岁年龄递进的家庭财商底稿：零花钱、消费、储蓄、投资与风险，每个阶段怎么聊、怎么练，都替你排好。家长、教育者和内容创作者可以直接拿去备课、改写，或用于家庭阅读。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/money-education-whitebook/index.html · Money Education Whitebook 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/money-education-whitebook.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  6. 教育作品：适用范围与风险边界写入证据区 callout-risk。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/money_education_whitebook" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 22</b><br>作品展示 · 教育文档</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">家庭谈钱的年龄递进指南 · 3—22 岁</div>
+          <h1>Money<br><em>Education</em> Whitebook</h1>
+        </div>
+        <div class="hero-note">
+          <strong>从 3 岁到 22 岁，陪孩子把钱一路聊明白</strong>
+          <p>一份按 3—22 岁年龄递进的家庭财商底稿：零花钱、消费、储蓄、投资与风险，每个阶段怎么聊、怎么练，都替你排好。家长、教育者和内容创作者可以直接拿去备课、改写，或用于家庭阅读。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">财商教育</span>
+            <span class="tag">多格式出版</span>
+            <span class="tag">白皮书</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/money_education_whitebook" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>阅读白皮书源码</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 本页为 compact 级，hero-strip 收成 2 格（页面级差异，覆盖共享 4 栏默认值） -->
+      <div class="hero-strip hero-strip-2">
+        <div><small>Age Path</small><b>3—22 岁连续递进</b></div>
+        <div><small>Topics</small><b>零花钱 · 消费 · 储蓄 · 投资 · 风险</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：Wiki 阅读版本（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/money-education-whitebook/01-wiki-reader.png" alt="Wiki 阅读版本"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:43:42.333Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把零花钱、消费与风险，串成一条年龄递进的路径</h2>
+            <div class="section-deck">从适龄问题开始，帮家长、教育者和内容创作者有话题可聊，而不是每次依赖一条孤立建议。</div>
+          </div>
+
+          <p class="lead reveal">零花钱、消费、储蓄、投资与风险，常在不同年龄<mark>突然进入家庭讨论</mark>，却缺少一条连续路径。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>Money Education Whitebook 按 3—22 岁的认知与责任变化组织内容，帮助家长、教育者和内容创作者从适龄问题开始，而不是每次依赖一条孤立建议。</p>
+              <p>白皮书覆盖家庭制度、阶段目标、练习、常见教育陷阱与复盘框架，把知识放回日常选择，而不是停留在概念。</p>
+            </div>
+            <aside class="pull">把抽象概念转成可讨论的生活动作，先谈得起来，再谈得下去。<small>Core idea</small></aside>
+          </div>
+
+          <!-- 图示 · 覆盖主题对象链：随年龄递进的主题 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Coverage / 覆盖主题</span><span>3—22 岁递进</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Topic 01</small>零花钱</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Topic 02</small>消费</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Topic 03</small>储蓄</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Topic 04</small>投资</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Topic 05</small>风险</div>
+              </div>
+              <div class="dg-gate"><b>年龄递进 · AGE PATH</b> — 按 3—22 岁的认知与责任变化组织内容，从适龄问题开始。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>家庭协作的方法，一份主稿多种用法</h2>
+            <div class="section-deck">饭桌复盘、金钱透明与失败复盘把概念转成动作；Markdown 一份主稿导出多种交付格式。</div>
+          </div>
+
+          <!-- 02.1 日常方法 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Daily Practice</div>
+              <h3>饭桌复盘、金钱透明与失败复盘</h3>
+              <p>白皮书覆盖家庭制度、阶段目标、练习、常见教育陷阱与复盘框架。饭桌复盘、金钱透明和失败复盘等方法，把抽象概念转成可讨论的生活动作。</p>
+              <p>可打印模板与四项 KPI 适合用来记录和提问。它们是教学设计和家庭协作工具，不是已被实验验证的教育干预。</p>
+              <div class="scope-list">
+                <div><b>方法</b><span>饭桌复盘 · 金钱透明 · 失败复盘</span></div>
+                <div><b>工具</b><span>可打印模板 · 四项 KPI</span></div>
+              </div>
+              <div class="rule-note">三种方法把「怎么跟孩子谈钱」变成可以一起做的动作。</div>
+            </div>
+          </div>
+
+          <!-- 02.2 一份主稿，多种使用方式 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 02：多格式交付物（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/money-education-whitebook/02-multi-format.png" alt="多格式交付物"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:43:42.334Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / One Source</div>
+              <h3>一份主稿，多种使用方式</h3>
+              <p>Markdown 是持续维护的内容源，可导出 DOCX、两种 HTML 电子书与 SVG 图示，不必在多个格式之间重复维护。</p>
+              <p>Wiki 版本提供目录、搜索、阅读进度、打印、移动端阅读与脚注审计；同一份材料因此可以进入家庭阅读、课程准备、文章改写或线下讲义。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>内容源</small>Markdown</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>交付物</small>DOCX · 两种 HTML · SVG</div>
+              </div>
+              <p class="dg-caption">一份主稿导出多格式交付物，进入不同的阅读与使用场景。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE</div>
+            <h2>当前可核验的状态与边界</h2>
+            <div class="section-deck">截至 2026-08-21；这是一份出版底稿，不是经实证验证的课程体系。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开可核验状态 · 来源：公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>公开正文</td><td class="data-table-ok">已公开</td><td class="data-table-mono">正文</td><td>多格式交付物一并公开</td></tr>
+                  <tr><td>多格式交付</td><td class="data-table-ok">已交付</td><td class="data-table-mono">DOCX · 两种 HTML · SVG</td><td>由 Markdown 源导出</td></tr>
+                  <tr><td>README · 许可证 · Pages · CI · Release</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>尚未提供</td></tr>
+                  <tr><td>统计引用与效果性主张</td><td class="data-table-risk">未核验</td><td class="data-table-mono">—</td><td>尚未逐条独立核验</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Markdown / HTML / DOCX / SVG</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 适用范围与风险</b>
+            <p class="callout-statement">这是一份研究型白皮书与出版底稿，不是经实证验证的课程体系，不保证改善财务行为，也不提供个性化投资建议。</p>
+            <div class="callout-note">正文中的统计引用和效果性主张尚未逐条独立核验；使用者应回到原始来源，并根据家庭年龄、文化与财务情况调整内容。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/money_education_whitebook" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/money_education_whitebook" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- 决策 + CTA -->
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">它提供框架，不替家庭给答案。白皮书的归档价值在于保留一套可继续审阅、改写和发布的年龄递进结构。</p>
+              <p>需要经实证验证的课程体系、或个性化投资建议的家庭，应另寻相应资源。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/money_education_whitebook" target="_blank" rel="noopener">阅读白皮书源码</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Content Publishing</small>
+              <h3>md2book</h3>
+              <p>用 Markdown 写作，以一本中文书的形态交付</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/md2book">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Quant Research</small>
+              <h3>Invest Signal Kit</h3>
+              <p>买入前，把理由、仓位与风险边界写成看得见的记录</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/invest-signal-kit">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Money Education Whitebook · No.22</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

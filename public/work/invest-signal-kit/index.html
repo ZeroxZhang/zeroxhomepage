@@ -1,0 +1,363 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  invest-signal-kit.html · Invest Signal Kit 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/invest-signal-kit.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：主链接与仓库使用 https 绝对地址；关联作品用相对路径 ../<slug>/index.html。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  8. 本页为金融类作品：适用范围与风险边界在证据区用 callout-risk 写明。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/invest-signal-kit">
+  <title>Invest Signal Kit · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="买 A 股或场内 ETF 之前，它把理由、计划金额与风险边界写成一条可回看的记录，下单前指出看得见的风险缺口。持仓后也用同一套问题做体检，看清最初的理由是否仍然成立。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/invest-signal-kit/index.html · Invest Signal Kit 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/invest-signal-kit.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  6. 金融作品：适用范围与风险边界写入证据区 callout-risk。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#start">开始</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/invest-signal-kit" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 16</b><br>作品展示 · Python + Web 工具</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">个人投研的决策检查 · A 股与场内 ETF</div>
+          <h1>Invest<br><em>Signal</em> Kit</h1>
+        </div>
+        <div class="hero-note">
+          <strong>买入前，把理由、仓位与风险边界写成看得见的记录</strong>
+          <p>买 A 股或场内 ETF 之前，它把理由、计划金额与风险边界写成一条可回看的记录，下单前指出看得见的风险缺口。持仓后也用同一套问题做体检，看清最初的理由是否仍然成立。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">风险检查</span>
+            <span class="tag">隐私优先</span>
+            <span class="tag">A 股</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/invest-signal-kit" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>获取检查工具</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 本页为 standard 级，hero-strip 收成 3 格（页面级差异，覆盖共享 4 栏默认值） -->
+      <div class="hero-strip hero-strip-3">
+        <div><small>Market</small><b>A 股 · 场内 ETF</b></div>
+        <div><small>Workflows</small><b>买前检查 · 持仓体检</b></div>
+        <div><small>Privacy</small><b>本地运行 · 无需上传</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：买前检查表单（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/invest-signal-kit/01-pre-trade-form.png" alt="买前检查表单"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.302Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把买入前的判断，从脑子里写到纸面上</h2>
+            <div class="section-deck">很多交易错误发生在分析开始之前；这个工具把那些基础判断变成一条可回看的记录。</div>
+          </div>
+
+          <p class="lead reveal">不少交易错误发生在分析开始之前：<mark>买入理由只存在于脑中</mark>，仓位没有和风险承受能力对应，信息来源未经核对，风险线与放弃条件等到价格下跌后才临时决定。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>市场工具通常继续增加行情与指标，却很少要求用户把这些基础判断写清楚。Invest Signal Kit 是一个在本地运行的 A 股与国内场内 ETF 决策检查工具，提供买前检查与持仓体检两条路径。</p>
+              <p>它通过结构化问题记录行动依据，并在下单或继续持有之前指出可见的风险缺口。工具不产生推荐标的，也不尝试预测价格。</p>
+            </div>
+            <aside class="pull">检查单不能消除损失，但可以减少理由漂移和无意中扩大风险。<small>Core Principle</small></aside>
+          </div>
+
+          <!-- 图示 · 两条路径：买前检查与持仓体检共享同一套原则 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Two Workflows / 两条路径</span><span>Pre-trade → Holding</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Path 01</small>买前检查</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Path 02</small>持仓体检</div>
+              </div>
+              <div class="dg-gate"><b>同一套原则 · SHARED PRINCIPLE</b> — 记录可核对的信息，暴露未回答的问题，再由人作出决策。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>买前检查、持仓体检与本地运行</h2>
+            <div class="section-deck">两条路径各司其职，加上一条明确的隐私边界。</div>
+          </div>
+
+          <!-- 02.1 买前检查 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Pre-trade Check</div>
+              <h3>买前检查：把冲动转换成可阅读的记录</h3>
+              <p>流程要求填写标的、计划金额、可承受风险、入场理由和信息来源。系统据此检查单笔仓位占比、单一持仓集中风险、理由完整性和风险边界。提示的用途是迫使决策者重新阅读自己的判断，而不是用另一个综合分数替代判断。</p>
+              <p>一次检查可能得到「继续补充来源」「降低金额」或「先不行动」等结论。历史最多保存最近 20 条检查的结论、风险线、下一步与关键原因，而不是完整表单和全部原始理由。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>填写依据</small>标的 · 金额 · 风险 · 理由 · 来源</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>系统检查</small>仓位 · 集中风险 · 理由 · 边界</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>得到结论</small>补充来源 · 降低金额 · 先不行动</div>
+              </div>
+              <p class="dg-caption">结论用于重读自己的判断，而不是换成另一个综合分数。</p>
+            </div>
+            <!-- ══ 截图槽位 02：检查结论（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/invest-signal-kit/02-check-result.png" alt="检查结论与风险提示"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.302Z -->
+          </div>
+
+          <!-- 02.2 持仓体检 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：持仓体检表单（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/invest-signal-kit/03-holding-review.png" alt="持仓体检表单"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:30:03.303Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Holding Review</div>
+              <h3>持仓体检：检查最初的理由是否仍成立</h3>
+              <p>流程关注当前亏损、单一持仓占比、预设风险线和继续持有的理由。用户在同一次体检中分别填写原始理由与当前理由，系统据此提示理由漂移。</p>
+              <p>它不会自动从历史记录恢复并比对完整原始表单——买前与持仓共享同一套原则：记录可核对的信息，暴露未回答的问题，再由人作出决策。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>原始理由</small>继续持有的依据</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>同一次体检</small>对比</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>当前理由</small>是否漂移</div>
+              </div>
+              <p class="dg-caption">理由漂移会被点出来，但完整原始表单不会自动恢复比对。</p>
+            </div>
+          </div>
+
+          <!-- 02.3 本地运行与隐私（全宽说明） -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Local &amp; Privacy / 本地运行与隐私</b>
+            <p class="callout-statement">前端历史保存在浏览器 localStorage，本地 Python 服务仅使用标准库运行；默认路径不要求远程账户，也不需要把持仓数据上传到项目方服务器。</p>
+            <div class="callout-note">清除站点数据可能同时删除本地历史；设备、浏览器资料与备份仍需用户自行保护。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / GETTING STARTED</div>
+            <h2>一条短流程，发生在行动之前</h2>
+            <div class="section-deck">启动后二选一，填写真实数据，阅读风险提示，再决定继续、调整或放弃。</div>
+          </div>
+
+          <!-- 图示 · 使用流程：四步（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Use / 使用流程</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="使用流程">
+                <span class="flow-step"><span class="flow-index">01</span>选择路径</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>填写真实数据</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>阅读风险提示</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>继续 · 调整 · 放弃</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>启动后选择买前检查或持仓体检。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>按结构化问题填写标的、金额、风险、理由与信息来源。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>阅读风险提示，看清可见的风险缺口。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>决定继续、调整或放弃；选择仍由用户作出。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">整个流程刻意保持短小，使检查能够发生在行动前，而不是变成一份无人愿意完成的长报告。<small>Keep it short</small></div>
+              <div class="aside-tags">
+                <span class="tag">买前检查</span>
+                <span class="tag">持仓体检</span>
+                <span class="tag">本地运行</span>
+                <span class="tag">风险提示</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已完成的范围与边界</h2>
+            <div class="section-deck">截至 2026-08-21；两条核心路径、本地历史与风险提示已覆盖，进阶研究不改变默认定位。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：仓库与公开 GitHub Actions</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>两条核心路径</td><td class="data-table-ok">已覆盖</td><td class="data-table-mono">买前检查 · 持仓体检</td><td>本地历史与风险提示一并就绪</td></tr>
+                  <tr><td>本地历史</td><td class="data-table-ok">已实现</td><td class="data-table-mono">最近 20 条</td><td>保存在 localStorage</td></tr>
+                  <tr><td>风险提示</td><td class="data-table-ok">已实现</td><td class="data-table-mono">决策前阅读</td><td>暴露可见的风险缺口</td></tr>
+                  <tr><td>公开核验</td><td class="data-table-ok">成功</td><td class="data-table-mono">latest</td><td>最新一次 GitHub Actions</td></tr>
+                  <tr><td>进阶研究</td><td class="data-table-info">实验性</td><td class="data-table-mono">验证 · 组合 · 回测 · Monte Carlo</td><td>不改变默认定位，不构成预测证明</td></tr>
+                  <tr><td>券商接入</td><td class="data-table-risk">未接入</td><td class="data-table-mono">—</td><td>不自动执行交易</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python 标准库 / HTML / localStorage</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 适用范围与风险</b>
+            <p class="callout-statement">Invest Signal Kit 不接入券商，不自动执行交易，不评估个人全部财务状况，也不提供投资建议。输出取决于用户输入，遗漏或粉饰理由会直接降低检查价值。</p>
+            <div class="callout-note">市场风险、滑点和突发事件仍由使用者承担。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/invest-signal-kit" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/invest-signal-kit" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- 决策 + CTA -->
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">适合已经独立作出投资决策，希望留下可复盘记录、并在行动前增加一道约束的个人研究者。</p>
+              <p>需要实时行情终端、自动组合管理或个性化资产配置建议的用户，应使用相应的专业服务。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/invest-signal-kit" target="_blank" rel="noopener">获取检查工具</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Quant research</small>
+              <h3>End-of-day Picker</h3>
+              <p>把尾盘筛选写成一条包含数据校验、市场状态、熔断与退出规则的研究流程</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/end-of-day-picker">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Quant research</small>
+              <h3>A-share Tailpicker</h3>
+              <p>在 14:20 建立预选，再用 14:50 的第二次扫描挑战每一个尾盘信号</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/a-share-tailpicker">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Web product</small>
+              <h3>灵眸 LingMou</h3>
+              <p>把四类信号放到一起，看清依据再决定</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/lingmou">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Invest Signal Kit · No.16</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

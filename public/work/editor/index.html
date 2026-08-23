@@ -1,0 +1,355 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  editor.html · Editor 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/editor.md（facts_as_of 2026-08-21），未新增数据。
+  3. Editor 没有独立可执行程序，真实界面是 Claude Code 等 Agent 环境里的终端运行；
+     仅保留 1 个截图槽位（一次运行），占位写明建议尺寸、拍摄内容与替换方法。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 版式由 site/site.css 承担，交互由 site/site.js 承担，页内不重复。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/editor">
+  <title>Editor · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="帮写作者在动手修改前，先看清读者会在哪里划走、哪里染上 AI 腔。它把每处修改的选择交回你手里，只在你接受后生成新版，原稿始终保留。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/editor/index.html · Editor 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/editor.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/editor" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 25</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">写作审稿工作流 · 保留作者语气</div>
+          <h1>Editor</h1>
+        </div>
+        <div class="hero-note">
+          <strong>先看清读者在哪里划走，再动手改，原稿不丢</strong>
+          <p>帮写作者在动手修改前，先看清读者会在哪里划走、哪里染上 AI 腔。它把每处修改的选择交回你手里，只在你接受后生成新版，原稿始终保留。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">审稿</span>
+            <span class="tag">写作质量</span>
+            <span class="tag">多智能体</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/editor" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装 Editor</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Reader Drop-off</small><b>标出读者最可能划走的位置</b></div>
+        <div><small>Language Scan</small><b>扫出 AI 痕迹与空泛表达</b></div>
+        <div><small>Author Control</small><b>逐条接受、跳过或重写</b></div>
+        <div><small>Original Kept</small><b>原稿保留 · 改完再出新版</b></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>先看清哪里失效，再动手改写</h2>
+            <div class="section-deck">「帮我润色」只处理句子表面；Editor 在改写前先定位读者、论点与表达在哪一层出了问题。</div>
+          </div>
+
+          <p class="lead reveal">「帮我润色」通常把注意力拉到句子表面。用词变得顺滑，原稿里的核心问题却可能保持不变——<mark>标题没有承诺清晰价值，开头缺少继续阅读的理由，论点与证据脱节，或者作者想说的话被常见的 AI 表达覆盖</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>Editor 是一套在 Claude Code 等 Agent 环境中运行的审稿流程。它先确认作者意图，再通过并行冷读与语言扫描定位读者流失点，最后把修改选择交回作者。</p>
+              <p>原稿不会被覆盖；被接受的建议进入 v2、v3 等后续版本。审稿因此先于改写发生——先确定问题在哪一层，再决定动哪一处。</p>
+            </div>
+            <aside class="pull">改稿的代价通常不在句子，而在判断：先弄清读者为什么读不下去，再决定改什么。<small>Review First</small></aside>
+          </div>
+
+          <!-- 图示 · 审稿链：一次审稿的先后顺序 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Review Flow / 审稿链</span><span>Draft → Intent → Review → Decide → New Version</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>01</small>原稿</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>确认意图</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03</small>并行审稿</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>04</small>作者选择</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>05</small>新版 v2 / v3</div>
+              </div>
+              <div class="dg-gate"><b>原稿保留 · ORIGINAL KEPT</b> — 原稿不会被覆盖；被接受的建议进入 v2、v3 等后续版本。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>先定边界，再让两个视角并行审稿</h2>
+            <div class="section-deck">冷读与语言扫描各自负责一类问题，汇总后再把选择交回作者。</div>
+          </div>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>流程首先选择或建立 persona，记录目标读者、表达语气、常用词与禁用表达。随后依次追问文章让谁受益、标题制造了什么预期差、开头承载什么具体场景。这些问题用于确定修改边界，避免 Agent 在不理解写作目的时自行重构观点。</p>
+              <p>如果受众、平台或不可牺牲的表达仍不清楚，流程会继续询问。作者可以保留有意为之的不规则句式、个人语气或立场，不需要为了统一而接受全部建议。</p>
+            </div>
+            <aside class="pull">修改发生在判断之后，避免一次自动重写同时改变事实、逻辑和语气，却无法解释具体动了什么。<small>Editorial Boundary</small></aside>
+          </div>
+
+          <!-- 图示 · 两个并行视角 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Parallel Review / 双视角并行</span><span>冷读 × 语言扫描 → 汇总</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>视角 01</small>读者冷读</div>
+                <div class="dg-node"><small>视角 02</small>语言扫描</div>
+              </div>
+              <div class="dg-gate"><b>汇总 · AGGREGATE</b> — 两组结果与结构、论证、语言及平台适配检查汇总，作者逐条接受、跳过或要求重写。</div>
+            </div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Agent A / Cold Read</small>
+              <h2 class="editorial-card-title">读者冷读</h2>
+              <p class="editorial-card-body">以目标读者身份通读，标记三个最可能划走的位置，并说明信息、节奏或可信度上的原因。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Agent B / Language Scan</small>
+              <h2 class="editorial-card-title">语言扫描</h2>
+              <p class="editorial-card-body">扫描绝对化句式、破折号滥用、过度比喻、重复结构和空泛抽象词等常见 AI 痕迹。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Aggregate / Four Checks</small>
+              <h2 class="editorial-card-title">四类检查汇总</h2>
+              <p class="editorial-card-body">结构、论证、语言与平台适配，与两组并行结果合在一起呈现。</p>
+            </article>
+            <article class="editorial-card editorial-card-data">
+              <small class="editorial-card-eyebrow">Author / Decision</small>
+              <h2 class="editorial-card-title">作者选择</h2>
+              <p class="editorial-card-body">逐条接受、跳过或要求重写；修改发生在判断之后。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>一次完整的使用流程</h2>
+            <div class="section-deck">从「/editor 文件路径」开始，到写出新版并保留原稿结束。</div>
+          </div>
+
+          <!-- 图示 · 一次使用的五个步骤 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Run / 一次使用</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次完整使用流程">
+                <span class="flow-step"><span class="flow-index">01</span>指定平台或读者</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>回答意图问题</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>阅读并行审稿</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>选择进入下一版</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>写出新版 · 原稿保留</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>通过「/editor 文件路径」接收草稿，指定平台或目标读者。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>回答关于意图的关键问题，确定修改边界。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>阅读冷读与语言扫描两组并行审稿结果。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>逐条选择要进入下一版的修改。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>系统计算新的版本路径并写出派生文件，原始稿件保留用于比较和回退。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">这种流程适合文章、社交媒体长文和需要明确读者反应的内容。<small>Fit Tasks</small></div>
+              <div class="aside-tags">
+                <span class="tag">文章</span>
+                <span class="tag">社交媒体长文</span>
+                <span class="tag">读者反应</span>
+              </div>
+            </aside>
+          </div>
+
+          <!-- ══ 截图槽位 01：一次运行（手动替换点）══════════════════
+               替换方法：删除 <div class="shot-empty">…</div>，
+               放入 <img class="shot-img" src="/work-assets/screenshots/editor/01-run.png" alt="Editor 一次运行终端画面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.308Z -->
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与开始 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>当前实现与边界</h2>
+            <div class="section-deck">截至 2026-08-21；仓库提供完整 spec 与 plan，但没有测试、CI 或 Release。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>当前实现与证据 · 来源：公开仓库 · facts_as_of 2026-08-21</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>完整 spec</td><td class="data-table-ok">已提供</td><td class="data-table-mono">spec</td><td>项目规格文档</td></tr>
+                  <tr><td>完整 plan</td><td class="data-table-ok">已提供</td><td class="data-table-mono">plan</td><td>项目计划文档</td></tr>
+                  <tr><td>平台参考文件</td><td class="data-table-info">部分</td><td class="data-table-mono">4 个平台</td><td>Twitter、微信、小红书等已建立结构</td></tr>
+                  <tr><td>渠道经验 / 典型反例</td><td class="data-table-warn">待补充</td><td class="data-table-mono">—</td><td>多项仍待补充真实材料</td></tr>
+                  <tr><td>测试</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>无测试</td></tr>
+                  <tr><td>CI</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>无 CI</td></tr>
+                  <tr><td>Release</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>无 Release</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">实现构成：SKILL.md / persona / 平台规则 / 多 Agent 调度约定（没有独立可执行程序，依赖宿主环境的文件读写与并行子 Agent 能力）</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">Editor 不承担事实核查、语法工具或发布系统的全部职责，也不会替作者证明事实，或用固定规则保证文章表现。</p>
+            <div class="callout-note">输出质量取决于 persona 是否具体、原稿信息是否充分，以及作者有没有对建议作出判断。截至 2026-08-21 · 以公开仓库为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/editor" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/editor" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">Editor 适合希望保留作者权、愿意参与取舍，又需要一个稳定审稿顺序的人。</p>
+              <p>若目标只是自动改写一段文字，或需要多人在线批注、校对和发布管理，应选择更直接的编辑工具。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/editor" target="_blank" rel="noopener">安装 Editor</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Content Publishing</small>
+              <h3>huashu-bookwriter</h3>
+              <p>把已有知识写成结构、声音和质量都统一的书。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/huashu-bookwriter">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Learning</small>
+              <h3>Really</h3>
+              <p>把难题拆开、换个问法，再决定从哪下手。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/really">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Editor · No.25</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

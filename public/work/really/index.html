@@ -1,0 +1,362 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  really.html · Really 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/really.md（facts_as_of 2026-08-21），未新增数据。
+  3. 本作品为 Markdown 形式的 Agent Skill，无可展示的图形界面，故不预留截图槽位。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与 design/components.css
+     —— 统一规则由共享样式承担，每个作品页只写自己的内容与版式差异。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；机制名词与工程数据（学科数 / 框架数 / Stars）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/really">
+  <title>Really · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="面对「要不要离职」「团队为什么总在同一个地方争论」这类难题，它不急着给建议，而是先把问题拆开、从不同学科比较成因。最后重写成一个更有行动价值的问题，让你带着更清楚的方向做下一步判断。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/really/index.html · Really 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/really.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 本作品为 Markdown Skill，无图形界面，故无截图槽位（无 data-shot）。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/really" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 首屏 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 12</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Maintained</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">跨学科问题重构 Skill · 决策准备</div>
+          <h1>Really</h1>
+        </div>
+        <div class="hero-note">
+          <strong>把难题拆开、换个问法，再决定从哪下手</strong>
+          <p>面对「要不要离职」「团队为什么总在同一个地方争论」这类难题，它不急着给建议，而是先把问题拆开、从不同学科比较成因。最后重写成一个更有行动价值的问题，让你带着更清楚的方向做下一步判断。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">问题诊断</span>
+            <span class="tag">跨学科</span>
+            <span class="tag">决策</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/really" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装 Really</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 本页为标准级作品，能力格收敛为 3 个（site.css 默认 4 栏，此页以页面级差异对齐为 3 栏） -->
+      <div class="hero-strip hero-strip-3">
+        <div><small>Lenses</small><b>多学科视角</b></div>
+        <div><small>Process</small><b>六步 · 关键点才暂停</b></div>
+        <div><small>Deliverable</small><b>重构后的问题 + 报告</b></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把难题拆开，再决定该怎么问</h2>
+            <div class="section-deck">直接给建议，常常只把表面提问改顺，却留下隐含前提和相互冲突的原因。</div>
+          </div>
+
+          <p class="lead reveal">「怎么提高转化？」「要不要离职？」「团队为什么总在同一个地方争论？」——这类问题往往同时装着事实、情绪、身份、资源与制度约束。若急着给建议，答案很容易只优化一句表面提问，却把隐含前提和相互冲突的原因<mark>留在原处</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>Really 是一个跨学科深度询问 Agent Skill。它先把输入拆成现象、结构和假设，再从多个学科角度寻找能够解释更多现象的成因，最后重写问题并生成一份完整分析报告。</p>
+              <p>它不急着给建议：分析停在需要你选择的地方，价值取舍与最终行动始终回到你手上。</p>
+            </div>
+            <aside class="pull">把开放难题改写成更有行动价值的问题。<small>The Reframe</small></aside>
+          </div>
+
+          <!-- 图示 · 询问路径：输入如何走到重构后的问题 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Inquiry Path / 询问路径</span><span>Input → Question</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Input</small>现象 / 结构 / 假设</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Lenses</small>多学科成因</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Reframe</small>重写问题</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Output</small>完整分析报告</div>
+              </div>
+              <div class="dg-gate"><b>决策准备 · DECISION PREP</b> — 服务于开放式思考与决策准备，而非替用户作出决定。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>十种透镜，各自负责看见不同约束</h2>
+            <div class="section-deck">五个核心视角常驻，五个条件视角按语境加入；它们不投票平均。</div>
+          </div>
+
+          <!-- 图示 · 十种透镜：核心五镜批量运行，扩展透镜按条件加入 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Ten Lenses / 十种透镜</span><span>5 Core → 5 Conditional</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node dg-current"><small>Core × 5</small>心理学 · 社会学 · 哲学 · 营销学 · 管理学</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Batch</small>批量运行</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Cond × 5</small>经济学 · 复杂性科学 · 人类学与符号学 · 决策科学 · 认知神经科学</div>
+              </div>
+              <div class="dg-gate"><b>触发条件 · TRIGGER</b> — 涉及价格、复杂系统、文化身份、高风险选择或生理状态时，扩展透镜按条件加入。</div>
+            </div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Lens 01 / Psychology</small>
+              <h2 class="editorial-card-title">心理学</h2>
+              <p class="editorial-card-body">负责看见动机与防御。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Lens 02 / Sociology</small>
+              <h2 class="editorial-card-title">社会学</h2>
+              <p class="editorial-card-body">负责看见群体与制度。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Lens 03 / Philosophy</small>
+              <h2 class="editorial-card-title">哲学</h2>
+              <p class="editorial-card-body">负责看见概念与价值前提。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Lens 04 / Marketing</small>
+              <h2 class="editorial-card-title">营销学</h2>
+              <p class="editorial-card-body">负责看见需求与定位。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Lens 05 / Management</small>
+              <h2 class="editorial-card-title">管理学</h2>
+              <p class="editorial-card-body">负责看见激励与系统结构。</p>
+            </article>
+            <article class="editorial-card editorial-card-data">
+              <small class="editorial-card-eyebrow">Frameworks / 框架参考</small>
+              <h2 class="editorial-card-title">扩展透镜与框架</h2>
+              <p class="editorial-card-body">经济学、复杂性科学、人类学与符号学、决策科学、认知神经科学按条件加入；仓库参考整理 10 学科、40+ 框架。</p>
+            </article>
+          </div>
+
+          <div class="rule-note reveal">流程不会要求不同学科投票得出平均结论；当两个解释相互冲突时，冲突会成为下一轮提问的线索。</div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>六个阶段，把分析停在需要选择的地方</h2>
+            <div class="section-deck">从一段情境描述到一份完整报告；只在关键决策点暂停，用选择题确认方向。</div>
+          </div>
+
+          <!-- 图示 · 六阶段流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Six Phases / 六个阶段</span><span>6 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次完整询问流程">
+                <span class="flow-step"><span class="flow-index">01</span>确认输入</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>表层审计</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>核心五镜</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>扩展透镜</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">05</span>合成成因 · 提升层级</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">06</span>交付报告</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>从一段简洁的情境描述开始，先确认输入范围。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>对表面提问做一次审计，定位它可能漏掉的隐含前提。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>核心五镜批量运行：心理学、社会学、哲学、营销学、管理学。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>涉及价格、复杂系统、文化身份、高风险选择或生理状态时，扩展透镜按条件加入。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>合成主要成因、提升观察层级，保留解释之间的支持与张力。</p></div></div>
+              <div class="step"><div class="step-no">06</div><div class="step-body"><p>交付完整报告：症状与约束、各学科解释、重构后的问题与下一步证据。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">六个阶段只在关键决策点暂停，用选择题让你确认方向，减少连续开放追问带来的疲劳。<small>Pause Points</small></div>
+              <div class="aside-tags">
+                <span class="tag">创业与产品判断</span>
+                <span class="tag">职业选择</span>
+                <span class="tag">合作冲突</span>
+                <span class="tag">系统性卡点</span>
+              </div>
+            </aside>
+          </div>
+
+          <div class="callout reveal" style="margin-top:var(--space-8)">
+            <b class="callout-label">Deliverable / 交付物</b>
+            <p class="callout-statement">被区分开的症状与约束、各学科的解释、解释之间的支持或张力、一个重构后的问题，以及值得继续收集的证据。</p>
+            <div class="callout-note">一份完整分析报告，不是替你作出的决定。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据摘要 + CTA + 关联作品 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>证据、适用对象与限制</h2>
+            <div class="section-deck">截至 2026-08-21 · 方法结构与材料规模可查；根因保证与效果数据不在其中。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开证据 · 来源：公开仓库，截至 2026-08-21</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Skill 主流程</td><td class="data-table-ok">已提供</td><td class="data-table-mono">SKILL.md</td><td>公开仓库</td></tr>
+                  <tr><td>分析报告模板</td><td class="data-table-ok">已提供</td><td class="data-table-mono">模板</td><td>公开仓库</td></tr>
+                  <tr><td>框架参考</td><td class="data-table-ok">已提供</td><td class="data-table-mono">10 学科 / 40+ 框架</td><td>公开仓库</td></tr>
+                  <tr><td>许可证</td><td class="data-table-ok">开源</td><td class="data-table-mono">Apache-2.0</td><td>公开仓库</td></tr>
+                  <tr><td>GitHub Stars</td><td class="data-table-info">记录</td><td class="data-table-mono">3</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>用户研究 / 效果数据</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>无公开用户研究或效果数据</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Markdown / Prompt Engineering</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">这里的「诊断」指问题分析方法，不构成心理治疗、医疗建议、法律意见或组织咨询；输出质量取决于输入情境、模型能力与框架是否适配。</p>
+            <div class="callout-note">公开证据不能证明所有场景都能找到单一根因；高风险情境应由相应专业人士结合可验证事实处理，价值取舍与最终行动仍由你保留。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/really" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/really" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">适合创业与产品判断、职业选择、合作冲突和反复出现的系统性卡点，也适合在进入方案讨论前做一次问题审查。</p>
+              <p>它不替你作决定，也不承诺每个难题都只有一个根因；它做的是把症状、结构与假设分开，让冲突的解释成为下一步提问的线索。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/really" target="_blank" rel="noopener">安装 Really</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Content Publishing</small>
+              <h3>Editor</h3>
+              <p>先看清读者在哪里划走，再动手改，原稿不丢</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/editor">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Utilities</small>
+              <h3>价值可见与组织推进</h3>
+              <p>让好工作被看见，让每次沟通都推动一个明确的下一步。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/indian-workplace-methodology">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Really · No.12</span>
+      <span>无截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

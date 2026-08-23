@@ -22,8 +22,8 @@ Rich interaction is a product goal, not a commitment to a particular library. Ch
 ## Current Context
 
 - The repository is private and the canonical remote is `github.com/ZeroxZhang/ZeroxZhang.github.io`.
-- The app scaffold is live: Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion, with a completed homepage (`/`) and an `/about` placeholder. Commands and state live in `README.md`.
-- `content/works/` contains the current bilingual portfolio source for 35 works; the homepage consumes it through `lib/works.ts`. About, Blog, and portfolio media are still incomplete.
+- The app scaffold is live: Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion, with a completed homepage (`/`), 35 same-domain `/work/<slug>` entries, and an `/about` placeholder. Commands and state live in `README.md`.
+- `content/works/` contains the current bilingual portfolio source for 35 works; the homepage consumes it through `lib/works.ts`, while the delivered portfolio showcases are mounted as static pages. About, Blog, and most portfolio media are still incomplete.
 - OriginKit Hero 10 is a locally preserved visual reference and source baseline, adapted into the site (typography, Kinetic Grid floor, portfolio grid); provenance lives in `components/originkit/ORIGIN.md`. The homepage visual baseline is documented in `docs/design/2026-08-23-homepage-design.md`.
 - Hosting must support the server-side visit-counter behavior described in the product documents; the platform and persistence mechanism remain open decisions.
 

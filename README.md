@@ -17,10 +17,11 @@
 > 更新于 2026-08-23
 
 - **首页首版已完成**：英雄区（Hero 10 基线 + Cinzel 主标题 + 格言「Semper novarum rerum cupidus」+ GitHub/博客/公众号/联系我按钮组）、Kinetic Grid 倾斜动效地面（替换 Prism Grid）、按 8 条分类组织的 Interactive Grid 作品集入口（9 宫格 + 分类弹层）、导航与 Footer。
-- 应用脚手架已落地：Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion，`/`、`/about`（双语占位）静态预渲染；`npm run dev/build/start/lint/typecheck/test` 可用，另有 Playwright 首页与关键回归验收脚本。
+- 应用脚手架已落地：Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion，`/`、`/about`（双语占位）与 35 个 `/work/<slug>` 作品入口可用；`npm run dev/build/start/lint/typecheck/test` 可用，另有 Playwright 首页与关键回归验收脚本。
 - 35 个作品的中英文介绍已整理到 `content/works/`，首页由 `lib/works.ts` 加载器消费；分类、计数与排序来自内容源，构建时校验双语字段、正文结构、链接、关联和枚举。
+- 35 个已交付作品展示页作为同域静态页面接入；首页分类弹层中的每件作品均连接详情页，灵眸、Z-Slides、大音希声另提供直接官网入口。
 - 设计基线已定稿：见 [`docs/design/2026-08-23-homepage-design.md`](./docs/design/2026-08-23-homepage-design.md)。
-- 待办：作品详情页 `/work/<slug>`、About 正式页、Blog 板块、作品媒体、访问计数器后端与部署平台决策。
+- 待办：About 正式页、Blog 板块、其余作品媒体、访问计数器后端与部署平台决策。
 
 更细的阶段安排见 [`docs/plans/2026-08-21-website-kickoff-plan.md`](./docs/plans/2026-08-21-website-kickoff-plan.md)。计划会随验证结果调整，不代表不可变的实施顺序。
 

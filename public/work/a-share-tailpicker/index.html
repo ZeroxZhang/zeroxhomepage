@@ -1,0 +1,369 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  a-share-tailpicker.html · A-share Tailpicker 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/a-share-tailpicker.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。本页无 hero 次级入口，故不使用 light-glass。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/a-share-tailpicker">
+  <title>A-share Tailpicker · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="临近收盘的一张快照容易骗人：拉升、放量或板块异动，二十分钟后可能已经衰减。它让你在 14:20 建立候选、14:50 收盘前再确认一遍，并把每次观察存成可复查的研究记录。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/a-share-tailpicker/index.html · A-share Tailpicker 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/a-share-tailpicker.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用方法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/a-share-tailpicker" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 15</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Maintained</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">A 股尾盘研究 Skill · 沪市主板 60 系列</div>
+          <h1>A-share<br><em>Tailpicker</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>尾盘信号看两遍，每次观察都存成可复查的记录</strong>
+          <p>临近收盘的一张快照容易骗人：拉升、放量或板块异动，二十分钟后可能已经衰减。它让你在 14:20 建立候选、14:50 收盘前再确认一遍，并把每次观察存成可复查的研究记录。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">A 股</span>
+            <span class="tag">Agent Skill</span>
+            <span class="tag">回测</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/a-share-tailpicker" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装 Tailpicker</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-3">
+        <div><small>两次确认</small><b>14:20 预选 · 14:50 再确认</b></div>
+        <div><small>数据源</small><b>多数据源 · 自动降级</b></div>
+        <div><small>可复查</small><b>理由 · 来源 · 风险都留存</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：运行报告（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/a-share-tailpicker/01-run-report.png" alt="A-share Tailpicker 运行报告"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.296Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>尾盘策略最怕的，是一张会衰减的快照</h2>
+            <div class="section-deck">单次扫描分不清持续变化与短时噪声；两次扫描让观察可以被重放和比较。</div>
+          </div>
+
+          <p class="lead reveal">尾盘策略经常建立在一张临近收盘的快照上。价格拉升、成交放大或板块异动看起来很有说服力，但<mark>二十分钟后，信号可能已经衰减</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>单次扫描无法区分持续变化与短时噪声，也很容易让研究者只记住成功候选，忘记被丢弃的上下文。</p>
+              <p>A-share Tailpicker 聚焦沪市主板 60 系列，用两个明确时间点组织尾盘研究：14:20 建立预选，14:50 更新行情并重新评估。第二次扫描的任务是淘汰已经失效的候选，并为留下的标的补充收盘前证据。</p>
+            </div>
+            <aside class="pull">把一次临盘观察，变成收盘后可复查的研究记录。<small>Two-stage confirmation</small></aside>
+          </div>
+
+          <!-- 图示 · 两次扫描：14:20 预选 → 14:50 再确认 → 分开输出 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Two Scans / 两次扫描</span><span>14:20 预选 → 14:50 再确认</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>14:20</small>预选 · 更宽观察范围</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>14:50</small>更新行情 · 重新评估</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>输出</small>候选 / 观察名单 / 市场说明</div>
+              </div>
+              <div class="dg-gate"><b>第二次扫描 · CONFIRMATION</b> — 淘汰已经失效的候选，为留下的标的补充收盘前证据。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>两次扫描、多数据源与保守回测</h2>
+            <div class="section-deck">评分用于组织多类证据，不代表一个分数足以预测次日表现。</div>
+          </div>
+
+          <!-- 02.1 两次扫描 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Two-stage Confirmation</div>
+              <h3>14:20 建预选，14:50 再确认</h3>
+              <p>14:20 的预选允许更宽的观察范围，记录分时形态、量价关系、资金代理、均线位置、板块共振与交叉验证信息。14:50 使用更新后的价格和成交状态再次计算，检查先前理由是否仍成立。</p>
+              <p>候选、观察名单和市场说明分开输出，避免把边缘标的塞进同一个强制排名。系统保留入选理由、数据来源和风险说明，使使用者可以在收盘后检查：到底是哪组条件影响了结果，第二次确认又删除了什么。</p>
+              <div class="rule-note">评分用于组织多类证据，不代表一个分数足以预测次日表现。</div>
+            </div>
+            <!-- ══ 截图槽位 02：两次扫描输出（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/a-share-tailpicker/02-two-stage-output.png" alt="14:20 预选与 14:50 确认输出对比"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.297Z -->
+          </div>
+
+          <!-- 02.2 数据源 -->
+          <div class="models-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Data Sources</div>
+              <h3>数据源按执行环境降级</h3>
+              <p>工作流可根据环境选择 iFinD、Kimi Code、AKShare 或东方财富 HTTP，并为数据源设置优先级和 fallback 路径；非技术信息的交叉验证属于评分阶段。这样既能利用已有终端，也能在免费接口受限时保留替代方案。</p>
+              <p>降级信息会影响结果可信度，应随报告一起阅读。</p>
+              <div class="diagram">
+                <div class="diagram-title"><span>Data Sources / 数据源</span><span>优先级 + fallback</span></div>
+                <div class="diagram-body">
+                  <div class="dg-row">
+                    <div class="dg-node"><small>Source 01</small>iFinD</div>
+                    <span class="dg-arrow">→</span>
+                    <div class="dg-node"><small>Source 02</small>Kimi Code</div>
+                    <span class="dg-arrow">→</span>
+                    <div class="dg-node"><small>Source 03</small>AKShare</div>
+                    <span class="dg-arrow">→</span>
+                    <div class="dg-node"><small>Source 04</small>东方财富 HTTP</div>
+                  </div>
+                  <div class="dg-gate"><b>Fallback · 降级路径</b> — 每个数据源可设优先级与 fallback；免费接口受限时保留替代方案，降级信息随报告一起阅读。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02.3 次日回测 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：次日回测复盘（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/a-share-tailpicker/03-backtest-review.png" alt="次日回测与复盘记录"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:30:03.297Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Next-day Backtest</div>
+              <h3>次日回测采用保守口径</h3>
+              <p>筛选完成后，候选进入次日回测与复盘。实现加入交易成本和保守成交假设，并在组合层限制行业集中度；熊市环境会提高标准。</p>
+              <p>回测关注的不只是涨跌，还包括信号是否能按假设成交、风险规则是否执行，以及初始理由是否经得住次日数据。</p>
+              <div class="rule-note">测试通过不能延伸为市场有效性证明。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>一次完整运行的四个步骤</h2>
+            <div class="section-deck">两个明确时间点使过程可以被重放和比较。</div>
+          </div>
+
+          <!-- 图示 · 完整运行：四步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Full Run / 完整运行</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次完整运行流程">
+                <span class="flow-step"><span class="flow-index">01</span>14:20 预选</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>14:50 确认</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>收盘保存</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>次日回测</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>14:20 生成预选和观察池。</p><p><small>预选记录分时形态、量价关系、资金代理、均线位置、板块共振与交叉验证信息。</small></p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>14:50 更新数据并确认，淘汰已失效候选。</p><p><small>使用更新后的价格和成交状态再次计算。</small></p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>收盘后保存报告。</p><p><small>保留入选理由、数据来源和风险说明。</small></p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>次日按统一口径检查结果。</p><p><small>回测关注能否按假设成交、风险规则是否执行、初始理由是否经得住次日数据。</small></p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">两个明确时间点让每次运行可以被重放和比较。<small>Replayable</small></div>
+              <div class="aside-tags">
+                <span class="tag">尾盘研究</span>
+                <span class="tag">两次扫描</span>
+                <span class="tag">次日回测</span>
+                <span class="tag">复盘</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已验证的工程范围与边界</h2>
+            <div class="section-deck">截至 2026-08-21；测试通过不代表市场有效性。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：公开仓库与本次核验</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>仓库覆盖</td><td class="data-table-ok">已实现</td><td>预选 / 确认 / 观察池 / 市场说明 / 回测</td><td>公开仓库闭环</td></tr>
+                  <tr><td>单元测试</td><td class="data-table-ok">通过</td><td class="data-table-mono">33 / 33</td><td>本机副本，含未提交修改</td></tr>
+                  <tr><td>公共 CI</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>无 CI / Release</td></tr>
+                  <tr><td>可核验业绩</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>无独立可验证策略业绩</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界与风险</b>
+            <p class="callout-statement">该 Skill 不连接券商，用于方法研究和复盘，不构成个性化投资建议或收益承诺。</p>
+            <div class="callout-note">真实交易还受到滑点、流动性、涨跌停、数据延迟和突发事件影响。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/a-share-tailpicker" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/a-share-tailpicker" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="callout reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">它适合希望把尾盘观察固定为可比较流程，并愿意检查数据与假设的研究者。</p>
+            <div class="callout-note">寻找自动买卖指令、实盘托管或已证明超额收益的用户，不属于当前项目覆盖范围。</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">把尾盘观察固定成一条可比较、可回查的流程。</p>
+              <p>这个 Skill 用于方法研究和复盘，不连接券商，也不构成个性化投资建议或收益承诺。它面向愿意检查数据与假设的研究者。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/a-share-tailpicker" target="_blank" rel="noopener">安装 Tailpicker</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / quant-research</small>
+              <h3>End-of-day Picker</h3>
+              <p>把尾盘筛选写成一条包含数据校验、市场状态、熔断与退出规则的研究流程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/end-of-day-picker">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / quant-research</small>
+              <h3>Invest Signal Kit</h3>
+              <p>用一份本地检查单，在买入前记录理由、仓位与风险边界。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/invest-signal-kit">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / web-products</small>
+              <h3>灵眸 LingMou</h3>
+              <p>把四类信号放到一起，看清依据再决定。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/lingmou">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — A-share Tailpicker · No.15</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

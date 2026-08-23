@@ -37,8 +37,9 @@ links:
   - label: 打开灵眸
     label_en: Open LingMou
     type: website
-    url: https://zrcfzy.top
+    url: https://zrcfzy.top/
     primary: true
+    show_on_homepage: true
 related:
   - end-of-day-picker
   - a-share-tailpicker
@@ -119,7 +120,7 @@ MA、RSI、MACD、KDJ 与布林线等指标用于描述趋势、动量和波动�
 
 市场很难因为多看一个指标就变得确定。灵眸提供的价值，是把证据放在一起，保留来源、分歧和风险，使每次行动之前多一层可以复查的判断。
 
-[打开灵眸](https://zrcfzy.top)
+[打开灵眸](https://zrcfzy.top/)
 
 <!-- locale: en -->
 
@@ -193,5 +194,4 @@ The page therefore describes the visible product and its rule design. LingMou is
 
 No extra indicator can make a market certain. LingMou brings the evidence together while preserving its source, disagreement, and risk, giving each decision a view that can be inspected later.
 
-[Open LingMou](https://zrcfzy.top)
-
+[Open LingMou](https://zrcfzy.top/)

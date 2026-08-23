@@ -1,0 +1,369 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  io-system.html · IO System 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/io-system.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+      后续手动放入截图即可，布局无需改动。本作品为本地 CLI/文件系统，无图形界面，
+      故只留 2 个可拍摄的「文件 / 终端」槽位，均需脱敏。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+      design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. frontmatter links 为空（私人本地系统，无公开仓库 / 演示 / 安装包），因此本页
+      没有 hero 主 CTA、结尾 tactile、证据区 key-cap 与 cube-flip；唯一动效按钮是
+      关联作品的 dotted-offset 翻阅。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+      结果动词、说人话；版本号、测试数、技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/io-system">
+  <title>IO System · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="IO System 把你的收藏、摘录和旧稿收进同一套本地文件：每条素材记得出处，写文章时追得到依据，旧内容也能被重新翻出来参与创作。文件始终归你、随时可读，Agent 也照同一套规则一起干活，内容不会被锁进某个应用。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/io-system/index.html · IO System 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/io-system.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+      替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#workflow">工作流</a>
+          <a href="#evidence">证据</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 09</b><br>作品展示 · 本地个人内容系统</div>
+        <div class="mast-right">
+          <b>Status — Private</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">个人内容系统 · 本地文件 + iCloud</div>
+          <h1>IO<br><em>System</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>存下来的素材，日后查得到出处、也翻得出来再用</strong>
+          <p>IO System 把你的收藏、摘录和旧稿收进同一套本地文件：每条素材记得出处，写文章时追得到依据，旧内容也能被重新翻出来参与创作。文件始终归你、随时可读，Agent 也照同一套规则一起干活，内容不会被锁进某个应用。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">Personal OS</span>
+            <span class="tag">Local-first</span>
+            <span class="tag">内容工作流</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Storage</small><b>文件住在本机与 iCloud</b></div>
+        <div><small>Sources</small><b>成品追得到依据</b></div>
+        <div><small>Rediscovery</small><b>旧料翻得出、用得上</b></div>
+        <div><small>Audit</small><b>索引可重建 · 可审计</b></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>从收藏仓库，走向一条能反复使用的内容循环</h2>
+            <div class="section-deck">笔记数量不等于知识积累；IO System 把「以后怎么用」的判断前移，并保存成明确结构。</div>
+          </div>
+
+          <p class="lead reveal">收藏工具解决了「先存下来」，却很少解决「以后怎么用」：链接进了稍后读，摘录散落各处，灵感失去上下文，等到开始创作，仍要<mark>凭记忆找来源、重建关系</mark>，并判断哪些旧材料值得重新打开。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>IO System 是一套运行在本地文件与 iCloud 上的个人内容系统。它把输入、来源、主题、输出和再发现连成同一条工作流，使素材有来路、成品可追溯、旧内容能够再次参与创作。Markdown 保存正文，YAML 描述关系，Python CLI 执行约束；文件系统始终是唯一事实源。</p>
+              <p>系统以内容在不同阶段之间的流动为核心：一段输入如何成为观点，一份输出如何保留证据，完成的文章又如何变成下一轮创作的材料。单篇笔记只是这条链路中的一个载体。</p>
+            </div>
+            <aside class="pull">这些判断不依赖某个应用的私有数据库：来源关系可以直接检查，索引也可以从文件重建。<small>Local-first / 事实源</small></aside>
+          </div>
+
+          <!-- 图示 · 内容循环：收藏 → 创作 → 再发现 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Content Loop / 内容循环</span><span>收藏 → 创作 → 再发现</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Stage 01</small>输入 · 有类型有归属</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Stage 02</small>观点与草稿</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Stage 03</small>输出 · 保留 sources</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Stage 04</small>再发现 · 旧料参与创作</div>
+              </div>
+              <div class="dg-gate"><b>循环 · LOOP</b> — 完成的文章成为下一轮创作的材料，收藏不是单程终点。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>五个相互衔接的层次</h2>
+            <div class="section-deck">类型、来源、主题、再发现与审计，各自解决一类「内容用不起来」的问题。</div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Layer 01 / Input</small>
+              <h2 class="editorial-card-title">输入有类型，也有归属</h2>
+              <p class="editorial-card-body">idea、material、snippet、spark 描述当前状态；六类自然语言意图覆盖输入、输出、灵感、剪藏、归档和系统命令。含糊指令先询问，不替用户猜测。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Layer 02 / Sources</small>
+              <h2 class="editorial-card-title">来源关系随内容一起保存</h2>
+              <p class="editorial-card-body">每份输出用 sources 字段连接原始材料、历史输出和外部来源，成品可追溯，旧文也能成为新项目的输入。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Layer 03 / Topics</small>
+              <h2 class="editorial-card-title">主题词表控制长期漂移</h2>
+              <p class="editorial-card-body">规范名称与别名统一登记，避免同一概念因大小写、缩写或中英文表达不同而形成多个孤岛。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Layer 04 / Spark</small>
+              <h2 class="editorial-card-title">Spark 负责再发现</h2>
+              <p class="editorial-card-body">随机考古、跨主题连接、标签扩展、时间脉冲和矛盾发现，从旧材料里找新组合，并按采纳调整权重。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Layer 05 / Audit</small>
+              <h2 class="editorial-card-title">审计维护系统健康</h2>
+              <p class="editorial-card-body">rebuild-index 从文件重建索引，audit 检查元数据、引用关系和目录结构；索引是可重建的派生视图。</p>
+            </article>
+            <article class="editorial-card editorial-card-data">
+              <small class="editorial-card-eyebrow">Foundation / Local-first</small>
+              <h2 class="editorial-card-title">文件是唯一事实源</h2>
+              <p class="editorial-card-body">正文与关系留在可读文件里，索引可以重建，内容不会锁进某个应用的私有数据库。</p>
+            </article>
+          </div>
+
+          <!-- 02.1 来源关系 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Source Relationships</div>
+              <h3>来源关系随内容一起保存</h3>
+              <p>每份输出通过 sources 字段连接<strong>原始材料、历史输出和外部来源</strong>。成品可以一路追溯到依据，旧文章也能成为新项目的输入。</p>
+              <p>这些关系不依赖某个应用的私有数据库，可以直接检查，也可以由脚本审计。来源因此不再停留在写作时的记忆里，而是成为内容的一部分。</p>
+              <div class="rule-note">内容可以离开工具，关系经得起审计——这是「local-first」在 IO System 里的具体含义。</div>
+            </div>
+            <!-- ══ 截图槽位 01：来源关系（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/io-system/01-sources-yaml.png" alt="输出文件的 sources 字段（脱敏）"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.311Z -->
+          </div>
+
+          <!-- 图示 · Spark 再发现机制 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Spark / 再发现机制</span><span>旧材料 → 新组合</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>策略</small>随机考古 · 跨主题 · 标签扩展 · 时间脉冲 · 矛盾发现</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>结果</small>旧材料的新组合</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>反馈</small>按采纳调整权重</div>
+              </div>
+              <div class="dg-gate"><b>再发现 · REDISCOVERY</b> — 把「偶然翻到一条旧笔记」变成系统内可重复的动作。</div>
+            </div>
+          </div>
+
+          <!-- 02.2 审计 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 02：审计命令输出（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/io-system/02-audit-cli.png" alt="audit 命令终端输出（脱敏）"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.311Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Audit</div>
+              <h3>审计维护系统健康</h3>
+              <p>rebuild-index 可以从文件重建索引，audit 检查元数据、引用关系和目录结构。索引属于可重建的派生视图。</p>
+              <p>即使工具发生变化，作为事实源的正文和关系仍留在可读文件中。系统的健康不依赖某个应用是否还在维护。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 工作流 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>一条真实的内容流</h2>
+            <div class="section-deck">系统价值由这条链路能否连续运转来衡量，界面里保存了多少卡片只是表面规模。</div>
+          </div>
+
+          <!-- 图示 · 内容流：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Representative Flow / 典型内容流</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一条典型内容流">
+                <span class="flow-step"><span class="flow-index">01</span>SILENZIO 转录播客</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>material 入档 · 记录来源与主题</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>Spark 发现与旧摘录的矛盾</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>进入草稿</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>输出保留 sources</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prose reveal">
+            <p>一段播客先由 SILENZIO 转成文字，其中值得保留的观点以 material 进入 IO System，并记录节目来源与主题。后来准备文章时，Spark 找到它与另一份旧摘录之间的矛盾；两者共同进入草稿。文章完成后，输出文件仍保留 sources，日后还可以被拆成短内容或成为新研究的入口。</p>
+          </div>
+
+          <!-- 03.1 Agent 如何进入 -->
+          <div class="cap-text reveal" style="margin-top:var(--space-7)">
+            <div class="cap-no">03.1 / Agent Participation</div>
+            <h3>Agent 如何进入这套系统</h3>
+            <p>IO System 不把 AI 当成拥有独立记忆的黑箱。Claude Code、Codex 或其他执行环境需要遵守同一套目录、schema、命名和确认规则。Agent 可以帮助归档、建立来源关系、生成 Spark 或执行审计，但内容边界和事实源不会因为更换模型而改变。</p>
+            <p>风格文件则把「写成什么样」从单次提示词中抽离出来。开始生成前先选择对应语气和用途，减少不同工具接入后造成的表达漂移。规则本身与内容一起版本化，能够被检查和修订。</p>
+            <div class="scope-list">
+              <div><b>目录</b><span>统一结构</span></div>
+              <div><b>Schema</b><span>统一</span></div>
+              <div><b>命名</b><span>统一</span></div>
+              <div><b>确认规则</b><span>含糊指令先询问</span></div>
+            </div>
+          </div>
+
+          <!-- 03.2 开始方式 -->
+          <div class="callout callout-data reveal" style="margin-top:var(--space-6)">
+            <b class="callout-label">Getting Started / 开始方式</b>
+            <p class="callout-statement">这是私人本地系统，不提供公开仓库、在线演示或安装包。开始方式不是下载安装，而是用自己真实的内容，按这套目录与元数据规则跑起来。</p>
+            <div class="callout-note">适合愿意维护目录与元数据、重视内容所有权的人</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已经运行的私人基础设施</h2>
+            <div class="section-deck">截至 2026-08-21 · 脱敏快照与审计记录。</div>
+          </div>
+
+          <!-- 数据图 · 规模记分卡：2026 年 8 月脱敏快照 -->
+          <div class="dg-score reveal" style="margin-bottom:32px">
+            <div><small>规范主题 / Topics</small><b>10</b><div class="dg-track"><i style="width:11%"></i></div></div>
+            <div><small>剪藏 / Clippings</small><b>90</b><div class="dg-track"><i style="width:100%"></i></div></div>
+            <div><small>输入素材 / Inputs</small><b>42</b><div class="dg-track"><i style="width:47%"></i></div></div>
+            <div><small>输出 / Outputs</small><b>20</b><div class="dg-track"><i style="width:22%"></i></div></div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>私人基础设施摘要 · 来源：2026 年 8 月脱敏快照</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>版本演进</td><td class="data-table-ok">已记录</td><td class="data-table-mono">v1.0.0 → v1.6.0</td><td>2026-04-02 起 · 私人本地</td></tr>
+                  <tr><td>审计快照</td><td class="data-table-ok">通过</td><td class="data-table-mono">0 错误 / 0 告警</td><td>最近一次</td></tr>
+                  <tr><td>公开仓库</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>私人本地系统</td></tr>
+                  <tr><td>在线演示</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>—</td></tr>
+                  <tr><td>安装包</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Markdown / YAML / Python 标准库 / iCloud Drive</p>
+
+          <div class="callout callout-data reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">规模 ≠ 效率</b>
+            <p class="callout-statement">这些数字说明系统已经承载真实内容，但不等同于通用效率结论。</p>
+            <div class="callout-note">本页只展示匿名架构、汇总规模和工作方法，不公开真实标题、正文、来源、本机路径。</div>
+          </div>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-6)">
+            <b class="callout-label">Boundary / 适用范围与代价</b>
+            <p class="callout-statement">当前实现为私人本地系统，不提供公开仓库、在线演示或安装包。使用者需要理解 schema、处理偶尔的归类问题，并对同步与备份负责；开箱即用的云端笔记和多人实时协作超出当前范围。</p>
+            <div class="callout-note">截至 2026-08-21 · 适合重视内容所有权、来源追踪与长期复用的人</div>
+          </div>
+
+          <div class="callout reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">IO System 是对 local-first AI 内容工作流的一次持续实践：文件可以离开工具，关系可以接受审计，自动化也必须服从可读、可恢复的内容基础。</p>
+            <div class="callout-note">私人系统 · 无公开下载入口，下一步可从关联作品看起</div>
+          </div>
+
+          <div class="related-head reveal" style="margin-top:var(--space-8)">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / 内容创作</small>
+              <h3>huashu-bookwriter</h3>
+              <p>把一本书的结构、声音和质量标准写进 AI 工作流。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/huashu-bookwriter">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / 线上产品</small>
+              <h3>大音希声 SILENZIO</h3>
+              <p>从一条小宇宙链接开始，把长播客变成可检索、可编辑、可继续使用的文字。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/silenzio">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / 内容创作</small>
+              <h3>Editor</h3>
+              <p>先看清读者在哪里划走，再动手改，原稿不丢</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/editor">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — IO System · No.09</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

@@ -40,6 +40,16 @@ export interface CategoryInfo {
   description_en: string;
 }
 
+export interface WorkLink {
+  label: string;
+  label_en: string;
+  type: string;
+  url: string;
+  primary: boolean;
+  /** 在首页作品清单中额外展示为独立外链入口。 */
+  show_on_homepage: boolean;
+}
+
 export interface WorkMeta {
   slug: string;
   title: string;
@@ -55,6 +65,7 @@ export interface WorkMeta {
   status: string;
   featured: boolean;
   weight: number;
+  links: WorkLink[];
 }
 
 export interface CategorySummary extends CategoryInfo {
@@ -181,7 +192,7 @@ function parseWorkFile(slug: string, worksDir: string): WorkMeta {
     if (!link || typeof link !== "object" || Array.isArray(link)) {
       fail(slug, `links[${index}] 必须是对象`);
     }
-    for (const field of ["label", "label_en", "url"] as const) {
+    for (const field of ["label", "label_en", "type", "url"] as const) {
       if (typeof link[field] !== "string" || link[field].trim() === "") {
         fail(slug, `links[${index}].${field} 必须是非空字符串`);
       }
@@ -196,12 +207,24 @@ function parseWorkFile(slug: string, worksDir: string): WorkMeta {
       fail(slug, `links[${index}].url 不是有效 URL`);
     }
     if (url.protocol !== "https:") fail(slug, `links[${index}].url 必须使用 https`);
+    if (
+      link.show_on_homepage !== undefined &&
+      typeof link.show_on_homepage !== "boolean"
+    ) {
+      fail(slug, `links[${index}].show_on_homepage 必须是布尔值`);
+    }
+    if (link.show_on_homepage === true && link.type !== "website") {
+      fail(slug, `links[${index}] 只有 website 链接可以展示在首页`);
+    }
   }
   if (
     fm.status !== "private" &&
     links.filter((link) => link.primary === true).length !== 1
   ) {
     fail(slug, "公开作品必须恰好包含一个 primary 链接");
+  }
+  if (links.filter((link) => link.show_on_homepage === true).length > 1) {
+    fail(slug, "最多只能有一个链接展示在首页");
   }
   validateBody(raw.slice(match[0].length), slug);
 
@@ -212,6 +235,14 @@ function parseWorkFile(slug: string, worksDir: string): WorkMeta {
     status: String(fm.status),
     featured,
     weight,
+    links: links.map((link) => ({
+      label: String(link.label),
+      label_en: String(link.label_en),
+      type: String(link.type),
+      url: String(link.url),
+      primary: link.primary === true,
+      show_on_homepage: link.show_on_homepage === true,
+    })),
   };
 }
 

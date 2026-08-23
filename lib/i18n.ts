@@ -48,7 +48,9 @@ export const copy = {
       hint: (n: number) => `查看 ${n} 件`,
       countSuffix: "件作品",
       allCount: (n: number) => `${n} 件作品`,
-      detailNote: "作品详情页正在建设中 · 联系方式",
+      viewDetail: "查看详情",
+      visitWebsite: "访问官网",
+      detailNote: "选择任意作品，打开完整详情页",
     },
     contact: {
       emailNote: "回复通常在 1–2 个工作日内。",
@@ -116,7 +118,9 @@ export const copy = {
       hint: (n: number) => `View ${n} works`,
       countSuffix: "works",
       allCount: (n: number) => `${n} Works`,
-      detailNote: "Work detail pages are under construction · Contact",
+      viewDetail: "View details",
+      visitWebsite: "Visit website",
+      detailNote: "Select any work to open its full detail page",
     },
     contact: {
       emailNote: "Replies usually within 1–2 business days.",

@@ -1,0 +1,344 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  deepseek-harness-app.html · DeepSeek Harness App 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/deepseek-harness-app.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级引导）→
+     key-cap 命令（打开仓库）→ cube-flip 切换（复制下载地址 / 已复制）→
+     dotted-offset 翻阅（关联作品索引）→ tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；版本号、体积与技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/deepseek-harness-app">
+  <title>DeepSeek Harness App · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="下载后拖进「应用程序」，双击打开，本地服务与界面一起启动，填一次 API Key 就能开始用。省掉安装开发环境和跑命令行的首次配置。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/deepseek-harness-app/index.html · DeepSeek Harness App 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/deepseek-harness-app.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#start">开始</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/deepseek-harness-app/releases/tag/v1.0.0" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 13</b><br>作品展示 · macOS 桌面应用</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">Mac 上的 DeepSeek Harness 桌面入口 · Apple Silicon</div>
+          <h1>DeepSeek<br><em>Harness</em> App</h1>
+        </div>
+        <div class="hero-note">
+          <strong>免装开发环境，双击在 Mac 上打开 DeepSeek Harness</strong>
+          <p>下载后拖进「应用程序」，双击打开，本地服务与界面一起启动，填一次 API Key 就能开始用。省掉安装开发环境和跑命令行的首次配置。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">macOS</span>
+            <span class="tag">AI 编程</span>
+            <span class="tag">桌面封装</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/deepseek-harness-app/releases/tag/v1.0.0" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>下载 DeepSeek Harness App</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="https://github.com/ZeroxZhang/deepseek-harness-app" target="_blank" rel="noopener"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>查看源码与构建脚本</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Platform</small><b>macOS · Apple Silicon</b></div>
+        <div><small>Launch</small><b>双击打开</b></div>
+        <div><small>Setup</small><b>免命令行配置</b></div>
+        <div><small>Local</small><b>服务跑在本机</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主窗口（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/deepseek-harness-app/01-main-window.png" alt="DeepSeek Harness App 主窗口"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.992Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把一段终端部署，收进一个桌面应用</h2>
+            <div class="section-deck">想用界面的人，不需要先装齐开发工具、克隆仓库，再记一串启动命令。</div>
+          </div>
+
+          <p class="lead reveal">体验 DeepSeek Harness 通常要先准备 Node.js 22+、pnpm 和 Git，克隆仓库、安装依赖，再从终端启动服务。对只想使用界面的人，这是一段<mark>额外的首次配置</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>DeepSeek Harness App 把这段部署过程封装进一个面向 Apple Silicon 的 macOS 应用。便携构建将 Harness 代码、Node 运行时和所需依赖放入应用包，用户安装后通过同一个桌面入口启动本地服务与原生窗口。</p>
+              <p>它不改变 Harness 本身，只把「怎么把它跑起来」这一步从终端挪进一个可双击的应用。公开仓库提供 Swift 外壳、配置模板与完整构建脚本，窗口与进程如何连接都可以被核验。</p>
+            </div>
+            <aside class="pull">对只想评估和使用界面的用户，省去一整套命令行准备；对需要核验的人，源码与构建脚本都是公开的。<small>What it wraps</small></aside>
+          </div>
+
+          <!-- 图示 · 桌面外壳对象链：Swift 外壳 → WKWebView → 本机服务 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Desktop Shell / 桌面外壳</span><span>Swift → WKWebView → dsh web</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Shell</small>Swift 应用 · 窗口 · 进程</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>View</small>WKWebView · 加载本机界面</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Service</small>dsh web · 默认端口 3080</div>
+              </div>
+              <div class="dg-gate"><b>ServerController · 启动门控</b> — 先检查配置端口上是否已有 dsh web 服务；没有时，再使用随包 Node 启动 Harness，并在应用结束时处理它拉起的进程。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>外壳负责把服务完整地启动和收好</h2>
+            <div class="section-deck">窗口、进程与日志各司其职，出问题时能分清是窗口问题、端口占用还是 Node 进程失败。</div>
+          </div>
+
+          <!-- 02.1 桌面外壳 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Desktop Shell</div>
+              <h3>启动、日志与收尾都由桌面外壳接管</h3>
+              <p><strong>Swift 应用</strong>管理窗口、生命周期、日志与子进程，<strong>WKWebView</strong>加载本机服务提供的界面，默认服务端口是 3080。窗口尺寸通过系统偏好保存，外部链接交给默认浏览器打开。</p>
+              <p><strong>ServerController</strong> 会先检查配置端口上是否已有 dsh web 服务；没有时，再使用随包 Node 启动 Harness，并在应用结束时处理它拉起的进程。</p>
+              <p>启动期间应用提供状态页，失败信息与服务日志分别写入 macOS 日志目录，便于区分窗口问题、端口占用和 Node 进程失败。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>检查</small>已有 dsh web？</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>无</small>随包 Node 启动 Harness</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>结束时</small>清理拉起的进程</div>
+              </div>
+              <p class="dg-caption">ServerController 的启动门控：有服务就直接用，没有才由随包 Node 拉起，并在结束时收好。</p>
+            </div>
+            <!-- ══ 截图槽位 02：启动状态页（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/deepseek-harness-app/02-startup-page.png" alt="启动状态页"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.992Z -->
+          </div>
+
+          <!-- 问题定位（全宽 callout） -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Observability / 问题定位</b>
+            <p class="callout-statement">失败信息与服务日志分别写入 macOS 日志目录，窗口问题、端口占用和 Node 进程失败可以分开排查。</p>
+            <div class="callout-note">公开仓库提供 Swift 外壳、配置模板与完整构建脚本，窗口与进程如何连接可被核验。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / GET STARTED</div>
+            <h2>第一次使用只保留必要的配置</h2>
+            <div class="section-deck">下载、拖入、双击、填一次 API Key；之后每次打开，环境随窗口一起启动。</div>
+          </div>
+
+          <!-- 图示 · 首次使用路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>First Run / 首次使用</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="首次使用流程">
+                <span class="flow-step"><span class="flow-index">01</span>下载 DMG</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>拖入「应用程序」</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>双击打开</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>等待本地服务</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>填入 API Key</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03.1 首次运行 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">03.1 / First Run</div>
+              <h3>只有 API Key 一步需要你亲自输入</h3>
+              <p>下载 DMG 后，把应用拖入「应用程序」，首次打开等待本地服务就绪，再到 Harness 设置中填入自己的 DeepSeek API Key。</p>
+              <p>应用运行数据保存在本机的 Harness 配置目录，API Key 不需要写进项目源码。之后每次打开应用，本地运行环境会随桌面窗口一起启动。</p>
+              <div class="scope-list">
+                <div><b>运行数据</b><span>本机 Harness 配置目录</span></div>
+                <div><b>API Key</b><span>只填在设置里，不进源码</span></div>
+                <div><b>再次打开</b><span>环境随窗口一起启动</span></div>
+              </div>
+            </div>
+            <!-- ══ 截图槽位 03：Harness 设置（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/deepseek-harness-app/03-harness-settings.png" alt="Harness 设置填入 API Key"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.992Z -->
+          </div>
+
+          <!-- 本地 / 远程边界说明 -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Local / 明确边界</b>
+            <p class="callout-statement">本地保存与离线推理是两件事：Harness 界面和服务运行在电脑上，模型请求仍会发送到用户配置的 API 提供方。</p>
+            <div class="callout-note">提示词、代码或其他请求内容应按该服务的隐私条款处理；封装未增加独立的密钥托管或企业访问控制层。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>v1.0 的公开交付与取舍</h2>
+            <div class="section-deck">截至 2026-08-21；交付物、构建目标与签名状态均可在公开仓库与 Release 核验。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>v1.0.0 公开交付 · 来源：GitHub Release 与公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Release</td><td class="data-table-ok">已发布</td><td class="data-table-mono">v1.0.0</td><td>GitHub Release</td></tr>
+                  <tr><td>arm64 DMG</td><td class="data-table-ok">提供</td><td class="data-table-mono">约 757 MB</td><td>Apple Silicon</td></tr>
+                  <tr><td>ZIP</td><td class="data-table-ok">提供</td><td class="data-table-mono">约 555 MB</td><td>便携包</td></tr>
+                  <tr><td>构建目标</td><td class="data-table-ok">arm64</td><td class="data-table-mono">arm64-apple-macosx14.0</td><td>macOS 14.0+</td></tr>
+                  <tr><td>签名</td><td class="data-table-risk">ad-hoc</td><td class="data-table-mono">无公证</td><td>首次运行可能需确认</td></tr>
+                  <tr><td>自动更新</td><td class="data-table-risk">不支持</td><td class="data-table-mono">—</td><td>后续版本手动下载替换</td></tr>
+                  <tr><td>平台覆盖</td><td class="data-table-risk">仅 Apple Silicon</td><td class="data-table-mono">—</td><td>不覆盖 Intel / Windows / Linux</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Swift / WKWebView / Node.js</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">发布包采用 ad-hoc 签名，没有 Developer ID 公证，也不支持自动更新；首次运行可能需要右键打开或在系统安全设置中确认，后续版本需要手动下载替换。</p>
+            <div class="callout-note">适合愿意接受这些发布限制、希望快速试用 Harness 的个人 Mac 用户 · 截至 2026-08-21</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 源码 / 构建脚本） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/deepseek-harness-app" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制下载地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/deepseek-harness-app/releases/tag/v1.0.0" aria-pressed="false" aria-label="复制下载地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制下载地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- ══ 决策与开始 ══ -->
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">适合愿意接受这些发布限制、希望快速试用 Harness 的个人 Mac 用户。</p>
+              <p>受管企业设备、严格软件供应链环境或需要跨平台部署的团队，应自行构建并完成签名审查。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/deepseek-harness-app/releases/tag/v1.0.0" target="_blank" rel="noopener">下载 DeepSeek Harness App</a>
+              </div>
+              <a class="btn" href="https://github.com/ZeroxZhang/deepseek-harness-app" target="_blank" rel="noopener">查看源码与构建脚本</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Agent Platform</small>
+              <h3>Zerox Agent</h3>
+              <p>复杂的事交给它，每一步都看得见、拦得住、续得上。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/zerox-agent">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — DeepSeek Harness App · No.13</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

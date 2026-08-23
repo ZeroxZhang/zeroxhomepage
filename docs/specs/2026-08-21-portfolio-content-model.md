@@ -1,7 +1,7 @@
 # 作品内容模型与前端适配方案
 
 - 日期：2026-08-21
-- 状态：schema v2 双语内容侧已采用，前端实现待框架选型后落地
+- 状态：schema v2 已采用；首页清单与同域静态作品页路由已落地
 - 适用范围：首页作品列表、作品筛选、`/work/<slug>` 详情页、SEO/分享元数据
 
 ## 1. 决策
@@ -31,6 +31,7 @@ content/works/<slug>.md       网站正式内容源
 
 - `content/works/index.yaml` 是作品注册表与分类字典。
 - `<slug>.md` frontmatter 提供中英文结构化字段，正文用 locale marker 提供两套完整详情页叙事。
+- `links[].show_on_homepage: true` 可把一个 `type: website` 链接提升为首页独立官网入口；每个作品最多一个。
 - 媒体资源不嵌入正文；未来在 frontmatter 增加 `media` 引用，前端根据资源类型选择组件。
 - 易变外部数据不在客户端临时抓取。若未来需要实时 Stars/版本，应在构建时或服务端更新，并保留失败回退值。
 
@@ -62,7 +63,7 @@ content/works/<slug>.md       网站正式内容源
 2. 解析每个 Markdown 的 YAML frontmatter 与正文 AST。
 3. 校验双语必填字段、locale marker、枚举值、链接协议、唯一主 CTA、`related` 引用和每种语言的标题层级。
 4. 按 `featured`、`weight`、`title` 生成首页列表。
-5. 按 slug 生成 `/work/<slug>` 静态路径或预渲染路径。
+5. 按 slug 生成 `/work/<slug>` 路径；当前实现通过经测试同步的 `lib/work-slugs.ts` 部署清单，将其连接到同域 `public/work/<slug>/index.html` 静态交付页，避免路由追踪无关仓库文件。
 6. 按当前 locale 从标题、摘要和未来的 `media.hero` 生成 SEO 与 Open Graph 元数据。
 
 不建议让作品文件直接成为框架路由文件。应由 `app/work/[slug]` 或等价适配层读取内容，这样路由、布局和正文可以独立演进。

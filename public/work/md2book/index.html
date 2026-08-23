@@ -1,0 +1,389 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  md2book · 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/md2book.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位槽位（data-shot），写明建议尺寸、拍摄内容与替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：「返回作品列表」暂以 # 占位；仓库与 CTA 用 https 绝对地址。
+  6. 按钮动效按「动词语法」分配（design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先（works-showcase/SKILL.md）：价值先行、结果动词、
+     说人话；版本号 / 测试数 / 技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/md2book">
+  <title>md2book · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="中文技术内容的正文写完后，封面、目录、主题、代码与分页自动排好，直接输出 A4 PDF。你只维护 Markdown 这一份源文件，不必在排版界面上反复调整。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/md2book/index.html · md2book 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/md2book.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#workflow">使用方法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/md2book" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 03</b><br>作品展示 · 文档出版工具</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">中文技术写作的成书工具 · Markdown → A4 PDF</div>
+          <h1>md2book</h1>
+        </div>
+        <div class="hero-note">
+          <strong>用 Markdown 写作，以一本中文书的形态交付</strong>
+          <p>中文技术内容的正文写完后，封面、目录、主题、代码与分页自动排好，直接输出 A4 PDF。你只维护 Markdown 这一份源文件，不必在排版界面上反复调整。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">Markdown</span>
+            <span class="tag">PDF</span>
+            <span class="tag">中文排版</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/md2book" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>用 md2book 出版</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Output</small><b>A4 PDF 成书</b></div>
+        <div><small>Structure</small><b>封面 + 自动目录</b></div>
+        <div><small>Themes</small><b>三套主题可选</b></div>
+        <div><small>Chinese</small><b>中文混排主路径</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：成品内页（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/md2book/01-page-sample.png" alt="md2book 生成的成品内页"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.310Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把「内容完成之后」的工作交给系统</h2>
+            <div class="section-deck">作者继续维护 Markdown，系统负责把它组织为带封面、目录、主题和阅读节奏的 A4 PDF。</div>
+          </div>
+
+          <p class="lead reveal">Markdown 很适合持续写作：纯文本、版本友好，也不要求作者在排版界面里反复调整格式。问题通常出现在<mark>交付阶段</mark>——网页里正常的标题、代码和表格进入固定纸张后，可能出现孤行、断页、目录错位和中文字体不协调。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>直接打印网页可以得到 PDF，却很难得到一本适合连续阅读的书。章节应该从合理位置开始，标题需要和后文保持连接，代码块不能随意断开，中文正文的行高与段距也需要稳定。</p>
+              <p>md2book 先将 Markdown 转为结构清楚的 HTML，再使用 Chromium 的打印排版能力处理页面。CSS break 规则针对章节、标题、代码块、表格和提示框进行约束——它没有重新发明一套分页引擎，而是把浏览器已有能力调校为适合技术书籍的出版流程。</p>
+            </div>
+            <aside class="pull">格式转换与书籍排版是两件事；md2book 做的是后者，为「内容完成之后」的工作提供出版层。<small>Publishing Layer</small></aside>
+          </div>
+
+          <!-- 图示 · 出版流程：Markdown → HTML → 分页 → PDF -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Publishing Pipeline / 出版流程</span><span>Markdown → HTML → Pagination → A4 PDF</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Source</small>Markdown 源文件</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>HTML</small>结构化 HTML</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Layout</small>Chromium 打印排版</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Output</small>A4 PDF</div>
+              </div>
+              <div class="dg-gate"><b>CSS break 规则</b> — 针对章节、标题、代码块、表格和提示框进行约束。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>封面、目录、主题与中文排版</h2>
+            <div class="section-deck">书籍结构随正文一起维护；三套主题对应三种阅读语境，中文技术内容是主路径。</div>
+          </div>
+
+          <!-- 02.1 书籍结构 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Structure</div>
+              <h3>书籍结构随正文一起维护</h3>
+              <p>封面为内容建立入口，自动目录提供全书导航。章节增删后，作者无需手工更新页码或重新排一遍目录。</p>
+              <p>对长篇技术内容来说，这项能力会直接改变维护成本：Markdown 继续作为单一正文源，导航和页码在输出时生成，减少正文版本与交付版本之间的分叉。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>Entry</small>封面</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Nav</small>自动目录</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Sync</small>章节增删 · 页码自动重排</div>
+              </div>
+            </div>
+            <!-- ══ 截图槽位 02：封面 + 自动目录（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/md2book/02-cover-toc.png" alt="md2book 生成的封面与目录页"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.310Z -->
+          </div>
+
+          <!-- 02.2 三套主题 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：三套主题对比（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/md2book/03-themes.png" alt="三套主题对比"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:30:03.310Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Themes</div>
+              <h3>三套主题对应三种阅读语境</h3>
+              <p>主题不只是替换颜色。字体、标题比例、段距、装饰和提示框会协同变化，作者可以改变出版气质，而不需要重写正文。</p>
+              <div class="scope-list">
+                <div><b>Minimal</b><span>技术手册 · 内部文档 · 低视觉干扰</span></div>
+                <div><b>Academic</b><span>研究资料 · 课程讲义 · 正式感</span></div>
+                <div><b>Playful</b><span>入门教程 · 年轻读者 · 活泼</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02.3 中文排版 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Chinese Typesetting</div>
+              <h3>中文技术内容是主路径</h3>
+              <p>中文字体、行高、标点节奏和中英文混排都被放在核心排版路径里。GFM、表格、代码高亮和 Callout 也保持一致的视觉层级。</p>
+              <p>这对于技术书尤其重要：代码和英文术语天然会打断中文文本的节奏，默认浏览器样式很少为这种混排做足准备。</p>
+            </div>
+            <!-- 图示 · 统一主题规则：正文 / 代码 / 辅助说明由同一套规则约束 -->
+            <div class="diagram" style="margin:0">
+              <div class="diagram-title"><span>Unified Typography / 统一主题规则</span><span>Body · Code · Notes</span></div>
+              <div class="diagram-body">
+                <div class="dg-row">
+                  <div class="dg-node"><small>Content</small>正文</div>
+                  <div class="dg-node"><small>Content</small>代码</div>
+                  <div class="dg-node"><small>Content</small>辅助说明</div>
+                  <span class="dg-arrow">→</span>
+                  <div class="dg-node dg-current"><small>Rules</small>统一主题规则</div>
+                </div>
+                <div class="dg-gate"><b>核心排版路径</b> — 中文字体 · 行高 · 标点节奏 · 中英文混排 · GFM · 表格 · 代码高亮 · Callout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>从源文件到成品</h2>
+            <div class="section-deck">五步走完一次转换；浏览器、Node.js 与 Playwright 各司其职。</div>
+          </div>
+
+          <!-- 图示 · 典型路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>From Source to PDF / 从源文件到成品</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="从源文件到成品的流程">
+                <span class="flow-step"><span class="flow-index">01</span>组织 Markdown</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>选择主题</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>生成 HTML</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>输出 A4 PDF</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>检查调整</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>使用 Markdown 组织章节、代码、表格和提示信息。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>选择适合读者与内容的主题。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>运行转换流程，生成 HTML 中间文档。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>Playwright 启动 Chromium，按照打印 CSS 输出 A4 PDF。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>检查少量特殊页面，必要时调整源内容或主题规则。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">浏览器承担成熟的 CSS 渲染，Node.js 组织转换，Playwright 负责稳定输出；主题也因此能继续用熟悉的 HTML/CSS 迭代。<small>Division of Labor</small></div>
+              <div class="aside-tags">
+                <span class="tag">技术手册</span>
+                <span class="tag">研究资料</span>
+                <span class="tag">课程讲义</span>
+                <span class="tag">入门教程</span>
+              </div>
+            </aside>
+          </div>
+
+          <!-- 选择边界：md2book 还是 md2pdf_v2（全宽 callout） -->
+          <div class="callout callout-data reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">md2book 还是 md2pdf_v2</b>
+            <p class="callout-statement">md2book 面向有章节结构的长篇内容，强调主题系统、目录和整体阅读体验；md2pdf_v2 使用 ReportLab，运行面更小，更适合一次性文档和低依赖环境。</p>
+            <div class="callout-note">两者服务不同交付条件——按内容长度、环境限制和版式要求选择，不需要把所有 PDF 任务塞进同一种工具。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开状态与边界</h2>
+            <div class="section-deck">截至 2026-08-21；社区数据与能力覆盖可在公开仓库核对。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：公开仓库记录</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>社区关注</td><td class="data-table-info">公开</td><td class="data-table-mono">60 Stars</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>社区关注</td><td class="data-table-info">公开</td><td class="data-table-mono">47 Forks</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>封面</td><td class="data-table-ok">已提供</td><td class="data-table-mono">✓</td><td>内容入口</td></tr>
+                  <tr><td>自动目录</td><td class="data-table-ok">已提供</td><td class="data-table-mono">✓</td><td>页码自动生成</td></tr>
+                  <tr><td>主题系统</td><td class="data-table-ok">已提供</td><td class="data-table-mono">3 套</td><td>Minimal · Academic · Playful</td></tr>
+                  <tr><td>中文排版</td><td class="data-table-ok">已提供</td><td class="data-table-mono">✓</td><td>GFM · 表格 · 代码高亮 · Callout</td></tr>
+                  <tr><td>公开测试 / CI</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>无公开测试与 CI</td></tr>
+                  <tr><td>正式 Release</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>无正式 Release</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Node.js / Playwright / HTML / CSS</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">项目没有公开测试、CI 或正式 Release，因此不同输入仍可能需要人工检查，尤其是超长代码、复杂表格和特殊字体环境。</p>
+            <div class="callout-note">md2book 提供的是一个更可靠的成书起点，不对所有 Markdown 承诺零调整输出。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/md2book" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/md2book" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">内容已经是一份 Markdown 时，成书工作可以交给它：封面、目录、主题与分页在输出时生成，你只需检查少量特殊页面。</p>
+              <p>如果只是需要快速交付的单篇文档，或运行环境更受限，可以先看 md2pdf_v2——它使用 ReportLab，运行面更小。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/md2book" target="_blank" rel="noopener">获取 md2book</a>
+              </div>
+              <a class="btn" href="/work/md2pdf-v2">想先了解轻量方案：md2pdf_v2</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Content Publishing</small>
+              <h3>huashu-bookwriter</h3>
+              <p>把一本书的结构、声音和质量标准写进 AI 工作流。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/huashu-bookwriter">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Content Publishing</small>
+              <h3>md2pdf_v2</h3>
+              <p>一句话确认风格，把 Markdown 交付成中文友好的 PDF。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/md2pdf-v2">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Utilities</small>
+              <h3>EPUB/PDF to TXT Converter</h3>
+              <p>一批电子书放进去，带走可以搜索、分析和继续整理的纯文本。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/epub-pdf-to-txt-converter">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — md2book · No.03</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

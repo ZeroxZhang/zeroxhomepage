@@ -105,7 +105,7 @@
 | huashu-bookwriter 仓库 | https://github.com/ZeroxZhang/huashu-bookwriter | 核验于 2026-08-21 | 高（个人官方仓库） |
 | OnePager 仓库 | https://github.com/ZeroxZhang/onepager | 核验于 2026-08-21 | 高（个人官方仓库） |
 | 量化项目仓库集合 | https://github.com/ZeroxZhang?tab=repositories | 核验于 2026-08-21 | 高（个人官方仓库；具体仓库链接已进入对应内容文件） |
-| 灵眸 | https://zrcfzy.top | 核验于 2026-08-21 | 中高（公开产品页实测；认证与真实分析未端到端测试） |
+| 灵眸 | https://zrcfzy.top/ | 用户于 2026-08-23 确认为现行官网 | 中高（官网地址来自项目所有者；认证与真实分析未端到端测试） |
 | SILENZIO | https://silenzio.cn | 核验于 2026-08-21 | 中高（公开产品页实测；真实转录未测试） |
 | Z-Slides | https://slides.zeroxzhang.cc | 核验于 2026-08-21 | 中高（公开产品页实测；真实模型生成未测试） |
 | 过敏原地图 | https://github.com/ZeroxZhang/algmap | 核验于 2026-08-21 | 高（源码一手证据，确认随机示意数据） |

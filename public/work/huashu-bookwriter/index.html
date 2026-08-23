@@ -1,0 +1,406 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  huashu-bookwriter · 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/huashu-bookwriter.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  8. 本作品为 Agent Skill（无图形界面），截图按可拍摄的真实界面预留 3 个：
+     技能目录结构、章节模板文件、PDF 出版样张；没有把握的界面宁可少留。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/huashu-bookwriter">
+  <title>huashu-bookwriter · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把已有知识写成一本完整的技术书：先定书籍蓝图和章节任务，再统一风格、逐章审校，最后导出 PDF。你负责定方向和最终取舍，重复的整理、统一与检查交给它。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/huashu-bookwriter/index.html · huashu-bookwriter 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/huashu-bookwriter.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#workflow">工作流</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/huashu-bookwriter" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 02</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">长篇技术写作 · 写书助手</div>
+          <h1>huashu<br><em>bookwriter</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把已有知识写成结构、声音和质量都统一的书</strong>
+          <p>把已有知识写成一本完整的技术书：先定书籍蓝图和章节任务，再统一风格、逐章审校，最后导出 PDF。你负责定方向和最终取舍，重复的整理、统一与检查交给它。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">AI 写作</span>
+            <span class="tag">技术出版</span>
+            <span class="tag">多智能体</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/huashu-bookwriter" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>获取 huashu-bookwriter</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Blueprints</small><b>三类书型蓝图</b></div>
+        <div><small>Chapter Roles</small><b>三类章节模板</b></div>
+        <div><small>Style DNA</small><b>作者声音可检查</b></div>
+        <div><small>Quality Gates</small><b>单章 + 全书双检</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：技能目录结构（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/huashu-bookwriter/01-skill-tree.png" alt="huashu-bookwriter 目录结构"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:33:01.117Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>长篇写作需要「全书状态」</h2>
+            <div class="section-deck">一条 Prompt 能约束眼前的段落，却很难照看几十章之间的关系。</div>
+          </div>
+
+          <p class="lead reveal">用 AI 写出一章已经很容易。难题出现在第十章之后：概念开始重复，难度忽高忽低，示例与主线脱节，原本清晰的作者声音也被模型的通用表达逐渐冲淡。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>一条 Prompt 能约束眼前的段落，很难照看几十章之间的关系。作者不得不重复解释背景，再花大量时间清理重复内容、统一术语和调整节奏。</p>
+              <p>huashu-bookwriter 面向的是整本书，而不是单次生成。它把读者定位、书型、章节职责、语言风格、质量门和出版交付整理为一套可执行协议。模型可以更换，项目成员可以增加，但全书仍然围绕同一份蓝图工作。</p>
+            </div>
+            <aside class="pull">这套 Skill 将隐性的编辑判断显式化：每一章开始前都知道自己在全书中的位置，写完后既接受局部检查，也回到全书层面检查一致性。<small>Book-level State</small></aside>
+          </div>
+
+          <!-- 图示 · 五层系统对象链：从想法到交付经过哪几层 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Five-layer System / 五层系统</span><span>Idea → Delivery</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Layer 01</small>书籍蓝图</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Layer 02</small>章节模板</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Layer 03</small>风格 DNA</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Layer 04</small>质量门</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Layer 05</small>出版交付</div>
+              </div>
+              <div class="dg-gate"><b>作者决定权 · AUTHOR CALL</b> — 人在关键节点保持决定权；AI 承担资料整理、初稿生产和重复检查。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>五层系统，把一本书从想法推进到交付</h2>
+            <div class="section-deck">每层各管一类问题：阅读路径、章节任务、作者声音、质检与出版。</div>
+          </div>
+
+          <!-- 02.1 书籍蓝图 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Book Blueprint</div>
+              <h3>书籍蓝图确定阅读路径</h3>
+              <p>系统提供「从入门到精通」「橙皮书」「快速指南」三类蓝图。它们对应不同的读者基础、篇幅节奏和学习目标。</p>
+              <p>目录不再只是主题列表，而是一条设计过的能力成长路径。</p>
+            </div>
+            <div class="dg-mini">
+              <div class="dg-node"><small>Blueprint</small>从入门到精通</div>
+              <div class="dg-node"><small>Blueprint</small>橙皮书</div>
+              <div class="dg-node"><small>Blueprint</small>快速指南</div>
+              <span class="dg-arrow">→</span>
+              <div class="dg-node dg-current"><small>Path</small>能力成长路径</div>
+            </div>
+          </div>
+
+          <!-- 02.2 章节模板 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 02：章节模板（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/huashu-bookwriter/02-chapter-template.png" alt="章节模板文件"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:33:01.117Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Chapter Templates</div>
+              <h3>章节模板明确每一章的任务</h3>
+              <p>概念讲解、实战教程和深度分析采用不同结构。</p>
+              <div class="scope-list">
+                <div><b>概念章</b><span>建立理解</span></div>
+                <div><b>实战章</b><span>带读者完成任务</span></div>
+                <div><b>分析章</b><span>比较机制与取舍</span></div>
+              </div>
+              <p>模板约束的是章节功能，不是统一所有写法。</p>
+            </div>
+          </div>
+
+          <!-- 02.3 风格 DNA -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Style DNA</div>
+              <h3>风格 DNA 保存作者声音</h3>
+              <p>短句比例、第一人称、数字引用、术语偏好和禁用表达被整理成可检查规则。</p>
+              <p>风格因此可以被讨论、修改和复用，不必等到终稿阶段再凭感觉逐句修正。</p>
+            </div>
+            <div class="aside-tags">
+              <span class="tag">短句比例</span>
+              <span class="tag">第一人称</span>
+              <span class="tag">数字引用</span>
+              <span class="tag">术语偏好</span>
+              <span class="tag">禁用表达</span>
+            </div>
+          </div>
+
+          <!-- 02.4 质量门 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.4 / Quality Gates</div>
+              <h3>质量门同时检查局部与全局</h3>
+              <p>单章审校关注论点、解释、示例和语言；全书审校继续寻找概念重复、章节冲突、术语漂移和难度断层。评审结果进入下一轮修改，而不是只生成一份笼统建议。</p>
+            </div>
+            <div class="scope-list">
+              <div><b>单章审校</b><span>论点 · 解释 · 示例 · 语言</span></div>
+              <div><b>全书审校</b><span>概念重复 · 章节冲突 · 术语漂移 · 难度断层</span></div>
+            </div>
+          </div>
+
+          <!-- 02.5 出版交付 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：PDF 出版样张（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/huashu-bookwriter/03-pdf-output.png" alt="导出的 PDF 样张"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:33:01.118Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.5 / Publishing</div>
+              <h3>出版流程连接内容与成品</h3>
+              <p>Pandoc 与 XeLaTeX 负责 PDF 交付。多 Agent 脚手架可以拆分资料、写作、审校和排版角色，并记录阶段与任务状态。</p>
+              <div class="rule-note">脚手架提供编排结构，本身不包含 Agent 执行引擎。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 工作流 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>一次完整工作流</h2>
+            <div class="section-deck">五个步骤，从定义读者到 PDF 出版；人在关键节点保持决定权。</div>
+          </div>
+
+          <!-- 图示 · 典型路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Run / 典型路径</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次完整工作流">
+                <span class="flow-step"><span class="flow-index">01</span>定义读者</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>选择书型</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>建立风格 DNA</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>分章生成评审</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>质检 + PDF 出版</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>定义目标读者、主题范围和交付形态。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>选择书型，确认全书蓝图与章节顺序。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>建立风格 DNA，并为不同章节分配任务模板。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>分章生成、评审和修改，同时维护术语与引用。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>运行全书质量检查，进入 PDF 出版流程。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">人在关键节点保持决定权。AI 承担资料整理、初稿生产和重复检查，作者负责方向、内容责任和最终取舍。<small>Division of Labor</small></div>
+              <div class="aside-tags">
+                <span class="tag">书籍蓝图</span>
+                <span class="tag">章节模板</span>
+                <span class="tag">风格 DNA</span>
+                <span class="tag">质量门</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE &amp; BOUNDARY</div>
+            <h2>社区采用与当前边界</h2>
+            <div class="section-deck">截至 2026-08-21；公开仓库记录为 154 Stars、86 Forks，是当前作品集中社区采用度最高的项目。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态 · 来源：公开仓库记录</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>社区采用</td><td class="data-table-ok">已公开</td><td class="data-table-mono">154 Stars / 86 Forks</td><td>作品集中采用度最高</td></tr>
+                  <tr><td>书型蓝图</td><td class="data-table-ok">已覆盖</td><td class="data-table-mono">3 类</td><td>从入门到精通 · 橙皮书 · 快速指南</td></tr>
+                  <tr><td>章节模板</td><td class="data-table-ok">已覆盖</td><td class="data-table-mono">3 类</td><td>概念 · 实战 · 分析</td></tr>
+                  <tr><td>质量检查</td><td class="data-table-ok">已覆盖</td><td class="data-table-mono">单章 + 全书</td><td>局部与全局两层</td></tr>
+                  <tr><td>PDF 导出</td><td class="data-table-ok">已支持</td><td class="data-table-mono">Pandoc + XeLaTeX</td><td>出版交付</td></tr>
+                  <tr><td>编排脚手架</td><td class="data-table-ok">已覆盖</td><td class="data-table-mono">多角色</td><td>不含 Agent 执行引擎</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / Pandoc / XeLaTeX</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">方法来自对已出版作品与公开资料的逆向学习。公开项目不代表相关原作者对风格还原的授权或背书，也无法保证每个主题都能自动产出出版级内容。</p>
+            <div class="callout-note">它提供的是一套可审查的生产系统，最终质量仍由资料、模型与作者共同决定 · 截至 2026-08-21</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/huashu-bookwriter" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/huashu-bookwriter" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="callout reveal" style="margin-top:var(--space-8)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">huashu-bookwriter 更适合已经拥有主题、经验或课程素材的人。它不能替代作者的专业判断，也不会凭空生成可信案例；它解决的是把已有知识组织成长篇交付，并减少团队协作中的结构漂移。</p>
+            <div class="callout-note">对只写一篇文章，完整流程可能显得过重</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">它的优势会在章节增多、协作者增加、版本反复迭代时逐渐显现。</p>
+              <p>如果你已经有一堆素材、经验或课程，缺的是一条稳定的生产线，这套 Skill 值得一试。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/huashu-bookwriter" target="_blank" rel="noopener">安装 huashu-bookwriter</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Publishing</small>
+              <h3>md2book</h3>
+              <p>用 Markdown 写作，以一本中文书的形态交付。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/md2book">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Editing</small>
+              <h3>Editor</h3>
+              <p>在改写句子之前，先定位论点、读者与表达究竟在哪一层失效。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/editor">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Learning</small>
+              <h3>paper-to-course</h3>
+              <p>把论文中的理解障碍，重新设计成一门交互课程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/paper-to-course">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — huashu-bookwriter · No.02</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

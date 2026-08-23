@@ -13,6 +13,7 @@ export default defineConfig([
       "components/originkit/**",
       "node_modules/**",
       "out/**",
+      "public/work/**",
     ],
   },
 ]);

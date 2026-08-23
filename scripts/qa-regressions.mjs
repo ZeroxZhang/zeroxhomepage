@@ -76,6 +76,100 @@ const browser = await chromium.launch();
   record("分类作品排序", firstWork?.trim() === "huashu-bookwriter", `first=${firstWork?.trim()}`);
   await page.keyboard.press("Escape");
 
+  await page.getByRole("button", { name: "查看分类：已上线产品" }).click();
+  const workLinks = await page.locator('[role="dialog"] a[data-work-detail]').evaluateAll((links) =>
+    links.map((link) => link.getAttribute("href")),
+  );
+  record(
+    "作品清单连接同域详情页",
+    workLinks.length > 0 && workLinks.every((href) => /^\/work\/[a-z0-9-]+$/.test(href ?? "")),
+    JSON.stringify(workLinks),
+  );
+  const websiteLinks = await page.locator('[role="dialog"] a[data-work-website]').evaluateAll((links) =>
+    links.map((link) => [
+      link.getAttribute("data-work-website"),
+      link.getAttribute("href"),
+      link.getAttribute("target"),
+      link.getAttribute("rel"),
+      link.getAttribute("aria-label"),
+    ]),
+  );
+  record(
+    "三个产品显示安全的独立官网入口",
+    JSON.stringify(websiteLinks) ===
+      JSON.stringify([
+        ["lingmou", "https://zrcfzy.top/", "_blank", "noopener noreferrer", "访问官网: 灵眸 LingMou"],
+        ["silenzio", "https://silenzio.cn", "_blank", "noopener noreferrer", "访问官网: 大音希声 SILENZIO"],
+        ["z-slides", "https://slides.zeroxzhang.cc", "_blank", "noopener noreferrer", "访问官网: Z-Slides"],
+      ]),
+    JSON.stringify(websiteLinks),
+  );
+  await page.keyboard.press("Escape");
+
+  await page.getByRole("button", { name: "查看分类：全部作品" }).click();
+  const allWorkLinks = await page.locator('[role="dialog"] a[data-work-detail]').evaluateAll((links) =>
+    links.map((link) => link.getAttribute("href")),
+  );
+  record(
+    "全部作品均连接唯一详情页",
+    allWorkLinks.length === 35 &&
+      new Set(allWorkLinks).size === 35 &&
+      allWorkLinks.every((href) => /^\/work\/[a-z0-9-]+$/.test(href ?? "")),
+    `count=${allWorkLinks.length}, unique=${new Set(allWorkLinks).size}`,
+  );
+  await page.keyboard.press("Escape");
+
+  const detailPage = monitor(await context.newPage(), "work-detail");
+  await detailPage.goto(`${BASE_URL}/#work`, { waitUntil: "networkidle" });
+  await detailPage.getByRole("button", { name: "查看分类：已上线产品" }).click();
+  const detailResponsePromise = detailPage.waitForResponse(
+    (response) =>
+      response.url() === `${BASE_URL}/work/lingmou` &&
+      response.request().resourceType() === "document",
+  );
+  await detailPage.locator('[data-work-detail="lingmou"]').click();
+  const detailResponse = await detailResponsePromise;
+  await detailPage.waitForLoadState("networkidle");
+  const detailState = await detailPage.evaluate(() => ({
+    title: document.title,
+    canonical: document.querySelector('link[rel="canonical"]')?.getAttribute("href"),
+    stylesheetLoaded: [...document.styleSheets].some((sheet) =>
+      sheet.href?.includes("/work-assets/site/site.css"),
+    ),
+  }));
+  record(
+    "作品详情路由可直接访问",
+    detailResponse?.status() === 200 &&
+      detailPage.url() === `${BASE_URL}/work/lingmou` &&
+      detailState.title.includes("灵眸") &&
+      detailState.canonical === "https://zeroxzhang.cc/work/lingmou" &&
+      detailState.stylesheetLoaded,
+    JSON.stringify({ status: detailResponse?.status(), url: detailPage.url(), ...detailState }),
+  );
+  await detailPage.waitForTimeout(500);
+  await detailPage.evaluate(() => {
+    window.__canvasOps = { background: 0, floor: 0, pixel: 0 };
+  });
+  await detailPage.waitForTimeout(500);
+  const detailCanvasOps = await detailPage.evaluate(() => window.__canvasOps);
+  record(
+    "作品详情 Canvas 空闲停止",
+    detailCanvasOps.pixel < 50,
+    JSON.stringify(detailCanvasOps),
+  );
+  await detailPage.close();
+
+  const missingDetailPage = await context.newPage();
+  const missingDetailResponse = await missingDetailPage.goto(`${BASE_URL}/work/not-a-real-work`, {
+    waitUntil: "domcontentloaded",
+  });
+  record(
+    "未知作品详情返回 404",
+    missingDetailResponse?.status() === 404,
+    `status=${missingDetailResponse?.status()}`,
+  );
+  await missingDetailPage.close();
+
   await page.getByRole("button", { name: "联系我" }).click();
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");

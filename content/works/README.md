@@ -32,6 +32,8 @@ English copy.
 
 - `zh-CN` 与 `en` 都提供完整的核心定位、事实、限制和行动入口。
 - 中文字段使用默认名称，英文列表字段使用 `_en` 后缀；实际字段以 schema spec 和校验器为准。
+- `links[].show_on_homepage: true` 表示在首页作品清单中额外显示该官网入口；每个作品最多一个，且仅用于 `type: website` 的链接。
+- `lib/work-slugs.ts` 是部署路由使用的无文件系统清单；测试会强制它与 `index.yaml` 的作品注册表保持一致，避免路由构建追踪无关仓库文件。
 - locale 应在 Markdown 渲染前切分，避免把两种正文同时交给页面再隐藏。
 - 内容保持框架无关，不嵌入 JSX、组件 import 或样式类。
 - 动态事实标注 `facts_as_of`；公开内容不得泄露私密材料、凭证或本机路径。

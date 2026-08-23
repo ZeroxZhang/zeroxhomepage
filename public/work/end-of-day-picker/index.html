@@ -1,0 +1,380 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  end-of-day-picker.html · End-of-day Picker 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/end-of-day-picker.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+      后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+      design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+      radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+      cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+      tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+      结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  8. 金融类作品：证据区写明适用范围与风险边界，不构成投资建议、不提供收益承诺。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/end-of-day-picker">
+  <title>End-of-day Picker · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="尾盘前，把约五千只 A 股经七层规则一步步缩到最多五只候选，数据是否可用、当天市场环境、何时停手、次日如何退出都写在同一条流程里。适合研究筛选与风险控制的开发者与个人研究者；它是实验性系统，不构成投资建议。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/end-of-day-picker/index.html · End-of-day Picker 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/end-of-day-picker.md · facts_as_of 2026-08-21
+  作品编号：No. 14（按 content/works/index.yaml 顺序，作品总数 35）
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+      替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#method">使用方法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/end-of-day-picker" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 14</b><br>作品展示 · Python 量化研究系统</div>
+        <div class="mast-right">
+          <b>Status — Experiment</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">A 股尾盘研究 · 个人研究者</div>
+          <h1>End-of-day<br><em>Picker</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把五千只 A 股缩到最多五只，退出规则一并写清</strong>
+          <p>尾盘前，把约五千只 A 股经七层规则一步步缩到最多五只候选，数据是否可用、当天市场环境、何时停手、次日如何退出都写在同一条流程里。适合研究筛选与风险控制的开发者与个人研究者；它是实验性系统，不构成投资建议。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">A 股</span>
+            <span class="tag">量化筛选</span>
+            <span class="tag">风险控制</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/end-of-day-picker" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>查看筛选系统</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-3">
+        <div><small>Universe</small><b>约 5000 只 → 最多 5 只</b></div>
+        <div><small>Regime</small><b>牛 / 震荡 / 熊 · 熔断停筛</b></div>
+        <div><small>Exit Plan</small><b>移动止盈 · 梯度退出 · 强制平仓</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：运行报告（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/end-of-day-picker/01-run-report.png" alt="End-of-day Picker 运行报告"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.260Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>尾盘强弱，不直接等于可交易的信号</h2>
+            <div class="section-deck">从约五千只标的开始，到最多五只候选；筛选、拒绝、暂停和退出都在同一条流程里。</div>
+          </div>
+
+          <p class="lead reveal">尾盘信号容易被当日涨幅放大。一只股票临近收盘走强，可能代表趋势延续，也可能来自<mark>流动性、短时情绪或数据异常</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>只按排名挑出「最强的几只」，无法回答当天是否适合开仓、入选依据是否可靠，以及判断出错后如何退出。</p>
+              <p>End-of-day Picker 是一套实验性的 A 股尾盘研究系统。它从约五千只标的开始，经过七层规则逐步缩小范围，最终最多保留五只候选。筛选、拒绝、暂停和次日退出被放在同一条流程中，使每次结果都能回到数据和规则复盘。</p>
+            </div>
+            <aside class="pull">报告呈现各层筛选结果、排除统计与最终候选依据——不只有一个排名，还保留筛选过程和市场说明。<small>Reviewable Output</small></aside>
+          </div>
+
+          <!-- 图示 · 七层漏斗：决策顺序 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>七层漏斗 / Decision Order</span><span>约 5000 只 → 最多 5 只</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>全市场</small>数据可用性</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>规则</small>基础条件</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>个股</small>相对特征</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>环境</small>市场环境</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>确认</small>候选确认</div>
+              </div>
+              <div class="dg-gate"><b>二次验证 · 退出计划</b> — 候选附带移动止盈、梯度退出与强制平仓时间表；最多保留五只。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>七层规则，把筛选顺序说清楚</h2>
+            <div class="section-deck">漏斗、阈值、数据校验、熔断与退出计划，各自解决一类问题。</div>
+          </div>
+
+          <!-- 02.1 漏斗与决策顺序 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Funnel</div>
+              <h3>七层漏斗解决的是决策顺序</h3>
+              <p>系统先处理全市场数据的可用性，再进入基础条件、个股相对特征、市场环境与候选确认等阶段。每一层只承担有限职责，报告呈现各层筛选结果、排除统计与最终候选依据。</p>
+              <p>部分阈值依据个股近 60 日分布计算百分位，减少用同一绝对标准衡量不同波动特征的偏差。市场状态被划分为牛市、震荡或熊市，并据此调整筛选强度。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>市场状态</small>牛 / 震荡 / 熊</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>据此</small>调整筛选强度</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>熔断</small>停止给出候选</div>
+              </div>
+              <p class="dg-caption">大跌、跌停潮或连续亏损等条件出现时，熔断规则允许系统停止给出候选。</p>
+            </div>
+            <!-- ══ 截图槽位 02：漏斗排除统计（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/end-of-day-picker/02-funnel-stats.png" alt="七层漏斗排除统计"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.260Z -->
+          </div>
+
+          <!-- 02.2 数据校验 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Data Checks</div>
+              <h3>数据异常不能自动变成交易信号</h3>
+              <p>免费市场数据存在延迟、字段变化和短时不可用。实现中配置 AKShare、东方财富、新浪与腾讯等来源，按优先级承担主备与 fallback；候选判断另有交叉验证规则。</p>
+            </div>
+            <aside class="pull">冗余提高的是研究连续性，不代表来源之间已完成同字段一致性比对。<small>Redundancy ≠ Consistency</small></aside>
+          </div>
+
+          <!-- 数据边界（全宽 callout） -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Data Boundary / 数据边界</b>
+            <p class="callout-statement">数据冗余提高的是研究连续性，不代表不同来源已经完成同字段一致性比对；进入真实决策前仍要检查时间戳、字段口径和异常值。</p>
+            <div class="callout-note">数据异常不能自动变成交易信号</div>
+          </div>
+
+          <!-- 02.3 进入即退出 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Exit Plan</div>
+              <h3>进入规则从一开始就连接退出计划</h3>
+              <p>候选还要经过二次验证，并附带移动止盈、梯度退出和强制平仓时间表。这样可以在信号出现时同步记录风险边界，避免第二天再临时决定如何处理亏损或冲高回落。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>候选</small>二次验证</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>退出</small>移动止盈 · 梯度退出</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>时间表</small>强制平仓</div>
+              </div>
+            </div>
+            <aside class="pull">风险边界在信号出现时同步写下，而不是亏损后再临时决定。<small>Exit at Entry</small></aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="method">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / METHOD</div>
+            <h2>一次典型运行如何展开</h2>
+            <div class="section-deck">从检查数据与市场状态，到次日按退出规则复盘，而不是只统计是否上涨。</div>
+          </div>
+
+          <!-- 图示 · 典型路径：四步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Run / 典型运行</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次典型运行流程">
+                <span class="flow-step"><span class="flow-index">01</span>检查数据与市场状态</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>执行七层过滤</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>输出候选与风险提示</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>次日按退出规则复盘</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>检查当天数据与市场状态。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>执行七层过滤，逐步缩小候选范围。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>输出候选、各层排除统计和风险提示。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>次日根据预先写下的退出规则复盘，而不是只统计是否上涨。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">系统保留的是可复查的筛选结果，不是逐标的完整审计日志。<small>Reviewable Output</small></div>
+              <div class="aside-tags">
+                <span class="tag">A 股</span>
+                <span class="tag">量化筛选</span>
+                <span class="tag">风险控制</span>
+              </div>
+            </aside>
+          </div>
+
+          <div class="callout reveal">
+            <b class="callout-label">Who It Is For / 适合谁</b>
+            <p class="callout-statement">适合希望研究筛选顺序、拒绝条件和风险控制如何共同工作的开发者或个人研究者。若目标是获得一份可直接跟单的股票清单，当前证据和工程成熟度都不足以支持这一用途。</p>
+            <div class="callout-note">研究工具，不是跟单清单</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已公开的代码覆盖与已知缺口</h2>
+            <div class="section-deck">截至 2026-08-21；代码覆盖与未完成项均以公开仓库为准。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开代码覆盖与已知缺口 · 来源：公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>全市场数据收集</td><td class="data-table-ok">已覆盖</td><td>公开代码</td></tr>
+                  <tr><td>七层筛选</td><td class="data-table-ok">已覆盖</td><td>公开代码</td></tr>
+                  <tr><td>市场分类</td><td class="data-table-ok">已覆盖</td><td>牛 / 震荡 / 熊</td></tr>
+                  <tr><td>数据冗余</td><td class="data-table-ok">已覆盖</td><td>多源主备 + fallback</td></tr>
+                  <tr><td>熔断规则</td><td class="data-table-ok">已覆盖</td><td>大跌 / 跌停潮 / 连续亏损</td></tr>
+                  <tr><td>退出矩阵</td><td class="data-table-ok">已覆盖</td><td>移动止盈 / 梯度退出 / 强制平仓</td></tr>
+                  <tr><td>live 板块映射</td><td class="data-table-risk">未完成</td><td>仍为空</td></tr>
+                  <tr><td>特殊 fallback 别名</td><td class="data-table-risk">未完成</td><td>新闻 / 扫描 / 现货回退未注册</td></tr>
+                  <tr><td>测试 / CI / 回测 / 实盘</td><td class="data-table-risk">无</td><td>仓库未公开</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / AKShare / pandas / NumPy</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">适用范围 / 风险边界</b>
+            <p class="callout-statement">当前版本适合阅读、修改规则和开展方法实验，不能直接视为生产交易系统；项目不连接券商，不构成投资建议，也不提供收益承诺。历史数据中的可用信号不等于未来可成交结果——滑点、涨跌停、流动性、数据延迟和突发事件都可能改变执行。</p>
+            <div class="callout-note">截至 2026-08-21 · 以公开仓库为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/end-of-day-picker" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/end-of-day-picker" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- CTA + related（标准页并入证据摘要节） -->
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果你是开发者或个人研究者，想研究筛选顺序、拒绝条件和风险控制如何共同工作，这份公开代码可以作为方法实验的起点。它不连接券商，不构成投资建议，也不提供收益承诺。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/end-of-day-picker" target="_blank" rel="noopener">查看筛选系统</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / 量化研究</small>
+              <h3>A-share Tailpicker</h3>
+              <p>在 14:20 建立预选，再用 14:50 的第二次扫描挑战每一个尾盘信号。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/a-share-tailpicker">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / 量化研究</small>
+              <h3>Invest Signal Kit</h3>
+              <p>用一份本地检查单，在买入前记录理由、仓位与风险边界。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/invest-signal-kit">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / 已上线产品</small>
+              <h3>灵眸 LingMou</h3>
+              <p>把四类信号放到一起，看清依据再决定。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/lingmou">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — End-of-day Picker · No.14</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

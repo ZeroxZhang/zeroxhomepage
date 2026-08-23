@@ -1,0 +1,369 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  text-card-generator/index.html · Text Card Generator 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/text-card-generator.md（facts_as_of 2026-08-21），
+     未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：主链接（在线应用 / 公开仓库）用 https 绝对地址；
+     「返回作品列表」暂以 # 占位。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制主链接）→ dotted-offset 翻阅（关联作品）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；技术栈与工程数据（无测试 / CI / Release 等）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/text-card-generator">
+  <title>Text Card Generator · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把摘录、短文或自己的句子，配好纸张与字体、调好行距与留白，做成一张高清的文字卡片。所见即所得，调完直接下载 PNG 分享，不需要注册账号，也不需要把内容交给生成模型。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/text-card-generator/index.html · Text Card Generator 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/text-card-generator.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#workflow">用法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://cards.zeroxzhang.cc" target="_blank" rel="noopener">制作</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 26</b><br>作品展示 · Web 应用</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">浏览器里的文字卡片编辑器 · 所见即所得</div>
+          <h1>Text Card<br><em>Generator</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把一段摘录，排成干净、高清、可分享的文字卡片</strong>
+          <p>把摘录、短文或自己的句子，配好纸张与字体、调好行距与留白，做成一张高清的文字卡片。所见即所得，调完直接下载 PNG 分享，不需要注册账号，也不需要把内容交给生成模型。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">文字卡片</span>
+            <span class="tag">所见即所得</span>
+            <span class="tag">图片导出</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://cards.zeroxzhang.cc" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>制作文字卡片</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-3 hero-strip-3">
+        <div><small>编辑</small><b>所见即所得 · 同屏预览</b></div>
+        <div><small>纸张</small><b>5 种纸张 · 中文字体</b></div>
+        <div><small>导出</small><b>4× 高清 PNG</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/text-card-generator/01-main-editor.png" alt="Text Card Generator 主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:33:01.114Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>从纯文字到一张值得读完的卡片</h2>
+            <div class="section-deck">所见即所得的编辑器：选纸张、调字体、控制留白，再导出高清 PNG。</div>
+          </div>
+
+          <p class="lead reveal">一段摘录直接发成纯文字，往往<mark>缺少阅读边界</mark>；放进通用海报模板，又容易让装饰压过内容。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>Text Card Generator 是一个在浏览器中运行的所见即所得编辑器。左侧负责输入与排版，右侧实时显示最终卡片。用户可以从便签、纯色、横线、网格与点阵纸张中选择，再根据内容调整字体、间距、缩进与对齐，完成后导出高清 PNG。</p>
+              <p>它处理的是更接近编辑设计的细节：行长、行距、字体、纸张纹理和留白共同决定读者是否愿意停下来读完，而不是简单地把字放进图片。</p>
+            </div>
+            <aside class="pull">文字卡片需要处理的细节更接近编辑设计：行长、行距、字体、纸张纹理和留白共同决定读者是否愿意停下来读完。<small>Editorial Design</small></aside>
+          </div>
+
+          <!-- 图示 · 编辑器组成：一次编辑经过哪些部分 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Editor Composition / 编辑器组成</span><span>Input → Preview → Export</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>左栏</small>输入与排版</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>右栏</small>实时预览</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>导出</small>高清 PNG</div>
+              </div>
+              <div class="dg-gate"><b>所见即所得 · WYSIWYG</b> — 预览与导出使用同一个视觉对象，调成什么样，导出就是什么样。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>排版、纸张与导出，各做一件事</h2>
+            <div class="section-deck">三组能力构成一条完整闭环：编辑与实时预览、纸张与字体、预览与导出一致。</div>
+          </div>
+
+          <!-- 02.1 所见即所得编辑器 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / WYSIWYG Editor</div>
+              <h3>编辑和预览放在同一屏，改完立刻看到</h3>
+              <p>左侧负责输入与排版，右侧实时显示最终卡片。<strong>字号、行高、字间距、段间距、首行缩进和对齐方式</strong>都可以在这里调整。所见即所得意味着预览就是成品，不需要先导出再核对。</p>
+              <p>编辑和预览在同一页面完成，不要求先注册账号，也不需要把内容交给生成模型。</p>
+            </div>
+            <!-- ══ 截图槽位 02：排版控制（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/text-card-generator/02-typography-controls.png" alt="排版控制面板"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:33:01.115Z -->
+          </div>
+
+          <!-- 02.2 纸张与字体 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：纸张与字体（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/text-card-generator/03-paper-fonts.png" alt="纸张与字体选择"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:33:01.115Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Paper &amp; Type</div>
+              <h3>用纸张表达语境，用字体服务阅读</h3>
+              <p>五种纸张样式可以表达不同内容语境：<strong>横线</strong>更接近手写笔记，<strong>网格和点阵</strong>适合结构化摘录，<strong>纯色</strong>则减少背景干扰；便签折角与明暗模式提供更明确的物理质感。</p>
+              <p>字体列表包含 14 个 Google Fonts family、3 个随项目托管的中文字体，以及 2 个系统 fallback 选择；pinyin-pro 可以根据中文作者名生成拼音辅助信息。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>Google Fonts</small>14 family</div>
+                <span class="dg-arrow">+</span>
+                <div class="dg-node"><small>中文字体</small>3 个托管</div>
+                <span class="dg-arrow">+</span>
+                <div class="dg-node"><small>系统 fallback</small>2 个选择</div>
+              </div>
+              <p class="dg-caption">字体数量提供选择空间，但授权、网络加载与跨设备一致性仍需要在具体使用环境中检查。</p>
+            </div>
+          </div>
+
+          <!-- 02.3 预览与导出一致 -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Preview = Export / 同一个视觉对象</b>
+            <p class="callout-statement">卡片预览不是单独绘制的近似图；导出捕获同一份预览，让背景、排版与装饰尽可能保持一致。</p>
+            <div class="callout-note">导出 scale 设为 4，在高分屏或社交平台二次压缩后，为文字边缘保留更多分辨率余量。</div>
+          </div>
+
+          <!-- 图示 · 预览到导出：同一个视觉对象的链路 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Preview → Export / 同一视觉对象</span><span>3 Steps</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>01</small>预览 DOM</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>html2canvas 捕获</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>03</small>4× scale PNG</div>
+              </div>
+              <div class="dg-gate"><b>一致性边界</b> — 受浏览器渲染、字体加载和 html2canvas 支持范围影响，关键成品应在实际下载图片中确认。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / HOW TO USE</div>
+            <h2>三步完成一张卡片</h2>
+            <div class="section-deck">输入内容，选纸张与字体并实时调整，最后下载 PNG；全程在同一个页面里完成。</div>
+          </div>
+
+          <!-- 图示 · 三步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Workflow / 三步流程</span><span>3 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="三步完成一张卡片">
+                <span class="flow-step"><span class="flow-index">01</span>输入摘录</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>选纸张与字体</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">03</span>下载 PNG</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>输入摘录、短文或自己的句子。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>选择纸张和字体，并通过实时预览调整行距与留白。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>下载 PNG。编辑和预览在同一页面完成，无需注册，也不需要把内容交给生成模型。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">适合的内容包括读书摘录、短笔记、文章片段和社交平台文字图。<small>Fit Tasks</small></div>
+              <div class="aside-tags">
+                <span class="tag">读书摘录</span>
+                <span class="tag">短笔记</span>
+                <span class="tag">文章片段</span>
+                <span class="tag">社交文字图</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>当前状态与使用边界</h2>
+            <div class="section-deck">截至 2026-08-21；在线应用可访问，已形成完整闭环，但工程验证仍有缺口。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：内容文件与公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>在线应用</td><td class="data-table-ok">可访问</td><td class="data-table-mono">live</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>功能闭环</td><td class="data-table-ok">完整</td><td class="data-table-mono">编辑 · 预览 · 导出</td><td>多纸张 / 多字体 / 高清导出</td></tr>
+                  <tr><td>自动化测试</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>公开仓库未包含</td></tr>
+                  <tr><td>CI</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>公开仓库未包含</td></tr>
+                  <tr><td>Release</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>公开仓库未包含</td></tr>
+                  <tr><td>跨浏览器像素一致性</td><td class="data-table-risk">未验证</td><td class="data-table-mono">—</td><td>尚无系统验证结果</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：React 18 / TypeScript / Vite / Tailwind CSS 3 / Zustand</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">预览与导出依赖浏览器渲染、字体加载和 html2canvas 支持范围；不同系统、浏览器版本或远程字体状态可能造成行宽与换行差异，关键成品应在实际下载图片中确认。</p>
+            <div class="callout-note">字体授权、网络加载与跨设备一致性需在使用环境中检查；长文、复杂图文混排、批量模板生产与多人品牌资产并非当前产品目标。截至 2026-08-21 · 以公开仓库为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/text_card_generator" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制主链接 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://cards.zeroxzhang.cc" aria-pressed="false" aria-label="复制制作地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制制作地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- 决策与 CTA -->
+          <div class="callout reveal" style="margin-top:var(--space-9)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">一张值得读完的文字卡片，来自对行长、行距、字体与留白的具体控制，而不是装饰的堆叠。</p>
+            <div class="callout-note">Text Card Generator 把这段编辑设计放进浏览器，几步完成，无需注册。</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果你只想把一段摘录或短句做成干净的文字图片，这套流程不需要注册、不需要生成模型，几步就能拿到成品。</p>
+              <p>想先核对导出逻辑，公开仓库就在旁边；更轻量的表达工具还有 Minimalism Note Card Generator 与 X Card。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://cards.zeroxzhang.cc" target="_blank" rel="noopener">制作文字卡片</a>
+              </div>
+              <a class="btn" href="https://github.com/ZeroxZhang/text_card_generator" target="_blank" rel="noopener">查看 GitHub 仓库</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Web Products</small>
+              <h3>Minimalism Note Card Generator</h3>
+              <p>写下一段话，几步带走一张克制、干净的分享卡片。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/minimalism-note-card-generator">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Visual Design</small>
+              <h3>X Card</h3>
+              <p>不截真实账号，也能做出干净、可控的 X 风格文字卡片。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/x-card">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Text Card Generator · No.26</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  pdf-watermark-remover.html · PDF Watermark Remover 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/pdf-watermark-remover.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/pdf-watermark-remover">
+  <title>PDF Watermark Remover · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="它只针对一种可识别的水印：把反复平铺在页面里的那层水印去掉，而不是整页重做。处理前先备份原件、在副本上运行，再抽查正文、图片、表格和链接。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/pdf-watermark-remover/index.html · PDF Watermark Remover 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/pdf-watermark-remover.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/pdf-watermark-remover" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 30</b><br>作品展示 · Python 工具</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">PDF 水印清理 · 本地运行</div>
+          <h1>PDF <em>Watermark</em><br>Remover</h1>
+        </div>
+        <div class="hero-note">
+          <strong>去掉 PDF 里的水印，尽量保住正文、图片和表格</strong>
+          <p>它只针对一种可识别的水印：把反复平铺在页面里的那层水印去掉，而不是整页重做。处理前先备份原件、在副本上运行，再抽查正文、图片、表格和链接。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">PDF</span>
+            <span class="tag">本地处理</span>
+            <span class="tag">文档处理</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/pdf-watermark-remover" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>获取脚本</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-2 hero-strip-2">
+        <div><small>Preserve</small><b>不整页重做，正文、图片、表格尽量保留</b></div>
+        <div><small>Scope</small><b>只针对一种可识别的平铺水印</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：处理前后对照（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/pdf-watermark-remover/01-before-after.png" alt="处理前后对照"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.259Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>拆掉水印层，而不是整页重做</h2>
+            <div class="section-deck">直接删图片可能误伤正文，逐页重做又会破坏文本、表格和图表；这里走一条有意收窄的路。</div>
+          </div>
+
+          <p class="lead reveal">部分 PDF 把水印保存为<mark>反复调用的 Form XObject</mark>（一种被页面反复引用的对象），平铺在正文后方。直接删除图片对象可能误伤正文，逐页重做又会破坏文本、表格和图表。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>PDF Watermark Remover 针对这一种可识别结构，在资源与内容流层面定位调用并移除对应水印层。脚本基于 PyMuPDF，核心约百行。</p>
+              <p>它优先保留已有页面对象，避免把整页重新渲染成图片。这样的范围适合结构一致、重复调用同一水印对象的文档。</p>
+            </div>
+            <aside class="pull">只拆一种可识别的水印层，而不是把整份 PDF 重新渲染一遍。<small>Narrow Path</small></aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>一条有意收窄的处理路径</h2>
+            <div class="section-deck">先备份、在副本上运行、再抽查结果；目标是尽量保留已有内容，而不是承诺识别所有水印。</div>
+          </div>
+
+          <!-- 图示 · 使用路径：三步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Usage / 使用路径</span><span>3 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次典型处理流程">
+                <span class="flow-step"><span class="flow-index">01</span>备份原文件</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-current"><span class="flow-index">02</span>在副本上运行脚本</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">03</span>抽查首页 · 复杂页 · 末页</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">01 / Locate &amp; Remove</small>
+              <h2 class="editorial-card-title">定位并移除那层水印</h2>
+              <p class="editorial-card-body">在资源与内容流层面定位调用，移除对应的水印层，只针对一种可识别结构。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">02 / Preserve</small>
+              <h2 class="editorial-card-title">尽量保留已有页面对象</h2>
+              <p class="editorial-card-body">优先保留文本、图片、表格和图表，避免把整页重新渲染成图片。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE</div>
+            <h2>证据有限，边界清楚</h2>
+            <div class="section-deck">截至 2026-08-21；公开仓库只有实现，没有 fixture、自动测试、CI 或正式 Release。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>实现</td><td class="data-table-ok">已提供</td><td class="data-table-mono">Python / PyMuPDF</td><td>公开仓库</td></tr>
+                  <tr><td>公开 fixture</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>没有公开 fixture</td></tr>
+                  <tr><td>自动测试</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>没有自动测试</td></tr>
+                  <tr><td>CI</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>没有公开 CI</td></tr>
+                  <tr><td>正式 Release</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>没有正式 Release</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / PyMuPDF</p>
+
+          <div class="callout callout-data reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Evidence / 证据边界</b>
+            <p class="callout-statement">「尽量保留其他内容」是设计目标，并非经大规模文档集证明的兼容性结论。</p>
+            <div class="callout-note">截至 2026-08-21 · 以公开仓库为准</div>
+          </div>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-6)">
+            <b class="callout-label">Boundary / 范围与授权</b>
+            <p class="callout-statement">该脚本不承诺识别所有水印：加密 PDF、扫描图像中的水印、已与正文合并的图形、不同页面使用不同对象的文件，都可能无法处理或产生误删。请只处理自己拥有或已获明确授权修改的文档。</p>
+            <div class="callout-note">当水印承担权利声明、追踪或合规用途时，应先获得权利方许可；重要文件应保留原件并在副本上操作。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/pdf-watermark-remover" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/pdf-watermark-remover" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- ══ 决策与开始（并入证据节）════ -->
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">它适合结构一致、重复调用同一水印对象的文档；重要文件请保留原件，并在副本上操作。</p>
+              <p>即使输出可以打开，也应检查文字选择、图片、表格、图表、链接与页数——处理成功不等于文档无损。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/pdf-watermark-remover" target="_blank" rel="noopener">获取脚本</a>
+              </div>
+              <a class="btn" href="/work/md2pdf-v2">Markdown 转 PDF：md2pdf_v2</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Content Publishing</small>
+              <h3>md2pdf_v2</h3>
+              <p>一句话确认风格，把 Markdown 交付成中文友好的 PDF。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/md2pdf-v2">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Utilities</small>
+              <h3>EPUB/PDF to TXT Converter</h3>
+              <p>一批电子书放进去，带走可以搜索、分析和继续整理的纯文本。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/epub-pdf-to-txt-converter">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — PDF Watermark Remover · No.30</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

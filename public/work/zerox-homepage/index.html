@@ -1,0 +1,273 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  zerox-homepage.html · 旧个人主页与博客 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/zerox-homepage.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：主链接与仓库使用 https 绝对地址；关联作品用相对路径（本页 related 为空，无关联卡片）。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级引导）→
+     key-cap 命令（打开仓库）→ cube-flip 切换（复制旧主页地址 / 已复制）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；版本号、测试数与技术栈后置到证据区。
+  8. 本页为 legacy 档案作品：适用范围与一处已知故障在证据区用 callout-risk 写明。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/zerox-homepage">
+  <title>旧个人主页与博客 · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="旧主页用极简门户连接博客、GitHub、Instagram 和小红书，博客里的长文可以归档、搜索、订阅 RSS。你现在仍能打开这些页面，它们也是新网站重建时要继承的内容起点。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/zerox-homepage/index.html · 旧个人主页与博客 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/zerox-homepage.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  6. 本页为 legacy 档案：一处已知故障写入证据区 callout-risk。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://www.zeroxzhang.cc" target="_blank" rel="noopener">访问</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 35</b><br>作品展示 · 个人网站</div>
+        <div class="mast-right">
+          <b>Status — Legacy</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">个人网站 · 数字档案 · 2018 年至今</div>
+          <h1>旧个人主页与博客</h1>
+        </div>
+        <div class="hero-note">
+          <strong>2018 年至今的文章，现在还能一篇篇翻开重读</strong>
+          <p>旧主页用极简门户连接博客、GitHub、Instagram 和小红书，博客里的长文可以归档、搜索、订阅 RSS。你现在仍能打开这些页面，它们也是新网站重建时要继承的内容起点。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">个人网站</span>
+            <span class="tag">博客</span>
+            <span class="tag">数字档案</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://www.zeroxzhang.cc" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>访问旧主页</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="https://blog.zeroxzhang.cc" target="_blank" rel="noopener"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>阅读博客</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 本页为 compact 级，hero-strip 收成 2 格（页面级差异，覆盖共享 4 栏默认值） -->
+      <div class="hero-strip hero-strip-2 hero-strip-2">
+        <div><small>Access</small><b>主页与博客仍可访问</b></div>
+        <div><small>Archive</small><b>长文可归档 · 可搜索</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：旧主页极简门户（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/zerox-homepage/01-legacy-homepage.png" alt="旧主页极简门户"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.246Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>从当下入口，变成一份可以被翻阅的时间档案</h2>
+            <div class="section-deck">从 2018 年开始，这套主页与博客持续连接公开身份、社交账号和长文内容。</div>
+          </div>
+
+          <p class="lead reveal">个人网站既是当下入口，也会逐渐成为<mark>时间档案</mark>：它们记录了早期视觉偏好、关注主题与发布方式。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>旧主页以极简门户连接 Blog、GitHub、Instagram 与小红书，矩阵画布和鼠标轨迹构成主要视觉识别；博客保存数字营销、数据分析和产品运营等长期文章。访客可以从轻量身份页进入更完整的内容记录。</p>
+              <p>这两套页面也是新网站重建时需要继承和重新整理的内容基础——哪些公开链接与内容应被继承，哪些交互和失效代码应停止沿用，都要从这里交代清楚。</p>
+            </div>
+            <aside class="pull">保存的不是技术方案，而是早期视觉偏好、关注主题与发布方式。<small>What it preserves</small></aside>
+          </div>
+
+          <!-- 图示 · 结构：一个入口连接博客与社交，博客是另一套独立系统 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Legacy Structure / 结构</span><span>一个入口 → 两套系统</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node dg-current"><small>旧主页</small>极简门户</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>连接</small>Blog · GitHub · Instagram · 小红书</div>
+              </div>
+              <div class="dg-gate"><b>博客 · 独立系统</b> — 数字营销 / 数据分析 / 产品运营 · 归档 / 搜索 / RSS / Markdown 输出</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>一个入口，两套长期独立的系统</h2>
+            <div class="section-deck">旧主页负责连接，博客负责沉淀；两者长期分离，也各自留下了需要整理的痕迹。</div>
+          </div>
+
+          <!-- 02.1 一个轻量入口 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / One Doorway</div>
+              <h3>一个轻量入口，接住博客与社交账号</h3>
+              <p>旧主页以极简门户连接 Blog、GitHub、Instagram 与小红书，矩阵画布和鼠标轨迹构成主要视觉识别。访客可以从轻量身份页进入更完整的内容记录。</p>
+              <p>博客保存数字营销、数据分析和产品运营等长期文章，并提供归档、搜索、RSS 与 Markdown 输出。</p>
+              <div class="scope-list">
+                <div><b>门户</b><span>Blog · GitHub · Instagram · 小红书</span></div>
+                <div><b>博客</b><span>归档 · 搜索 · RSS · Markdown</span></div>
+              </div>
+              <div class="rule-note">从轻量身份页进入更完整的内容记录，是这个旧入口仍然有用的地方。</div>
+            </div>
+          </div>
+
+          <!-- 02.2 两套系统 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 02：博客归档页（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/zerox-homepage/02-blog-archive.png" alt="博客归档页"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.246Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Two Systems</div>
+              <h3>仍可访问，但不再代表当前技术方向</h3>
+              <p>主页运行在 GitHub Pages，以静态 HTML 与 JavaScript 为主；博客采用 GitBook / Next.js 体系。两者在视觉、导航与部署上长期分离。</p>
+              <p>主页还保留了固定桌面布局、过时版权年份和偏重鼠标输入的交互。截至 2026-08-21，主页与博客均可公开访问，但更适合作为历史档案，不是新站的技术基线。</p>
+              <div class="rule-note">公开可访问不等于技术方向：这套旧站的价值在于被保存，而不是被照搬。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE</div>
+            <h2>可访问的状态，与一处已知故障</h2>
+            <div class="section-deck">截至 2026-08-21；主页与博客均可公开访问，但自建访问统计接口已失效。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开可核验状态 · 来源：公开主页、博客与源码</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>主页</td><td class="data-table-ok">可访问</td><td class="data-table-mono">GitHub Pages</td><td>静态 HTML + JavaScript</td></tr>
+                  <tr><td>博客</td><td class="data-table-ok">可访问</td><td class="data-table-mono">GitBook / Next.js</td><td>长期文章归档</td></tr>
+                  <tr><td>自建访问接口 /api/visit</td><td class="data-table-risk">失效</td><td class="data-table-mono">404</td><td>页面无 visit-count 节点</td></tr>
+                  <tr><td>可见访问数字</td><td class="data-table-risk">第三方</td><td class="data-table-mono">不蒜子</td><td>依赖外部统计服务</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / JavaScript / GitHub Pages / GitBook</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">主页与博客均可公开访问，但更适合作为历史档案，不是新站的技术基线；自建访问接口 /api/visit 已失效，可见访问数字依赖第三方「不蒜子」统计。</p>
+            <div class="callout-note">截至 2026-08-21 · 统计连续性与第三方依赖应在迁移时重新评估。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/zeroxhomepage" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制旧主页地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://www.zeroxzhang.cc" aria-pressed="false" aria-label="复制旧主页地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制旧主页地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- 决策 + CTA -->
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">这套旧站的价值在于交代迁移起点：哪些公开链接与内容应被继承，哪些交互和失效代码应停止沿用。</p>
+              <p>新网站会重新统一个人介绍、作品与博客入口，同时保存旧页面和文章的可访问历史。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://www.zeroxzhang.cc" target="_blank" rel="noopener">访问旧主页</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — 旧个人主页与博客 · No.35</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

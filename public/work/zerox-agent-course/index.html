@@ -1,0 +1,381 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  zerox-agent-course.html · Zerox Agent Course 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/zerox-agent-course.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级引导）→
+     key-cap 命令（打开仓库）→ cube-flip 切换（复制课程地址 / 已复制）→
+     dotted-offset 翻阅（关联作品索引）→ tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（技术栈 / 部署记录）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/zerox-agent-course">
+  <title>Zerox Agent Course · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="一门在浏览器里跑的互动源码课：跟着一次任务，把 Zerox Agent 从头到尾走一遍。动画、拖拽和测验在每一步检查你的理解，学完你能带着具体文件回到源码继续核验。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/zerox-agent-course/index.html · Zerox Agent Course 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/zerox-agent-course.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#modules">模块</a>
+          <a href="#workflow">学习路径</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://zeroxzhang.github.io/zerox-agent-course/" target="_blank" rel="noopener">开始课程</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 19</b><br>作品展示 · 互动源码教程</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">浏览器里的互动源码课 · 中文</div>
+          <h1>Zerox<br><em>Agent</em> Course</h1>
+        </div>
+        <div class="hero-note">
+          <strong>跟着一次任务，看懂 Agent 怎么运转、在哪停、怎么恢复</strong>
+          <p>一门在浏览器里跑的互动源码课：跟着一次任务，把 Zerox Agent 从头到尾走一遍。动画、拖拽和测验在每一步检查你的理解，学完你能带着具体文件回到源码继续核验。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">源码学习</span>
+            <span class="tag">AI Agent</span>
+            <span class="tag">互动教程</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://zeroxzhang.github.io/zerox-agent-course/" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>开始课程</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="https://github.com/ZeroxZhang/zerox-agent-course" target="_blank" rel="noopener"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>查看源码</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Delivery</small><b>浏览器里直接打开</b></div>
+        <div><small>Modules</small><b>六个模块逐层展开</b></div>
+        <div><small>Interaction</small><b>动画 · 拖拽 · 测验</b></div>
+        <div><small>Setup</small><b>无需安装即可学</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：课程主页（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/zerox-agent-course/01-home.png" alt="Zerox Agent Course 课程主页"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.306Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>先从目录树里走出来，换成一张运行地图</h2>
+            <div class="section-deck">大型 Agent 仓库名词很多，却说不清消息经过了谁、在哪里暂停、失败后如何恢复。</div>
+          </div>
+
+          <p class="lead reveal">大型桌面 Agent 仓库同时包含界面进程、后台服务、模型适配器、工具执行、权限判断和持久化。<mark>从目录树开始，名词很多，却说不清消息经过了谁、在哪里暂停、失败后如何恢复。</mark></p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>若阅读从目录树或入口文件开始，很快会遇到大量名词，却仍说不清用户按下回车后，消息经过了谁、在哪里暂停、失败后如何恢复。Zerox Agent Course 是一门浏览器内运行的中文互动源码课：它以一次任务的生命周期为主线，把 Zerox Agent 的界面、Electron 进程边界、Agent Loop、授权、扩展能力和存储恢复串成一张运行地图，再把每个概念带回具体文件与代码片段。</p>
+              <p>直接交付的是一套可以反复浏览的系统心智模型：谁持有状态、谁能执行工具、审批在哪发生、恢复依赖哪些记录。每个模块都可以独立返回重看，单页结构也便于在分享讨论时指向同一套上下文。</p>
+            </div>
+            <aside class="pull">它不是把架构压成一张静态总览，而是让「看过代码」和「理解调用关系」能够被区分。<small>Reading Map</small></aside>
+          </div>
+
+          <!-- 图示 · 运行地图：课程沿一次任务的生命周期串起的阅读主线 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Reading Map / 运行地图</span><span>一次任务的生命周期为主线</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>01</small>界面</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>Electron 进程边界</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03</small>Agent Loop</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>04</small>授权</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>05</small>扩展能力</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>06</small>存储恢复</div>
+              </div>
+              <div class="dg-gate"><b>阅读主线 · RUNTIME PATH</b> — 课程把界面、进程边界、Agent Loop、授权、扩展能力与存储恢复串成一条沿任务生命周期的阅读路线，再把每个概念带回具体文件。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="modules">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / MODULES</div>
+            <h2>六个模块，按理解依赖逐层展开</h2>
+            <div class="section-deck">从认识 Zerox Agent 到存储恢复，每章都建立在前一章的理解之上。</div>
+          </div>
+
+          <div class="prose reveal" style="margin-bottom:40px">
+            <p>课程从「认识 Zerox Agent」和消息全链路开始，随后介绍 Electron 三层角色、Preload 白名单与依赖注入装配。第三模块进入 Think—Act—Observe 循环、统一模型接口和上下文压缩；第四模块聚焦 Shell 命令分析、Permission Engine、审批与 Goal Mode。最后两章覆盖内置工具、Skill、MCP、子智能体，以及 JSON/JSONL、SQLite、Checkpoint、事件总线和执行轨迹。</p>
+          </div>
+
+          <!-- 图示 · 六模块依赖顺序 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Six Modules / 依赖顺序</span><span>M01 → M06</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="六个模块按理解依赖展开">
+                <span class="flow-step"><span class="flow-index">M01</span>认识 + 消息链路</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">M02</span>Electron 三层 + Preload</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">M03</span>Think—Act—Observe</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">M04</span>Permission Engine + 审批</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">M05</span>工具 · Skill · MCP</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">M06</span>JSON · SQLite · 轨迹</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02.1 互动形式 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Interactive Forms</div>
+              <h3>互动不是装饰，是把「看过」和「理解」分开</h3>
+              <p>可步进的数据流动画显示消息如何移动，角色扮演式聊天展示模块协作，架构组件可点击查看职责。这些互动把抽象的组件关系变成可以一步步观察的行为。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>Agent Loop</small>Think 思考</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Agent Loop</small>Act 调用工具</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Agent Loop</small>Observe 观察结果</div>
+              </div>
+              <p class="dg-caption">第三模块进入 Think—Act—Observe 循环：模型思考 → 调用工具 → 观察结果，再回到思考。</p>
+            </div>
+            <!-- ══ 截图槽位 02：数据流动画（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/zerox-agent-course/02-data-flow.png" alt="数据流动画"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.306Z -->
+          </div>
+
+          <!-- 02.2 练习 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：练习（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/zerox-agent-course/03-exercises.png" alt="练习界面"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T14:30:03.306Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Exercises</div>
+              <h3>在继续之前，先做出判断</h3>
+              <p>选择题、拖拽匹配、权限漏洞挑战和结业测验要求读者在继续前作出判断。练习服务于真实的误解，不承担装饰页面的任务，因此「看过代码」和「理解调用关系」能够被区分。</p>
+              <div class="rule-note">每个模块都可以独立返回重看——遇到薄弱点，回到相应动画重放即可。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 学习路径 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>一条低摩擦的学习工作流</h2>
+            <div class="section-deck">跟着消息走一遍，再用动画与练习把理解钉牢，最后回到源码核验。</div>
+          </div>
+
+          <!-- 图示 · 学习路径：四步流程 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Study Path / 学习路径</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一条典型学习路径">
+                <span class="flow-step"><span class="flow-index">01</span>追踪一条消息</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>按导航点推进</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>操作动画 / 完成练习</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>回到源码核验</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>打开在线课程后，先跟随第一章追踪一条消息，再用导航点按模块推进；遇到关键机制时操作动画或完成练习，最后带着页面给出的文件名与调用链回到源码核验。</p>
+              <p>课程由分模块 HTML、共享 CSS 与原生 JavaScript 构成，build.sh 将各章节组装成一个静态 index.html，无需安装 Electron 或启动 Zerox Agent 即可学习。</p>
+            </div>
+            <aside class="pull">它适合第一次阅读 Agent 工程的开发者，也适合希望理解桌面 Agent 安全与可恢复设计的产品和技术人员。<small>Who It's For</small></aside>
+          </div>
+
+          <!-- ══ 截图槽位 04：架构组件可点击（手动替换点）══════════════════
+               替换方法：删除 <div class="shot-empty">…</div>，放入
+               <img class="shot-img" src="/work-assets/screenshots/zerox-agent-course/04-architecture.png" alt="架构组件可点击"> -->
+      <!-- SHOT-SLOT 04 ADMIN-SKIPPED 2026-08-22T14:30:03.306Z -->
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>已发布的学习快照与边界</h2>
+            <div class="section-deck">截至 2026-08-21；公开仓库与 GitHub Pages 可访问，但没有 Release 或独立测试。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态 · 来源：公开仓库与部署记录</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>课程内容</td><td class="data-table-ok">已公开</td><td class="data-table-mono">6 个模块 · 互动脚本</td><td>公开仓库提供</td></tr>
+                  <tr><td>GitHub Pages 部署</td><td class="data-table-ok">成功</td><td class="data-table-mono">部署记录成功</td><td>在线页面可直接访问</td></tr>
+                  <tr><td>公开 Release</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>无公开 Release</td></tr>
+                  <tr><td>自动内容同步</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>无</td></tr>
+                  <tr><td>独立测试套件</td><td class="data-table-risk">未提供</td><td class="data-table-mono">—</td><td>针对课程行为的独立测试</td></tr>
+                  <tr><td>上游 commit 锁定</td><td class="data-table-risk">未锁定</td><td class="data-table-mono">—</td><td>未锁定所讲解的 Zerox Agent 上游 commit</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / CSS / JavaScript / Shell（build.sh 组装为单个静态 index.html）</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">这是一份 2026 年 7 月发布的源码学习快照，不能代替最新 API 文档或当前分支的逐行说明；源码发生变化时，文件路径和实现细节可能漂移。</p>
+            <div class="callout-note">截至 2026-08-21 · 以公开仓库为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/zerox-agent-course" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制课程地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://zeroxzhang.github.io/zerox-agent-course/" aria-pressed="false" aria-label="复制课程地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制课程地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- 决策与开始 -->
+          <div class="callout reveal" style="margin-top:var(--space-8)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">如果你想读一个大型 Agent 仓库，又不愿从目录树里硬啃名词，这门课给你一条按任务流、信任边界和状态恢复建立的阅读地图。</p>
+            <div class="callout-note">适合第一次阅读 Agent 工程的开发者，以及想理解安全与可恢复设计的产品和技术人员</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">直接交付的是一套可以反复浏览的系统心智模型：谁持有状态、谁能执行工具、审批在哪发生、恢复依赖哪些记录。</p>
+              <p>按任务流、信任边界和状态恢复建立的阅读地图，即使在源码变化后，仍可作为进入仓库的起点。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://zeroxzhang.github.io/zerox-agent-course/" target="_blank" rel="noopener">开始课程</a>
+              </div>
+              <a class="btn" href="/work/zerox-agent">先了解 Zerox Agent 本身</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Agent Platform</small>
+              <h3>Zerox Agent</h3>
+              <p>复杂的事交给它，每一步都看得见、拦得住、续得上。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/zerox-agent">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Learning</small>
+              <h3>Nanobot Course</h3>
+              <p>用六章互动练习，重建一次 Agent 从消息到工具的执行过程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/nanobot-course">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Content</small>
+              <h3>paper-to-course</h3>
+              <p>把难懂的论文，变成能一步步看懂的互动课程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/paper-to-course">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Zerox Agent Course · No.19</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

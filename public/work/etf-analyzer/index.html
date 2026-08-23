@@ -1,0 +1,294 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  etf-analyzer · ETF Analyzer 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/etf-analyzer.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），本页仅 1 个槽位，写明了建议尺寸、拍摄内容和
+     替换方法，后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。本页无 hero 次级链接，故不使用 light-glass。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/etf-analyzer">
+  <title>ETF Analyzer · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="输入一只 ETF 或主题，它把投资逻辑、产品风险和入场时机拆成三张评分卡，逐项核对证据再下结论。最后你得到的是适用场景、主要风险和仍需人工确认的问题，而不是一个说不清来源的分数。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/etf-analyzer/index.html · ETF Analyzer 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/etf-analyzer.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/etf-analyzer" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 18</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">ETF 尽调助手 · 量化研究</div>
+          <h1>ETF<br><em>Analyzer</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>看清一只 ETF 买的是什么，再决定现在要不要出手</strong>
+          <p>输入一只 ETF 或主题，它把投资逻辑、产品风险和入场时机拆成三张评分卡，逐项核对证据再下结论。最后你得到的是适用场景、主要风险和仍需人工确认的问题，而不是一个说不清来源的分数。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">ETF</span>
+            <span class="tag">投资研究</span>
+            <span class="tag">Agent Skill</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/etf-analyzer" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装 ETF Analyzer</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-2">
+        <div><small>Scorecards</small><b>主题 · 产品 · 时点 三张卡</b></div>
+        <div><small>Output</small><b>结论带证据等级与风险提示</b></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>别只看近期涨跌，先查清买到的是什么</h2>
+            <div class="section-deck">名称相似的 ETF 可能跟踪不同指数、采用不同复制方式，暴露于不同的行业集中度、汇率与流动性风险。</div>
+          </div>
+
+          <p class="lead reveal">近期涨幅只能描述过去，无法回答两个问题：<mark>「买到的是什么」</mark>以及<mark>「现在是否适合行动」</mark>。ETF Analyzer 把这两个问题拆开处理，让研究不必被压成一个分数。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>名称相似的 ETF 可能跟踪不同指数，采用不同复制方式，也可能暴露于截然不同的行业集中度、汇率与流动性风险。单看一条近期收益曲线，看不出这些差异。</p>
+              <p>ETF Analyzer 用三张评分卡分别回答不同问题：主题卡检查投资逻辑、持续条件与证据质量；产品卡比较指数、持仓、费率、规模、流动性和跟踪方式；时点卡观察趋势、波动与入场条件。三张卡均越过门槛时，工具才会形成行动候选。</p>
+            </div>
+            <aside class="pull">研究被拆成三个可以各自复查的问题，而不是一句说不清来源的分数。<small>Three Scorecards</small></aside>
+          </div>
+
+          <!-- 图示 · 三张评分卡：三张卡均越过门槛，才形成行动候选 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Three Scorecards / 三张评分卡</span><span>Theme · Product · Timing</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Card 01 · 主题卡</small>投资逻辑 · 持续条件 · 证据质量</div>
+                <div class="dg-node"><small>Card 02 · 产品卡</small>指数 · 持仓 · 费率 · 规模 · 流动性 · 跟踪方式</div>
+                <div class="dg-node"><small>Card 03 · 时点卡</small>趋势 · 波动 · 入场条件</div>
+              </div>
+              <div class="dg-gate"><b>门槛 · GATE</b> — 三张卡均越过各自门槛时，工具才会形成行动候选。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力精简 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>三张卡分开查，结论可以复查</h2>
+            <div class="section-deck">从标的到结论的路径，每一步都标出证据等级与数据质量。</div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Card 01 / Theme</small>
+              <h2 class="editorial-card-title">主题卡</h2>
+              <p class="editorial-card-body">检查投资逻辑、持续条件与证据质量。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Card 02 / Product</small>
+              <h2 class="editorial-card-title">产品卡</h2>
+              <p class="editorial-card-body">比较指数、持仓、费率、规模、流动性和跟踪方式。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Card 03 / Timing</small>
+              <h2 class="editorial-card-title">时点卡</h2>
+              <p class="editorial-card-body">观察趋势、波动与入场条件。</p>
+            </article>
+          </div>
+
+          <!-- 02.1 从标的到可复查结论 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / From Ticker to Verdict</div>
+              <h3>从标的到可复查结论</h3>
+              <p>提供 ETF 或主题后，Agent 先确认研究范围，再收集证据、运行评分与技术检查，最后输出适用场景、主要风险和仍需人工确认的问题。</p>
+              <div class="flow" aria-label="研究路径" style="margin-top:22px">
+                <span class="flow-step"><span class="flow-index">01</span>确认研究范围</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>收集证据</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>评分与技术检查</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>输出结论</span>
+              </div>
+              <p>基础信息、行情、持仓、指数和新闻由不同来源分工采集；MA、MACD、RSI、KDJ、布林带、ATR、OBV、MFI 与策略回测脚本服务于时点研究。结论同时标记证据等级与数据质量，报告会提示数据延迟、成本、前视偏差和过拟合风险。</p>
+              <div class="rule-note">时点研究回答的是「现在是否适合行动」，不是对未来的收益承诺。</div>
+            </div>
+            <!-- ══ 截图槽位 01：结论输出（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/etf-analyzer/01-verdict-output.png" alt="ETF Analyzer 结论输出"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:37:00.642Z -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与决策 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE &amp; BOUNDARY</div>
+            <h2>公开证据与明确边界</h2>
+            <div class="section-deck">截至 2026-08-21；能查证的和必须自己承担的，都写清楚。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开仓库证据 · 截至 2026-08-21 · 以公开仓库为准</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Stars</td><td class="data-table-ok">已公开</td><td class="data-table-mono">2</td><td>公开仓库记录</td></tr>
+                  <tr><td>Skill</td><td class="data-table-ok">已公开</td><td class="data-table-mono">—</td><td>公开仓库包含</td></tr>
+                  <tr><td>scripts</td><td class="data-table-ok">已公开</td><td class="data-table-mono">—</td><td>公开仓库包含</td></tr>
+                  <tr><td>references</td><td class="data-table-ok">已公开</td><td class="data-table-mono">—</td><td>公开仓库包含</td></tr>
+                  <tr><td>README</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>公开仓库未包含</td></tr>
+                  <tr><td>LICENSE</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>公开仓库未包含</td></tr>
+                  <tr><td>测试 / CI / Release / 公开分析样例</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>公开仓库未包含</td></tr>
+                  <tr><td>本机安装副本</td><td class="data-table-warn">不完整</td><td class="data-table-mono">—</td><td>缺少 Skill 引用的 scripts 与 references，以公开仓库为准</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">评分卡帮助组织证据，不保证数据完整、模型有效或未来收益；本工具不构成投资建议。</p>
+            <div class="callout-note">任何候选仍需核对基金公告、指数规则、成交条件与个人风险承受能力。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/etf-analyzer" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/etf-analyzer" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果你只想看一条收益曲线，那不需要这个工具；如果你想在动手前查清买到的是什么，它帮你把功课拆成三张可复查的评分卡。</p>
+              <p>它是一套研究辅助，不构成投资建议；最终判断仍需你核对基金公告、指数规则、成交条件与自己的风险承受能力。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/etf-analyzer" target="_blank" rel="noopener">安装 ETF Analyzer</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Quant Research</small>
+              <h3>Stock &amp; Fund Analyzer</h3>
+              <p>把估值、质量、周期与趋势放进同一份股票和基金研究备忘录。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/stock-fund-analyzer">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Quant Research</small>
+              <h3>Invest Signal Kit</h3>
+              <p>用一份本地检查单，在买入前记录理由、仓位与风险边界。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/invest-signal-kit">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — ETF Analyzer · No.18</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

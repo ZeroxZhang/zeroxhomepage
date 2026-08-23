@@ -1,0 +1,396 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  paper-to-course.html · paper-to-course 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/paper-to-course.md（facts_as_of 2026-08-21），未新增数据。
+  3. 作品编号 No. 06：按 content/works/index.yaml 顺序（作品总数 35）。
+  4. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法。
+  5. 设计 token 与组件样式直接引用 design/colors_and_type.css 与 design/components.css。
+  6. 按钮动效按「动词语法」分配（design/SKILL.md · Button Motion Grammar）。
+  7. 首屏文案遵循 C 端价值优先原则（works-showcase/SKILL.md）：价值先行、结果动词、
+     说人话；版本 / 测试 / 技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/paper-to-course">
+  <title>paper-to-course · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="给一篇论文，它补齐动机、逐段展开公式、逐行跑通算法，再配上练习与谱系。你沿着设计好的路径读，一步步抵达论文的核心思想。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/paper-to-course/index.html · paper-to-course 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/paper-to-course.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#workflow">工作流</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/paper-to-course" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 06</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Maintained</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">把论文变成互动课程 · 学习工具</div>
+          <h1>paper-to-<em>course</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把难懂的论文，变成能一步步看懂的互动课程</strong>
+          <p>给一篇论文，它补齐动机、逐段展开公式、逐行跑通算法，再配上练习与谱系。你沿着设计好的路径读，一步步抵达论文的核心思想。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">论文阅读</span>
+            <span class="tag">互动教程</span>
+            <span class="tag">知识传播</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/paper-to-course" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装 paper-to-course</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="/work/zerox-agent-course"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>先看一个用同样方法做的课程</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Derivation</small><b>公式分段展开</b></div>
+        <div><small>Pseudocode</small><b>算法逐行高亮</b></div>
+        <div><small>Practice</small><b>练习验证理解</b></div>
+        <div><small>Lineage</small><b>谱系理清脉络</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：课程页面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/paper-to-course/01-course-page.png" alt="paper-to-course 生成的课程页面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.985Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>论文为同行而写，课程为学习而设计</h2>
+            <div class="section-deck">从「论文说了什么」走到「为什么这样成立」。</div>
+          </div>
+
+          <p class="lead reveal">对第一次接触主题的读者来说，困难未必来自概念本身，而是<mark>论文没有为学习设计路径</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>学术论文服务于同行交流。它需要在有限篇幅里报告方法、实验和贡献，因此会省略大量背景，也常把关键推导压缩到几个公式之间。</p>
+              <p>摘要擅长提取结论，却很少处理理解过程。读者仍然需要自己查背景、补公式、追溯前人工作，并判断伪代码中的每一步在做什么。</p>
+            </div>
+            <aside class="pull">课程把理解过程变成可见动作：公式分段展开、算法逐行高亮、研究关系画成谱系、理解用练习验证。<small>Learning Interface</small></aside>
+          </div>
+
+          <!-- 图示 · 对象链：论文如何变成课程 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>From Paper to Course / 论文 → 课程</span><span>Object Chain</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Paper</small>论文 · 方法 / 实验 / 贡献</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>paper-to-course</small>补齐动机 / 推导 / 算法 / 练习</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Course</small>浏览器课程 · 可练习验证</div>
+              </div>
+              <div class="dg-gate"><b>保留研究内容 · PRESERVE</b> — 在通俗化的同时不改变论文原意，先建立事实底稿，再设计理解路径。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>针对不同认知任务，选择对应的交互</h2>
+            <div class="section-deck">五种交互各自解决一类理解障碍；只有确实能降低认知成本的内容才进入交互。</div>
+          </div>
+
+          <!-- 02.1 逐步推导 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Step-by-step Derivation</div>
+              <h3>把跳跃的公式，拆成能一步步展开的步骤</h3>
+              <p>将一个跳跃较大的公式拆成可展开步骤，解释每个变量和等式变化。形式化内容仍然保留，直觉解释与它并排出现。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>公式</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>分步展开</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>03</small>直觉并排</div>
+              </div>
+            </div>
+            <!-- ══ 截图槽位 02：逐步推导（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/paper-to-course/02-derivation.png" alt="逐步推导面板"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.985Z -->
+          </div>
+
+          <!-- 02.2 伪代码执行 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：伪代码执行（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/paper-to-course/03-pseudocode.png" alt="伪代码逐行执行"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.985Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Executable Pseudocode</div>
+              <h3>让算法逐行运行，看见每一步为何必要</h3>
+              <p>代码逐行高亮，状态变化与文字同步。读者看到算法如何运行，也能知道某一步为何必要。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>逐行高亮</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>状态同步</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>03</small>理解必要性</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02.3 研究谱系 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Research Lineage</div>
+              <h3>把一项工作的来龙去脉画成谱系</h3>
+              <p>谱系树和模拟对话帮助读者理解一项工作从哪里来、解决了什么缺口，以及不同观点为何产生分歧。</p>
+              <div class="rule-note">练习服务于真实误解，不承担装饰页面的任务。</div>
+            </div>
+            <!-- ══ 截图槽位 04：研究谱系（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/paper-to-course/04-lineage.png" alt="研究谱系树"> -->
+      <!-- SHOT-SLOT 04 ADMIN-SKIPPED 2026-08-22T15:37:20.985Z -->
+          </div>
+
+          <!-- 交互清单：五种交互与认知任务的对应（事实清单） -->
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>交互 ↔ 认知任务 · 内容原词</caption>
+                <thead>
+                  <tr><th>交互</th><th>认知任务</th><th>作用</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>逐步推导</td><td>跳跃较大的公式</td><td>分步展开，解释变量与等式变化</td></tr>
+                  <tr><td>伪代码执行</td><td>算法过程</td><td>逐行高亮，状态与文字同步</td></tr>
+                  <tr><td>主动练习</td><td>关键概念误解</td><td>拖拽、多选、Bug 挑战检查</td></tr>
+                  <tr><td>研究谱系</td><td>来龙去脉</td><td>谱系树 + 模拟对话</td></tr>
+                  <tr><td>术语表</td><td>生僻术语</td><td>浮窗减少切换，保留延伸入口</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 工作流 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>五阶段：从深度阅读到最终评审</h2>
+            <div class="section-deck">先建立事实底稿，再设计理解路径，最后确认读者能否抵达核心思想。</div>
+          </div>
+
+          <!-- 图示 · 生产流程：五阶段（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Production Flow / 生产流程</span><span>5 Stages</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="五阶段课程生产流程">
+                <span class="flow-step"><span class="flow-index">01</span>深度阅读</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>知识扩展</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>课程设计</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>页面构建</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>最终评审</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>识别研究问题、核心贡献、方法、实验与限制，建立事实底稿，避免课程为了通俗而改变论文原意。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>补充前置概念、历史背景和相关工作，区分论文原文与外部解释，让读者知道每个结论来自哪里。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>确定学习目标、章节顺序和交互点。<small>只有确实能降低认知成本的内容才进入交互，不要求把所有元素都用一遍。</small></p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>使用 HTML、CSS、JavaScript 与 KaTeX 实现课程，页面直接在浏览器打开，不需要注册课程平台。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>检查概念准确性、叙事顺序、交互可用性和页面完整性，确认读者能否沿着课程抵达核心思想。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">先设计理解路径，再选择页面和互动。<small>Principle</small></div>
+              <div class="aside-tags">
+                <span class="tag">研究小组</span>
+                <span class="tag">课程补充</span>
+                <span class="tag">技术社区</span>
+                <span class="tag">个人学习</span>
+              </div>
+            </aside>
+          </div>
+
+          <div class="callout callout-data reveal">
+            <b class="callout-label">Delivery / 轻量交付</b>
+            <p class="callout-statement">输出由 HTML、CSS 与 IIFE JavaScript 组成，通过 build.sh 拼装模块，不需要运行服务器。</p>
+            <div class="callout-note">当前课程可能从 CDN 加载 KaTeX 与 Google Fonts，「浏览器直接打开」不等于完全离线单文件。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开状态与适用边界</h2>
+            <div class="section-deck">截至 2026-08-21；公开五阶段工作流与 18 类页面元素。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态 · 截至 2026-08-21 · 来源：公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Stars</td><td class="data-table-ok">公开</td><td class="data-table-mono">6</td><td>项目记录</td></tr>
+                  <tr><td>Forks</td><td class="data-table-ok">公开</td><td class="data-table-mono">1</td><td>项目记录</td></tr>
+                  <tr><td>页面元素</td><td class="data-table-ok">公开</td><td class="data-table-mono">18 类（#0–#17）</td><td>封面属于页面元素但不构成交互</td></tr>
+                  <tr><td>工作流</td><td class="data-table-ok">公开</td><td class="data-table-mono">五阶段</td><td>深度阅读 → 知识扩展 → 课程设计 → 页面构建 → 最终评审</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / CSS / JavaScript / KaTeX</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 适用边界</b>
+            <p class="callout-statement">对公式密集、算法复杂、历史脉络重要的论文尤其有价值；对于结构简单、已有优秀教程的材料，完整课程生产可能不划算。</p>
+            <div class="callout-note">它不会替读者保证理解，也不能自动验证所有扩展资料——作者仍需检查学术准确性、版权边界和引用。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/paper-to-course" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制安装地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/paper-to-course" aria-pressed="false" aria-label="复制安装地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制安装地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- 决策与 CTA -->
+          <div class="callout reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">适合值得被认真解释的论文——公式密集、算法复杂、历史脉络重要。先设计理解路径，再选择页面和互动。</p>
+            <div class="callout-note">一种面向学习动作的写作方式</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果只是想快速提取结论，摘要已经足够。paper-to-course 面向的是另一种需求：你真的想把一篇难论文读懂，并且希望这个过程可以被保存、分享和反复使用。</p>
+              <p>这套方法后来用于 Zerox Agent Course 与 Nanobot Course，把学习对象从论文扩展到代码库。共同原则保持不变：先设计理解路径，再选择页面和互动。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/paper-to-course" target="_blank" rel="noopener">安装 paper-to-course</a>
+              </div>
+              <a class="btn" href="/work/zerox-agent-course">看一个用同样方法做的课程</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Learning</small>
+              <h3>Zerox Agent Course</h3>
+              <p>沿着一次任务的运行路径，读懂桌面 Agent 的关键边界。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/zerox-agent-course">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Learning</small>
+              <h3>Nanobot Course</h3>
+              <p>用六章互动练习，重建一次 Agent 从消息到工具的执行过程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/nanobot-course">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Visual Design</small>
+              <h3>Concept Bridge</h3>
+              <p>输入两个概念，沿着中间推导路径继续探索。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/concept-bridge">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — paper-to-course · No.06</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

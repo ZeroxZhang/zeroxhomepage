@@ -1,0 +1,355 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  arch-diagram.html · Architecture Diagram 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/arch-diagram.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与 design/components.css
+     —— 统一规则由共享样式承担，每个作品页只写自己的内容与版式差异。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/arch-diagram">
+  <title>Architecture Diagram · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="让 Agent 帮你把系统关系整理成一张经得起评审的架构图：连线不交叉、归属说得清。产出可浏览、可嵌入、可离线打开，也能随着设计继续改。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/arch-diagram/index.html · Architecture Diagram 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/arch-diagram.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用方法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/arch_diagram" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 10</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">架构图生成 Skill · 可视化设计</div>
+          <h1>Architecture<br><em>Diagram</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把架构图画清楚，评审不再先猜图</strong>
+          <p>让 Agent 帮你把系统关系整理成一张经得起评审的架构图：连线不交叉、归属说得清。产出可浏览、可嵌入、可离线打开，也能随着设计继续改。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">架构图</span>
+            <span class="tag">SVG</span>
+            <span class="tag">确定性布局</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/arch_diagram" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装架构图 Skill</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 本页为标准级作品，能力格收敛为 3 个（site.css 默认 4 栏，此页以页面级差异对齐为 3 栏） -->
+      <div class="hero-strip hero-strip-3">
+        <div><small>Deliverables</small><b>HTML 可浏览 · SVG 可嵌入</b></div>
+        <div><small>Offline</small><b>离线打开 · 不依赖远程资源</b></div>
+        <div><small>Editable</small><b>沿用 ID 更新 · 无需整图重来</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：生成的 HTML 架构图（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/arch-diagram/01-html-diagram.png" alt="生成的 HTML 架构图"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.990Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>让架构图经得起评审，而不是让评审先猜图</h2>
+            <div class="section-deck">架构图常在细节处失去可信度；这套 Skill 把画图决策写成可以检查的契约。</div>
+          </div>
+
+          <p class="lead reveal">架构图最容易在细节处失去可信度：节点看似整齐，跨层连线却互相遮挡；箭头从含义含混的方向进入；标签压住路径；容器与泳道无法说明组件的归属。结果往往是——<mark>评审先猜图，再讨论系统</mark>，图也很难随着设计继续演进。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>Architecture Diagram 是一套面向 Agent 的架构图生成 Skill。它把拓扑、分层、端口、路由和验收写成明确契约，使一张图从关系模型出发，最终交付为可以阅读、检查和继续编辑的 HTML 与 SVG。</p>
+              <p>生成前，Agent 先区分拓扑、视觉泳道、容器、节点、端口与边，并用稳定 ID 建立布局计划。端口方向和连线通道在节点放置阶段就被预留，减少后期硬塞路径造成的交叉与误读。</p>
+            </div>
+            <aside class="pull">接入层、应用层和数据层可用泳道表达位置语义；前端、后端、数据库、云服务等组件则通过一致配色表达类别。<small>Structure Model</small></aside>
+          </div>
+
+          <!-- 图示 · 结构模型：生成前先区分哪些对象 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Structure Model / 结构模型</span><span>Rank → Lane → Group → Node → Port → Edge</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Rank</small>拓扑</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Lane</small>泳道</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Group</small>容器</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Node</small>节点</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Port</small>端口</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Edge</small>边</div>
+              </div>
+              <div class="dg-gate"><b>稳定 ID · STABLE ID</b> — 用稳定 ID 建立布局计划，把规划模型连到最终输出。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>先算清楚结构，再画出图形</h2>
+            <div class="section-deck">从关系模型出发，把布局流程与交付物分别做成可检查的步骤。</div>
+          </div>
+
+          <!-- 02.1 先算结构 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / 先算结构</div>
+              <h3>先把关系变成可计算的结构</h3>
+              <p>布局流程依次处理<strong>文本测量、排序、打包、放置、正交避障路由、标签占位和边界计算</strong>。节点 bbox、route、lane、group 与 z-order 会保留在语义化 SVG 中，后续脚本可以检查几何关系，而非仅凭截图目测。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>01</small>文本测量</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>02</small>排序</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>03</small>打包</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>04</small>放置</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>05</small>正交避障路由</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>06</small>标签占位</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>07</small>边界计算</div>
+              </div>
+              <p class="dg-caption">七步依次推进；几何关系写进语义化 SVG，交给脚本检查而非目测。</p>
+            </div>
+            <!-- ══ 截图槽位 02：ASCII 布局计划（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/arch-diagram/02-ascii-plan.png" alt="ASCII 布局计划"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.991Z -->
+          </div>
+
+          <!-- 02.2 两份交付物 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：独立 SVG / 演示模板（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/arch-diagram/03-svg-template.png" alt="独立 SVG 交付物"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.991Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / 两份交付物</div>
+              <h3>从需求到两份可继续使用的交付物</h3>
+              <p>HTML 适合直接浏览、展示摘要卡片和悬停提示；SVG 可嵌入文档、网页或演示文稿。亮色、暗色与 1280×720 演示模板覆盖常见传播场景，产物不依赖远程字体、图片或脚本，离线也能打开。</p>
+              <p>当架构发生变化时，可以沿用同一组节点与边的 ID 更新关系，再重新执行提取和校验，减少手工改图后遗漏标签、箭头或边界的风险。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>从需求到交付，每一步都可检查</h2>
+            <div class="section-deck">典型生成从需求描述开始，中间产物可以回看，改图不必整张重来。</div>
+          </div>
+
+          <p class="lead reveal">一次典型工作从主题、语言、方向、泳道和展示范围开始。Agent 先规范化关系图，再生成稳定 ID 的 ASCII 布局计划，随后输出包含内联 CSS 与 SVG 的完整 HTML；仓库脚本再从 HTML 精确提取独立 SVG，并对两份文件执行结构、边界和一致性检查。</p>
+
+          <!-- 图示 · 典型路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Run / 典型路径</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次典型架构图生成流程">
+                <span class="flow-step"><span class="flow-index">01</span>定主题 · 方向 · 泳道</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>规范化关系图</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>ASCII 布局计划</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>HTML · 内联 CSS + SVG</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>提取 SVG + 校验</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>明确主题、语言、方向、泳道与展示范围。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>规范化关系图，生成稳定 ID 的 ASCII 布局计划。</p><p><small>结构先在文本线框里确认，进入 SVG 前的改动成本最低。</small></p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>输出包含内联 CSS 与 SVG 的完整 HTML。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>从 HTML 提取独立 SVG，执行结构、边界和一致性检查。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>需要时调用本机 Chrome 检查真实字形、响应式溢出与 16:9 裁切。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">架构变化时，沿用同一组节点与边的 ID 更新关系，再重新提取和校验——改图不必整张重来。<small>Evolution</small></div>
+              <div class="aside-tags">
+                <span class="tag">架构图</span>
+                <span class="tag">SVG</span>
+                <span class="tag">确定性布局</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据摘要 + CTA + 关联作品 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开证据与使用边界</h2>
+            <div class="section-deck">截至 2026-08-21；仓库内容与最近一次 Actions 运行都可直接查看。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开工程证据 · 来源：公开仓库，截至 2026-08-21</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>公开仓库</td><td class="data-table-ok">已公开</td><td class="data-table-mono">模板 · 提取器 · 校验器</td><td>含通过与失败用例</td></tr>
+                  <tr><td>GitHub Stars</td><td class="data-table-ok">记录</td><td class="data-table-mono">2</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>最近公开 Actions</td><td class="data-table-risk">失败</td><td class="data-table-mono">layout-contract</td><td>不能视为主分支持续通过</td></tr>
+                  <tr><td>字体打包</td><td class="data-table-warn">未打包</td><td class="data-table-mono">SimHei · JetBrains Mono</td><td>系统回退可能改变字宽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / HTML / SVG</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">这套 Skill 的确定性来自生成契约与检查流程，具体几何仍由宿主 Agent 依约执行；它并非独立的通用自动布局引擎。</p>
+            <div class="callout-note">SimHei 与 JetBrains Mono 未随项目打包，系统字体回退可能改变字宽和排版结果；装饰性关系图用完整语义与校验流程会偏重。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/arch_diagram" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/arch_diagram" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">适合需要进入设计评审、技术文档和长期维护的系统图。</p>
+              <p>若需求只是快速制作一张装饰性关系图，完整的语义与校验流程可能显得偏重。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/arch_diagram" target="_blank" rel="noopener">安装架构图 Skill</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Visual Design</small>
+              <h3>Flowchart Generator Skill</h3>
+              <p>在画布出现之前，先把流程的逻辑整理清楚。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/flowchart-generator-skill">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Visual Design</small>
+              <h3>OnePager</h3>
+              <p>把长内容重新编辑成一页可以读完的视觉叙事。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/onepager">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Architecture Diagram · No.10</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

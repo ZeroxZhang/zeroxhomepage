@@ -1,0 +1,338 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  stock-fund-analyzer.html · Stock & Fund Analyzer 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/stock-fund-analyzer.md（facts_as_of 2026-08-21），
+     未新增任何数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。无次级链接，不启用 light-glass。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；架构名词与工程数据（版本 / 测试 / 技术栈）后置到证据区。
+  8. 本作为金融类内容，适用范围与风险边界在证据区显式写出。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/stock-fund-analyzer">
+  <title>Stock &amp; Fund Analyzer · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="同一只股票或基金，可能同时「估值偏低」又在「持续下跌」。这套研究 Skill 把价值、质量、周期与趋势分开整理进同一份备忘录，让你看清每种判断的依据与失效条件，再决定下一步。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/stock-fund-analyzer/index.html · Stock & Fund Analyzer 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/stock-fund-analyzer.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用方法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/stock-fund-analyzer" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 17</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">股票与基金研究助手 · 量化研究</div>
+          <h1>Stock &amp; Fund<br><em>Analyzer</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>把便宜与下跌分开，看清依据再决定</strong>
+          <p>同一只股票或基金，可能同时「估值偏低」又在「持续下跌」。这套研究 Skill 把价值、质量、周期与趋势分开整理进同一份备忘录，让你看清每种判断的依据与失效条件，再决定下一步。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">股票研究</span>
+            <span class="tag">基金研究</span>
+            <span class="tag">估值</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/stock-fund-analyzer" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装研究 Skill</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-3">
+        <div><small>Dimensions</small><b>估值 · 质量 · 周期 · 趋势</b></div>
+        <div><small>Output</small><b>公允价值区间 + 研究标签</b></div>
+        <div><small>Coverage</small><b>股票 · ETF · A 股</b></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>便宜和下跌，可以同时是真的</h2>
+            <div class="section-deck">单一综合分数会藏起两种判断依赖的数据、时间尺度和失效条件；这份研究 Skill 把它们分开整理进同一份备忘录。</div>
+          </div>
+
+          <p class="lead reveal">同一只标的可以同时出现<mark>「估值偏低」和「趋势向下」</mark>。如果研究报告只给出一个综合分数，读者看不到两种判断依赖的数据、时间尺度和失效条件，也无法判断分歧是否已经被充分处理。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>Stock &amp; Fund Analyzer 是一套面向 Agent 的股票与基金研究协议，把估值、企业质量、行业周期、价格趋势与成交行为组织进结构化备忘录。</p>
+              <p>仓库定义分析框架与输出形式；事实、估算和解释是否被严格分开，仍取决于执行时的数据校验与提示约束。</p>
+            </div>
+            <aside class="pull">它的价值不是给一个分数，而是让「为什么便宜」和「为什么在跌」各自保留自己的证据。<small>Research Memo</small></aside>
+          </div>
+
+          <!-- 图示 · 五类维度 → 一份备忘录（对象链） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Research Memo / 五类维度 → 一份备忘录</span><span>Valuation → Quality → Cycle → Trend → Behavior</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Dim 01</small>估值</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Dim 02</small>企业质量</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Dim 03</small>行业周期</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Dim 04</small>价格趋势</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Dim 05</small>成交行为</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Output</small>结构化备忘录</div>
+              </div>
+              <div class="dg-gate"><b>分歧保留 · DISAGREEMENT</b> — 两种判断依赖的数据、时间尺度和失效条件分别保留，不揉成一个分数。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>价值与趋势，两套框架进同一份报告</h2>
+            <div class="section-deck">价值看内在价值与经营质量，技术看趋势与量能；仓库把它们放进同一工作流，但不自动合并分歧。</div>
+          </div>
+
+          <!-- 02.1 两套框架 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Two Frameworks</div>
+              <h3>两种框架放在一起，但分歧要显式记录</h3>
+              <p>价值部分可使用 <strong>Graham Number、DCF、护城河与周期分析</strong>，观察价格和内在价值假设、经营质量及行业位置；技术部分引入 <strong>道氏理论、艾略特波浪和 CAN SLIM</strong> 等视角，描述趋势、量能与市场行为。</p>
+              <p>仓库把这些方法放在同一工作流中，但没有强制实现一套框架冲突处理协议；使用时应显式记录分歧，避免把结果直接平均。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>价值</small>Graham · DCF · 护城河 · 周期</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>技术</small>道氏 · 艾略特 · CAN SLIM</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>输出</small>公允价值区间 + 研究标签</div>
+              </div>
+              <p class="dg-caption">最终输出可包含公允价值区间和 Buy / Hold / Sell 研究标签。</p>
+            </div>
+            <!-- ══ 截图槽位 01：备忘录输出（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/stock-fund-analyzer/01-memo-output.png" alt="研究备忘录输出示例"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.304Z -->
+          </div>
+
+          <!-- 02.2 Skill 与参考脚本 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 02：参考脚本（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/stock-fund-analyzer/02-reference-script.png" alt="Python 参考脚本数据获取运行"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.304Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Skill &amp; Scripts</div>
+              <h3>Skill 定框架，参考脚本演示取数</h3>
+              <p>Python 参考脚本演示股票、ETF 与 A 股数据获取，以及部分指标计算；Skill 定义可选框架、分析顺序与备忘录结构。</p>
+              <p>数据来源包括 yfinance 与 AKShare 等公开接口，其字段、更新频率和资产覆盖存在差异，进入分析前需要校验。</p>
+              <div class="rule-note">为使标签可复查，使用者应另外记录数据日期、关键假设、风险因素与失效条件——这是必要的研究纪律，不是仓库自动保证的结果。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用方法 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>先核对数据，再分开分析，最后比较结论</h2>
+            <div class="section-deck">一种更稳妥的使用顺序；Skill 提供框架起点，不自动保证每次执行都遵守额外纪律。</div>
+          </div>
+
+          <!-- 图示 · 稳妥使用顺序：四步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Safer Workflow / 稳妥使用顺序</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="稳妥使用顺序">
+                <span class="flow-step"><span class="flow-index">01</span>确认标的与时间范围</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>收集并核对基础数据</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>分别完成基本面与技术面分析</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-current"><span class="flow-index">04</span>比较结论：共同指向 · 冲突 · 补证</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prose reveal">
+            <p>先确认标的与时间范围，收集并核对基础数据，再分别完成基本面和技术面分析；随后由使用者比较结论，列出共同指向、主要冲突和需要补证的部分。当前 Skill 提供框架起点，但不会自动保证每次执行都遵守这套额外纪律。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开仓库的现状与边界</h2>
+            <div class="section-deck">截至 2026-08-21；代码与参考文件规模较小，暂无测试、CI、Release 或完整公开样例。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开仓库现状 · 截至 2026-08-21</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>数据收集工作流</td><td class="data-table-ok">已定义</td><td>收集并核对基础数据</td></tr>
+                  <tr><td>价值分析</td><td class="data-table-ok">已定义</td><td>Graham Number · DCF · 护城河 · 周期</td></tr>
+                  <tr><td>技术分析</td><td class="data-table-ok">已定义</td><td>道氏理论 · 艾略特波浪 · CAN SLIM</td></tr>
+                  <tr><td>备忘录工作流</td><td class="data-table-ok">已定义</td><td>公允价值区间 + 研究标签</td></tr>
+                  <tr><td>测试 · CI · Release</td><td class="data-table-warn">暂无</td><td>仓库尚未提供</td></tr>
+                  <tr><td>公开样例</td><td class="data-table-warn">暂无</td><td>无完整公开样例</td></tr>
+                  <tr><td>ETF 估值字段</td><td class="data-table-risk">需修正</td><td>两个字段映射到同一 priceToBook 值</td></tr>
+                  <tr><td>历史策略验证</td><td class="data-table-risk">无</td><td>无公开回测；不管理组合、不执行交易</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Python / yfinance / AKShare / pandas / NumPy</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">项目没有经过公开的历史策略验证，也不自动管理组合或执行交易。任何研究标签都受数据质量、模型假设、市场变化和 Agent 解释影响，不构成投资建议。</p>
+            <div class="callout-note">重要结论应回到公司公告、基金文件与可靠行情源交叉确认。</div>
+          </div>
+
+          <div class="callout callout-data reveal" style="margin-top:var(--space-6)">
+            <b class="callout-label">Scope / 适用范围</b>
+            <p class="callout-statement">适合希望借助 Agent 组织多角度证据、并愿意审查输入和假设的个人研究者；成熟估值平台、合规投顾、可审计生产数据管线或直接交易接口，超出当前项目范围。</p>
+            <div class="callout-note">研究辅助，不替代专业判断</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/stock-fund-analyzer" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/stock-fund-analyzer" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">如果你愿意审查输入和假设，这套 Skill 能把估值、质量、周期与趋势组织进同一份备忘录，让你看清依据再决定。</p>
+              <p>如果你需要成熟估值平台、合规投顾、可审计生产数据管线或直接交易接口，它超出当前范围。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/stock-fund-analyzer" target="_blank" rel="noopener">安装研究 Skill</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Quant Research</small>
+              <h3>ETF Analyzer</h3>
+              <p>别用一条近期收益曲线，决定你是否真的看懂一只 ETF。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/etf-analyzer">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Web Product</small>
+              <h3>灵眸 LingMou</h3>
+              <p>把四类信号放到一起，看清依据再决定。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/lingmou">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Stock &amp; Fund Analyzer · No.17</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

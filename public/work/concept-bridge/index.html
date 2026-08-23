@@ -1,0 +1,339 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  concept-bridge.html · Concept Bridge 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/concept-bridge.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的内容。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制 Demo 地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。本页无 hero 次级链接，故未使用 light-glass 悬浮。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；版本号、测试数、技术栈后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/concept-bridge">
+  <title>Concept Bridge · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="你知道两个概念各自的定义，却说不清它们如何一步步关联；它把中间缺的推导步骤补出来。在一张能旋转、能展开的图里看完整条路径，点开任意节点继续追问。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/concept-bridge/index.html · Concept Bridge 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/concept-bridge.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#usage">使用</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://concept-bridge-three.vercel.app" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 11</b><br>作品展示 · Web 应用</div>
+        <div class="mast-right">
+          <b>Status — Experiment</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">3D 概念探索 · 可视化</div>
+          <h1>Concept<br><em>Bridge</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>补上两个概念之间缺的几步，再沿陌生分支继续追问</strong>
+          <p>你知道两个概念各自的定义，却说不清它们如何一步步关联；它把中间缺的推导步骤补出来。在一张能旋转、能展开的图里看完整条路径，点开任意节点继续追问。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">3D 可视化</span>
+            <span class="tag">概念学习</span>
+            <span class="tag">LLM</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://concept-bridge-three.vercel.app" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>探索概念路径</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-3">
+        <div><small>Path</small><b>两个概念 → 中间推导路径</b></div>
+        <div><small>Explore</small><b>旋转 · 拖动 · 悬停</b></div>
+        <div><small>Branch</small><b>点节点继续展开</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/concept-bridge/01-main-ui.png" alt="Concept Bridge 主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.992Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>两个熟悉概念之间，缺的是中间那几步</h2>
+            <div class="section-deck">词典补充了端点，长段解释又埋掉了方向；Concept Bridge 把中间的推导路径摆出来。</div>
+          </div>
+
+          <p class="lead reveal">学习中的卡点，常出现在两个你已经认识的概念之间：你知道<mark>「梯度下降」和「神经网络」各自的定义</mark>，却缺少一条能说明它们如何关联、每一步为何出现的路径。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>词典式答案补上了端点信息，长段解释又很难保留整体方向。Concept Bridge 是一个实验性的 3D 概念探索应用：输入任意两个概念，服务端让 LLM 生成起点、终点、3—4 个中间概念及其有序连接，再把结果呈现为一张可以旋转、拖动、悬停和扩展的粒子网络。</p>
+            </div>
+            <aside class="pull">你不需要先读完一整篇解释；可以先看清完整路径，再决定沿哪个陌生概念继续追问。<small>Concept Bridge</small></aside>
+          </div>
+
+          <!-- 图示 · 生成管线：两个概念如何变成一张 3D 图 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Generation Pipeline / 生成管线</span><span>Input → LLM → Graph</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Input</small>两个概念</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>LLM</small>起点 · 终点 · 3—4 个中间概念</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Links</small>有序连接</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Render</small>3D 粒子网络</div>
+              </div>
+              <div class="dg-gate"><b>主路径 · MAIN CHAIN</b> — 推导顺序显式展示；端点与中间节点使用不同颜色。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>把「中间几步」放到可操作的空间里</h2>
+            <div class="section-deck">主路径看得见顺序，节点可悬停可点击；3D 只组织界面，不冒充知识距离。</div>
+          </div>
+
+          <!-- 02.1 主路径与节点交互 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Main Path</div>
+              <h3>先看完整路径，再沿陌生分支追问</h3>
+              <p>主路径把推导顺序显式展示出来，端点与中间节点使用不同颜色。悬停节点可查看模型生成的简短定义；点击任意节点，应用会再请求 3 个子概念，并把去重后的新节点合入现有网络。</p>
+              <p>你可以先观察完整路径，再沿某个陌生分支继续追问，而不必在多轮聊天记录中反复寻找上下文。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>观察</small>主路径 · 端点分色</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>悬停</small>查看简短定义</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>点击</small>3 个子概念 · 去重合入</div>
+              </div>
+              <p class="dg-caption">三个动作各自解决一类需要：看顺序、查定义、扩分支。</p>
+            </div>
+            <!-- ══ 截图槽位 02：节点扩展（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/concept-bridge/02-node-expansion.png" alt="Concept Bridge 节点扩展"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.992Z -->
+          </div>
+
+          <!-- 02.2 3D 交互与边界（全宽 callout） -->
+          <div class="callout callout-data reveal">
+            <b class="callout-label">3D Interaction / 明确边界</b>
+            <p class="callout-statement">节点由 100—400 个粒子构成并持续旋转，方向粒子沿连接移动，力导向布局允许拖拽后回弹。视觉距离和聚类用于组织探索界面，没有被解释为可测量的知识距离。</p>
+            <div class="callout-note">3D 是探索界面的组织方式，不是概念之间距离的度量。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 使用 ══ -->
+      <section class="block" id="usage">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / USAGE</div>
+            <h2>一次探索怎样进行</h2>
+            <div class="section-deck">从填写两个概念，到得到一张仍可继续生长的会话内概念图。</div>
+          </div>
+
+          <!-- 图示 · 首次使用：四步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>First Run / 首次使用</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次探索流程">
+                <span class="flow-step"><span class="flow-index">01</span>填写两个概念</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>提交 · 返回节点和边</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>建立初始图</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>悬停 / 点击扩展</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>第一次使用只需填写两个概念并提交。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>Next.js API 路由通过 OpenAI SDK 调用兼容接口，返回结构化节点和边。</p><p><small>API Key 由服务端环境变量读取，不写入前端代码。</small></p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>浏览器据此建立初始图。</p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>遇到值得拆解的概念时，点击节点增加一层分支，悬停定义提供快速回顾。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">交付物是一张仍可继续生长的会话内概念图，适合头脑风暴、课程预习和寻找研究入口。<small>Deliverable</small></div>
+              <div class="aside-tags">
+                <span class="tag">头脑风暴</span>
+                <span class="tag">课程预习</span>
+                <span class="tag">寻找研究入口</span>
+              </div>
+            </aside>
+          </div>
+
+          <div class="callout callout-data reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Persistence / 当前边界</b>
+            <p class="callout-statement">当前公开实现没有保存工作区、协作编辑、引用来源或图谱导出功能；刷新页面后能否保留探索结果也没有持久化机制保证，重要路径需要另行记录。</p>
+            <div class="callout-note">会话内概念图：可继续生长，但请自行记录重要路径。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与开始 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>原型状态与认知边界</h2>
+            <div class="section-deck">截至 2026-08-21；公开 Demo 可访问，产品化元数据尚未收尾。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开实现状态 · 来源：公开源码与线上 Demo</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>公开 Demo</td><td class="data-table-ok">可访问</td><td class="data-table-mono">online</td><td>双概念输入、逻辑链、节点扩展、3D 交互与悬停解释可在源码核验</td></tr>
+                  <tr><td>测试</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>无公开测试</td></tr>
+                  <tr><td>CI</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>无 CI 工作流</td></tr>
+                  <tr><td>Release</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>无 Release</td></tr>
+                  <tr><td>许可证</td><td class="data-table-risk">未公开</td><td class="data-table-mono">—</td><td>无许可证</td></tr>
+                  <tr><td>页面元数据</td><td class="data-table-warn">未收尾</td><td class="data-table-mono">默认</td><td>线上页面仍保留 Create Next App 默认标题与描述</td></tr>
+                  <tr><td>模型配置</td><td class="data-table-warn">不确定</td><td class="data-table-mono">deepseek-chat</td><td>仓库默认值；README 的 DeepSeek V4 Flash 配置与代码默认不一致</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：Next.js 16 / React 19 / Three.js / react-force-graph-3d</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 认知边界</b>
+            <p class="callout-statement">图中的关系来自 LLM 生成，不是 embedding、向量距离或降维计算结果，也可能出现遗漏、跳步和事实错误。它适合用来提出后续问题和浏览可能的连接；考试结论、研究引用与专业决策仍需回到可靠资料逐项核验。</p>
+            <div class="callout-note">截至 2026-08-21 · 以公开源码为准</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/concept_bridge" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制 Demo 地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://concept-bridge-three.vercel.app" aria-pressed="false" aria-label="复制 Demo 地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制 Demo 地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">Concept Bridge 适合用来提出后续问题和浏览可能的连接：头脑风暴、课程预习、寻找研究入口。打开 Demo，把两个你一直没连起来的概念放进去试试。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://concept-bridge-three.vercel.app" target="_blank" rel="noopener">探索概念路径</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Content</small>
+              <h3>paper-to-course</h3>
+              <p>把难懂的论文，变成能一步步看懂的互动课程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/paper-to-course">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Learning</small>
+              <h3>Nanobot Course</h3>
+              <p>用六章互动练习，重建一次 Agent 从消息到工具的执行过程。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/nanobot-course">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — Concept Bridge · No.11</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+/* zerox-dark-editorial · based on guide-dark-editorial-system.html */
+/* @group-priority: signal, neutral, data, status */
+:root {
+  /* reference exact palette */
+  --ink-950: #08110f; /* @primary */
+  --ink-900: #0d1816;
+  --ink-850: #13221f;
+  --paper-100: #e8e9df;
+  --paper-300: #c8cbc1;
+  --muted-500: #8d9c98;
+  --line-700: #2a3c3a;
+  --signal-green: #3dff92; /* @primary · 克制荧光科技绿主强调 */
+  --signal-orange: var(--signal-green); /* legacy alias: mapped to neon technology green */
+  --data-cyan: #35c9d0;
+  --success-green: #8bd79f;
+  --caution-yellow: #d8c75e;
+  --danger-red: #d67875;
+
+  /* portable color aliases */
+  --primary: var(--signal-green);
+  --primary-foreground: var(--ink-950);
+  --accent: var(--signal-green);
+  --accent-hover: #70ffb4;
+  --link: var(--signal-green);
+  --ring: var(--signal-green);
+  --secondary: var(--paper-300);
+  --secondary-foreground: var(--ink-950);
+  --muted: var(--ink-850);
+  --muted-foreground: var(--muted-500);
+  --rule: var(--line-700);
+  --border: var(--line-700);
+  --background: var(--ink-950);
+  --bg: var(--ink-950);
+  --surface: var(--ink-900);
+  --surface-dim: var(--ink-950);
+  --surface-bright: var(--ink-850);
+  --surface-container-low: var(--ink-950);
+  --surface-container: var(--ink-900);
+  --surface-container-high: var(--ink-850);
+  --surface-container-highest: #19302a;
+  --foreground: var(--paper-100);
+  --fg: var(--paper-100);
+  --color-primary: var(--signal-green);
+  --color-primary-hover: #70ffb4;
+  --color-on-primary: var(--ink-950);
+  --color-secondary: var(--paper-300);
+  --color-border: var(--line-700);
+  --color-muted-foreground: var(--muted-500);
+  --color-background: var(--ink-950);
+  --color-surface: var(--ink-900);
+  --color-surface-container: var(--ink-900);
+  --color-surface-container-high: var(--ink-850);
+  --color-foreground: var(--paper-100);
+  --color-info: var(--data-cyan);
+  --color-success: var(--success-green);
+  --color-warning: var(--caution-yellow);
+  --color-error: var(--danger-red);
+  --error: var(--danger-red);
+
+  /* semantic interaction layers */
+  --interactive-hover: rgba(61,255,146,0.12);
+  --interactive-focus: rgba(61,255,146,0.22);
+  --interactive-press: rgba(61,255,146,0.20);
+  --interactive-data: rgba(53,201,208,0.13);
+
+  /* exact font stacks */
+  --serif: "Songti SC","Noto Serif CJK SC","Source Han Serif SC","STSong",serif;
+  --sans: "PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+  --mono: "SFMono-Regular","Cascadia Code","Roboto Mono","Noto Sans Mono CJK SC",monospace;
+  --font-display: var(--serif);
+  --font-heading: var(--serif);
+  --font-body: var(--sans);
+  --font-mono: var(--mono);
+  --font-family-base: var(--sans);
+
+  /* type scale · 中文字体排印调研后调整（见 typography-research.md） */
+  --font-size-display: clamp(64px,10.2vw,148px);
+  --font-size-h1: clamp(64px,10.2vw,148px);
+  --font-size-h2: clamp(40px,5.6vw,72px);
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+  --font-size-lead: clamp(20px,2.4vw,30px);
+  --font-size-body: 16px;
+  --font-size-caption: 12px;
+  --font-size-eyebrow: 11px;
+  --font-size-mono: 13px;
+  --font-weight-display: 700;
+  --font-weight-h1: 700;
+  --font-weight-h2: 600;
+  --font-weight-h3: 600;
+  --font-weight-h4: 600;
+  --font-weight-body: 400;
+  --font-weight-lead: 400;
+  --font-weight-caption: 400;
+  --font-weight-eyebrow: 500;
+  --font-weight-mono: 500;
+  --line-height-display: .96;
+  --line-height-h1: .96;
+  --line-height-h2: 1.12;
+  --line-height-h3: 1.5;
+  --line-height-h4: 1.5;
+  --line-height-lead: 1.7;
+  --line-height-body: 1.8;
+  --line-height-caption: 1.5;
+  --line-height-eyebrow: 1.45;
+  --line-height-mono: 1.6;
+  --letter-spacing-display: -0.02em; /* 拉丁产品名微收；纯中文大标题用 0~0.02em */
+  --letter-spacing-h2: 0;            /* 中文标题默认密排，不动字距 */
+  --letter-spacing-label: 0.14em;
+  --type-display: var(--font-weight-display) var(--font-size-display)/var(--line-height-display) var(--serif);
+  --type-h1: var(--font-weight-h1) var(--font-size-h1)/var(--line-height-h1) var(--serif);
+  --type-h2: var(--font-weight-h2) var(--font-size-h2)/var(--line-height-h2) var(--serif);
+  --type-h3: var(--font-weight-h3) var(--font-size-h3)/var(--line-height-h3) var(--serif);
+  --type-h4: var(--font-weight-h4) var(--font-size-h4)/var(--line-height-h4) var(--serif);
+  --type-lead: var(--font-weight-lead) var(--font-size-lead)/var(--line-height-lead) var(--serif);
+  --type-body: var(--font-weight-body) var(--font-size-body)/var(--line-height-body) var(--sans);
+  --type-caption: var(--font-weight-caption) var(--font-size-caption)/var(--line-height-caption) var(--sans);
+  --type-eyebrow: var(--font-weight-eyebrow) var(--font-size-eyebrow)/var(--line-height-eyebrow) var(--mono);
+  --type-mono: var(--font-weight-mono) var(--font-size-mono)/var(--line-height-mono) var(--mono);
+
+  /* editorial spacing and layout */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 112px;
+  --space-11: 128px;
+  --space-12: 160px;
+  --max-content-width: 1240px;
+  --gutter-page: 32px;
+  --gutter-column: 24px;
+  --gutter-section: 112px;
+  --section-space: 112px;
+  --grid-columns: 12;
+  --layout-2-8-2: 2fr 8fr 2fr;
+  --layout-7-5: 7fr 5fr;
+  --layout-8-4: 8fr 4fr;
+  --layout-6-6: 1fr 1fr;
+
+  /* sizes */
+  --size-icon-sm: 16px;
+  --size-icon-md: 20px;
+  --size-icon-lg: 24px;
+  --size-button-height: 42px;
+  --size-input-height: 44px;
+  --size-tag-height: 24px;
+  --size-nav-height: 64px;
+  --size-rule: 1px;
+
+  /* radius stays squared */
+  --zerox-radius-none: 0px;
+  --zerox-radius-sm: 0px;
+  --zerox-radius-md: 0px;
+  --zerox-radius-lg: 0px;
+  --zerox-radius-xl: 0px;
+  --zerox-radius-full: 0px;
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-full: 0px;
+
+  /* restrained depth */
+  --shadow-1: 0 1px 0 rgba(45,57,62,0.90);
+  --shadow-2: 0 18px 48px rgba(0,0,0,0.18);
+  --shadow-3: 0 24px 68px rgba(0,0,0,0.24);
+  --shadow-4: 0 34px 90px rgba(0,0,0,0.32);
+  --shadow-5: 0 44px 120px rgba(0,0,0,0.42);
+
+  /* kinetic grid motion */
+  --duration-fast: 220ms;
+  --duration-base: 250ms;
+  --duration-reveal: 650ms;
+  --easing-standard: cubic-bezier(.2,.7,.2,1);
+  --motion-grid-amplitude: 10px;
+  --motion-enter-y: 18px;
+
+  /* Originkit mechanism tokens · editorial skin applied */
+  --motion-originkit-spring-fast: 120ms cubic-bezier(.2,.9,.2,1);
+  --motion-originkit-spring-command: 420ms cubic-bezier(.18,1.22,.22,1);
+  --motion-originkit-spring-offset: 360ms cubic-bezier(.2,1,.2,1);
+  --motion-originkit-reveal: 450ms ease-in-out;
+  --motion-originkit-cube: 420ms cubic-bezier(.18,1.05,.24,1);
+  --motion-originkit-cube-perspective: 600px;
+  --motion-originkit-keycap-tilt: 49deg;
+  --motion-originkit-keycap-rotate: -37deg;
+  --motion-originkit-keycap-depth: 15px;
+  --motion-originkit-keycap-float: 8px;
+  --motion-originkit-keycap-hover-float: 7px;
+  --motion-originkit-offset: 14px;
+  --motion-originkit-offset-compact: 4px;
+  --motion-originkit-light-radius: 80px;
+  --motion-originkit-light-edge-width: 30deg;
+  --motion-originkit-tactile-x: -1px;
+  --motion-originkit-tactile-y: 11px;
+  --motion-originkit-grid-spacing: 50;
+  --motion-originkit-grid-radius: 200;
+  --motion-originkit-grid-strength: 4;
+  --motion-originkit-grid-trail-ms: 260;
+
+  /* button motion grammar */
+  --button-motion-fast: 180ms;
+  --button-motion-base: 240ms;
+  --button-motion-slow: 420ms;
+  --button-motion-spring: cubic-bezier(.2,1.18,.22,1);
+  --button-motion-prism-y: var(--motion-originkit-keycap-float);
+  --button-motion-press-y: var(--motion-originkit-tactile-y);
+  --button-motion-offset: var(--motion-originkit-offset);
+  --button-motion-ring: rgba(232,233,223,.18);
+  --button-motion-glass: rgba(19,34,31,.58);
+  --button-motion-cyan-soft: rgba(53,201,208,.18);
+  --button-motion-signal-soft: rgba(61,255,146,.28);
+}
+
+.dark {
+  --background: var(--ink-950);
+  --bg: var(--ink-950);
+  --surface: var(--ink-900);
+  --surface-dim: var(--ink-950);
+  --surface-bright: var(--ink-850);
+  --foreground: var(--paper-100);
+  --fg: var(--paper-100);
+  --border: var(--line-700);
+  --rule: var(--line-700);
+  --primary: var(--signal-green);
+  --accent: var(--signal-green);
+  --link: var(--signal-green);
+  --ring: var(--signal-green);
+}
+
+.zerox-display{font-family:var(--serif);font-size:var(--font-size-display);font-weight:700;line-height:.82;letter-spacing:-.075em;}
+.zerox-h1{font-family:var(--serif);font-size:var(--font-size-h1);font-weight:700;line-height:.96;letter-spacing:-.02em;}
+.zerox-h2{font-family:var(--serif);font-size:var(--font-size-h2);font-weight:600;line-height:1.12;letter-spacing:0;}
+.zerox-h3{font-family:var(--sans);font-size:24px;font-weight:600;line-height:1.5;letter-spacing:0;}
+.zerox-h4{font-family:var(--sans);font-size:20px;font-weight:600;line-height:1.5;}
+.zerox-lead{font-family:var(--serif);font-size:var(--font-size-lead);font-weight:400;line-height:1.7;}
+.zerox-body{font-family:var(--sans);font-size:16px;font-weight:400;line-height:1.78;}
+.zerox-caption{font-family:var(--sans);font-size:12px;font-weight:400;line-height:1.5;}
+.zerox-eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;line-height:1.45;letter-spacing:.14em;text-transform:uppercase;}
+.zerox-mono{font-family:var(--mono);font-size:13px;font-weight:500;line-height:1.6;}
+.zerox-stroke{color:transparent;-webkit-text-stroke:1px var(--paper-100);}

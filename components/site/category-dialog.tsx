@@ -2,10 +2,9 @@
 
 /**
  * 分类作品清单弹层：单个分类或「全部作品」。
- * 作品详情页尚未建设，清单仅展示标题、一句话定位与类型，不产生死链。
+ * 每个作品入口连接同域详情页；被内容字段标记的官网链接额外显示独立入口。
  * 文案与作品字段按当前语言取用。
  */
-import { siteConfig } from "@/lib/site.config";
 import type { CategorySummary, WorkMeta } from "@/lib/works";
 import { copy, pick } from "@/lib/i18n";
 import { useLocale } from "@/components/site/locale-provider";
@@ -22,21 +21,59 @@ interface CategoryDialogProps {
 const KICKER_CLASS =
   "flex items-center gap-2.5 font-sans text-[10px] uppercase tracking-[0.34em] text-brass";
 
-const WorkRow = ({ work, locale }: { work: WorkMeta; locale: "zh-CN" | "en" }) => (
-  <li className="border-t border-line py-3.5 first:border-t-0">
-    <div className="flex items-baseline justify-between gap-3">
-      <span className="font-display text-[15px] font-semibold text-ivory">
-        {pick(locale, work.title, work.title_en)}
-      </span>
-      <span className="shrink-0 font-sans text-[10.5px] uppercase tracking-[0.08em] text-ivory-dim">
-        {pick(locale, work.type, work.type_en) || work.status}
-      </span>
-    </div>
-    <p className="mt-1.5 line-clamp-2 font-sans text-[12.5px] leading-relaxed text-ivory-dim">
-      {pick(locale, work.tagline, work.tagline_en)}
-    </p>
-  </li>
-);
+const WorkRow = ({
+  work,
+  locale,
+  viewDetail,
+  visitWebsite,
+}: {
+  work: WorkMeta;
+  locale: "zh-CN" | "en";
+  viewDetail: string;
+  visitWebsite: string;
+}) => {
+  const title = pick(locale, work.title, work.title_en);
+  const website = work.links.find((link) => link.show_on_homepage);
+
+  return (
+    <li className="border-t border-line py-3.5 first:border-t-0">
+      <a
+        href={`/work/${work.slug}`}
+        data-work-detail={work.slug}
+        className="group/detail -mx-2 block rounded-md px-2 py-1 transition-colors hover:bg-brass/[0.045]"
+      >
+        <div className="flex items-baseline justify-between gap-3">
+          <span className="font-display text-[15px] font-semibold text-ivory transition-colors group-hover/detail:text-brass-bright">
+            {title}
+          </span>
+          <span className="shrink-0 font-sans text-[10.5px] uppercase tracking-[0.08em] text-ivory-dim">
+            {pick(locale, work.type, work.type_en) || work.status}
+          </span>
+        </div>
+        <p className="mt-1.5 line-clamp-2 font-sans text-[12.5px] leading-relaxed text-ivory-dim">
+          {pick(locale, work.tagline, work.tagline_en)}
+        </p>
+        <span className="mt-2 inline-flex items-center gap-1.5 font-sans text-[10.5px] uppercase tracking-[0.12em] text-brass">
+          {viewDetail}
+          <span aria-hidden="true">→</span>
+        </span>
+      </a>
+      {website ? (
+        <a
+          href={website.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-work-website={work.slug}
+          aria-label={`${visitWebsite}: ${title}`}
+          className="mt-2 inline-flex min-h-11 items-center gap-1.5 border border-brass-deep/70 px-3 font-sans text-[10.5px] uppercase tracking-[0.1em] text-brass transition-colors hover:border-brass hover:bg-brass/10 hover:text-brass-bright"
+        >
+          {pick(locale, website.label, website.label_en)}
+          <span aria-hidden="true">↗</span>
+        </a>
+      ) : null}
+    </li>
+  );
+};
 
 const CategoryHeader = ({
   category,
@@ -107,7 +144,13 @@ export const CategoryDialog = ({
                 </h3>
                 <ul>
                   {category.works.map((work) => (
-                    <WorkRow key={work.slug} work={work} locale={locale} />
+                    <WorkRow
+                      key={work.slug}
+                      work={work}
+                      locale={locale}
+                      viewDetail={c.works.viewDetail}
+                      visitWebsite={c.works.visitWebsite}
+                    />
                   ))}
                 </ul>
               </section>
@@ -126,14 +169,20 @@ export const CategoryDialog = ({
           </p>
           <ul className="mt-5">
             {active.works.map((work) => (
-              <WorkRow key={work.slug} work={work} locale={locale} />
+              <WorkRow
+                key={work.slug}
+                work={work}
+                locale={locale}
+                viewDetail={c.works.viewDetail}
+                visitWebsite={c.works.visitWebsite}
+              />
             ))}
           </ul>
         </div>
       ) : null}
 
       <p className="mt-6 border-t border-line pt-4 text-center font-sans text-[11.5px] tracking-[0.06em] text-ivory-faint">
-        {c.works.detailNote} {siteConfig.email}
+        {c.works.detailNote}
       </p>
     </Dialog>
   );

@@ -1,0 +1,400 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  work/onepager/index.html · OnePager 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/onepager.md（facts_as_of 2026-08-21），未新增数据。
+  3. 作品编号 No. 05 按 content/works/index.yaml 顺序（作品总数 35）。
+  4. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  5. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  6. 链接约定：关联作品用相对路径 ../<slug>/index.html；「返回作品列表」暂以 # 占位。
+  7. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制仓库地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。本页无自然次级入口，故不启用 light-glass。
+  8. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；版本号、测试数、技术栈（v1.5.0 / 11 Stars / CI）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/onepager">
+  <title>OnePager · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="把文本、Markdown 或 PDF 重新编辑成一页信息图。它先判断读者该记住什么，再安排版式与视觉，并在交付前自动检查溢出和遮挡。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/onepager/index.html · OnePager 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/onepager.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#workflow">工作流</a>
+          <a href="#evidence">证据</a>
+          <a href="#start">开始</a>
+        </div>
+        <a class="nav-cta" href="https://github.com/ZeroxZhang/onepager" target="_blank" rel="noopener">获取</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 05</b><br>作品展示 · Agent Skill</div>
+        <div class="mast-right">
+          <b>Status — Active</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">把长文变成一页信息图 · 编辑先于画布</div>
+          <h1>OnePager</h1>
+        </div>
+        <div class="hero-note">
+          <strong>把长内容重新编辑成一页可以读完的视觉叙事</strong>
+          <p>把文本、Markdown 或 PDF 重新编辑成一页信息图。它先判断读者该记住什么，再安排版式与视觉，并在交付前自动检查溢出和遮挡。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">信息图</span>
+            <span class="tag">内容重构</span>
+            <span class="tag">视觉质量</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://github.com/ZeroxZhang/onepager" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>安装 OnePager</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Input</small><b>文本 · Markdown · PDF</b></div>
+        <div><small>Canvas</small><b>4 种画布尺寸</b></div>
+        <div><small>Density</small><b>3 档信息密度</b></div>
+        <div><small>Style</small><b>9 种视觉方向</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：成品信息图（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/onepager/01-final-poster.png" alt="OnePager 生成的一页信息图"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.983Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>一页内容需要重新写，而不是简单压缩</h2>
+            <div class="section-deck">社交传播、汇报和移动端阅读都在有限空间里发生；直接压缩会产生过高密度，也会把结论埋在角落。</div>
+          </div>
+
+          <p class="lead reveal">把长文放进一张海报，最直接的做法是缩小字号、压紧间距、继续塞入更多段落。结果通常信息齐全，却<mark>没有人愿意读完</mark>。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>OnePager 从编辑开始。它先判断读者需要记住什么，再重组论点、删减重复、设计阅读顺序，最后才进入画布。输出是一页信息图，但工作内容同时包含编辑、视觉设计和工程验收。</p>
+              <p>OnePager 使用 MECE、金字塔原理与 SCQA 整理内容。工具会识别核心结论、证据、冲突和行动信息，并为不同层级分配视觉权重。删掉一部分内容并不代表损失；当页面目标明确后，取舍本身就是编辑质量。</p>
+            </div>
+            <aside class="pull">原文的铺垫、论证顺序和段落长度通常为连续阅读设计，直接搬到单页，结论会被埋在角落。<small>Edit First</small></aside>
+          </div>
+
+          <!-- 图示 · 制作链：编辑 → 视觉设计 → 工程验收 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Production Chain / 制作链</span><span>Edit → Design → QA</span></div>
+            <div class="diagram-body">
+              <div class="dg-row">
+                <div class="dg-node"><small>Stage 01</small>编辑</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Stage 02</small>视觉设计</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>Stage 03</small>工程验收</div>
+              </div>
+              <div class="dg-gate"><b>输出 · DELIVERABLE</b> — 一页信息图；编辑、视觉与验收共同完成，而非简单压缩版面。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>蓝图、画布与双层检查</h2>
+            <div class="section-deck">文案与版式先分离再合流；画布、密度和视觉方向按观看环境重新分配内容。</div>
+          </div>
+
+          <!-- 02.1 内容蓝图 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Content Blueprint</div>
+              <h3>内容蓝图连接文案与版式</h3>
+              <p>在生成 HTML/CSS 前，系统先建立 <strong>Blueprint</strong> 与中间表示（IR）。它们记录页面目标、内容模块、重要性、画布条件和视觉方向。</p>
+              <p>这层契约使文案与布局能够分别修改。标题不够清楚，可以先改内容；层级已经成立但画面拥挤，再调整网格和比例。设计迭代不必每次回到原始长文重做。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>长文</small>输入内容</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>Blueprint · IR</small>目标 · 模块 · 权重</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>HTML/CSS</small>页面</div>
+              </div>
+              <p class="dg-caption">文案与版式分别修改：改标题动内容，改网格动比例，不必回到原始长文重做。</p>
+            </div>
+            <!-- ══ 截图槽位 02：内容蓝图（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/onepager/02-blueprint.png" alt="内容蓝图面板"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.983Z -->
+          </div>
+
+          <!-- 02.2 画布 / 密度 / 风格 -->
+          <div class="cap-block reverse reveal">
+            <!-- ══ 截图槽位 03：画布与密度（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/onepager/03-canvas-density.png" alt="画布与密度对比"> -->
+      <!-- SHOT-SLOT 03 ADMIN-SKIPPED 2026-08-22T15:37:20.983Z -->
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Canvas · Density · Style</div>
+              <h3>为不同观看环境重新分配内容</h3>
+              <p>切换画布时，系统会重排信息，不采用机械裁切。</p>
+              <div class="scope-list">
+                <div><b>竖屏长图</b><span>移动端滚动</span></div>
+                <div><b>16:9</b><span>演示与横屏展示</span></div>
+                <div><b>1:1</b><span>社交平台</span></div>
+                <div><b>3:4</b><span>海报与图文封面</span></div>
+              </div>
+              <div class="dg-mini">
+                <div class="dg-node"><small>快速传播</small>最少结论</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>标准摘要</small>平衡解释与速度</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>高密度报告</small>更多证据</div>
+              </div>
+              <p class="dg-caption">三档信息密度同步影响文案和版式，不只是字号大小。</p>
+              <p>九种视觉方向（<strong>Dark Editorial、Swiss Precision、Organic Nature</strong> 等）共同约束中文字体、色彩、图形和留白。风格被视为完整视觉语言，避免只换背景色或装饰。</p>
+            </div>
+          </div>
+
+          <!-- 02.3 质量检查 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.3 / Quality Assurance</div>
+              <h3>质量检查发生在真实渲染之后</h3>
+              <p>第一层检查文件结构与静态契约。第二层由 <strong>Playwright</strong> 实际渲染页面，检查文本溢出、元素遮挡和画布边界。</p>
+              <p>Blueprint、IR、Manifest 与 SHA-256 记录使配置、文件和检查结果保持可追踪。这里的可复现指生产信息与验收记录能够回看，不代表模型每次会生成完全相同的文案。</p>
+              <div class="rule-note">与直接使用图像模型相比，这条路线需要更多中间步骤。它换来的是清晰文字、可修改布局、稳定品牌样式和可自动检查的成品。</div>
+            </div>
+            <!-- ══ 截图槽位 04：质量检查（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/onepager/04-qa-report.png" alt="几何验收报告"> -->
+      <!-- SHOT-SLOT 04 ADMIN-SKIPPED 2026-08-22T15:37:20.984Z -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 工作流 ══ -->
+      <section class="block" id="workflow">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / WORKFLOW</div>
+            <h2>一次典型制作过程</h2>
+            <div class="section-deck">五个步骤，从材料到交付；人在第三步仍可改变叙事重点。</div>
+          </div>
+
+          <!-- 图示 · 典型路径：五步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Run / 典型路径</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="一次典型制作流程">
+                <span class="flow-step"><span class="flow-index">01</span>提供材料</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>选择画布·密度·方向</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>审核内容蓝图</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>生成并检查</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>导出交付物</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workflow-grid reveal">
+            <div class="steps">
+              <div class="step"><div class="step-no">01</div><div class="step-body"><p>提供文本、Markdown 或 PDF，并说明用途与受众。</p></div></div>
+              <div class="step"><div class="step-no">02</div><div class="step-body"><p>选择画布、信息密度和视觉方向。</p></div></div>
+              <div class="step"><div class="step-no">03</div><div class="step-body"><p>审核内容蓝图，确认哪些信息进入页面。</p><p><small>人在这一步仍可改变叙事重点。</small></p></div></div>
+              <div class="step"><div class="step-no">04</div><div class="step-body"><p>生成 HTML/CSS 页面，并运行静态与几何检查。</p></div></div>
+              <div class="step"><div class="step-no">05</div><div class="step-body"><p>根据检查结果调整，导出最终交付物。</p></div></div>
+            </div>
+            <aside class="workflow-aside">
+              <div class="pull">系统不会把「生成成功」直接等同于「页面合格」。<small>Human Review</small></div>
+              <div class="aside-tags">
+                <span class="tag">研究摘要</span>
+                <span class="tag">产品介绍</span>
+                <span class="tag">项目复盘</span>
+                <span class="tag">课程提要</span>
+                <span class="tag">社交传播</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 / 证据与边界 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">04 / EVIDENCE</div>
+            <h2>公开状态与使用边界</h2>
+            <div class="section-deck">截至 2026-08-21；能力覆盖范围与不适合的场景一并说明。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开状态 · 来源：发布记录与公开仓库</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>公开版本</td><td class="data-table-ok">已发布</td><td class="data-table-mono">v1.5.0</td><td>GitHub</td></tr>
+                  <tr><td>Stars</td><td>—</td><td class="data-table-mono">11</td><td>截至 2026-08-21</td></tr>
+                  <tr><td>画布尺寸</td><td>—</td><td class="data-table-mono">4 种</td><td>竖屏长图 · 16:9 · 1:1 · 3:4</td></tr>
+                  <tr><td>视觉方向</td><td>—</td><td class="data-table-mono">9 种</td><td>完整视觉语言</td></tr>
+                  <tr><td>信息密度</td><td>—</td><td class="data-table-mono">3 档</td><td>快速传播 · 标准摘要 · 高密度报告</td></tr>
+                  <tr><td>质量检查</td><td class="data-table-ok">通过</td><td class="data-table-mono">双层</td><td>静态契约 + Playwright 几何检查</td></tr>
+                  <tr><td>公开 CI</td><td class="data-table-ok">成功</td><td class="data-table-mono">Python 3.9 / 3.12</td><td>均成功</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / CSS / JavaScript / Python / Playwright</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">OnePager 擅长把已有内容重新组织，不负责凭空补齐缺失数据和证据；可复现指生产信息与验收记录能够回看，不代表模型每次会生成完全相同的文案。</p>
+            <div class="callout-note">如果材料本身没有清晰结论，内容阶段会先暴露这个问题；对只有一句话的内容，完整生产流程也可能过重。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/onepager" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制仓库地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://github.com/ZeroxZhang/onepager" aria-pressed="false" aria-label="复制仓库地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制仓库地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 决策与开始 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">05 / DECISION</div>
+            <h2>适合需要被快速理解的复杂内容</h2>
+            <div class="section-deck">它擅长把已有内容重新组织，不负责凭空补齐缺失数据和证据。</div>
+          </div>
+
+          <div class="callout reveal">
+            <b class="callout-label">Decision</b>
+            <p class="callout-statement">你提供材料并说明受众，OnePager 负责重新编辑、安排版式、渲染与验收；内容蓝图阶段仍可改变叙事重点。</p>
+            <div class="callout-note">编辑、视觉与工程验收在同一套流程里完成</div>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">研究摘要、产品介绍、项目复盘、课程提要和社交传播都可以走这条路。</p>
+              <p>材料本身没有清晰结论时，内容阶段会先暴露问题；只有一句话的内容则更适合轻量文字卡片工具。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://github.com/ZeroxZhang/onepager" target="_blank" rel="noopener">安装 OnePager</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Visual Design</small>
+              <h3>Flowchart Generator Skill</h3>
+              <p>在画布出现之前，先把流程的逻辑整理清楚。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/flowchart-generator-skill">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Visual Design</small>
+              <h3>Architecture Diagram</h3>
+              <p>用可校验的几何规则，生成经得住评审的系统架构图。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/arch-diagram">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 03 / Publishing</small>
+              <h3>Newspaper Demo</h3>
+              <p>让 AI 生成的网页，重新拥有报纸式的阅读秩序。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/newspaper-demo">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — OnePager · No.05</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

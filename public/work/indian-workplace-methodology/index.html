@@ -1,0 +1,292 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  indian-workplace-methodology.html · 价值可见与组织推进 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（Junior pass，供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自 content/works/indian-workplace-methodology.md
+     （facts_as_of 2026-08-21），未新增数据。
+  3. 本作品为已发布的自包含 HTML 方法论文档，主阅读界面真实存在；
+     预留 2 个截图槽位（data-shot 01 / 02），均写明建议尺寸、拍摄内容与替换方法。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与
+     design/components.css —— 统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：作品页使用主站 /work/<slug> 路由；「返回作品列表」回到首页作品区。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ light-glass 悬浮（hero 次级引导）→
+     key-cap 命令（打开仓库）→ cube-flip 切换（复制阅读地址 / 已复制）→
+     dotted-offset 翻阅（关联作品）→ tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；技术栈（HTML / CSS）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/indian-workplace-methodology">
+  <title>价值可见与组织推进 · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="一份可直接阅读的方法论，把成果表达、利益相关者、决策记录与行动闭环整理成可执行的职场推进方式。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/indian-workplace-methodology/index.html · 价值可见与组织推进 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/indian-workplace-methodology.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot 01 / 02）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#method">方法</a>
+          <a href="#evidence">证据</a>
+        </div>
+        <a class="nav-cta" href="https://zeroxzhang.github.io/indian-workplace-methodology/" target="_blank" rel="noopener">阅读</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 31</b><br>作品展示 · 方法论文档</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">职场沟通与组织推进 · 行动清单</div>
+          <h1>价值可见与组织推进</h1>
+        </div>
+        <div class="hero-note">
+          <strong>让好工作被看见，让每次沟通都推动一个明确的下一步</strong>
+          <p>一份可直接阅读的方法论，把成果表达、利益相关者、决策记录与行动闭环整理成可执行的职场推进方式。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">职场沟通</span>
+            <span class="tag">组织执行</span>
+            <span class="tag">方法论</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://zeroxzhang.github.io/indian-workplace-methodology/" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>阅读方法论</a>
+            <!-- 动词「悬浮」：hero/kinetic grid 上的高级入口（仅 hero 区使用） -->
+            <a class="btn btn-light-glass" href="https://github.com/ZeroxZhang/indian-workplace-methodology" target="_blank" rel="noopener"><span class="light" aria-hidden="true"></span><span class="edge" aria-hidden="true"></span>查看 GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip hero-strip-2 hero-strip-2">
+        <div><small>结果语言</small><b>成果 · 影响 · 风险</b></div>
+        <div><small>行动收束</small><b>请求 · 负责人 · 复查</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主阅读视图（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/indian-workplace-methodology/01-reading-view.png" alt="《价值可见与组织推进》主阅读视图"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T14:30:03.254Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>做完的事，不等于被看见</h2>
+            <div class="section-deck">从「完成事项」转向「成果、影响与风险」，再从一个结论走到一个明确的下一步。</div>
+          </div>
+
+          <p class="lead reveal">完成任务并不自动等于组织理解了成果。会议结束、长消息发出、方案交付之后，仍可能没人能说清<mark>影响、风险、负责人和下一步</mark>。《价值可见与组织推进》把这些常见断点整理为可以在日常工作中练习的动作。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>它面向日常职场里最常见的一种落差：做了很多，组织却没有看见价值。方法不要求你改变性格，只提供一套可观察、可训练的动作——把工作讲成结果，把讨论收束成行动。</p>
+            </div>
+            <aside class="pull">让好工作被看见，让每次沟通都推动一个明确的下一步。<small>Core Promise</small></aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 方法 ══ -->
+      <section class="block" id="method">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / METHOD</div>
+            <h2>两件事：讲清结果，落到行动</h2>
+            <div class="section-deck">一套表达成果，一套推进下一步；典型流程五步走完。</div>
+          </div>
+
+          <!-- 图示 · 典型流程：把讨论接到行动上的五步 -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Typical Flow / 典型流程</span><span>5 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="把讨论接到行动上的典型流程">
+                <span class="flow-step"><span class="flow-index">01</span>界定结果</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>绘制关系</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>提出请求</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">04</span>确认责任</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">05</span>按节点复盘</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02.1 结果语言 -->
+          <div class="cap-block first reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.1 / Result Language</div>
+              <h3>用结果语言表达工作</h3>
+              <p>汇报从完成事项转向<strong>成果、影响与风险</strong>：发生了什么，改变了哪个指标或决策，还存在哪些不确定性。</p>
+              <p>对于暂时没有量化结果的工作，可以说明避免了什么损失、解除哪项依赖，或为下一阶段提供了什么条件，减少「做了很多」与「组织看见价值」之间的落差。</p>
+              <div class="dg-mini">
+                <div class="dg-node"><small>发生了什么</small>成果</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node"><small>改变了什么</small>指标或决策</div>
+                <span class="dg-arrow">→</span>
+                <div class="dg-node dg-current"><small>还剩什么</small>不确定性</div>
+              </div>
+              <p class="dg-caption">没有量化结果时，也可以说清「避免了什么损失」「解除哪项依赖」。</p>
+            </div>
+            <!-- ══ 截图槽位 02：响应式阅读（手动替换点）══════════════════
+                 替换方法：删除 <div class="shot-empty">…</div>，放入
+                 <img class="shot-img" src="/work-assets/screenshots/indian-workplace-methodology/02-responsive.png" alt="《价值可见与组织推进》响应式阅读视图"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T14:30:03.254Z -->
+          </div>
+
+          <!-- 02.2 行动收束 -->
+          <div class="cap-block reveal">
+            <div class="cap-text">
+              <div class="cap-no">02.2 / Actionable Close</div>
+              <h3>把讨论接到行动上</h3>
+              <p>开始沟通前先识别<strong>决策者、协作者和受影响者</strong>，并明确这次需要的是信息、意见、批准还是资源。</p>
+              <p>会议和消息以请求、负责人、截止时间及复查节点收束；关键决定和变更理由进入记录，降低承诺经过多人传递后的损失。</p>
+            </div>
+            <div class="scope-list">
+              <div><b>识别对象</b><span>决策者 · 协作者 · 受影响者</span></div>
+              <div><b>明确需要</b><span>信息 · 意见 · 批准 · 资源</span></div>
+              <div><b>收束方式</b><span>请求 · 负责人 · 截止 · 复查</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据摘要 + CTA + 关联作品 ══ -->
+      <section class="block" id="evidence">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE</div>
+            <h2>已发布的内容与证据边界</h2>
+            <div class="section-deck">截至 2026-08-21 · 交付形态可查，证据强度与适用范围一并写清。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>公开证据 · 来源：发布页面与公开仓库，截至 2026-08-21</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>发布形态</td><td class="data-table-ok">已发布</td><td class="data-table-mono">自包含 HTML</td><td>公开页面</td></tr>
+                  <tr><td>阅读辅助</td><td class="data-table-ok">已提供</td><td class="data-table-mono">目录 · 阅读进度 · 打印 · 响应式</td><td>阅读体验</td></tr>
+                  <tr><td>材料来源</td><td class="data-table-info">已说明</td><td class="data-table-mono">公开视频文稿 + 个人经验</td><td>底层材料</td></tr>
+                  <tr><td>同行评审</td><td class="data-table-risk">未经过</td><td class="data-table-mono">—</td><td>非组织行为学研究</td></tr>
+                  <tr><td>用户效果数据</td><td class="data-table-risk">无</td><td class="data-table-mono">—</td><td>未测量用户效果</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / CSS</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 边界</b>
+            <p class="callout-statement">底层材料来自公开视频文稿与个人经验，不是经过同行评审的组织行为学研究，也没有用户效果数据。</p>
+            <div class="callout-note">具体方法需要结合团队权限、文化、劳动关系和沟通规范验证。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / Release / 验证记录） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/indian-workplace-methodology" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制阅读地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://zeroxzhang.github.io/indian-workplace-methodology/" aria-pressed="false" aria-label="复制阅读地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制阅读地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">一份行动清单，而非人格模板：讨论可观察、可训练的组织机制，不把沟通方式归因于国籍、族群或人格标签。</p>
+              <p>适合作为下一次汇报、会议或跨团队协作前的检查表，也为后续补充案例和证据保留了清晰结构。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://zeroxzhang.github.io/indian-workplace-methodology/" target="_blank" rel="noopener">阅读《价值可见与组织推进》</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Learning</small>
+              <h3>Really</h3>
+              <p>把难题拆开、换个问法，再决定从哪下手。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/really">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — 价值可见与组织推进 · No.31</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

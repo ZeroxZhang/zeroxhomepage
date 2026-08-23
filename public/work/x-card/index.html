@@ -1,0 +1,282 @@
+<!doctype html>
+<!-- ═══════════════════════════════════════════════════════════════════
+  x-card.html · X Card 作品展示页
+  设计系统：zerox-dark-editorial（design/ 目录）
+  ═══════════════════════════════════════════════════════════════════
+  假设与说明（供评审）：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，后续模板阶段再做语言切换。
+  2. 全部事实取自 content/works/x-card.md（facts_as_of 2026-08-21），未新增数据。
+  3. 截图均为占位布局（shot 槽位），每个槽位写明了建议尺寸、拍摄内容和替换方法，
+     后续手动放入截图即可，布局无需改动。
+  4. 设计 token 与组件样式直接引用 design/colors_and_type.css 与 design/components.css ——
+     统一规则由共享样式承担，每个作品页只写自己的版式。
+  5. 链接约定：/work/<slug> 为各作品页路由；「返回作品列表」暂以 # 占位。
+  6. 按钮动效按「动词语法」分配（规则见 design/SKILL.md · Button Motion Grammar）：
+     radial-reveal 点亮（hero 主 CTA）→ key-cap 命令（打开仓库）→
+     cube-flip 切换（复制工具地址 / 已复制）→ dotted-offset 翻阅（关联作品索引）→
+     tactile 按压（结尾决策主操作）。
+  7. 首屏文案遵循 C 端价值优先原则（规则见 works-showcase/SKILL.md）：价值先行、
+     结果动词、说人话；工程数据（网络依赖 / 无 CI 等）后置到证据区。
+  ═══════════════════════════════════════════════════════════════════ -->
+<html lang="zh-CN" class="dark no-media">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://zeroxzhang.cc/work/x-card">
+  <title>X Card · 作品展示 | ZERØX / WORKS</title>
+  <meta name="description" content="隐私优先的单页卡片工具，在浏览器本地编辑资料、正文、主题与尺寸，并导出 2x / 3x PNG。">
+  <link rel="stylesheet" href="/work-assets/design/colors_and_type.css">
+  <link rel="stylesheet" href="/work-assets/design/components.css">
+  <link rel="stylesheet" href="/work-assets/site/site.css">
+</head>
+<body>
+  <div class="kinetic-bg" aria-hidden="true"><canvas id="kinetic-canvas"></canvas></div>
+
+  <div class="page">
+    <div class="progress" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+  work/x-card/index.html · X Card 作品展示页
+  架构：design/（设计系统）→ site/（页面模板 CSS/JS）→ work/<slug>/（页面内容）
+  内容真源：content/works/x-card.md · facts_as_of 2026-08-21
+  ═══════════════════════════════════════════════════════════════════
+  说明：
+  1. 本页为 zh-CN 单语预览；内容模型支持 en，语言切换后置。
+  2. 全部事实取自内容文件，未新增数据；首屏文案遵循 C 端价值原则。
+  3. 截图槽位（data-shot）与替换流程见 assets/screenshots/README.md；
+     替换时把 <div class="shot-empty">…</div> 换成 <img class="shot-img" src="…">。
+  4. 版式与交互在 site/site.css + site/site.js，页内不重复；组件样式在 design/。
+  5. 按钮动效按动词语法分配（design/SKILL.md · Button Motion Grammar）。
+  ═══════════════════════════════════════════════════════════════════ -->
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Zerøx / Works</a>
+        <div class="nav-links">
+          <a href="#overview">概览</a>
+          <a href="#capabilities">能力</a>
+          <a href="#start">开始</a>
+        </div>
+        <a class="nav-cta" href="https://zeroxzhang.github.io/x_card/" target="_blank" rel="noopener">制作</a>
+      </div>
+    </nav>
+
+    <!-- ══ Hero：承诺 + 主截图 ══ -->
+    <header class="hero wrap" id="top">
+      <div class="masthead">
+        <div><b>Zerøx / Works — No. 27</b><br>作品展示 · Web 应用</div>
+        <div class="mast-right">
+          <b>Status — Complete</b><br>
+          Facts as of 2026-08-21
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">浏览器里的 X 风格卡片工具 · 无需账号</div>
+          <h1>X<br><em>Card</em></h1>
+        </div>
+        <div class="hero-note">
+          <strong>不截真实账号，也能做出干净可控的 X 风格卡片</strong>
+          <p>隐私优先的单页卡片工具，在浏览器本地编辑资料、正文、主题与尺寸，并导出 2x / 3x PNG。</p>
+          <div class="hero-tags">
+            <span class="tag tag-current">社交卡片</span>
+            <span class="tag">隐私优先</span>
+            <span class="tag">单页应用</span>
+          </div>
+          <div class="hero-actions">
+            <!-- 动词「点亮」：单一高意图 CTA，从光标处展开（每页仅此一个） -->
+            <a class="btn btn-radial-reveal" href="https://zeroxzhang.github.io/x_card/" target="_blank" rel="noopener"><span class="reveal-fill" aria-hidden="true"></span>制作 X 风格卡片</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-strip">
+        <div><small>Edit</small><b>资料与正文本地填写</b></div>
+        <div><small>Theme</small><b>浅色 / 深色 · 边框</b></div>
+        <div><small>Canvas</small><b>宽度 420–900px</b></div>
+        <div><small>Export</small><b>2x / 3x PNG 导出</b></div>
+      </div>
+
+      <!-- ══ 截图槽位 01：主界面（手动替换点）══════════════════
+           替换方法：删除 <div class="shot-empty">…</div>，
+           放入 <img class="shot-img" src="/work-assets/screenshots/x-card/01-main-ui.png" alt="X Card 主界面"> -->
+      <!-- SHOT-SLOT 01 ADMIN-SKIPPED 2026-08-22T15:37:20.998Z -->
+    </header>
+
+    <main>
+      <!-- ══ 01 / 概览 ══ -->
+      <section class="block" id="overview">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">01 / OVERVIEW</div>
+            <h2>把帖子视觉从平台界面里拆出来</h2>
+            <div class="section-deck">适合制作引用卡、演示样稿或经授权的社交内容预览，不带走真实账号。</div>
+          </div>
+
+          <p class="lead reveal">直接截取社交平台帖子，会把导航、推荐内容、压缩痕迹和真实账号信息一起带走。X Card 把帖子视觉从平台界面中拆出来，姓名、头像信息、正文、时间与视觉选项都由使用者明确填写。</p>
+
+          <div class="prose-row reveal">
+            <div class="prose">
+              <p>它面向需要控制构图和隐私的单张文本内容。整页只做一件事：把一段文字排版成一张干净的 X 风格卡片，不需要登录真实账号。输入内容在浏览器本地参与排版，没有业务后端负责保存正文。</p>
+            </div>
+            <aside class="pull">需要控制构图和隐私的单张内容，不必从真实账号截图开始。<small>Privacy-first</small></aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 02 / 能力精简 ══ -->
+      <section class="block" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">02 / CAPABILITIES</div>
+            <h2>从一张空白卡片到高清 PNG</h2>
+            <div class="section-deck">编辑、排版、预览与导出在同一条路径里完成。</div>
+          </div>
+
+          <!-- 图示 · 制作路径：四步流程（复用 flow 组件） -->
+          <div class="diagram reveal">
+            <div class="diagram-title"><span>Compose Flow / 制作路径</span><span>4 Steps</span></div>
+            <div class="diagram-body">
+              <div class="flow" aria-label="制作一张 X 风格卡片的流程">
+                <span class="flow-step"><span class="flow-index">01</span>编辑资料与正文</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">02</span>选择主题与尺寸</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step"><span class="flow-index">03</span>确认预览</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step flow-step-success"><span class="flow-index">04</span>导出高清 PNG</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="editorial-card-grid reveal">
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Cap 01 / Compose</small>
+              <h2 class="editorial-card-title">本地可控</h2>
+              <p class="editorial-card-body">先编辑资料与正文，再选择浅色或深色主题、边框和模拟认证标识；画布宽度可在 420—900px 之间调整，也能设置最小高度，正文支持重点加粗。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Cap 02 / Export</small>
+              <h2 class="editorial-card-title">高清导出</h2>
+              <p class="editorial-card-body">确认预览后，按 2x 或 3x 清晰度导出 PNG，减少真实平台截图中的导航、推荐与压缩痕迹等无关元素。</p>
+            </article>
+            <article class="editorial-card">
+              <small class="editorial-card-eyebrow">Cap 03 / Stack</small>
+              <h2 class="editorial-card-title">轻量实现</h2>
+              <p class="editorial-card-body">以原生 HTML、CSS 和 JavaScript 构建，部署在 GitHub Pages；输入内容在浏览器本地排版，无业务后端保存正文。</p>
+            </article>
+          </div>
+
+          <!-- ══ 截图槽位 02：主题与导出（手动替换点）══════════════════
+               替换方法：删除 <div class="shot-empty">…</div>，
+               放入 <img class="shot-img" src="/work-assets/screenshots/x-card/02-theme-export.png" alt="X Card 主题与导出控件"> -->
+      <!-- SHOT-SLOT 02 ADMIN-SKIPPED 2026-08-22T15:37:20.998Z -->
+        </div>
+      </section>
+
+      <!-- ══ 03 / 证据与开始 ══ -->
+      <section class="block" id="start">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="section-no">03 / EVIDENCE &amp; START</div>
+            <h2>能做什么，也先说清边界</h2>
+            <div class="section-deck">截至 2026-08-21，在线页面与公开仓库均可访问；渲染差异与误用风险需要使用者自己把关。</div>
+          </div>
+
+          <div class="reveal">
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <caption>当前证据 · 来源：在线页面与公开仓库（截至 2026-08-21）</caption>
+                <thead>
+                  <tr><th>维度</th><th>状态</th><th>证据值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>在线页面</td><td class="data-table-ok">可访问</td><td class="data-table-mono">live</td><td>公开部署于 GitHub Pages</td></tr>
+                  <tr><td>公开仓库</td><td class="data-table-ok">可访问</td><td class="data-table-mono">public</td><td>源码可核验</td></tr>
+                  <tr><td>兼容性 CI</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>跨浏览器渲染需自行检查</td></tr>
+                  <tr><td>自动测试</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>无自动化验证</td></tr>
+                  <tr><td>版本 tag</td><td class="data-table-risk">暂无</td><td class="data-table-mono">—</td><td>无正式版本 tag</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="stack-note reveal">技术栈：HTML / CSS / JavaScript · 部署于 GitHub Pages</p>
+
+          <div class="callout callout-risk reveal" style="margin-top:var(--space-7)">
+            <b class="callout-label">Boundary / 使用边界</b>
+            <p class="callout-statement">模拟认证标识与可编辑资料不应被用于伪造真实发言；成品应根据发布语境标注为设计稿、引用卡或重制内容。</p>
+            <div class="callout-note">PNG 导出依赖从 jsDelivr 加载的第三方库，首次导出需要网络；库未缓存时离线打开不保证完成导出。不同浏览器、字体与长文本下的渲染仍需使用者检查。</div>
+          </div>
+
+          <div class="evidence-actions reveal" style="margin-top:var(--space-6)">
+            <!-- 动词「命令」：技术控制台入口（仓库 / 源码） -->
+            <div class="keycap-wrap">
+              <a class="btn btn-keycap" href="https://github.com/ZeroxZhang/x_card" target="_blank" rel="noopener" aria-label="打开公开仓库">
+                <span class="sizer">打开公开仓库</span>
+                <span class="prism">
+                  <span class="reflection"></span>
+                  <span class="slab slab-depth-0"></span>
+                  <span class="slab slab-depth-3"></span>
+                  <span class="slab slab-depth-6"></span>
+                  <span class="slab slab-depth-9"></span>
+                  <span class="slab slab-depth-12"></span>
+                  <span class="slab slab-depth-15"></span>
+                  <span class="top">打开公开仓库 ↗</span>
+                </span>
+              </a>
+            </div>
+            <!-- 动词「切换」：真实双态 —— 复制工具地址 / 已复制（JS 状态驱动 + 自动回退） -->
+            <button type="button" class="btn btn-cube-flip" data-copy="https://zeroxzhang.github.io/x_card/" aria-pressed="false" aria-label="复制卡片工具地址到剪贴板">
+              <span class="cube">
+                <span class="face front">复制工具地址</span>
+                <span class="face back">已复制 ✓</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="cta-grid reveal">
+            <div>
+              <p class="cta-lead">需要一张不带走账号、构图可控的 X 风格文字卡片？打开页面，填好资料与正文，导出即可。</p>
+              <p>它适合需要控制构图和隐私的单张文本内容，也保留了一个无需账号即可复用的静态工具样本。</p>
+            </div>
+            <div class="cta-actions">
+              <!-- 动词「按压」：结尾决策点的主操作 —— 实体按压 = 考虑之后的承诺（每页仅此一个） -->
+              <div class="btn-tactile-wrap">
+                <a class="btn btn-tactile" href="https://zeroxzhang.github.io/x_card/" target="_blank" rel="noopener">制作 X 风格卡片</a>
+              </div>
+              <a class="btn" href="https://github.com/ZeroxZhang/x_card" target="_blank" rel="noopener">查看 GitHub</a>
+            </div>
+          </div>
+
+          <div class="related-head reveal">Related Works / 关联作品 <span>按内容模型登记</span></div>
+          <div class="related-grid reveal">
+            <article class="related-card">
+              <small>Related 01 / Visual Design</small>
+              <h3>Text Card Generator</h3>
+              <p>在浏览器中完成中文排版、纸张选择与高分辨率文字卡片导出。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/text-card-generator">查看作品</a></div>
+            </article>
+            <article class="related-card">
+              <small>Related 02 / Web Products</small>
+              <h3>Minimalism Note Card Generator</h3>
+              <p>写下一段话，几步带走一张克制、干净的分享卡片。</p>
+              <div class="card-foot"><a class="btn btn-dotted-offset compact" href="/work/minimalism-note-card-generator">查看作品</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>Zerøx / Works — X Card · No.27</span>
+      <span>未提供截图 · Facts as of 2026-08-21</span>
+      <span><a href="/#work">← 返回作品列表</a> · <a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+
+  <script src="/work-assets/site/site.js"></script>
+</body>
+</html>

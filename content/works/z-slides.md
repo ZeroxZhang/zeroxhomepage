@@ -38,6 +38,7 @@ links:
     type: website
     url: https://slides.zeroxzhang.cc
     primary: true
+    show_on_homepage: true
 related:
   - onepager
   - newspaper-demo
