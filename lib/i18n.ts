@@ -41,7 +41,7 @@ export const copy = {
     },
     works: {
       heading: (categories: number, total: number) =>
-        `${categories} 条线索，${total} 件作品`,
+        `${categories}大类，${total}件近期作品。`,
       sub: (categories: number, total: number) =>
         `${categories} tracks, ${total} works — 点击任意分类查看完整清单。`,
       allLabel: "全部作品",

@@ -6,7 +6,7 @@ import { copy } from "../lib/i18n.ts";
 test("作品区标题由分类数和作品数生成", () => {
   const heading = copy["zh-CN"].works.heading;
   assert.equal(typeof heading, "function");
-  assert.equal(heading(8, 36), "8 条线索，36 件作品");
+  assert.equal(heading(8, 36), "8大类，36件近期作品。");
 });
 
 test("英雄区说明提供中英文版本", () => {
