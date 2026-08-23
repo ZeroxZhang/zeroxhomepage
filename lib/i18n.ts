@@ -29,9 +29,9 @@ export const copy = {
     },
     hero: {
       kicker: "官方主页 · OFFICIAL HOMEPAGE",
-      mottoLine: "探索永无止境 · 此行通往群星",
-      description: (total: number) =>
-        `独立开发者与创作者。长期构建 AI Agent 系统、量化投研工具与内容出版产品——${total} 件作品在此公开归档，从本地脚本到上线产品。`,
+      mottoLine: "探索永无止境。",
+      description: (_total: number) =>
+        "独立开发者与创作者。长期构建 AI Agent 系统与工具、量化投研工具与内容输出系统。首页仅呈现近期部分作品，欢迎合作者与我联系。",
       buttons: {
         github: "GitHub",
         blog: "博客",
@@ -60,7 +60,7 @@ export const copy = {
     },
     footer: {
       brandTagline: `官方主页 · ${siteConfig.domain}`,
-      mottoLine: `${siteConfig.hero.mottoLa} — 探索永无止境。`,
+      mottoLine: "探索永无止境。",
       explore: "浏览",
       contact: "联系",
       wechatLabel: "微信公众号：",
@@ -97,9 +97,9 @@ export const copy = {
     },
     hero: {
       kicker: "OFFICIAL HOMEPAGE · 官方主页",
-      mottoLine: "Thus one journeys to the stars — exploration never ends.",
-      description: (total: number) =>
-        `Independent developer & creator. I build AI agent systems, quant research tools, and content publishing products — ${total} works archived here, from local scripts to live products.`,
+      mottoLine: "Exploration never ends.",
+      description: (_total: number) =>
+        "Independent developer and creator. I build AI agent systems and tools, quantitative research tools, and content production systems. The homepage presents only a selection of recent work. Collaborators are welcome to get in touch.",
       buttons: {
         github: "GitHub",
         blog: "Blog",
@@ -128,7 +128,7 @@ export const copy = {
     },
     footer: {
       brandTagline: `Official site · ${siteConfig.domain}`,
-      mottoLine: `${siteConfig.hero.mottoLa} — exploration never ends.`,
+      mottoLine: "Exploration never ends.",
       explore: "Explore",
       contact: "Contact",
       wechatLabel: "WeChat Official Account:",

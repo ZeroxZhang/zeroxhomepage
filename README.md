@@ -16,7 +16,7 @@
 
 > 更新于 2026-08-23
 
-- **首页首版已完成**：英雄区（Hero 10 基线 + Cinzel 主标题 + 维吉尔格言「Sic itur ad astra」+ GitHub/博客/公众号/联系我按钮组）、Kinetic Grid 倾斜动效地面（替换 Prism Grid）、按 8 条分类组织的 Interactive Grid 作品集入口（9 宫格 + 分类弹层）、导航与 Footer。
+- **首页首版已完成**：英雄区（Hero 10 基线 + Cinzel 主标题 + 格言「Semper novarum rerum cupidus」+ GitHub/博客/公众号/联系我按钮组）、Kinetic Grid 倾斜动效地面（替换 Prism Grid）、按 8 条分类组织的 Interactive Grid 作品集入口（9 宫格 + 分类弹层）、导航与 Footer。
 - 应用脚手架已落地：Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion，`/`、`/about`（双语占位）静态预渲染；`npm run dev/build/start/lint/typecheck/test` 可用，另有 Playwright 首页与关键回归验收脚本。
 - 35 个作品的中英文介绍已整理到 `content/works/`，首页由 `lib/works.ts` 加载器消费；分类、计数与排序来自内容源，构建时校验双语字段、正文结构、链接、关联和枚举。
 - 设计基线已定稿：见 [`docs/design/2026-08-23-homepage-design.md`](./docs/design/2026-08-23-homepage-design.md)。

@@ -30,10 +30,10 @@
 
 - 眉标：`官方主页 · OFFICIAL HOMEPAGE`（黄铜、宽字距、两侧菱形）
 - 主标题：`ZEROX ZHANG.`（Cinzel 900，clamp(2.8rem,10.5vw,8.4rem)，逐字入场，句点为黄铜色）——满足「这是 Zerox Zhang 的官方地址」的第一眼表达
-- 弧形循环文字：`SIC ITUR AD ASTRA · 探索永无止境 ·`（TextArc，hover 暂停）
-- 格言四层结构：拉丁原文（黄铜斜体）→ 英译 `Thus one journeys to the stars.` → 中文 `探索永无止境 · 此行通往群星` → 出处 `VERGILIVS · AENEIS IX.641`
-- 格言选型：维吉尔《埃涅阿斯纪》IX.641「sic itur ad astra」（如此走向群星）。备选曾考虑：`Per aspera ad astra`（塞涅卡系）、`Αἰὲν ἀριστεύειν`（荷马）、`Navigare necesse est`（普鲁塔克）。选定理由：出处确凿、词面即含「路」（itur=行走）与「星辰」（astra），与「探索永无止境」逐字对应。
-- 说明段：一句话个人定位（独立开发者与创作者；AI Agent 系统 / 量化投研 / 内容出版；35 件作品公开归档）
+- 弧形循环文字：`SEMPER NOVARUM RERUM CUPIDUS · 探索永无止境 ·`（TextArc，hover 暂停）
+- 格言两层结构：拉丁原文 `Semper novarum rerum cupidus`（黄铜斜体）→ 当前语言释义（中文「探索永无止境。」；英文 `Exploration never ends.`）。
+- 格言选型：采用用户提供的 `Semper novarum rerum cupidus`，强调持续探索新事物；不展示未经确认的出处署名。
+- 说明段：独立开发者与创作者定位；长期构建 AI Agent 系统与工具、量化投研工具与内容输出系统；首页仅展示近期部分作品并邀请合作者联系。
 
 ## 4. 动效地面：Kinetic Grid 替换 Prism Grid
 

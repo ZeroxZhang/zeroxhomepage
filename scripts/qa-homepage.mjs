@@ -105,13 +105,13 @@ for (const vp of VIEWPORTS) {
     `text=${headline?.text?.slice(0, 16)} font=${headline?.font?.split(",")[0]}`,
   );
 
-  // 4. 格言与出处
+  // 4. 格言
   const motto = await page.evaluate(() => document.body.innerText);
   record(
     `${vp.name} 格言文案`,
-    motto.includes("Sic itur ad astra") &&
-      motto.includes("探索永无止境 · 此行通往群星") &&
-      motto.includes("AENEIS"),
+    motto.includes("Semper novarum rerum cupidus") &&
+      motto.includes("探索永无止境") &&
+      !motto.includes("AENEIS"),
   );
 
   // 5. 四个按钮

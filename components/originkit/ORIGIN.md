@@ -66,7 +66,7 @@ OriginKit API Key 不在仓库中。它保存在获取机器的 macOS Keychain�
 
 | 文件 | 修改 | 原因 |
 | --- | --- | --- |
-| `ui/hero-10/text-arc.tsx` | 弧形文字改为「SIC ITUR AD ASTRA · 探索永无止境」；颜色/字体改本站主题；离开视口或页面隐藏时卸载旋转实例 | 移除 demo 品牌文案并暂停离屏帧循环 |
+| `ui/hero-10/text-arc.tsx` | 弧形文字改为「SEMPER NOVARUM RERUM CUPIDUS · 探索永无止境」；颜色/字体改本站主题；离开视口或页面隐藏时卸载旋转实例 | 移除 demo 品牌文案并暂停离屏帧循环 |
 | `ui/hero-10/pixel-background.tsx` | 修复 `maskStyle()` 把 Tailwind 工具类名写入 `maskImage` 的无效 CSS；像素色 `#5AF5A3` → `#D9B45B` | 交付缺陷修复 + 主题统一 |
 | `ui/hero-10/pixel-card.tsx` | `auto` 入场完成后停止逐像素闪烁；减少动态模式使用静态帧；离屏和页面隐藏时停止 rAF | 避免装饰 Canvas 永久占用 CPU/GPU |
 | `ui/kineticgrid.tsx` | 新增 `pointerTarget`、`mapPointer`、`reducedMotion`；网格稳定后休眠、输入时唤醒、页面隐藏时暂停；Canvas DPR 上限设为 1.5 | 保留交互的同时消除空闲永久重绘和高 DPR 放大成本 |

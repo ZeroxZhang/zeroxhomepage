@@ -110,7 +110,7 @@ export const TextArc = () => {
           style={{ width: diameter, height: diameter }}
         >
           <CircularText
-            words={["SIC ITUR AD ASTRA", "探索永无止境"]}
+            words={["SEMPER NOVARUM RERUM CUPIDUS", "探索永无止境"]}
             separator=" · "
             diameter={diameter}
             color="rgba(242,239,228,0.82)"

@@ -9,9 +9,13 @@ test("作品区标题由分类数和作品数生成", () => {
   assert.equal(heading(8, 36), "8 条线索，36 件作品");
 });
 
-test("英雄区说明由作品数生成", () => {
-  const description = copy.en.hero.description;
-  assert.equal(typeof description, "function");
-  assert.equal(description(36).includes("thirty-five"), false);
-  assert.equal(description(36).includes("36 works"), true);
+test("英雄区说明提供中英文版本", () => {
+  assert.equal(
+    copy["zh-CN"].hero.description(36),
+    "独立开发者与创作者。长期构建 AI Agent 系统与工具、量化投研工具与内容输出系统。首页仅呈现近期部分作品，欢迎合作者与我联系。",
+  );
+  assert.equal(
+    copy.en.hero.description(36),
+    "Independent developer and creator. I build AI agent systems and tools, quantitative research tools, and content production systems. The homepage presents only a selection of recent work. Collaborators are welcome to get in touch.",
+  );
 });

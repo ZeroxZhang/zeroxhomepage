@@ -23,8 +23,8 @@ export const siteConfig = {
   /** 英雄区主标题与格言（双语不敏感）。 */
   hero: {
     headline: "ZEROX ZHANG",
-    mottoLa: "Sic itur ad astra",
-    mottoAttribution: "Vergilius · Aeneis IX.641",
+    mottoLa: "Semper novarum rerum cupidus",
+    mottoAttribution: null,
   },
 
   /** 导航（标签文案在 lib/i18n.ts 按语言提供）。 */
@@ -37,7 +37,7 @@ export const siteConfig = {
 
   footer: {
     copyright: "© 2017–2026 zeroxzhang.cc · All rights reserved",
-    motto: "SIC ITUR AD ASTRA",
+    motto: "SEMPER NOVARUM RERUM CUPIDUS",
   },
 } as const;
 

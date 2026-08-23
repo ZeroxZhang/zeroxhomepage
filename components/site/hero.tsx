@@ -165,12 +165,14 @@ export const Hero = ({ total }: { total: number }) => {
               >
                 {c.hero.mottoLine}
               </motion.p>
-              <motion.p
-                {...restReveal(0.74)}
-                className="font-sans text-[9.5px] uppercase tracking-[0.34em] text-ivory-faint"
-              >
-                {siteConfig.hero.mottoAttribution}
-              </motion.p>
+              {siteConfig.hero.mottoAttribution ? (
+                <motion.p
+                  {...restReveal(0.74)}
+                  className="font-sans text-[9.5px] uppercase tracking-[0.34em] text-ivory-faint"
+                >
+                  {siteConfig.hero.mottoAttribution}
+                </motion.p>
+              ) : null}
             </div>
 
             <motion.p

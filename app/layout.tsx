@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: `%s · ${siteConfig.name}`,
   },
   description:
-    "Zerox Zhang 的官方网站：独立开发者与创作者，构建 AI Agent 系统、量化投研工具与内容出版产品。Sic itur ad astra — 探索永无止境。",
+    "Zerox Zhang 的官方网站：独立开发者与创作者，构建 AI Agent 系统与工具、量化投研工具与内容输出系统。Semper novarum rerum cupidus — 探索永无止境。",
   keywords: [
     "Zerox Zhang",
     "AI Agent",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: `${siteConfig.name} — 官方主页`,
-    description: "Sic itur ad astra — 探索永无止境。",
+    description: "Semper novarum rerum cupidus — 探索永无止境。",
     url: `https://${siteConfig.domain}`,
     siteName: siteConfig.domain,
     locale: "zh_CN",
