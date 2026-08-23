@@ -123,6 +123,19 @@ test("所有注册作品都有同域静态详情页", () => {
     }
 
     const renderedSource = page.replace(/<!--[\s\S]*?-->/g, "");
+    const footer = renderedSource.match(/<footer[\s\S]*?<\/footer>/)?.[0] ?? "";
+    assert.match(footer, /class="footer-signature"/, `${work.slug} 缺少统一页脚签名`);
+    assert.match(footer, /class="footer-links"/, `${work.slug} 缺少统一页脚导航`);
+    assert.doesNotMatch(
+      footer,
+      /截图|图片|占位|Facts as of|No\.\d+/,
+      `${work.slug} 页脚包含面向制作过程的内部状态`,
+    );
+    assert.doesNotMatch(
+      renderedSource,
+      /按内容模型登记|class="shot-empty"|# 占位/,
+      `${work.slug} 包含不应展示给访客的占位或内部说明`,
+    );
     for (const match of renderedSource.matchAll(/(?:href|src)="(\/work-assets\/[^"]+)"/g)) {
       assert.ok(
         existsSync(path.join(process.cwd(), "public", match[1].slice(1))),

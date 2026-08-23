@@ -173,9 +173,12 @@
     .card-foot{margin-top:auto;padding-top:20px}
 
     /* ── 页脚 ─────────────────────────────────────────────────── */
-    footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:36px 0 60px;border-top:1px solid var(--paper-300);color:var(--muted-500);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
-    footer a{color:var(--signal-green)}
-    footer a:hover{color:var(--accent-hover)}
+    footer{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:36px 0 60px;border-top:1px solid var(--paper-300);color:var(--muted-500);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+    .footer-signature{color:var(--paper-300)}
+    .footer-links{display:flex;align-items:center;gap:28px}
+    .footer-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--signal-green)}
+    .footer-links a + a{border-left:1px solid var(--line-700);padding-left:28px}
+    .footer-links a:hover{color:var(--accent-hover)}
 
     /* ── 无图模式（html.no-media：作品未提供截图，由管理台标记）── */
     /* 收起为截图预留的结构：能力块单列、hero 不撑满首屏 */
@@ -213,7 +216,9 @@
       .stat-grid div:last-child{border-bottom:0}
       .step{grid-template-columns:44px 1fr}
       .dg-score{grid-template-columns:minmax(0,1fr)}
-      footer{flex-direction:column;gap:8px}
+      footer{align-items:flex-start;flex-direction:column;gap:8px}
+      .footer-links{width:100%;flex-wrap:wrap;gap:0 24px}
+      .footer-links a + a{padding-left:24px}
     }
     @media (prefers-reduced-motion: reduce){
       *,*:before,*:after{scroll-behavior:auto!important;transition:none!important}
