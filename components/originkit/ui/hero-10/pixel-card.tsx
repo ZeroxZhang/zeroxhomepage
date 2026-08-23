@@ -1,8 +1,6 @@
 // Delivered by Originkit · stack: nextjs · styling: tailwind
 "use client";
 
-"use client";
-
 // Pixel Card — Originkit
 // Framer controls mirrored:
 //   Colors, Appear From, Trigger, Gap, Size, Speed, Position, Replay,
@@ -90,7 +88,12 @@ class Pixel {
     );
   }
 
-  appear(now: number, durationMs: number, easeFn: (t: number) => number) {
+  appear(
+    now: number,
+    durationMs: number,
+    easeFn: (t: number) => number,
+    keepShimmering: boolean,
+  ) {
     this.isIdle = false;
     this.shrinkStart = null;
     if (this.counter <= this.delay) {
@@ -102,7 +105,15 @@ class Pixel {
       const p =
         durationMs > 0 ? Math.min(1, (now - this.growStart) / durationMs) : 1;
       this.size = easeFn(p) * this.maxSize;
-      if (p >= 1) this.isShimmer = true;
+      if (p >= 1) {
+        this.size = this.maxSize;
+        this.isShimmer = keepShimmering;
+        if (!keepShimmering) {
+          this.draw();
+          this.isIdle = true;
+          return;
+        }
+      }
     }
     if (this.isShimmer) {
       this.shimmer();
@@ -390,12 +401,15 @@ export default function PixelCard(props: PixelCardProps) {
   };
 
   const doAnimate = (fnName: "appear" | "disappear") => {
-    animationRef.current = requestAnimationFrame(() => doAnimate(fnName));
+    animationRef.current = null;
     const timeNow = performance.now();
     const timePassed = timeNow - timePreviousRef.current;
     const timeInterval = 1000 / 60;
 
-    if (timePassed < timeInterval) return;
+    if (timePassed < timeInterval) {
+      animationRef.current = requestAnimationFrame(() => doAnimate(fnName));
+      return;
+    }
     timePreviousRef.current = timeNow - (timePassed % timeInterval);
 
     const ctx = canvasRef.current?.getContext("2d");
@@ -404,15 +418,20 @@ export default function PixelCard(props: PixelCardProps) {
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
     let allIdle = true;
+    const keepShimmering = resolvedTrigger === "hover" && !reducedMotion;
     for (let i = 0; i < pixelsRef.current.length; i++) {
       const pixel = pixelsRef.current[i];
-      pixel[fnName](timeNow, durationMs, easeFn);
+      if (fnName === "appear") {
+        pixel.appear(timeNow, durationMs, easeFn, keepShimmering);
+      } else {
+        pixel.disappear(timeNow, durationMs, easeFn);
+      }
       if (!pixel.isIdle) {
         allIdle = false;
       }
     }
-    if (allIdle) {
-      cancelAnimationFrame(animationRef.current as number);
+    if (!allIdle) {
+      animationRef.current = requestAnimationFrame(() => doAnimate(fnName));
     }
   };
 
@@ -432,7 +451,8 @@ export default function PixelCard(props: PixelCardProps) {
   };
 
   const present = () => {
-    if (isExport) {
+    if (isExport || reducedMotion) {
+      hasPlayedRef.current = true;
       drawStaticFrame();
       return;
     }
@@ -449,7 +469,7 @@ export default function PixelCard(props: PixelCardProps) {
     const resizeObserver = new ResizeObserver(() => {
       const alreadyPlayed = hasPlayedRef.current;
       initPixels();
-      if (isExport) {
+      if (isExport || reducedMotion) {
         drawStaticFrame();
         return;
       }
@@ -471,20 +491,20 @@ export default function PixelCard(props: PixelCardProps) {
     }
 
     let io: IntersectionObserver | null = null;
-    if (
-      !isExport &&
-      !isFramerCanvas &&
-      resolvedTrigger === "enter" &&
-      containerRef.current
-    ) {
+    if (!isExport && !isFramerCanvas && containerRef.current) {
       io = new IntersectionObserver(
         (entries) => {
           const entry = entries[0];
           if (!entry) return;
           if (entry.isIntersecting) {
-            handleAnimation("appear");
-          } else if (replay) {
-            handleAnimation("disappear");
+            if (resolvedTrigger === "enter") handleAnimation("appear");
+          } else {
+            if (animationRef.current !== null) {
+              cancelAnimationFrame(animationRef.current);
+              animationRef.current = null;
+            }
+            if (replay) handleAnimation("disappear");
+            else drawStaticFrame();
           }
         },
         { threshold: 0.15 },
@@ -492,9 +512,22 @@ export default function PixelCard(props: PixelCardProps) {
       io.observe(containerRef.current);
     }
 
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationRef.current !== null) {
+          cancelAnimationFrame(animationRef.current);
+          animationRef.current = null;
+        }
+      } else if (resolvedTrigger === "auto") {
+        drawStaticFrame();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
     return () => {
       resizeObserver.disconnect();
       io?.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
       }

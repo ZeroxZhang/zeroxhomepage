@@ -48,3 +48,30 @@ OriginKit API Key 不在仓库中。它保存在获取机器的 macOS Keychain�
 - SVG 未发现脚本、事件处理器、外部链接或 `foreignObject`。
 - 仓库扫描未发现 OriginKit API Key 或账户邮箱。
 - 代码尚未在真实 Next.js 应用中构建或运行；集成缺口见项目 Hero 10 适配评估。
+
+## 2026-08-23 新增交付与站点适配
+
+### 新增组件
+
+| 组件 | 来源 | 本地文件 | 说明 |
+| --- | --- | --- | --- |
+| Kinetic Grid | [kineticgrid](https://www.originkit.dev/components/kineticgrid) | `components/originkit/ui/kineticgrid.tsx` | cursor 类，无新增 npm 依赖 |
+| Interactive Grid | [interactive-grid](https://www.originkit.dev/components/interactive-grid) | `components/originkit/ui/interactive-grid.tsx` | animation 类，无新增 npm 依赖 |
+| Keycap Button | [keycap-button](https://www.originkit.dev/components/keycap-button) | `components/originkit/ui/keycap-button.tsx` | button 类，无新增 npm 依赖；上游为 DesignPass.dev 的 IsometricButton（MIT，版权注释保留在文件头），官方要求衍生代码注明 DesignPass.dev 与 Ernest Liu |
+
+- 取得方式：OriginKit CLI `add`（AI Prompt 通道，`--no-deps`），各消耗 1 次 Component delivery。
+- 组件源码为纯 React 客户端组件，交互机制已用于首页；未再获取同一组件。
+
+### 对交付文件的站点适配（Git 追踪）
+
+| 文件 | 修改 | 原因 |
+| --- | --- | --- |
+| `ui/hero-10/text-arc.tsx` | 弧形文字改为「SIC ITUR AD ASTRA · 探索永无止境」；颜色/字体改本站主题；离开视口或页面隐藏时卸载旋转实例 | 移除 demo 品牌文案并暂停离屏帧循环 |
+| `ui/hero-10/pixel-background.tsx` | 修复 `maskStyle()` 把 Tailwind 工具类名写入 `maskImage` 的无效 CSS；像素色 `#5AF5A3` → `#D9B45B` | 交付缺陷修复 + 主题统一 |
+| `ui/hero-10/pixel-card.tsx` | `auto` 入场完成后停止逐像素闪烁；减少动态模式使用静态帧；离屏和页面隐藏时停止 rAF | 避免装饰 Canvas 永久占用 CPU/GPU |
+| `ui/kineticgrid.tsx` | 新增 `pointerTarget`、`mapPointer`、`reducedMotion`；网格稳定后休眠、输入时唤醒、页面隐藏时暂停；Canvas DPR 上限设为 1.5 | 保留交互的同时消除空闲永久重绘和高 DPR 放大成本 |
+| `ui/interactive-grid.tsx` | 未修改 | 交互机制改编进 `components/site/work-grid.tsx`（单元格改为文字与符号内容） |
+| `ui/keycap-button.tsx` | 未修改 | 用于右上角语言切换（`components/site/locale-toggle.tsx`），配色/尺寸经 props 调为主题色 |
+
+其余 hero-10 文件（`section-16-hero`、`hero-content`、`navbar`、`button` 等）保留为来源基线，
+站点实现位于 `components/site/`。设计决策见 `docs/design/2026-08-23-homepage-design.md`。

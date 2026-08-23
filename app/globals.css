@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "./originkit-section-theme.css";
+
+/* OriginKit 交付组件位于 components/originkit，显式纳入 Tailwind 扫描 */
+@source "../components/originkit";
+
+/* ============================================================
+ * 设计系统 ——「黑曜石与黄铜」Obsidian & Brass
+ * 主题：现代数字 × 古典碑刻。黑曜底色、象牙文字、黄铜点缀、
+ * 苔绿环境光。英雄区、动效网格与作品集共用同一套 token。
+ * ============================================================ */
+@theme {
+  /* 色彩 */
+  --color-ink: #0a0c09;
+  --color-ink-soft: #0e110c;
+  --color-ink-card: #12150f;
+  --color-line: #262a1f;
+  --color-ivory: #f2efe4;
+  --color-ivory-dim: rgba(242, 239, 228, 0.62);
+  --color-ivory-faint: rgba(242, 239, 228, 0.38);
+  --color-brass: #d9b45b;
+  --color-brass-bright: #efd38a;
+  --color-brass-deep: #a68f1f;
+  --color-moss: #7c9476;
+  --color-moss-deep: #4a5d46;
+
+  /* 字体 */
+  --font-display: var(--font-cinzel), ui-serif, Georgia, serif;
+  --font-quote: var(--font-instrument), Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-cjk: "Songti SC", "STSong", "Noto Serif CJK SC",
+    "Source Han Serif SC", "SimSun", serif;
+
+  /* 圆角 */
+  --radius-pill: 999px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-brass);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* 主标题的暖光氛围 */
+@utility text-glow-brass {
+  text-shadow:
+    0 0 42px rgba(217, 180, 91, 0.22),
+    0 0 120px rgba(217, 180, 91, 0.12);
+}
+
+/* 分类磁贴 hover 时的黄铜光晕（供 work-grid 使用） */
+@utility glow-tile {
+  filter: drop-shadow(0 0 14px rgba(217, 180, 91, 0.35))
+    drop-shadow(0 0 40px rgba(217, 180, 91, 0.18));
+}
+
+/* 弹层面板入场 */
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 细滚动条：只用于弹层内部列表 */
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}

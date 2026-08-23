@@ -1,8 +1,6 @@
 // Delivered by Originkit · stack: nextjs · styling: tailwind
 "use client";
 
-"use client";
-
 import { useEffect, useState, type CSSProperties } from "react";
 import PixelCard from "@/components/originkit/ui/hero-10/pixel-card";
 
@@ -39,11 +37,14 @@ const getGapTier = (width: number): GapTier => {
 };
 
 const maskStyle = (side: "left" | "right", stops: MaskStops): CSSProperties => {
+  // 站点适配（2026-08-23）：原交付把 Tailwind 工具类名直接写入 maskImage
+  // （无效 CSS）。改为真实 radial-gradient 遮罩，语义与注释一致：
+  // 至 solid% 完全不透明，到 fade% 完全透明。
   const at = side === "left" ? "0% 0%" : "100% 0%";
-  const mask = `mask-circle mask-radial-farthest-corner mask-radial-at-top-left mask-radial-from-30% mask-radial-to-60%`;
+  const img = `radial-gradient(farthest-corner at ${at}, rgba(0,0,0,1) ${stops.solid}%, rgba(0,0,0,0) ${stops.fade}%)`;
   return {
-    maskImage: mask,
-    WebkitMaskImage: mask,
+    maskImage: img,
+    WebkitMaskImage: img,
     maskSize: "100% 100%",
     WebkitMaskSize: "100% 100%",
     maskRepeat: "no-repeat",
@@ -52,7 +53,8 @@ const maskStyle = (side: "left" | "right", stops: MaskStops): CSSProperties => {
 };
 
 const PIXEL_PROPS = {
-  colors: ["#ffffff", "#FFFFFFCC", "#FFFFFF99", "#5AF5A3"],
+  // 站点适配（2026-08-23）：绿色 #5AF5A3 改为黄铜 #D9B45B，匹配整站主题。
+  colors: ["#F2EFE4", "#F2EFE4CC", "#F2EFE499", "#D9B45B"],
   appearFrom: "top" as const,
   trigger: "auto" as const,
   position: "top" as const,

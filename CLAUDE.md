@@ -22,18 +22,18 @@ Rich interaction is a product goal, not a commitment to a particular library. Ch
 ## Current Context
 
 - The repository is private and the canonical remote is `github.com/ZeroxZhang/ZeroxZhang.github.io`.
-- The dependency manifest has been initialized with Next.js, React, TypeScript, Tailwind CSS v4, Motion, and Framer Motion. The files currently under `app/` and `postcss.config.mjs` began as OriginKit integration inputs; a complete runnable application scaffold is still pending.
-- `content/works/` contains the current bilingual portfolio source for 35 works. About, Blog, and portfolio media are still incomplete.
-- OriginKit Hero 10 is a locally preserved visual reference and source baseline. Its demo content and structure are not product requirements.
+- The app scaffold is live: Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion, with a completed homepage (`/`) and an `/about` placeholder. Commands and state live in `README.md`.
+- `content/works/` contains the current bilingual portfolio source for 35 works; the homepage consumes it through `lib/works.ts`. About, Blog, and portfolio media are still incomplete.
+- OriginKit Hero 10 is a locally preserved visual reference and source baseline, adapted into the site (typography, Kinetic Grid floor, portfolio grid); provenance lives in `components/originkit/ORIGIN.md`. The homepage visual baseline is documented in `docs/design/2026-08-23-homepage-design.md`.
 - Hosting must support the server-side visit-counter behavior described in the product documents; the platform and persistence mechanism remain open decisions.
 
 Current status and next steps belong in [README.md](./README.md) and active plans rather than being duplicated here.
 
 ## Durable Boundaries
 
-- Never commit or expose credentials, private content, personal identifiers, or local machine paths. OriginKit credential and provenance details are documented in [`components/originkit/ORIGIN.md`](./components/originkit/ORIGIN.md).
+- Never commit or expose credentials, private content, personal identifiers, or local machine paths without explicit user approval. [`docs/raw/subpages/subpages_address.md`](./docs/raw/subpages/subpages_address.md) is an explicitly approved raw-handoff exception (2026-08-23); it is not a portable project reference. OriginKit credential and provenance details are documented in [`components/originkit/ORIGIN.md`](./components/originkit/ORIGIN.md).
 - Preserve source provenance and license information for third-party assets. Adapt local vendor/reference code deliberately rather than treating it as unexplained project code.
-- Back up the existing site and relevant DNS state before switching `zeroxzhang.cc`; the current domain still points to a site hosted elsewhere.
+- Re-check and back up the existing site and relevant DNS state before switching `zeroxzhang.cc`; do not rely on a durable document for the domain's current external state.
 - Preserve user-authored briefs and raw source material as evidence. Derived interpretation belongs in active project documents or content files.
 - Keep structured content internally consistent. The local README and active content spec define the current contract; change the contract intentionally when a better model is needed.
 

@@ -32,8 +32,8 @@ zeroxzhang.cc
 | 关于 | `/about` | 内部页面（2026-08-21 决策①，brief 未含，源于 CLAUDE.md 三大板块） |
 | 博客 | `/blog` | 内部页面（占位，结构待后续 brief） |
 | GitHub | 外链 | 指向用户 GitHub（仓库记录见 CLAUDE.md：`github.com/ZeroxZhang/ZeroxZhang.github.io`） |
-| 微信公众号 | 外链/弹层 | 形态待定（二维码弹层 or 链接），见第 8 节开放问题 |
-| 联系我 | 待定 | 邮箱 `shangye_robbie@126.com` 已定；点击行为（`mailto:` 直发 or 滚动至 footer 联系方式）待定 |
+| 微信公众号 | 弹层 | 展示公众号名称「Zerox在探索」与真实二维码图 |
+| 联系我 | 弹层 | 展示邮箱 `shangye_robbie@126.com`，支持复制与 `mailto:` |
 
 ## 4. 作品介绍页（`/work/<slug>`）
 
@@ -65,7 +65,7 @@ zeroxzhang.cc
 | `/work/<slug>` | 作品介绍页 | 动态页 × 35 |
 | `/blog` | 博客 | 占位（结构待后续 brief） |
 
-- 路由形态（SPA/MPA、slug 命名规则）待框架选型后由 `specs/` 定义；框架未定（见 CLAUDE.md）。
+- 当前采用 Next.js App Router；作品 slug 沿用 `content/works/index.yaml` 注册值，详情路由仍待实现。
 - GitHub、微信公众号为外部链接，不占用站内路由。
 
 ## 8. 开放问题
@@ -74,9 +74,9 @@ zeroxzhang.cc
 | --- | --- | --- |
 | 1 | 部署平台选型（候选 Vercel / Netlify / Cloudflare Pages+Workers） | `specs/` |
 | 2 | 访问计数器实现细节（后端函数、存储、每日随机规则、跨日行为） | `specs/` |
-| 3 | 微信公众号按钮形态（二维码弹层 / 外链） | 待定 |
-| 4 | 联系我按钮点击行为（`mailto:` / 滚动至 footer） | 待定 |
-| 5 | 博客板块结构 | 待后续 brief |
+| 3 | 微信公众号按钮形态（二维码弹层 / 外链） | ✅ 2026-08-23 决策并实现：弹层展示名称「Zerox在探索」与 `public/wechat/zerox-wechat-qr.jpg` |
+| 4 | 联系我按钮点击行为（`mailto:` / 滚动至 footer） | ✅ 2026-08-23 决策：弹窗展示邮箱，支持复制与 mailto |
+| 5 | 博客板块结构 | 待后续 brief；首页「博客」按钮暂指向外部 blog.zeroxzhang.cc（2026-08-23 决策） |
 | 6 | 作品媒体字段、宽高比、首图与 OG 图生成规则 | 待视觉设计与框架选型 |
 | 7 | 作品角色、周期、协作者与更多量化结果的补充口径 | 待用户补充一手信息 |
 
