@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { notFound } from "next/navigation";
+import { injectGoogleAnalytics } from "@/lib/google-analytics";
 import { WORK_SLUGS } from "@/lib/work-slugs";
 
 /**
@@ -25,9 +26,11 @@ export async function GET(
     notFound();
   }
 
-  const html = readFileSync(
-    path.join(process.cwd(), "public", "work", slug, "index.html"),
-    "utf8",
+  const html = injectGoogleAnalytics(
+    readFileSync(
+      path.join(process.cwd(), "public", "work", slug, "index.html"),
+      "utf8",
+    ),
   );
 
   return new Response(html, {

@@ -6,7 +6,12 @@ export const siteConfig = {
   name: "Zerox Zhang",
   nameMark: "ZEROX·ZHANG",
   domain: "zeroxzhang.cc",
+  domains: ["zeroxzhang.cc", "zeroxzhang.com"],
   homeUrl: "/",
+
+  analytics: {
+    googleMeasurementId: "G-1FSFSSNCQ5",
+  },
 
   email: "shangye_robbie@126.com",
 

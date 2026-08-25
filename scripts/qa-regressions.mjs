@@ -47,6 +47,19 @@ const browser = await chromium.launch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = monitor(await context.newPage(), "dialog");
   await page.goto(`${BASE_URL}/#work`, { waitUntil: "networkidle" });
+  const homepageAnalytics = await page.evaluate(() => ({
+    scripts: [...document.scripts].filter((script) =>
+      script.src.includes("googletagmanager.com/gtag/js?id=G-1FSFSSNCQ5"),
+    ).length,
+    configured: (window.dataLayer ?? []).some(
+      (entry) => entry?.[0] === "config" && entry?.[1] === "G-1FSFSSNCQ5",
+    ),
+  }));
+  record(
+    "应用页面加载唯一 Google Analytics 代码",
+    homepageAnalytics.scripts === 1 && homepageAnalytics.configured,
+    JSON.stringify(homepageAnalytics),
+  );
   const previewContrast = await page.locator("#work li").first().evaluate((element) => {
     const parse = (value) => {
       const values = value.match(/[\d.]+/g)?.map(Number) ?? [];
@@ -136,6 +149,12 @@ const browser = await chromium.launch();
     stylesheetLoaded: [...document.styleSheets].some((sheet) =>
       sheet.href?.includes("/work-assets/site/site.css"),
     ),
+    analyticsScripts: [...document.scripts].filter((script) =>
+      script.src.includes("googletagmanager.com/gtag/js?id=G-1FSFSSNCQ5"),
+    ).length,
+    analyticsConfigured: (window.dataLayer ?? []).some(
+      (entry) => entry?.[0] === "config" && entry?.[1] === "G-1FSFSSNCQ5",
+    ),
   }));
   record(
     "作品详情路由可直接访问",
@@ -143,7 +162,9 @@ const browser = await chromium.launch();
       detailPage.url() === `${BASE_URL}/work/lingmou` &&
       detailState.title.includes("灵眸") &&
       detailState.canonical === "https://zeroxzhang.cc/work/lingmou" &&
-      detailState.stylesheetLoaded,
+      detailState.stylesheetLoaded &&
+      detailState.analyticsScripts === 1 &&
+      detailState.analyticsConfigured,
     JSON.stringify({ status: detailResponse?.status(), url: detailPage.url(), ...detailState }),
   );
   await detailPage.waitForTimeout(500);

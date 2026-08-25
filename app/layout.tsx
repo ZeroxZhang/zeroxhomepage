@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { fontDisplay, fontQuote, fontSans } from "@/lib/fonts";
+import { googleAnalyticsId } from "@/lib/google-analytics";
 import { siteConfig } from "@/lib/site.config";
 import { LocaleProvider } from "@/components/site/locale-provider";
 import "./globals.css";
@@ -41,6 +43,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-ink font-sans text-ivory antialiased">
         <LocaleProvider>{children}</LocaleProvider>
       </body>
+      <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>
   );
 }
