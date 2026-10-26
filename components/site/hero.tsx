@@ -128,7 +128,7 @@ export const Hero = ({ total }: { total: number }) => {
       <Atmosphere />
       <PixelBackground />
       <KineticFloor />
-      <SiteNavbar />
+      <SiteNavbar onContact={() => setDialog("email")} />
 
       <div className="pointer-events-none relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 flex-col items-center justify-center px-5 pb-20 pt-24 ipad:pt-28">
         <div className="pointer-events-auto flex w-full flex-col items-center">

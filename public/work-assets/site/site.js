@@ -146,6 +146,8 @@
       }
     })();
 
+    /* 双语作品切换内容时只重新绑定正文交互，背景画布保持一个实例。 */
+    function enhanceContent(){
     /* ── 阅读进度条 + 导航高亮 ── */
     var progress = document.querySelector('.progress');
     var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
@@ -244,4 +246,15 @@
         }
       });
     }
+    return function(){
+      window.removeEventListener('scroll', updateProgress);
+      navObs.disconnect();
+      revealObs.disconnect();
+    };
+    }
+    var disposeContent = enhanceContent();
+    document.addEventListener('work:contentchange', function(){
+      disposeContent();
+      disposeContent = enhanceContent();
+    });
   })();

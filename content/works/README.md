@@ -35,6 +35,7 @@ English copy.
 - `links[].show_on_homepage: true` 表示在首页作品清单中额外显示该官网入口；每个作品最多一个，且仅用于 `type: website` 的链接。
 - `lib/work-slugs.ts` 是部署路由使用的无文件系统清单；测试会强制它与 `index.yaml` 的作品注册表保持一致，避免路由构建追踪无关仓库文件。
 - locale 应在 Markdown 渲染前切分，避免把两种正文同时交给页面再隐藏。
+- 2026-10 新增的 6 个展示页沿用既有 `design/colors_and_type.css`、`design/components.css`、`site/site.css` 和 `site/site.js`；`projects.css` 仅扩展图集与内容模块，`projects.js` 处理双语与图片放大。保持大衬线标题、编号章节、荧光绿、直角按钮与动态网格，不另设主题。中文作为无脚本默认内容，英文放在不参与渲染的 `<template>` 中，切换时只挂载当前语言，并继承首页 `site-locale`。正文更新时同步内容源与对应 `public/work/<slug>/index.html`；图片来源和许可保存在 `public/work-assets/2026-projects/SOURCES.md`。
 - 内容保持框架无关，不嵌入 JSX、组件 import 或样式类。
 - 动态事实标注 `facts_as_of`；公开内容不得泄露私密材料、凭证或本机路径。
 

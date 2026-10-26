@@ -125,8 +125,8 @@ const browser = await chromium.launch();
   );
   record(
     "全部作品均连接唯一详情页",
-    allWorkLinks.length === 35 &&
-      new Set(allWorkLinks).size === 35 &&
+    allWorkLinks.length === 41 &&
+      new Set(allWorkLinks).size === 41 &&
       allWorkLinks.every((href) => /^\/work\/[a-z0-9-]+$/.test(href ?? "")),
     `count=${allWorkLinks.length}, unique=${new Set(allWorkLinks).size}`,
   );
@@ -191,7 +191,14 @@ const browser = await chromium.launch();
   );
   await missingDetailPage.close();
 
-  await page.getByRole("button", { name: "联系我" }).click();
+  const navContact = page.locator("nav").getByRole("button", { name: "联系我", exact: true });
+  await navContact.click();
+  const navDialog = await page.locator('[role="dialog"]').innerText();
+  record("导航联系我打开联系方式浮层", navDialog.includes("shangye_robbie@126.com"));
+  await page.keyboard.press("Escape");
+  record("导航联系浮层关闭后恢复焦点", await navContact.evaluate((element) => element === document.activeElement));
+  await page.getByRole("button", { name: "联系我", exact: true }).last().click();
+  record("两个联系入口复用相同内容", (await page.locator('[role="dialog"]').innerText()) === navDialog);
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
@@ -290,7 +297,7 @@ for (const reducedMotion of ["no-preference", "reduce"]) {
     `min=${Math.min(...footerHeights).toFixed(1)}`,
   );
 
-  await page.getByRole("button", { name: "联系我" }).click();
+  await page.getByRole("button", { name: "联系我", exact: true }).last().click();
   const closeSize = await page.getByRole("button", { name: "关闭" }).last().evaluate((element) => {
     const rect = element.getBoundingClientRect();
     return Math.min(rect.width, rect.height);

@@ -40,6 +40,12 @@ export const WORK_SLUGS = [
   "allergen-map",
   "minimalism-note-card-generator",
   "zerox-homepage",
+  "zerox-skills",
+  "consulting-report-forge",
+  "zerox-thinkcell-charts",
+  "zerox-due-diligence",
+  "zerox-deep-research",
+  "day0-knowledgebase",
 ] as const;
 
 export type WorkSlug = (typeof WORK_SLUGS)[number];

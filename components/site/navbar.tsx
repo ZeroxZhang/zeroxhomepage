@@ -34,7 +34,7 @@ const Logo = () => {
   );
 };
 
-export const SiteNavbar = () => {
+export const SiteNavbar = ({ onContact }: { onContact: () => void }) => {
   const { locale } = useLocale();
   const c = copy[locale];
   const [menuOpen, setMenuOpen] = useState(false);
@@ -86,12 +86,14 @@ export const SiteNavbar = () => {
 
         <div className="hidden ipad:flex items-center gap-4">
           <LocaleToggle />
-          <a
-            href={`mailto:${siteConfig.email}`}
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            onClick={onContact}
             className="inline-flex min-h-11 items-center rounded-full border border-line bg-ink-card px-4 font-sans text-[13px] text-ivory/80 transition-colors hover:text-ivory"
           >
             {c.nav.contact}
-          </a>
+          </button>
         </div>
 
         {/* 移动端：语言切换 + 菜单按钮 */}

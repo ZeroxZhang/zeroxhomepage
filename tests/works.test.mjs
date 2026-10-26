@@ -96,7 +96,7 @@ test("所有注册作品都有同域静态详情页", () => {
   const works = getWorksData().categories.flatMap((category) => category.works);
   const knownSlugs = new Set(works.map((work) => work.slug));
 
-  assert.equal(works.length, 35);
+  assert.equal(works.length, 41);
   assert.deepEqual(
     [...knownSlugs].sort(),
     [...WORK_SLUGS].sort(),

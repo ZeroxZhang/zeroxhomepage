@@ -14,14 +14,15 @@
 
 ## 当前状态
 
-> 更新于 2026-08-23
+> 更新于 2026-10-26
 
 - **首页首版已完成**：英雄区（Hero 10 基线 + Cinzel 主标题 + 格言「Semper novarum rerum cupidus」+ GitHub/博客/公众号/联系我按钮组）、Kinetic Grid 倾斜动效地面（替换 Prism Grid）、按 8 条分类组织的 Interactive Grid 作品集入口（9 宫格 + 分类弹层）、导航与 Footer。
-- 应用脚手架已落地：Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion，`/`、`/about`（双语占位）与 35 个 `/work/<slug>` 作品入口可用；`npm run dev/build/start/lint/typecheck/test` 可用，另有 Playwright 首页与关键回归验收脚本。
-- 35 个作品的中英文介绍已整理到 `content/works/`，首页由 `lib/works.ts` 加载器消费；分类、计数与排序来自内容源，构建时校验双语字段、正文结构、链接、关联和枚举。
-- 35 个已交付作品展示页作为同域静态页面接入；首页分类弹层中的每件作品均连接详情页，灵眸、Z-Slides、大音希声另提供直接官网入口。
+- 应用脚手架已落地：Next.js App Router + TypeScript + Tailwind CSS v4 + Motion/Framer Motion，`/`、`/about`（双语占位）与 41 个 `/work/<slug>` 作品入口可用；`npm run dev/build/start/lint/typecheck/test` 可用，另有 Playwright 首页与关键回归验收脚本。
+- 41 个作品的中英文介绍已整理到 `content/works/`，首页由 `lib/works.ts` 加载器消费；分类、计数与排序来自内容源，构建时校验双语字段、正文结构、链接、关联和枚举。
+- 41 个已交付作品展示页作为同域静态页面接入；首页分类弹层中的每件作品均连接详情页，灵眸、Z-Slides、大音希声另提供直接官网入口。
+- 新增 6 个图文双语作品页：zerox-skills、Consulting Report Forge、zerox-thinkcell-charts、zerox-due-diligence、zerox-deep-research、末日知识库。支持语言继承、图片放大、移动端阅读和来源追溯。导航与英雄区的“联系我”共用联系方式弹层。
 - 设计基线已定稿：见 [`docs/design/2026-08-23-homepage-design.md`](./docs/design/2026-08-23-homepage-design.md)。
-- 待办：About 正式页、Blog 板块、其余作品媒体、访问计数器后端与部署平台决策。
+- 待办：About 正式页、Blog 板块、其余作品媒体、访问计数器后端。
 
 更细的阶段安排见 [`docs/plans/2026-08-21-website-kickoff-plan.md`](./docs/plans/2026-08-21-website-kickoff-plan.md)。计划会随验证结果调整，不代表不可变的实施顺序。
 
@@ -54,7 +55,7 @@ npm run qa:homepage  # 首页自动化验收（需生产服务器运行，PLAYWR
 npm run qa:regressions # 关键缺陷回归（同样需要生产服务器）
 ```
 
-访问计数器包含服务端逻辑，因此部署目标需要函数运行时和持久化能力。正式部署与 DNS 切换仍待完成；操作前需重新核对公开解析，备份现有站点和 DNS 状态，并准备回滚。
+访问计数器包含服务端逻辑，因此部署目标需要函数运行时和持久化能力。部署使用 Vercel，日常推送目标为 `origin`（`ZeroxZhang/zeroxhomepage`）；旧仓库保留为 `legacy`。变更域名配置前仍需核对实时状态，历史迁移记录见 [部署复盘](docs/iterations/2026-08-23-repository-migration-and-vercel-deployment.md)。
 
 ## 文档协作
 

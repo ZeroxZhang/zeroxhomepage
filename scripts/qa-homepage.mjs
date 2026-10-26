@@ -13,6 +13,7 @@
 import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
 import { createRequire } from "node:module";
+import { getWorksData } from "../lib/works.ts";
 
 const require = createRequire(import.meta.url);
 const { PNG } = require("pngjs");
@@ -162,7 +163,7 @@ for (const vp of VIEWPORTS) {
   const context = await createMonitoredContext({ viewport: { width: 1440, height: 900 } }, "email-dialog");
   const page = await context.newPage();
   await page.goto(BASE_URL + "/", { waitUntil: "networkidle", timeout: 30000 });
-  await page.getByRole("button", { name: "联系我" }).click();
+  await page.getByRole("button", { name: "联系我", exact: true }).last().click();
   await page.waitForTimeout(300);
   const emailDialog = await page.evaluate(() => {
     const dialog = document.querySelector('[role="dialog"]');
@@ -474,10 +475,12 @@ for (const vp of VIEWPORTS) {
   );
   record("英文按钮文案", hasEnButtons);
 
-  const tileEn = await page.evaluate(() =>
-    [...document.querySelectorAll("#work button")].some((t) =>
-      t.textContent?.includes("A-share Tailpicker"),
-    ),
+  const expectedTitles = getWorksData().categories.flatMap((category) =>
+    category.top.slice(0, 2).map((work) => `${work.title_en} · ${work.type_en}`),
+  );
+  const visibleTitles = await page.locator("#work li").allTextContents();
+  const tileEn = expectedTitles.every((title) =>
+    visibleTitles.some((visible) => visible.trim() === title),
   );
   record("磁贴英文作品名", tileEn);
 

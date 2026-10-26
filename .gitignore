@@ -15,3 +15,10 @@ dist/
 .originkit/
 .gstack/
 .vercel/
+
+# Local verification and generated process artifacts
+test-results/
+playwright-report/
+coverage/
+tmp/
+*.log

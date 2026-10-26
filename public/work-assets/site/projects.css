@@ -1,0 +1,86 @@
+/* 新作品的图文扩展。导航、字体、颜色、章节与按钮直接复用 design/ 和 site.css。
+   本文件只处理图集、技能目录、双语入口和图片查看器，不定义第二套主题。 */
+.project-page { color-scheme: dark; }
+.project-page img { display: block; width: 100%; height: auto; }
+.project-page figure { min-width: 0; }
+.project-page h3 { text-wrap: pretty; }
+.project-page code, .project-page pre { font-family: var(--mono); }
+.project-page .hero-grid > *, .project-page .editorial-card { min-width: 0; }
+.project-page .hero h1 { overflow-wrap: normal; }
+.project-page .hero.long-title h1 { font-size: clamp(48px,8.4vw,122px); }
+.project-page .hero-tags .tag { max-width: 100%; height: auto; min-height: var(--size-tag-height); white-space: normal; overflow-wrap: anywhere; }
+.nav-tools { display: flex; align-items: center; gap: 24px; }
+.locale-toggle { padding: 10px 0; min-height: 44px; background: none; border: 0; color: var(--paper-300); font: var(--type-eyebrow); cursor: pointer; }
+.locale-toggle:hover { color: var(--signal-green); }
+.skip-link { position: fixed; left: 16px; top: -100px; z-index: 40; padding: 12px; background: var(--ink-900); }
+.skip-link:focus { top: 12px; }
+.hero-art { min-width: 0; }
+.hero-art img { max-height: 520px; object-fit: contain; }
+.poster-art img { max-height: 620px; }
+.image-link { display: block; cursor: zoom-in; border: 1px solid var(--line-700); background: var(--ink-900); }
+.image-gallery { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 32px; align-items: start; }
+.image-gallery figure:only-child { grid-column: 1/-1; }
+.image-gallery img { max-height: 680px; object-fit: contain; }
+.skill-entry h3 { display: flex; justify-content: space-between; gap: 16px; }
+.skill-entry h3 span { color: var(--signal-green); }
+.skill-entry code.editorial-card-eyebrow { white-space: normal; overflow-wrap: anywhere; letter-spacing: .04em; }
+.catalog-index { display: block; color: var(--muted-500); font: 10px var(--mono); margin-bottom: 18px; }
+.flow-diagram { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; list-style: none; padding: 1px; margin: 0; background: var(--line-700); }
+.flow-diagram li { min-width: 0; position: relative; padding: 28px; background: var(--ink-900); border-top: 2px solid var(--signal-green); }
+.flow-diagram h3 { margin: 0 0 16px; font: 500 16px/1.5 var(--mono); color: var(--signal-green); }
+.flow-diagram li:not(:last-child)::after { content: '→'; position: absolute; right: 12px; top: 27px; color: var(--signal-green); }
+.flow-diagram.independent li::after { content: none; }
+.flow-diagram p { margin: 0; font: 16px/1.8 var(--sans); color: var(--paper-300); }
+.package-list { margin: 0; border-top: 1px solid var(--line-700); }
+.package-list > div { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; padding: 26px 0; border-bottom: 1px solid var(--line-700); }
+.package-list dt { font: 14px/1.8 var(--mono); color: var(--signal-green); overflow-wrap: anywhere; }
+.package-list dd { margin: 0; color: var(--paper-300); }
+.trace-diagram { display: grid; gap: 32px; }
+.trace-diagram h3 { font: 12px var(--mono); color: var(--signal-green); letter-spacing: .1em; }
+.trace-diagram ol { display: flex; padding: 0; list-style: none; gap: 28px; margin: 18px 0 0; }
+.trace-diagram li { flex: 1; min-width: 0; position: relative; padding: 20px; border: 1px solid var(--line-700); background: var(--ink-900); font: 14px/1.7 var(--mono); }
+.trace-diagram li:not(:last-child)::after { content: '→'; position: absolute; right: -23px; color: var(--signal-green); }
+.roadmap-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1px; padding: 1px; background: var(--line-700); align-items: start; }
+.roadmap-list details { padding: 4px 24px; background: var(--ink-950); }
+.roadmap-list summary { padding: 20px 0; cursor: pointer; font: 500 20px/1.5 var(--sans); }
+.roadmap-list summary::marker { color: var(--signal-green); }
+.roadmap-list p { color: var(--paper-300); padding-bottom: 12px; }
+.brief { margin-top: 28px; }
+.brief h3 { font: 12px/1.6 var(--mono); color: var(--signal-green); letter-spacing: .08em; }
+.brief pre { margin: 0; padding: 24px 28px; background: var(--ink-900); border-left: 2px solid var(--signal-green); color: var(--paper-300); font: 14px/1.9 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.source-note { padding-block: 32px 56px; border-top: 1px solid var(--line-700); color: var(--paper-300); font-size: 13px; }
+.source-note h2 { font: 500 16px var(--mono); color: var(--paper-100); }
+.source-note ul { display: flex; flex-wrap: wrap; gap: 16px 28px; list-style: none; padding: 0; }
+.source-note a { color: var(--signal-green); text-decoration: underline; text-underline-offset: .3em; }
+.related-section { padding-block: 24px 80px; }
+.project-page .related-card h3 { overflow-wrap: anywhere; }
+.image-dialog { width: min(1400px,96vw); max-height: 94dvh; padding: 54px 20px 20px; border: 1px solid var(--line-700); color: var(--paper-100); background: var(--ink-950); }
+.image-dialog::backdrop { background: rgba(8,17,15,.94); }
+.image-dialog img { max-height: 72dvh; object-fit: contain; }
+.image-dialog p { margin: 18px 0 0; text-align: center; font-size: 13px; }
+.image-dialog button { position: absolute; right: 12px; top: 8px; width: 44px; height: 44px; border: 0; background: none; color: var(--paper-100); font-size: 28px; cursor: pointer; }
+@media (max-width: 900px) {
+  .nav-links { gap: 12px; }
+  .nav-tools { gap: 18px; }
+  .flow-diagram { grid-template-columns: 1fr; }
+  .flow-diagram li:not(:last-child)::after { content: none; }
+}
+@media (max-width: 640px) {
+  .project-page .nav-inner { gap: 12px; }
+  .project-page .brand { font-size: 10px; letter-spacing: .08em; }
+  .project-page .brand:before { width: 12px; margin-right: 6px; }
+  .nav-tools { gap: 14px; }
+  .project-page .nav-cta { letter-spacing: .06em; }
+  .project-page .hero-strip-3 { grid-template-columns: 1fr; }
+  .hero-art img { max-height: 420px; }
+  .project-page .hero h1 { font-size: clamp(52px,10.2vw,65px); }
+  .project-page .hero.long-title h1 { font-size: clamp(48px,9vw,58px); }
+  .project-page .section-head h2 { font-size: clamp(32px,8vw,40px); }
+  .image-gallery, .skill-catalog, .question-list, .roadmap-list { grid-template-columns: 1fr; }
+  .project-page .editorial-card { padding: 24px; }
+  .package-list > div { grid-template-columns: 1fr; gap: 12px; }
+  .trace-diagram ol { flex-direction: column; gap: 28px; }
+  .trace-diagram li:not(:last-child)::after { content: '↓'; left: 20px; right: auto; bottom: -28px; }
+  .brief pre { padding: 20px; font-size: 13px; }
+  .shot-head { letter-spacing: .06em; }
+}
