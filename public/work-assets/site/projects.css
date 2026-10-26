@@ -23,6 +23,7 @@
 .image-gallery img { max-height: 680px; object-fit: contain; }
 .skill-entry h3 { display: flex; justify-content: space-between; gap: 16px; }
 .skill-entry h3 span { color: var(--signal-green); }
+.skill-catalog > .skill-entry:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .skill-entry code.editorial-card-eyebrow { white-space: normal; overflow-wrap: anywhere; letter-spacing: .04em; }
 .catalog-index { display: block; color: var(--muted-500); font: 10px var(--mono); margin-bottom: 18px; }
 .flow-diagram { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; list-style: none; padding: 1px; margin: 0; background: var(--line-700); }
